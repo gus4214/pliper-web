@@ -7,6 +7,7 @@ module.exports = {
 
 		// Or if using `src` directory:
 		'./src/**/*.{html,js,ts,jsx,tsx,mdx}',
+		'./stories/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
 		extend: {},
