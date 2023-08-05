@@ -10,7 +10,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 	return (
 		<div className='flex h-full'>
 			<div className='grow flex flex-col min-w-0 min-h-screen'>
-				<MainHeader />
+				<MainHeader position='fixed' />
 				<main className='grow w-full'>{children}</main>
 				<LoginModal />
 				<Footer />

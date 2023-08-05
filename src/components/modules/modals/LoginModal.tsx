@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
 
 const LoginModal: React.FC = () => {
-	const [visible, setVisible] = useState<boolean>(true);
+	const [visible, setVisible] = useState<boolean>(false);
 
 	const toggleVisible = () => {
 		setVisible(!visible);
