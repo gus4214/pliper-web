@@ -1,5 +1,5 @@
 import MainVisualBox from '@/src/components/atoms/main/MainVisualBox';
-import MainBookMark from '@/src/components/modules/main/MainBookMark';
+import MainBookMark from '@/src/components/modules/main/feature/MainBookMark';
 import { Badge } from 'react-daisyui';
 
 const MainVisualContainer = () => {

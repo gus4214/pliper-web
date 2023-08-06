@@ -1,6 +1,6 @@
-import NotificationDropdown from '@/src/layouts/components/header/NotificationDropdown';
-import SearchDropdown from '@/src/layouts/components/header/SearchDropdown';
-import UserDropdown from '@/src/layouts/components/header/UserDropdown';
+import NotificationDropdown from '@/src/layouts/components/header/dropdowns/NotificationDropdown';
+import SearchDropdown from '@/src/layouts/components/header/dropdowns/SearchDropdown';
+import UserDropdown from '@/src/layouts/components/header/dropdowns/UserDropdown';
 import { Navbar } from 'react-daisyui';
 
 interface MainHeaderProps {

@@ -1,5 +1,5 @@
 import NotificationIcon from '@/src/components/atoms/icons/NotificationIcon';
-import NotificationItem from '@/src/components/modules/layout/notifications/NotificationItem';
+import NotificationItem from '@/src/layouts/components/header/dropdowns/NotificationItem';
 import { ChevronRight } from 'heroicons-react';
 import React, { useState } from 'react';
 import { Dropdown, Button, Tabs } from 'react-daisyui';

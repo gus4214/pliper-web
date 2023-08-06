@@ -15,7 +15,7 @@ const NotificationItem: React.FC<NotificationItem> = ({ category, date, text, co
 
 	return (
 		<>
-			<div className='w-[368px] h-[70px] p-4 bg-white rounded-lg border border-neutral-200 flex-col justify-center items-start gap-3 inline-flex'>
+			<div className='w-[368px] p-4 bg-white rounded-lg border border-neutral-200 flex-col justify-center items-start gap-3 inline-flex cursor-pointer'>
 				<div className='self-stretch justify-start items-center gap-2 inline-flex'>
 					<div className={`w-1.5 h-1.5 ${dotColor} rounded-full`} />
 					<div className={`${categoryColor} text-[15px] font-semibold leading-[15px]`}>{category}</div>
