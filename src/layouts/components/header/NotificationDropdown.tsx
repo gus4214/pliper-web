@@ -1,5 +1,5 @@
 import NotificationIcon from '@/src/components/atoms/icons/NotificationIcon';
-import NotificationItem from '@/src/components/modules/notifications/NotificationItem';
+import NotificationItem from '@/src/components/modules/layout/notifications/NotificationItem';
 import { ChevronRight } from 'heroicons-react';
 import React, { useState } from 'react';
 import { Dropdown, Button, Tabs } from 'react-daisyui';
@@ -12,7 +12,7 @@ const NotificationDropdown: React.FC = () => {
 			<Button size='sm' color='ghost' shape='circle'>
 				<NotificationIcon active />
 			</Button>
-			<Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg'>
+			<Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg z-10'>
 				<div className='w-[380px] h-9 px-6 py-2 justify-start items-center flex'>
 					<span className='text-black text-xl font-bold leading-tight'>알림 내역</span>
 				</div>

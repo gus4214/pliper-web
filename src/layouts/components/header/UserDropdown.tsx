@@ -9,7 +9,7 @@ const UserDropdown: React.FC = () => {
 					<div className='w-6 h-6 bg-gradient-to-b from-blue-400 to-emerald-200 rounded-full'></div>
 				</Avatar>
 			</Button>
-			<Dropdown.Menu className='w-[130px] rounded-lg'>
+			<Dropdown.Menu className='w-[130px] rounded-lg z-10'>
 				<Dropdown.Item className='p-3 justify-center'>개인 스페이스</Dropdown.Item>
 				<Dropdown.Item className='p-3 justify-center'> 플립 만들기</Dropdown.Item>
 				<Dropdown.Item className='p-3 justify-center'>My PLIP</Dropdown.Item>

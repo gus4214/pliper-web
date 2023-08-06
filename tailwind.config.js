@@ -8,7 +8,11 @@ module.exports = {
 		'node_modules/react-daisyui/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			backgroundImage: {
+				main_visual_image: "url('/images/mainVis.png')",
+			},
+		},
 	},
 	plugins: [require('daisyui')],
 	daisyui: {
