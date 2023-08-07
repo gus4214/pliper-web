@@ -5,6 +5,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import Head from 'next/head';
 import MainLayout from '@/src/layouts/MainLayout';
 import { NextPage } from 'next';
+import { AuthProvider } from '@/src/contexts/authContext';
 
 interface MyAppProps extends AppProps {
 	Component: NextPage;
@@ -35,7 +36,9 @@ export default function App(props: MyAppProps) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<QueryClientProvider client={queryClient}>
-				<Hydrate state={pageProps.dehydratedState}>{getLayout(<Component {...pageProps} />)}</Hydrate>
+				<Hydrate state={pageProps.dehydratedState}>
+					<AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+				</Hydrate>
 			</QueryClientProvider>
 		</>
 	);

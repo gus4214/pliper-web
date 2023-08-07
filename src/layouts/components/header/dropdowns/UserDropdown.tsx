@@ -1,10 +1,14 @@
 import React from 'react';
 import { Dropdown, Button, Divider, Avatar } from 'react-daisyui';
 
-const UserDropdown: React.FC = () => {
+interface UserDropdownProps {
+	onClick: () => void;
+}
+
+const UserDropdown: React.FC<UserDropdownProps> = ({ onClick }) => {
 	return (
 		<Dropdown end>
-			<Button tag='label' tabIndex={0} color='ghost' className='avatar' shape='circle' size='sm'>
+			<Button tag='label' tabIndex={0} color='ghost' className='avatar' shape='circle' size='sm' onClick={onClick}>
 				<Avatar shape='circle' size={'md'}>
 					<div className='w-6 h-6 bg-gradient-to-b from-blue-400 to-emerald-200 rounded-full'></div>
 				</Avatar>

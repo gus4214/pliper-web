@@ -5,9 +5,10 @@ import { Navbar } from 'react-daisyui';
 
 interface MainHeaderProps {
 	position: 'fixed' | 'static';
+	onClick: () => void;
 }
 
-const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
+const MainHeader: React.FC<MainHeaderProps> = ({ position, onClick }) => {
 	const barPosition = position === 'fixed' ? 'sticky' : 'static';
 
 	return (
@@ -23,7 +24,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 			<div className='flex gap-4'>
 				<SearchDropdown />
 				<NotificationDropdown />
-				<UserDropdown />
+				<UserDropdown onClick={onClick} />
 			</div>
 		</Navbar>
 	);
