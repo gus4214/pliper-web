@@ -42,7 +42,7 @@ export const callApi = <T, R extends IBaasResponse<unknown>>(request: IRequest<T
 				locale: request.locale ?? '',
 			})}`,
 			data: request.body,
-			// withCredentials: true,
+			withCredentials: true,
 			headers: {
 				Authorization: `Bearer ${request?.token}`,
 				...options,

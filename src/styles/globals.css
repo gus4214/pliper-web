@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.naver-button:hover .naver-icon {
+    @apply text-white;
+}
+
+.google-button:hover .google-icon {
+    @apply text-white;
+}

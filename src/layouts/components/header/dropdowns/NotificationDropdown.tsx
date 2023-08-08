@@ -36,7 +36,12 @@ const NotificationDropdown: React.FC = () => {
 								text='플립 10개 등록시 추가 되는 혜택을 확인 해보세요!'
 								confirmed
 							/>
-							<Button variant='outline' color='ghost' endIcon={<ChevronRight className='w-6 h-6 font-bold text-teal-400' />}>
+							<Button
+								variant='outline'
+								color='ghost'
+								endIcon={<ChevronRight className='w-6 h-6 font-bold text-teal-400' />}
+								dataTheme='mytheme'
+							>
 								<span className='text-sm font-normal'>알림 내역 더보기</span>
 							</Button>
 						</div>
