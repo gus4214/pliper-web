@@ -9,7 +9,7 @@ interface MainVisulBoxProps {
 const MainVisualBox: React.FC<MainVisulBoxProps> = ({ children, src }) => {
 	return (
 		<div className='flex justify-center items-center w-full h-[320px] relative'>
-			<Image src={src} layout='fill' objectFit='cover' className='absolute z-0' alt='Description of Image' />
+			<Image src={src} fill className='absolute z-0 object-cover' alt='main-visual' />
 			{children}
 		</div>
 	);

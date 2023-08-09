@@ -4,7 +4,7 @@ import { Card } from 'react-daisyui';
 const MainCarefullyPromptContainer = () => {
 	return (
 		<div className='w-full bg-neutral-50 flex flex-col py-[372px] pb-[46px] pt-[40px] items-center'>
-			<h1 className='text-center text-black text-2xl font-bold leading-normal'>업무에서 활용 가능한 프롬프트 엄선작</h1>
+			<h1 className='text-center text-2xl font-bold text-black'>업무에서 활용 가능한 프롬프트 엄선작</h1>
 			<div className='mt-8'>
 				<div className='w-[1176px] flex flex-col items-center gap-8'>
 					<div className='h-8 gap-2 flex'>

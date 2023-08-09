@@ -6,14 +6,15 @@ interface OAuthResult {
 	url: string;
 }
 
-export const googleAuthApi = () => {
-	return callApi<never, IBaasResponse<OAuthResult>>({
+export const googleAuthApi = (callbackUrl: string) => {
+	return callApi<{ callbackUrl: string }, OAuthResult>({
 		api: apis.GOOGLE_AUTH_API,
+		queryString: { callbackUrl },
 	});
 };
 
 export const naverAuthApi = () => {
-	return callApi<never, IBaasResponse<OAuthResult>>({
+	return callApi<never, OAuthResult>({
 		api: apis.NAVER_AUTH_API,
 	});
 };

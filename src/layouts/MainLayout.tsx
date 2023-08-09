@@ -4,7 +4,7 @@ import LoginModal from '@/src/components/modules/modals/LoginModal';
 import SignupModal from '@/src/components/modules/modals/SignupModal';
 import { useState } from 'react';
 
-interface MainLayoutProps {
+export interface MainLayoutProps {
 	children: React.ReactNode;
 }
 

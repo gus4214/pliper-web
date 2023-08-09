@@ -2,14 +2,6 @@ import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
-interface GoogleAuthResponse {
-	url: string;
-}
-
-interface ErrorResponse {
-	code: number;
-	message: string;
-}
 
 interface LoginModalProps {
 	open: boolean;
@@ -18,9 +10,9 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ open, toggleOpen }) => {
 	const handleGoogleLogin = async () => {
-		const result = await googleAuthApi();
+		const result = await googleAuthApi('http://localhost:3000/auth/google/callback');
 		console.log('🚀 ~ file: LoginModal.tsx:23 ~ handleGoogleLogin ~ result:', result);
-		// window.location.href = result.url;
+		window.location.href = result.url;
 	};
 
 	const handleNaverLogin = async () => {

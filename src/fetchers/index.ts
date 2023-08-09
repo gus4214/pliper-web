@@ -31,7 +31,7 @@ export const toQueryString = <T extends Record<string, unknown>>(payload: T): st
 	);
 };
 
-export const callApi = <T, R extends IBaasResponse<unknown>>(request: IRequest<T, R>, options?: RawAxiosRequestHeaders): Promise<R> => {
+export const callApi = <T, R extends object>(request: IRequest<T, R>, options?: RawAxiosRequestHeaders): Promise<R> => {
 	console.log('====== [INFO] request =====', request);
 
 	return apiClient
@@ -57,14 +57,14 @@ export const callApi = <T, R extends IBaasResponse<unknown>>(request: IRequest<T
 		.catch((e) => {
 			const result = !request.defaultData ? ({} as R) : request.defaultData;
 			const error = e as AxiosError<IResponse<R>>;
-			if (error.response?.data?.error) {
-				result.errorCode = error.response?.data.errorCode;
-				result.errorMessage = error.response?.data.error.errors
-					? error.response?.data.error.errors[0].message
-					: error.response?.data.error.message;
-			}
-			result.errorStatus = error.response?.status || 500;
-			result.isError = true;
+			// if (error.response?.data?.error) {
+			// 	result.errorCode = error.response?.data.errorCode;
+			// 	result.errorMessage = error.response?.data.error.errors
+			// 		? error.response?.data.error.errors[0].message
+			// 		: error.response?.data.error.message;
+			// }
+			// result.errorStatus = error.response?.status || 500;
+			// result.isError = true;
 			console.log('====== [WARN] request fail ======', result, error.response?.data);
 			return result;
 		});
