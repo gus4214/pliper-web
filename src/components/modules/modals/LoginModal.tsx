@@ -1,5 +1,4 @@
 import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
 
@@ -34,7 +33,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, toggleOpen }) => {
 				</div>
 				<div className='w-[400px] flex flex-col justify-center gap-6'>
 					<div className='flex flex-col justify-center gap-2'>
-						<Button variant='outline' fullWidth className='justify-start hover:bg-[#439E22] naver-button' onClick={handleNaverLogin}>
+						<Button
+							variant='outline'
+							fullWidth
+							className='justify-start hover:bg-[#439E22] naver-button border-neutral-200 hover:border-none'
+							onClick={handleNaverLogin}
+						>
 							<div className='w-7 h-[19px] justify-start items-center gap-4 inline-flex'>
 								<div className='text-[#439E22] text-base font-semibold naver-icon'>N</div>
 								<div className='h-[18px] w-[0px] border-[0.5px] border-neutral-300'></div>
@@ -42,7 +46,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, toggleOpen }) => {
 							<span className='ml-[90px]'>네이버 계정으로 시작하기</span>
 						</Button>
 
-						<Button variant='outline' fullWidth className='justify-start hover:bg-[#454746] google-button' onClick={handleGoogleLogin}>
+						<Button
+							variant='outline'
+							fullWidth
+							className='justify-start hover:bg-[#454746] google-button border-neutral-200 hover:border-none'
+							onClick={handleGoogleLogin}
+						>
 							<div className='w-7 h-[19px] justify-start items-center gap-4 inline-flex'>
 								<div className='text-red-700 text-base font-semibold google-icon'>G</div>
 								<div className='h-[18px] w-[0px] border-[0.5px] border-neutral-300'></div>
