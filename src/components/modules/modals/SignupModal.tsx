@@ -6,7 +6,7 @@ import { UseFormGetValues } from 'react-hook-form';
 interface SignupModalProps {}
 
 const SignupModal: React.FC<SignupModalProps> = () => {
-	const [signupVisible, setSignupVisible] = useState<boolean>(true);
+	const [signupVisible, setSignupVisible] = useState<boolean>(false);
 
 	const formHandler = useForm<{ job: string; nickname: string }>({
 		mode: 'onChange',

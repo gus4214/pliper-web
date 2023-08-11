@@ -6,7 +6,6 @@ const callback = () => {
 
 	useEffect(() => {
 		let code = new URL(window.location.href).searchParams.get('code');
-		console.log('🚀 ~ file: callback.tsx:9 ~ useEffect ~ code:', code);
 
 		router.push('/');
 	});

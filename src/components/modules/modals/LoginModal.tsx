@@ -9,8 +9,7 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	const handleGoogleLogin = async () => {
-		const result = await googleAuthApi('http://localhost:3000/auth/google/callback');
-		console.log('🚀 ~ file: LoginModal.tsx:23 ~ handleGoogleLogin ~ result:', result);
+		const result = await googleAuthApi('http://localhost:3000/api/auth/google/callback');
 		window.location.href = result.url;
 	};
 
