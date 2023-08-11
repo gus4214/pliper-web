@@ -7,10 +7,9 @@ import Link from 'next/link';
 
 interface MainHeaderProps {
 	position: 'fixed' | 'static';
-	onClick: () => void;
 }
 
-const MainHeader: React.FC<MainHeaderProps> = ({ position, onClick }) => {
+const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 	const barPosition = position === 'fixed' ? 'sticky' : 'static';
 
 	return (
@@ -25,7 +24,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position, onClick }) => {
 			<div className='flex gap-4'>
 				<SearchDropdown />
 				<NotificationDropdown />
-				<UserDropdown onClick={onClick} />
+				<UserDropdown />
 			</div>
 		</Navbar>
 	);

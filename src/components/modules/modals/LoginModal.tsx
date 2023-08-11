@@ -4,10 +4,10 @@ import { Button, Modal } from 'react-daisyui';
 
 interface LoginModalProps {
 	open: boolean;
-	toggleOpen: () => void;
+	onClose: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ open, toggleOpen }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	const handleGoogleLogin = async () => {
 		const result = await googleAuthApi('http://localhost:3000/auth/google/callback');
 		console.log('🚀 ~ file: LoginModal.tsx:23 ~ handleGoogleLogin ~ result:', result);
@@ -24,7 +24,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, toggleOpen }) => {
 		<>
 			<Modal.Legacy
 				open={open}
-				onClickBackdrop={toggleOpen}
+				onClickBackdrop={onClose}
 				className='max-w-screen-sm flex flex-col justify-center items-start rounded-2xl bg-white px-20 gap-8 w-[560px] h-[400px]'
 			>
 				<div className='w-[400px] flex flex-col justify-center items-center gap-4'>

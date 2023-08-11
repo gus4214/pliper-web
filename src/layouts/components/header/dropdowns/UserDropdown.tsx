@@ -1,12 +1,14 @@
+import { useLoginModal } from '@/src/hooks/modal';
 import React from 'react';
 import { Dropdown, Button, Divider, Avatar } from 'react-daisyui';
 
 interface UserDropdownProps {
-	onClick: () => void;
 	loggedIn?: boolean;
 }
 
-const UserDropdown: React.FC<UserDropdownProps> = ({ onClick, loggedIn }) => {
+const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn }) => {
+	const [open, close] = useLoginModal();
+
 	return (
 		<>
 			{loggedIn ? (
@@ -25,7 +27,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ onClick, loggedIn }) => {
 					</Dropdown.Menu>
 				</Dropdown>
 			) : (
-				<Button color='ghost' shape='circle' size='sm' onClick={onClick}>
+				<Button color='ghost' shape='circle' size='sm' onClick={open}>
 					<Avatar shape='circle' size={'md'}>
 						<div className='w-6 h-6 bg-gradient-to-b from-neutral-400 to-neutral-100 rounded-full'></div>
 					</Avatar>
