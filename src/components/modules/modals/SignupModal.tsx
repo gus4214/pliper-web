@@ -1,12 +1,20 @@
+import { signupModalAtom } from '@/src/stores/modal';
+import { useSetAtom } from 'jotai';
 import React, { useState } from 'react';
 import { Modal, Button, Input } from 'react-daisyui';
 import { useForm } from 'react-hook-form';
 import { UseFormGetValues } from 'react-hook-form';
 
-interface SignupModalProps {}
+interface SignupModalProps {
+	open: boolean;
+}
 
-const SignupModal: React.FC<SignupModalProps> = () => {
-	const [signupVisible, setSignupVisible] = useState<boolean>(false);
+const SignupModal: React.FC<SignupModalProps> = ({ open = false }) => {
+	const openSignupModal = useSetAtom(signupModalAtom);
+
+	const handleClose = () => {
+		openSignupModal({ open: false });
+	};
 
 	const formHandler = useForm<{ job: string; nickname: string }>({
 		mode: 'onChange',
@@ -26,14 +34,10 @@ const SignupModal: React.FC<SignupModalProps> = () => {
 
 	const selectedJob = watch('job');
 
-	const toggleSignupVisible = () => {
-		setSignupVisible(!signupVisible);
-	};
-
 	return (
 		<Modal.Legacy
-			open={signupVisible}
-			onClickBackdrop={toggleSignupVisible}
+			open={open}
+			onClickBackdrop={handleClose}
 			className='max-w-screen-sm flex flex-col justify-center  rounded-2xl bg-white p-20 gap-12 w-[560px]'
 		>
 			<div>

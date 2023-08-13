@@ -14,9 +14,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	};
 
 	const handleNaverLogin = async () => {
-		const result = await naverAuthApi();
-		console.log('🚀 ~ file: LoginModal.tsx:23 ~ handleGoogleLogin ~ result:', result);
-		// window.location.href = result.url;
+		const result = await naverAuthApi('http://localhost:3000/api/auth/naver/callback');
+		window.location.href = result.url;
 	};
 
 	return (
