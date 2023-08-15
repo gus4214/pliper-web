@@ -1,12 +1,14 @@
+import { useAuthContext } from '@/src/hooks/context';
 import { useLoginModal } from '@/src/hooks/modal';
 import React from 'react';
 import { Dropdown, Button, Divider, Avatar } from 'react-daisyui';
 
 interface UserDropdownProps {
 	loggedIn?: boolean;
+	handleLogout?: () => void;
 }
 
-const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn }) => {
+const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) => {
 	const [open, close] = useLoginModal();
 
 	return (
@@ -23,7 +25,9 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn }) => {
 						<Dropdown.Item className='p-3 justify-center'> 플립 만들기</Dropdown.Item>
 						<Dropdown.Item className='p-3 justify-center'>My PLIP</Dropdown.Item>
 						<Divider className='m-0' />
-						<Dropdown.Item className='p-3 justify-center'>로그아웃</Dropdown.Item>
+						<Dropdown.Item className='p-3 justify-center' onClick={handleLogout}>
+							로그아웃
+						</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
 			) : (

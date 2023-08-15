@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import { saveAccessToken, setCookie } from '@/src/utils/cooke';
+import { saveAccessToken, setCookie } from '@/src/utils/cookie';
 import { userAtom } from '@/src/stores/auth';
 import { LoginUser } from '@/src/fetchers/auth';
 

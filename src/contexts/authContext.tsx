@@ -1,15 +1,25 @@
 import { accessTokenKey } from '@/src/configs/auth';
-import { profileApi } from '@/src/fetchers/auth';
-import { userAtom } from '@/src/stores/auth';
+import { LoginUser, profileApi } from '@/src/fetchers/auth';
+import { AuthenticationUser, userAtom } from '@/src/stores/auth';
 import { saveUserAtom } from '@/src/stores/auth/login';
 import { initializedAtom } from '@/src/stores/initialization';
-import { clearCookie, getCookie } from '@/src/utils/cooke';
+import { clearCookie, getCookie } from '@/src/utils/cookie';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useRouter } from 'next/router';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 
-export interface AuthProviderType {}
+export interface AuthProviderType {
+	loading: boolean;
+	initialized: boolean;
+	user?: AuthenticationUser;
+	logout?: () => void;
+}
 
-const defaultProvider: AuthProviderType = {};
+const defaultProvider: AuthProviderType = {
+	loading: false,
+	initialized: false,
+	logout: () => {},
+};
 
 type AuthProviderProps = {
 	children: ReactNode;
@@ -23,6 +33,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useAtom(userAtom);
 
 	const saveUser = useSetAtom(saveUserAtom);
+	const router = useRouter();
 
 	useEffect(() => {
 		const initAuth = async () => {
@@ -38,6 +49,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 					console.log('Error 유저 프로파일 요청', error);
 					clearCookie(accessTokenKey);
 				}
+			} else {
 			}
 			setInitialized(true);
 			setLoading(false);
@@ -45,7 +57,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 		initialized || initAuth();
 	}, [initialized]);
 
-	return <AuthContext.Provider value={{ user, initialized, loading }}>{children}</AuthContext.Provider>;
+	const logout = () => {
+		clearCookie(accessTokenKey);
+		setUser(undefined);
+		router.replace('/');
+	};
+
+	return <AuthContext.Provider value={{ user, initialized, loading, logout }}>{children}</AuthContext.Provider>;
 };
 
 export { AuthContext, AuthProvider };

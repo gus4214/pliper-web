@@ -9,13 +9,21 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	const handleGoogleLogin = async () => {
-		const result = await googleAuthApi('http://localhost:3000/api/auth/google/callback');
-		window.location.href = result.url;
+		try {
+			const result = await googleAuthApi('http://localhost:3000/api/auth/google/callback');
+			window.location.href = result.url;
+		} catch (error) {
+			console.error('Error in GoogleAuthApi:', error);
+		}
 	};
 
 	const handleNaverLogin = async () => {
-		const result = await naverAuthApi('http://localhost:3000/api/auth/naver/callback');
-		window.location.href = result.url;
+		try {
+			const result = await naverAuthApi('http://localhost:3000/api/auth/naver/callback');
+			window.location.href = result.url;
+		} catch (error) {
+			console.error('Error in NaverAuthApi:', error);
+		}
 	};
 
 	return (

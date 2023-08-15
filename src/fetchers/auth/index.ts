@@ -32,12 +32,12 @@ export const googleAuthApi = (callbackUrl: string) => {
 	});
 };
 
-export const googleAuthCallbackApi = (code: string) => {
-	return callApi<{ code: string }, OAuthCallbackResult>({
-		api: apis.GOOGLE_AUTH_CALLBACK_API,
-		queryString: { code },
-	});
-};
+// export const googleAuthCallbackApi = (code: string) => {
+// 	return callApi<{ code: string }, OAuthCallbackResult>({
+// 		api: apis.GOOGLE_AUTH_CALLBACK_API,
+// 		queryString: { code },
+// 	});
+// };
 
 export const naverAuthApi = (callbackUrl: string) => {
 	return callApi<{ callbackUrl: string }, OAuthResult>({
@@ -45,6 +45,13 @@ export const naverAuthApi = (callbackUrl: string) => {
 		queryString: { callbackUrl },
 	});
 };
+
+// export const naverAuthCallbackApi = (code: string) => {
+// 	return callApi<{ code: string }, OAuthResult>({
+// 		api: apis.NAVER_AUTH_CALLBACK_API,
+// 		queryString: { code },
+// 	});
+// };
 
 export const profileApi = (token: string) => {
 	return callApi<never, LoginUser>({

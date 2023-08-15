@@ -4,6 +4,7 @@ import UserDropdown from '@/src/layouts/components/header/dropdowns/UserDropdown
 import { Button, Navbar } from 'react-daisyui';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useAuthContext } from '@/src/hooks/context';
 
 interface MainHeaderProps {
 	position: 'fixed' | 'static';
@@ -11,6 +12,9 @@ interface MainHeaderProps {
 
 const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 	const barPosition = position === 'fixed' ? 'sticky' : 'static';
+
+	const { user, logout } = useAuthContext();
+	console.log('🚀 ~ file: MainHeader.tsx:17 ~ r:', user);
 
 	return (
 		<Navbar className={`px-10 top-0 ${barPosition} bg-base-100 shadow-md round-box z-20`}>
@@ -24,7 +28,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 			<div className='flex gap-4'>
 				<SearchDropdown />
 				<NotificationDropdown />
-				<UserDropdown />
+				<UserDropdown loggedIn={!!user} handleLogout={logout} />
 			</div>
 		</Navbar>
 	);

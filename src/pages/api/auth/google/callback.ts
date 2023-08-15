@@ -1,10 +1,7 @@
 import { SERVER_API } from '@/src/fetchers/apis';
-import { googleAuthCallbackApi, OAuthCallbackResult } from '@/src/fetchers/auth';
+import { OAuthCallbackResult } from '@/src/fetchers/auth';
 import { IResponse } from '@/src/fetchers/types';
-import { signupModalAtom } from '@/src/stores/modal';
-import { saveAccessToken } from '@/src/utils/cooke';
 import axios, { AxiosError } from 'axios';
-import { useSetAtom } from 'jotai';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -12,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	try {
 		const response = await axios.request<OAuthCallbackResult>({
-			method: 'GET', // Or whichever HTTP method your API requires
+			method: 'GET',
 			baseURL: `${SERVER_API}`,
 			url: '/v1/auth/google/callback',
 			params: {
@@ -36,9 +33,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	} catch (error) {
 		const axiosError = error as AxiosError<IResponse<OAuthCallbackResult>>;
-		if (axiosError && axiosError.response) {
+		if (axiosError.response?.data.code === 402) {
 			console.log(axiosError.response.data);
-			res.setHeader('Set-Cookie', `ephemeralToken=${axiosError.response.data.message}; Path=/; Max-Age=3600`);
+			res.setHeader('Set-Cookie', `temporaryToken=${axiosError.response.data.message}; Path=/; Max-Age=3600`);
 			res.redirect('/signup');
 		} else {
 			console.error('Error in googleAuthCallback:', error);
