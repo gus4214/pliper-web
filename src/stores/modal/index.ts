@@ -16,6 +16,4 @@ export interface LoginModalAtomProps extends ModalAtomProps {
 
 export const loginModalAtom = atom<LoginModalAtomProps>({ open: false });
 
-export const signupModalAtom = atom<ModalAtomProps>({ open: false });
-
 export * from './actions/login';
