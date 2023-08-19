@@ -1,13 +1,15 @@
-import MainCarefullyPromptContainer from '@/src/components/modules/main/view/MainCarefullyPromptContainer';
-import MainHotTopicContainer from '@/src/components/modules/main/view/MainHotTopicContainer';
-import MainVisualContainer from '@/src/components/modules/main/view/MainVisualContainer';
+import MainDailyPromptContainer from '@/src/components/modules/main/container/MainDailyPromptContainer';
+import MainHotTopicContainer from '@/src/components/modules/main/container/MainHotTopicContainer';
+import MainVisualContainer from '@/src/components/modules/main/container/MainVisualContainer';
+import MainWorkPromptContainer from '@/src/components/modules/main/container/MainWorkPromptContainer';
 
 const MainTemplate = () => {
 	return (
 		<div className='flex flex-col items-center'>
 			<MainVisualContainer />
 			<MainHotTopicContainer />
-			<MainCarefullyPromptContainer />
+			<MainWorkPromptContainer />
+			<MainDailyPromptContainer />
 		</div>
 	);
 };
