@@ -64,4 +64,4 @@ jobs:
           script: |
             cd /home/ubuntu/apps/pliper-web
             cp -r .next/static/ .next/standalone/.next/static
-            node ./server.js &
+            cd /home/ubuntu/apps/pliper-web/.next/standalone && sudo pm2 restart server.js
