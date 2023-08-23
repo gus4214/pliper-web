@@ -18,10 +18,10 @@ jobs:
           node-version: 16
 
       - name: Install Dependencies
-        run: npm ci
+        run: yarn install
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Clean Next Dir
         uses: appleboy/ssh-action@master
