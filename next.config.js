@@ -1,7 +1,10 @@
+const withTwin = require('./withTwin');
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withTwin({
 	reactStrictMode: true,
 	transpilePackages: ['react-daisyui'],
+	output: 'standalone',
 	swcMinify: true,
 	webpack(config) {
 		config.module.rules.push({
@@ -11,6 +14,6 @@ const nextConfig = {
 		});
 		return config;
 	},
-};
+});
 
 module.exports = nextConfig;

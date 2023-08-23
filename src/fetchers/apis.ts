@@ -20,4 +20,9 @@ export const apis: { [k: string]: ApiInfo } = {
 
 	// 유저정보
 	PROFILE_API: { uri: '/v1/user/profile', method: 'GET', description: 'JWT 기반 유저 정보 조회 요청 API' },
+
+	// 프롬프트
+	GET_CATEGORY_API: { uri: '/v1/category', method: 'GET', description: '프롬프트 카테고리 호출 API' },
+	GET_PROMPT: { uri: 'v1/prompt', method: 'GET', description: '프롬프트 템플릿 목록 요청 API' },
+	GET_PROMPT_DETAIL: { uri: 'v1/prompt/{promptId}', method: 'GET', description: '프롬프트 템플릿 상세 요청 API' },
 };

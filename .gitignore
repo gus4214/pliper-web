@@ -37,6 +37,9 @@ next-env.d.ts
 # VisualStudioCode
 .vscode/*
 
+# Intell IDE
+.idea
+
 ### yarn ###
 # used Zero-Install
 .yarn/*

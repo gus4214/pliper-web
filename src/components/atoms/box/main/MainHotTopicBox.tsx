@@ -5,7 +5,7 @@ interface MainHotTopicBoxProps {
 }
 
 const MainHotTopicBox: React.FC<MainHotTopicBoxProps> = ({ children }) => {
-	return <div className='w-[1176px] h-60 flex flex-col justify-center items-center gap-8'>{children}</div>;
+	return <div className='w-[1176px] flex flex-col justify-center items-center gap-8 pt-[164px] pb-[84px]'>{children}</div>;
 };
 
 export default MainHotTopicBox;

@@ -1,5 +1,4 @@
 import ModalProvider from '@/src/components/modules/modals/ModalProvider';
-import SignupModal from '@/src/components/modules/modals/SignupModal';
 import Footer from '@/src/layouts/components/footer/Footer';
 import MainHeader from '@/src/layouts/components/header/MainHeader';
 
@@ -14,7 +13,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 				<MainHeader position='fixed' />
 				<main className='grow w-full'>{children}</main>
 				<ModalProvider />
-				<SignupModal />
 				<Footer />
 			</div>
 		</div>
