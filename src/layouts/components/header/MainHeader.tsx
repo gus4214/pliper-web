@@ -5,6 +5,8 @@ import { Button, Navbar } from 'react-daisyui';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuthContext } from '@/src/hooks/context';
+import { useState } from 'react';
+import SearchDrawer from '@/src/layouts/components/header/searchDrawer/SearchDrawer';
 
 interface MainHeaderProps {
 	position: 'fixed' | 'static';
@@ -14,7 +16,16 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 	const barPosition = position === 'fixed' ? 'sticky' : 'static';
 
 	const { user, logout } = useAuthContext();
-	console.log('🚀 ~ file: MainHeader.tsx:17 ~ r:', user);
+
+	const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+	const handleSearchClick = () => {
+		setIsSearchOpen(true);
+	};
+
+	const handleCloseSearch = () => {
+		setIsSearchOpen(false);
+	};
 
 	return (
 		<Navbar className={`px-10 top-0 ${barPosition} bg-base-100 shadow-md round-box z-20`}>
@@ -26,10 +37,11 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 				<Button color='ghost'>메뉴명 2</Button>
 			</div>
 			<div className='flex gap-4'>
-				<SearchDropdown />
+				<SearchDropdown onClick={handleSearchClick} />
 				<NotificationDropdown />
 				<UserDropdown loggedIn={!!user} handleLogout={logout} />
 			</div>
+			<SearchDrawer isOpen={isSearchOpen} onClose={handleCloseSearch} />
 		</Navbar>
 	);
 };
