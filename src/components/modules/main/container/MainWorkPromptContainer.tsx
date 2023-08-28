@@ -63,8 +63,8 @@ const MainWorkPromptContainer = () => {
 	return (
 		<MainWorkPromptBox>
 			<h1 className='text-center text-[28px] font-bold text-black'>업무에서 활용 가능한 프롬프트 엄선작</h1>
-			<div className='mt-8'>
-				<div className='w-[1176px] flex flex-col items-center gap-8'>
+			<div className='w-[1176px] mt-8'>
+				<div className='w-full flex flex-col items-center gap-8'>
 					<div className='gap-2 flex'>
 						<SelectChip label='개발' color='secondary' selected />
 						<SelectChip label='이메일' color='secondary' />

@@ -2,7 +2,7 @@ import FormInput from '@/src/components/modules/form/FormInput';
 import { temporaryTokenKey } from '@/src/configs/auth';
 import { userCategory } from '@/src/configs/signup';
 import { registerUserApi } from '@/src/fetchers/auth';
-import { getCookie } from '@/src/utils/cookie';
+import { getCookie, saveAccessToken } from '@/src/utils/cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'react-daisyui';
@@ -58,6 +58,10 @@ const SignupForm = () => {
 
 	const onSubmit = async (data: any) => {
 		const result = await registerUserApi(data, temporaryToken);
+		if (result.token) {
+			saveAccessToken(result.token, result.expires_in);
+			router.replace('/');
+		}
 	};
 
 	return (
@@ -76,9 +80,9 @@ const SignupForm = () => {
 										key={key}
 										size='md'
 										color='neutral'
-										variant={selectedJobs?.includes(key) ? undefined : 'outline'}
+										variant={selectedJobs?.includes(value) ? undefined : 'outline'}
 										className='w-[196px]'
-										onClick={() => addOrRemoveJob(key)}
+										onClick={() => addOrRemoveJob(value)}
 									>
 										{value}
 									</Button>

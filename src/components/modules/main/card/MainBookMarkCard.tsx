@@ -10,14 +10,16 @@ interface MainBookMarkCardProps {
 
 const MainBookMarkCard: React.FC<MainBookMarkCardProps> = ({ src, title, user, badge }) => {
 	return (
-		<>
-			<div className='w-[300px] h-40 rounded-2xl relative shadow cursor-pointer'>
-				<Image src={src} fill objectFit='cover' className='absolute z-0 rounded-lg' alt='main-bookmark' />
-				<span className='left-[15px] top-[105px] absolute text-center text-white text-base font-semibold'>{title}</span>
-				<span className='left-[15px] top-[131px] absolute opacity-50 text-center text-white text-[13px] font-medium'>{user}</span>
-				<div className='left-[-32px] top-[-16px] absolute'>{badge}</div>
+		<div className='flex flex-col justify-center gap-[18px]'>
+			<div className='w-[260px] h-40 relative cursor-pointer'>
+				<Image src={src} alt='title' fill objectFit='cover' className='rounded-tl-lg rounded-tr-[50px] rounded-bl-lg rounded-br-[50px]' />
+				<div className='left-0 top-[-16px] absolute'>{badge}</div>
 			</div>
-		</>
+			<div className='w-[260px] flex flex-col gap-3'>
+				<span className='text-black text-lg font-semibold truncate'>{title}</span>
+				<span className='opacity-70 text-neutral-400 text-[13px] font-medium truncate'>{user}</span>
+			</div>
+		</div>
 	);
 };
 
