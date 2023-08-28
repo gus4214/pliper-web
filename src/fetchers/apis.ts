@@ -25,4 +25,9 @@ export const apis: { [k: string]: ApiInfo } = {
 	GET_CATEGORY_API: { uri: '/v1/category', method: 'GET', description: '프롬프트 카테고리 호출 API' },
 	GET_PROMPT: { uri: 'v1/prompt', method: 'GET', description: '프롬프트 템플릿 목록 요청 API' },
 	GET_PROMPT_DETAIL: { uri: 'v1/prompt/{promptId}', method: 'GET', description: '프롬프트 템플릿 상세 요청 API' },
+
+	// 프롬프트 템플릿 검색
+	GET_SEARCHED_BY_USER: { uri: '/v1/search', method: 'GET', description: '유저 검색 히스토리 요청 API' },
+	DELETE_SEARCHED_BY_USER: { uri: '/v1/search/{historyId}', method: 'DELETE', description: '유저 검색 히스토리 삭제 요청 API' },
+	GET_TOP_SEARCHED: { uri: '/v1/search/top', method: 'GET', description: '검색어 랭킹 탑 10 요청 API' },
 };
