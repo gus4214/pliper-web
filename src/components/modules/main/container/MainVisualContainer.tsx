@@ -13,8 +13,8 @@ const MainVisualContainer = () => {
 						title='팀장에게 인정받는 기획서 작성 방법'
 						user='@UserID'
 						badge={
-							<Badge color='accent' className='w-[60px] h-8 p-2.5'>
-								<span className='text-white text-[13px] font-bold leading-[13px]'>100K</span>
+							<Badge color='accent' className='w-[60px] h-8 p-2.5 rounded'>
+								<span className='text-white text-lg font-bold leading-[18px]'>100K</span>
 							</Badge>
 						}
 					/>
@@ -23,8 +23,18 @@ const MainVisualContainer = () => {
 						title='팀장에게 인정받는 기획서 작성 방법'
 						user='@UserID'
 						badge={
-							<Badge color='accent' className='w-[60px] h-8 p-2.5'>
-								<span className='text-white text-[13px] font-bold leading-[13px]'>100K</span>
+							<Badge color='accent' className='w-[60px] h-8 p-2.5 rounded'>
+								<span className='text-white text-lg font-bold leading-[18px]'>100K</span>
+							</Badge>
+						}
+					/>
+					<MainBookMarkCard
+						src={'/images/work.jpeg'}
+						title='올 여름 아주 무더운 날씨!! 전기료 많이 아끼는 법'
+						user='@UserID'
+						badge={
+							<Badge color='accent' className='w-[60px] h-8 p-2.5 rounded'>
+								<span className='text-white text-lg font-bold leading-[18px]'>100K</span>
 							</Badge>
 						}
 					/>

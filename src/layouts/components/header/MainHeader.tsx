@@ -28,20 +28,22 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 	};
 
 	return (
-		<Navbar className={`px-10 top-0 ${barPosition} bg-base-100 shadow-md round-box z-20`}>
-			<Link href={'/'}>
-				<Image src={'/images/pliper.png'} alt='logo' width={96} height={24} />
-			</Link>
-			<div className='flex-1 ml-[159px]'>
-				<Button color='ghost'>메뉴명 1</Button>
-				<Button color='ghost'>메뉴명 2</Button>
+		<Navbar className={`px-10 top-0 ${barPosition} h-[60px] bg-base-100 shadow-md round-box z-20 flex justify-center flex-nowrap`}>
+			<div className='w-[1200px] flex flex-nowrap'>
+				<Link href={'/'}>
+					<Image src={'/images/logo/pliper.svg'} alt='logo' width={96} height={24} />
+				</Link>
+				<div className='flex-1 ml-[159px] w-[190px]'>
+					<Button color='ghost'>메뉴명 1</Button>
+					<Button color='ghost'>메뉴명 2</Button>
+				</div>
+				<div className='flex gap-4'>
+					<SearchDropdown onClick={handleSearchClick} />
+					<NotificationDropdown />
+					<UserDropdown loggedIn={!!user} handleLogout={logout} />
+				</div>
+				<SearchDrawer isOpen={isSearchOpen} onClose={handleCloseSearch} />
 			</div>
-			<div className='flex gap-4'>
-				<SearchDropdown onClick={handleSearchClick} />
-				<NotificationDropdown />
-				<UserDropdown loggedIn={!!user} handleLogout={logout} />
-			</div>
-			<SearchDrawer isOpen={isSearchOpen} onClose={handleCloseSearch} />
 		</Navbar>
 	);
 };

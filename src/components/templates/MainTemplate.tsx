@@ -1,3 +1,4 @@
+import MainAiPlatformContainer from '@/src/components/modules/main/container/MainAiPlatformContainer';
 import MainDailyPromptContainer from '@/src/components/modules/main/container/MainDailyPromptContainer';
 import MainHotTopicContainer from '@/src/components/modules/main/container/MainHotTopicContainer';
 import MainVisualContainer from '@/src/components/modules/main/container/MainVisualContainer';
@@ -10,6 +11,7 @@ const MainTemplate = () => {
 			<MainHotTopicContainer />
 			<MainWorkPromptContainer />
 			<MainDailyPromptContainer />
+			<MainAiPlatformContainer />
 		</div>
 	);
 };
