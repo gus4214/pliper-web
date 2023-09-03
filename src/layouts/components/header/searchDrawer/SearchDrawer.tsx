@@ -1,10 +1,8 @@
 import { useAuthContext } from '@/src/hooks/context';
+import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 import PopularSearchListContainer from '@/src/layouts/components/header/searchDrawer/popularSearch/PopularSearchListContainer';
-import RecentlySearchItem from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchItem';
 import RecentlySearchListContainer from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchListContainer';
-import { Transition } from '@headlessui/react';
-import { Fragment, useEffect, useState } from 'react';
-import { Button, Input } from 'react-daisyui';
+import { useEffect } from 'react';
 
 interface SearchDrawerProps {
 	isOpen?: boolean;
@@ -12,8 +10,6 @@ interface SearchDrawerProps {
 }
 
 const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
-	if (!isOpen) return null;
-
 	const { user } = useAuthContext();
 
 	useEffect(() => {
@@ -27,16 +23,18 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 		};
 	}, [isOpen]);
 
+	if (!isOpen) return null;
+
 	const drawerStyles = isOpen
 		? 'transform transition-transform duration-300 ease-in-out'
 		: 'transform -translate-y-full transition-transform duration-300 ease-in-out';
 
 	return (
 		<div
-			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col overflow-y-hidden`}
+			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden`}
 		>
 			<div className='w-[750px] flex flex-col mt-10 justify-center'>
-				<Input className='rounded-[130px] shadow border-none' placeholder='뭐든 적어주세요, 원하시는 내용을 보여드릴게요!' />
+				<SearchForm />
 				<div className='w-[750px] px-4 py-10 flex-col justify-start items-start gap-10 flex'>
 					{user && <RecentlySearchListContainer />}
 					<PopularSearchListContainer />
