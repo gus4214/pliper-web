@@ -11,7 +11,7 @@ export interface IBaasResponse<T> extends IBaasError {
 	data: T;
 }
 export interface IPageRequest {
-	size?: number;
+	limit?: number;
 	page?: number;
 }
 export interface IPageResponse<T> {

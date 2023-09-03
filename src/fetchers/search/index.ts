@@ -30,6 +30,13 @@ export const deleteSearchedByUserApi = ({ historyId }: { historyId: number }) =>
 	});
 };
 
+export const deleteAllSearchedByUserApi = () => {
+	return callApi<never, never>({
+		api: apis.DELETE_ALL_SEARCHED_BY_USER,
+		token: getCookie(accessTokenKey),
+	});
+};
+
 export const getTopSearchedApi = () => {
 	return callApi<never, GetTopSearchedItem>({
 		api: apis.GET_TOP_SEARCHED,
