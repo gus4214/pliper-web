@@ -1,65 +1,71 @@
 import MainWorkPromptBox from '@/src/components/atoms/box/main/MainWorkPromptBox';
 import SelectChip from '@/src/components/atoms/chip/SelectChip';
 import PromptCard from '@/src/components/modules/main/card/PromptCard';
+import { BestClip } from '@/src/fetchers/main';
+import { formatNumber } from '@/src/utils/utils';
+
+interface MainWorkPromptContainerProps {
+	bestWeekJob: BestClip[];
+}
 
 const samplePropmpt = [
 	{
-		id: 0,
+		promptId: 0,
 		src: '/images/sample/1.jpeg',
-		user: '@UserID',
+		userEmail: '@UserID',
 		title: '개발팀에게 인정받는 기획서 작성법 + 꿀팁',
-		tag: '개발',
-		likeCount: 208,
+		personaType: '개발',
+		likeCount: 2081,
 		viewCount: 527,
 	},
 	{
-		id: 1,
+		promptId: 1,
 		src: '/images/sample/2.jpeg',
-		user: '@UserID',
+		userEmail: '@UserID',
 		title: '사용자 이메일, 더이상 고민 NoNo!',
-		tag: '개발',
+		personaType: '개발',
 		likeCount: 208,
 		viewCount: 527,
 	},
 	{
-		id: 2,
+		promptId: 2,
 		src: '/images/sample/3.jpeg',
-		user: '@UserID',
+		userEmail: '@UserID',
 		title: '나란녀석 업무 반복 작업에서 벗어나자!',
-		tag: '개발',
+		personaType: '개발',
 		likeCount: 208,
 		viewCount: 527,
 	},
 	{
-		id: 3,
+		promptId: 3,
 		src: '/images/sample/4.jpeg',
-		user: '@UserID',
+		userEmail: '@UserID',
 		title: '개발팀에게 인정받는 개발비법!',
-		tag: '개발',
+		personaType: '개발',
 		likeCount: 208,
 		viewCount: 527,
 	},
 	{
-		id: 4,
+		promptId: 4,
 		src: '/images/sample/5.jpeg',
-		user: '@UserID',
+		userEmail: '@UserID',
 		title: '어느 날 내게 이런 업무가?!',
-		tag: '개발',
+		personaType: '개발',
 		likeCount: 208,
 		viewCount: 527,
 	},
 	{
-		id: 5,
+		promptId: 5,
 		src: '/images/sample/6.gif',
-		user: '@UserID',
+		userEmail: '@UserID',
 		title: '업무 10초라도 더 줄이는 법!',
-		tag: '개발',
+		personaType: '개발',
 		likeCount: 208,
-		viewCount: 527,
+		viewCount: 5272,
 	},
 ];
 
-const MainWorkPromptContainer = () => {
+const MainWorkPromptContainer: React.FC<MainWorkPromptContainerProps> = ({ bestWeekJob }) => {
 	return (
 		<MainWorkPromptBox>
 			<h1 className='text-center text-[28px] font-bold text-black'>업무에서 활용 가능한 프롬프트 엄선작</h1>
@@ -77,13 +83,13 @@ const MainWorkPromptContainer = () => {
 						{samplePropmpt.map((prompt) => {
 							return (
 								<PromptCard
-									key={prompt.id}
+									key={prompt.promptId}
 									src={prompt.src}
-									user={prompt.user}
+									user={prompt.userEmail}
 									title={prompt.title}
-									tag={prompt.tag}
-									likeCount={prompt.likeCount}
-									viewCount={prompt.viewCount}
+									tag={prompt.personaType}
+									likeCount={formatNumber(prompt.likeCount)}
+									viewCount={formatNumber(prompt.viewCount)}
 								/>
 							);
 						})}

@@ -1,5 +1,6 @@
 import FormInput from '@/src/components/modules/form/FormInput';
 import { getPromptsApi } from '@/src/fetchers/prompt';
+import { useRouter } from 'next/router';
 import React, { ChangeEvent } from 'react';
 import { Input } from 'react-daisyui';
 import { useController, useForm } from 'react-hook-form';
@@ -8,7 +9,12 @@ interface BaseFormFields {
 	title: string;
 }
 
-const SearchForm = () => {
+interface SearchFormProps {
+	onClose?: () => void;
+}
+
+const SearchForm: React.FC<SearchFormProps> = ({ onClose }) => {
+	const router = useRouter();
 	const formHandler = useForm<BaseFormFields>({
 		mode: 'onChange',
 		defaultValues: {
@@ -26,6 +32,8 @@ const SearchForm = () => {
 	const onSubmit = async (data: BaseFormFields) => {
 		const { title } = data;
 		const result = await getPromptsApi({ title });
+		router.push('/prompt');
+		onClose && onClose();
 	};
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {

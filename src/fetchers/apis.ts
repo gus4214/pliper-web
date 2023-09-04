@@ -31,4 +31,11 @@ export const apis: { [k: string]: ApiInfo } = {
 	DELETE_SEARCHED_BY_USER: { uri: '/v1/search/{historyId}', method: 'DELETE', description: '유저 검색 히스토리 삭제 요청 API' },
 	DELETE_ALL_SEARCHED_BY_USER: { uri: '/v1/search', method: 'DELETE', description: '유저 검색 히스토리 전체 삭제 요청 API' },
 	GET_TOP_SEARCHED: { uri: '/v1/search/top', method: 'GET', description: '검색어 랭킹 탑 10 요청 API' },
+
+	// 메인
+	GET_CURATION_MAIN: {
+		uri: '/v1/aggregate/main',
+		method: 'GET',
+		description: '메인에서 노출 될 큐레이션(키워드, 주간 베스트, 클립 베스트) 요청 API',
+	},
 };
