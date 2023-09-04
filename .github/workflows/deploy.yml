@@ -55,7 +55,8 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           source: "public"
-          target: "/home/ubuntu/apps/pliper-web/.next/standalone"
+          target: "/home/ubuntu/apps/pliper-web"
+
 
       - name: Restart Next.js service on Lightsail using SSH
         uses: appleboy/ssh-action@master
@@ -66,5 +67,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd /home/ubuntu/apps/pliper-web
-            cp -r .next/static/ .next/standalone/.next/static
-            cd /home/ubuntu/apps/pliper-web/.next/standalone && sudo pm2 restart server.js
+            cp -r .next/standalone ./
+            cp -r .next/static ./.next/static
+            
+            cd /home/ubuntu/apps/pliper-web && sudo pm2 restart server.js
