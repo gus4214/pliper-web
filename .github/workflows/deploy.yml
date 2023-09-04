@@ -54,9 +54,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: ".next/standalone"
+          source: "./.next/standalone"
           target: "/home/ubuntu/apps/pliper-web"
-          strip_components: 1
+          strip_components: 2
 
       - name: Deploy ".next" to Lightsail (2/2)
         uses: appleboy/ssh-action@master
