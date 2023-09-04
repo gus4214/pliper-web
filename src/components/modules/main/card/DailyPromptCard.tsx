@@ -9,8 +9,8 @@ interface DailyPromptCardProps {
 	user: string;
 	title: string;
 	tag: string;
-	likeCount: number;
-	viewCount: number;
+	likeCount: string;
+	viewCount: string;
 }
 
 const DailyPromptCard: React.FC<DailyPromptCardProps> = ({ src, user, title, tag, likeCount, viewCount }) => {

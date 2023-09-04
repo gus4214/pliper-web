@@ -1,5 +1,3 @@
-import { ArrowNarrowUp, ArrowRightOutline, ArrowUpOutline } from 'heroicons-react';
-import Image from 'next/image';
 import { Card } from 'react-daisyui';
 
 const MainAiPlatformContainer = () => {
@@ -14,7 +12,7 @@ const MainAiPlatformContainer = () => {
 					<Card imageFull className='w-[376px] h-20 relative flex cursor-pointer'>
 						<Card.Image src='/images/ai/ai1.jpeg' alt='ai-web' className='w-full' />
 						<div className='flex gap-3 items-center z-10 justify-center'>
-							<span className='text-white text-lg font-medium'>ChatGPT</span>
+							<span className='text-white text-lg font-medium'>뤼튼</span>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								fill='none'

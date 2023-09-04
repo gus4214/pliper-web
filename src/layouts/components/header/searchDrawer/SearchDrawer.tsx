@@ -34,7 +34,7 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden`}
 		>
 			<div className='w-[750px] flex flex-col mt-10 justify-center'>
-				<SearchForm />
+				<SearchForm onClose={onClose} />
 				<div className='w-[750px] px-4 py-10 flex-col justify-start items-start gap-10 flex'>
 					{user && <RecentlySearchListContainer />}
 					<PopularSearchListContainer />

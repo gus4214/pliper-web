@@ -3,14 +3,17 @@ import MainDailyPromptContainer from '@/src/components/modules/main/container/Ma
 import MainHotTopicContainer from '@/src/components/modules/main/container/MainHotTopicContainer';
 import MainVisualContainer from '@/src/components/modules/main/container/MainVisualContainer';
 import MainWorkPromptContainer from '@/src/components/modules/main/container/MainWorkPromptContainer';
+import { useGetCurationMain } from '@/src/fetchers/main';
 
 const MainTemplate = () => {
+	const { data } = useGetCurationMain();
+
 	return (
 		<div className='flex flex-col items-center'>
-			<MainVisualContainer />
-			<MainHotTopicContainer />
-			<MainWorkPromptContainer />
-			<MainDailyPromptContainer />
+			<MainVisualContainer bestClip={data?.bestClip || []} />
+			<MainHotTopicContainer keywords={data?.keywords || []} />
+			<MainWorkPromptContainer bestWeekJob={data?.bestWeekJob || []} />
+			<MainDailyPromptContainer bestWeekDaily={data?.bestWeekDaily || []} />
 			<MainAiPlatformContainer />
 		</div>
 	);

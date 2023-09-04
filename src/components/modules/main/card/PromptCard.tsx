@@ -9,8 +9,8 @@ interface PromptCardProps {
 	user: string;
 	title: string;
 	tag: string;
-	likeCount: number;
-	viewCount: number;
+	likeCount: string;
+	viewCount: string;
 }
 
 const PromptCard: React.FC<PromptCardProps> = ({ src, user, title, tag, likeCount, viewCount }) => {
