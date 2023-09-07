@@ -1,7 +1,7 @@
 import SelectChip from '@/src/components/atoms/chip/SelectChip';
-import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
+import PlipIcon from '@/src/components/atoms/icons/PlipIcon';
+import PlipNoneIcon from '@/src/components/atoms/icons/PlipNoneIcon';
 import PromptItem from '@/src/components/modules/prompt/PromptItem';
-import React from 'react';
 import { Search } from 'heroicons-react';
 import { Button, Input } from 'react-daisyui';
 
@@ -10,7 +10,7 @@ const PromptTemplate = () => {
 		<div className='flex flex-col w-full justify-center items-center'>
 			<div className='mt-10' />
 			<div className='rounded-[130px] border-none w-[976px] h-[60px] py-2 bg-neutral-50 flex justify-center mb-4 items-center'>
-				<Search className='' />
+				<Search />
 				<Input
 					placeholder='뭐든 적어주세요, 원하시는 내용을 보여드릴게요!'
 					className='w-[374px] border-none bg-neutral-50 focus:outline-none'
