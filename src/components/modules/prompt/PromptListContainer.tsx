@@ -4,9 +4,11 @@ import React from 'react';
 
 const PromptListContainer = () => {
 	return (
-		<AsyncComponentBoundary>
-			<PromptList />
-		</AsyncComponentBoundary>
+		<div className='w-[944px]'>
+			<AsyncComponentBoundary>
+				<PromptList />
+			</AsyncComponentBoundary>
+		</div>
 	);
 };
 

@@ -1,10 +1,11 @@
+import { PromptSortType } from '@/src/configs/prompt';
 import { IPageRequest } from '@/src/fetchers/types';
 
 export interface GetPromptsRequest extends IPageRequest {
 	category1Codes?: string[];
 	category2Codes?: string[];
 	personaTypes?: string[];
-	promptSort?: string[];
+	promptSort?: PromptSortType;
 	lmModel?: string[];
 	sort?: string;
 	title?: string;
