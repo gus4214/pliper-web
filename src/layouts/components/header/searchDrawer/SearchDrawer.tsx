@@ -2,6 +2,7 @@ import { useAuthContext } from '@/src/hooks/context';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 import PopularSearchListContainer from '@/src/layouts/components/header/searchDrawer/popularSearch/PopularSearchListContainer';
 import RecentlySearchListContainer from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchListContainer';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 interface SearchDrawerProps {
@@ -11,6 +12,13 @@ interface SearchDrawerProps {
 
 const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 	const { user } = useAuthContext();
+
+	const router = useRouter();
+
+	const handleSearch = () => {
+		router.push('/prompt');
+		onClose && onClose();
+	};
 
 	useEffect(() => {
 		if (isOpen) {
@@ -34,7 +42,7 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden`}
 		>
 			<div className='w-[750px] flex flex-col mt-10 justify-center'>
-				<SearchForm onClose={onClose} />
+				<SearchForm onEnter={handleSearch} />
 				<div className='w-[750px] px-4 py-10 flex-col justify-start items-start gap-10 flex'>
 					{user && <RecentlySearchListContainer />}
 					<PopularSearchListContainer />

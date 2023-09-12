@@ -1,9 +1,12 @@
+import { PromptSortType } from '@/src/configs/prompt';
 import { IPageRequest } from '@/src/fetchers/types';
 
 export interface GetPromptsRequest extends IPageRequest {
 	category1Codes?: string[];
 	category2Codes?: string[];
 	personaTypes?: string[];
+	promptSort?: PromptSortType;
+	lmModel?: string[];
 	sort?: string;
 	title?: string;
 }
@@ -17,6 +20,10 @@ export interface GetPromptsResult {
 	sort: string;
 	totalPages: number;
 	totalRows: number;
+}
+
+export interface GetPromptCategoryResult {
+	categories: Category[];
 }
 
 export interface Prompt {
@@ -47,4 +54,14 @@ export interface Parameter {
 	title: string;
 	type: string;
 	typeValues: string;
+}
+
+export interface Category {
+	dept1: Dept1;
+	dept2: Dept1[];
+}
+
+export interface Dept1 {
+	code: string;
+	text: string;
 }
