@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { useAuthContext } from '@/src/hooks/context';
 import { useState } from 'react';
 import SearchDrawer from '@/src/layouts/components/header/searchDrawer/SearchDrawer';
+import { searchInputAtom } from '@/src/stores/searchForm';
+import { useSetAtom } from 'jotai';
 
 interface MainHeaderProps {
 	position: 'fixed' | 'static';
@@ -18,9 +20,11 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 	const { user, logout } = useAuthContext();
 
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
+	const setSearchInputValue = useSetAtom(searchInputAtom);
 
 	const handleSearchClick = () => {
 		setIsSearchOpen(true);
+		setSearchInputValue('');
 	};
 
 	const handleCloseSearch = () => {

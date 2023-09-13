@@ -1,5 +1,6 @@
 import MainWorkPromptBox from '@/src/components/atoms/box/main/MainWorkPromptBox';
 import SelectChip from '@/src/components/atoms/chip/SelectChip';
+import PromptCategoryChips from '@/src/components/modules/main/PromptCategoryChips';
 import PromptCard from '@/src/components/modules/main/card/PromptCard';
 import { BestClip } from '@/src/fetchers/main';
 import { formatNumber } from '@/src/utils/utils';
@@ -71,14 +72,7 @@ const MainWorkPromptContainer: React.FC<MainWorkPromptContainerProps> = ({ bestW
 			<h1 className='text-center text-[28px] font-bold text-black'>업무에서 활용 가능한 프롬프트 엄선작</h1>
 			<div className='w-[1176px] mt-8'>
 				<div className='w-full flex flex-col items-center gap-8'>
-					<div className='gap-2 flex'>
-						<SelectChip label='개발' color='secondary' selected />
-						<SelectChip label='이메일' color='secondary' />
-						<SelectChip label='마케팅' color='secondary' />
-						<SelectChip label='디자인' color='secondary' />
-						<SelectChip label='문서작성' color='secondary' />
-					</div>
-
+					<PromptCategoryChips />
 					<div className='w-full gap-x-6 gap-y-10 flex flex-wrap'>
 						{samplePropmpt.map((prompt) => {
 							return (
