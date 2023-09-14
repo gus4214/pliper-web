@@ -2,6 +2,7 @@ import MainVisualBox from '@/src/components/atoms/box/main/MainVisualBox';
 import MainBookMarkCard from '@/src/components/modules/main/card/MainBookMarkCard';
 import { BestClip } from '@/src/fetchers/main';
 import { formatNumber } from '@/src/utils/utils';
+import React from 'react';
 import { Badge } from 'react-daisyui';
 
 const sampleBestClip = [
@@ -59,4 +60,4 @@ const MainVisualContainer: React.FC<MainVisualContainerProps> = ({ bestClip }) =
 	);
 };
 
-export default MainVisualContainer;
+export default React.memo(MainVisualContainer);

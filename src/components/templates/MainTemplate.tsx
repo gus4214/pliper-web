@@ -4,9 +4,11 @@ import MainHotTopicContainer from '@/src/components/modules/main/container/MainH
 import MainVisualContainer from '@/src/components/modules/main/container/MainVisualContainer';
 import MainWorkPromptContainer from '@/src/components/modules/main/container/MainWorkPromptContainer';
 import { useGetCurationMain } from '@/src/fetchers/main';
+import { workCategoryAtom } from '@/src/stores/main';
+import { useAtomValue } from 'jotai';
 
 const MainTemplate = () => {
-	const { data } = useGetCurationMain();
+	const { data } = useGetCurationMain({ dailyCategory: null, jobCategory: null });
 
 	return (
 		<div className='flex flex-col items-center'>
