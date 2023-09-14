@@ -1,10 +1,6 @@
-import MainWorkPromptBox from '@/src/components/atoms/box/main/MainWorkPromptBox';
-import SelectChip from '@/src/components/atoms/chip/SelectChip';
-import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import PromptCategoryChips from '@/src/components/modules/main/mainWorkPromptList/WorkPromptCategoryChips';
 import PromptCard from '@/src/components/modules/main/card/PromptCard';
-import { BestClip, useGetCurationMain } from '@/src/fetchers/main';
-import { dailyCategoryAtom, workCategoryAtom } from '@/src/stores/main';
+import { useGetCurationMain } from '@/src/fetchers/main';
+import { workCategoryAtom } from '@/src/stores/main';
 import { formatNumber } from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
 

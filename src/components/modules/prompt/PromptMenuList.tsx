@@ -3,6 +3,7 @@ import { category1CodesAtom, category2CodesAtom, searchFilterAtom } from '@/src/
 import { useAtom, useAtomValue } from 'jotai';
 import { useState } from 'react';
 import { Button, Checkbox, Menu } from 'react-daisyui';
+import tw from 'twin.macro';
 
 const PromptMenuList = () => {
 	const { data } = useGetPromptCategory();
@@ -49,7 +50,13 @@ const PromptMenuList = () => {
 				<div className='text-center text-neutral-800 text-xs font-bold'>카테고리</div>
 				<div className='border-l border-neutral-200 flex-col  gap-2.5 flex'>
 					{data?.categories.map((category) => (
-						<div className='flex flex-col border-l border-neutral-300 gap-3' key={category.dept1.code}>
+						<div
+							css={[
+								tw`flex flex-col border-l gap-3`,
+								categoryOpen.includes(category.dept1.code) ? tw`border-teal-200` : tw`border-neutral-300`,
+							]}
+							key={category.dept1.code}
+						>
 							<Button
 								className='w-32 h-8 px-4 py-[9px] min-h-8 hover:text-teal-400 hover:font-medium hover:bg-neutral-50 text-start'
 								color='ghost'
