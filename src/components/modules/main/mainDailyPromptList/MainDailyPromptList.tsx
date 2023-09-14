@@ -1,13 +1,8 @@
-import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import PromptCategoryChips from '@/src/components/modules/main/PromptCategoryChips';
 import DailyPromptCard from '@/src/components/modules/main/card/DailyPromptCard';
-import { BestClip } from '@/src/fetchers/main';
+import { useGetCurationMain } from '@/src/fetchers/main';
+import { dailyCategoryAtom } from '@/src/stores/main';
 import { formatNumber } from '@/src/utils/utils';
-import React from 'react';
-
-interface MainDailyPromptContainerProps {
-	bestWeekDaily: BestClip[];
-}
+import { useAtomValue } from 'jotai';
 
 const samplePropmpt = [
 	{
@@ -65,32 +60,29 @@ const samplePropmpt = [
 		viewCount: 527,
 	},
 ];
-const MainDailyPromptContainer: React.FC<MainDailyPromptContainerProps> = ({ bestWeekDaily }) => {
+
+const MainDailyPromptList = () => {
+	const dailyCategory = useAtomValue(dailyCategoryAtom);
+
+	const { data } = useGetCurationMain({ dailyCategory, jobCategory: null });
+
 	return (
-		<div className='w-full py-[90px] flex flex-col justify-center items-center'>
-			<div className='w-[1200px] px-3 flex-col gap-10 flex items-center'>
-				<h1 className='text-center text-black text-[28px] font-bold'>일상속에서도 프롬프트로 레벨업!</h1>
-				<AsyncComponentBoundary>
-					<PromptCategoryChips />
-				</AsyncComponentBoundary>
-				<div className='w-full gap-x-6 gap-y-6 flex flex-wrap'>
-					{samplePropmpt.map((prompt) => {
-						return (
-							<DailyPromptCard
-								key={prompt.promptId}
-								src={prompt.src}
-								user={prompt.userEmail}
-								title={prompt.title}
-								tag={prompt.personaType}
-								likeCount={formatNumber(prompt.likeCount)}
-								viewCount={formatNumber(prompt.viewCount)}
-							/>
-						);
-					})}
-				</div>
-			</div>
+		<div className='w-full gap-x-6 gap-y-6 flex flex-wrap'>
+			{samplePropmpt.map((prompt) => {
+				return (
+					<DailyPromptCard
+						key={prompt.promptId}
+						src={prompt.src}
+						user={prompt.userEmail}
+						title={prompt.title}
+						tag={prompt.personaType}
+						likeCount={formatNumber(prompt.likeCount)}
+						viewCount={formatNumber(prompt.viewCount)}
+					/>
+				);
+			})}
 		</div>
 	);
 };
 
-export default MainDailyPromptContainer;
+export default MainDailyPromptList;

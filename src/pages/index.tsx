@@ -6,9 +6,9 @@ import { QueryClient, dehydrate } from 'react-query';
 
 export default function Home() {
 	return (
-		<AsyncComponentBoundary>
+		<>
 			<MainTemplate />
-		</AsyncComponentBoundary>
+		</>
 	);
 }
 

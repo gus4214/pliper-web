@@ -1,10 +1,8 @@
 import SelectChip from '@/src/components/atoms/chip/SelectChip';
-import { PromptSortType } from '@/src/configs/prompt';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
 import { workCategoryAtom } from '@/src/stores/main';
-import { category1CodesAtom, promptSortAtom } from '@/src/stores/searchForm';
 import { useAtom } from 'jotai';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 interface WorkPromptCategoryChipsProps {
 	className?: string;
