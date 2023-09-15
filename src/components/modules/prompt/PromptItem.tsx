@@ -12,7 +12,7 @@ interface PromptItemProps {
 	title: string;
 }
 
-const PromptItem: React.FC<Partial<PromptItemProps>> = () => {
+const PromptItem: React.FC<Partial<PromptItemProps>> = ({ personaType, category, userEmail, updateTime, likeCount, viewCount, percents, title }) => {
 	return (
 		<div className='w-[944px] pl-4 pr-8 py-4 bg-white bg-opacity-5 rounded-2xl border border-neutral-200 hover:shadow  hover:border-teal-200 justify-start items-center gap-4 flex cursor-pointer'>
 			<div className='w-10 px-2 py-1.5 bg-white rounded flex-col justify-center items-center gap-2 flex'>
