@@ -6,6 +6,7 @@ export const category1CodesAtom = atom<string[]>([]);
 export const category2CodesAtom = atom<string[]>([]);
 export const promptSortAtom = atom<PromptSortType>('ACCURACY');
 export const lmModelAtom = atom<string[]>([]);
+export const personaTypesAtom = atom<string | undefined>(undefined);
 
 export const searchFilterAtom = atom((get) => ({
 	title: get(searchInputAtom),
@@ -13,4 +14,5 @@ export const searchFilterAtom = atom((get) => ({
 	category2Codes: get(category2CodesAtom),
 	promptSort: get(promptSortAtom),
 	lmModel: get(lmModelAtom),
+	personaTypes: get(personaTypesAtom),
 }));
