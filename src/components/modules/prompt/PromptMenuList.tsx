@@ -1,5 +1,6 @@
+import { promptLLMCategory } from '@/src/configs/prompt';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
-import { category1CodesAtom, category2CodesAtom, searchFilterAtom } from '@/src/stores/searchForm';
+import { category1CodesAtom, category2CodesAtom, lmModelAtom, searchFilterAtom } from '@/src/stores/searchForm';
 import { useAtom, useAtomValue } from 'jotai';
 import { useState } from 'react';
 import { Button, Checkbox, Menu } from 'react-daisyui';
@@ -10,6 +11,7 @@ const PromptMenuList = () => {
 
 	const [categoryOpen, setCategoryOpen] = useAtom(category1CodesAtom);
 	const [selectedCodes, setSelectedCodes] = useAtom(category2CodesAtom);
+	const [selectedModel, setSelectedModel] = useAtom(lmModelAtom);
 
 	const handleCategoryOpen = (code: string) => {
 		if (categoryOpen.includes(code)) {
@@ -27,10 +29,18 @@ const PromptMenuList = () => {
 		}
 	};
 
+	const handleModelCheckboxChange = (model: string) => {
+		if (selectedModel.includes(model)) {
+			setSelectedModel((prev) => prev.filter((item) => item !== model));
+		} else {
+			setSelectedModel((prev) => [...prev, model]);
+		}
+	};
+
 	return (
 		<div className='w-44 px-4 flex-col gap-8 flex'>
 			<div className='flex-col justify-center items-start gap-6 flex'>
-				<span className='text-center text-neutral-800 text-xs font-bold'>페르소나</span>
+				<h1 className='text-center text-neutral-800 text-xs font-bold'>페르소나</h1>
 				<div className='pl-4 border-l border-neutral-200 flex-col justify-center items-start gap-2 flex'>
 					<Button
 						className='w-32 h-8 px-4 py-[9px] min-h-8 hover:text-teal-400 hover:font-medium hover:bg-neutral-50 text-start'
@@ -47,8 +57,8 @@ const PromptMenuList = () => {
 				</div>
 			</div>
 			<div className='w-[140px] flex-col justify-start items-start gap-6 flex'>
-				<div className='text-center text-neutral-800 text-xs font-bold'>카테고리</div>
-				<div className='border-l border-neutral-200 flex-col  gap-2.5 flex'>
+				<h1 className='text-center text-neutral-800 text-xs font-bold'>카테고리</h1>
+				<div className='border-l border-neutral-200 flex-col gap-2.5 flex'>
 					{data?.categories.map((category) => (
 						<div
 							css={[
@@ -79,6 +89,22 @@ const PromptMenuList = () => {
 									))}
 								</div>
 							)}
+						</div>
+					))}
+				</div>
+			</div>
+			<div className='w-[140px] flex flex-col justify-start items-start gap-6'>
+				<h1 className='text-center text-neutral-800 text-xs font-bold'>플랫폼</h1>
+				<div className='pl-4 py-2 flex-col gap-4 flex border-l border-teal-200'>
+					{Object.entries(promptLLMCategory).map(([key, value]) => (
+						<div className='items-center gap-2 flex'>
+							<Checkbox
+								size='sm'
+								className='w-4 h-4 rounded'
+								onChange={() => handleModelCheckboxChange(key)}
+								checked={selectedModel.includes(key)}
+							/>
+							<span className='text-center text-neutral-700 text-sm font-normal'>{value}</span>
 						</div>
 					))}
 				</div>

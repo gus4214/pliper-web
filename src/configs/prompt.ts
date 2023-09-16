@@ -5,3 +5,8 @@ export const promptSortCategory = {
 	LIKE: '❤️ 좋아요 순',
 	LATEST: '✨ 최신 순',
 };
+
+export const promptLLMCategory = {
+	GPT: 'GPT 3.5',
+	BING: 'BING',
+};
