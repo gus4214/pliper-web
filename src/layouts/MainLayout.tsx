@@ -1,4 +1,4 @@
-import ModalProvider from '@/src/components/modules/modals/ModalProvider';
+import ModalProvider from '@/src/components/modules/@common/modals/ModalProvider';
 import Footer from '@/src/layouts/components/footer/Footer';
 import MainHeader from '@/src/layouts/components/header/MainHeader';
 

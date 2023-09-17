@@ -1,4 +1,4 @@
-import FormInput from '@/src/components/modules/form/FormInput';
+import FormInput from '@/src/components/modules/@common/form/FormInput';
 import { getPromptsApi } from '@/src/fetchers/prompt';
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { Search } from 'heroicons-react';

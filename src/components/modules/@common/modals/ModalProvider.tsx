@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import LoginModal from '@/src/components/modules/modals/LoginModal';
+import LoginModal from '@/src/components/modules/@common/modals/LoginModal';
 import { closeLoginModalAtom, loginModalAtom } from '@/src/stores/modal';
 
 const ModalProvider = () => {

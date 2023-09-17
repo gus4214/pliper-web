@@ -1,4 +1,4 @@
-import PromptItem from '@/src/components/modules/prompt/PromptItem';
+import PromptItem from '@/src/components/modules/prompt/list/PromptItem';
 import { useGetPrompts, useInfiniteGetPrompts } from '@/src/fetchers/prompt';
 import { searchFilterAtom, searchInputAtom } from '@/src/stores/searchForm';
 import { useAtomValue } from 'jotai';
