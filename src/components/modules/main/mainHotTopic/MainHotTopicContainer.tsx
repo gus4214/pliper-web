@@ -1,6 +1,9 @@
 import MainHotTopicBox from '@/src/components/atoms/box/main/MainHotTopicBox';
 import SelectChip from '@/src/components/atoms/chip/SelectChip';
 import { Keyword } from '@/src/fetchers/main';
+import { searchInputAtom } from '@/src/stores/searchForm';
+import { useAtom } from 'jotai';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 interface MainHotTopicContainerProps {
@@ -8,7 +11,11 @@ interface MainHotTopicContainerProps {
 }
 
 const MainHotTopicContainer: React.FC<MainHotTopicContainerProps> = ({ keywords }) => {
+	const router = useRouter();
+
 	const [selectedId, setSelectedId] = useState<string | null>(null);
+
+	const [topic, setTopic] = useAtom(searchInputAtom);
 
 	return (
 		<MainHotTopicBox>
@@ -22,6 +29,8 @@ const MainHotTopicContainer: React.FC<MainHotTopicContainerProps> = ({ keywords 
 						rounded
 						onClick={() => {
 							setSelectedId((prevSelectedId) => (prevSelectedId === value.keyword ? null : value.keyword));
+							setTopic(value.keyword);
+							router.push('/prompt');
 						}}
 					/>
 				))}

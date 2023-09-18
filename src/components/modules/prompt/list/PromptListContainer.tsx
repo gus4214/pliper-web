@@ -1,6 +1,5 @@
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import PromptList from '@/src/components/modules/prompt/PromptList';
-import React from 'react';
+import PromptList from '@/src/components/modules/prompt/list/PromptList';
 
 const PromptListContainer = () => {
 	return (

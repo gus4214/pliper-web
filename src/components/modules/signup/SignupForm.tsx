@@ -1,4 +1,4 @@
-import FormInput from '@/src/components/modules/form/FormInput';
+import FormInput from '@/src/components/modules/@common/form/FormInput';
 import { temporaryTokenKey } from '@/src/configs/auth';
 import { userCategory } from '@/src/configs/signup';
 import { registerUserApi } from '@/src/fetchers/auth';

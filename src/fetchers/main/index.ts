@@ -2,6 +2,11 @@ import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
 import { QueryClient, useQuery } from 'react-query';
 
+export interface GetCurationMainRequest {
+	dailyCategory?: string | null;
+	jobCategory?: string | null;
+}
+
 export interface GetCurationMainResult {
 	bestClip: BestClip[];
 	bestWeekDaily: BestClip[];
@@ -44,24 +49,25 @@ export interface Parameter {
 	typeValues: string;
 }
 
-export const getCurationMain = () => {
-	return callApi<never, GetCurationMainResult>({
+export const getCurationMain = (filter: GetCurationMainRequest) => {
+	return callApi<GetCurationMainRequest, GetCurationMainResult>({
 		api: apis.GET_CURATION_MAIN,
+		queryString: filter,
 	});
 };
 
 const queryKeys = {
-	getCurationMainKey: () => ['curation', 'main'] as const,
+	getCurationMainKey: (filter: GetCurationMainRequest) => ['curation', 'main', filter] as const,
 };
 
-export const useGetCurationMain = () => {
-	return useQuery(queryKeys.getCurationMainKey(), () => getCurationMain(), {
+export const useGetCurationMain = (filter: GetCurationMainRequest) => {
+	return useQuery(queryKeys.getCurationMainKey(filter), () => getCurationMain(filter), {
 		suspense: true,
 		refetchOnReconnect: false,
 		refetchOnWindowFocus: false,
 	});
 };
 
-export const prefetchGetCurationMain = (client: QueryClient) => {
-	return client.prefetchQuery(queryKeys.getCurationMainKey(), () => getCurationMain());
+export const prefetchGetCurationMain = (client: QueryClient, filter: GetCurationMainRequest) => {
+	return client.prefetchQuery(queryKeys.getCurationMainKey(filter), () => getCurationMain(filter));
 };

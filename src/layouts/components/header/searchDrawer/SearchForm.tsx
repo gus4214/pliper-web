@@ -1,10 +1,10 @@
-import FormInput from '@/src/components/modules/form/FormInput';
+import FormInput from '@/src/components/modules/@common/form/FormInput';
 import { getPromptsApi } from '@/src/fetchers/prompt';
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { Search } from 'heroicons-react';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { Input } from 'react-daisyui';
 import { useController, useForm } from 'react-hook-form';
 import tw from 'twin.macro';
@@ -19,7 +19,7 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onEnter, twStyle }) => {
-	const setSearchInputValue = useSetAtom(searchInputAtom);
+	const [searchInputValue, setSearchInputValue] = useAtom(searchInputAtom);
 
 	const formHandler = useForm<BaseFormFields>({
 		mode: 'onChange',
@@ -50,6 +50,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onEnter, twStyle }) => {
 			<div className={`${twStyle} rounded-[130px] border-none w-[750px] h-[60px] py-2 bg-neutral-50 flex justify-center items-center`}>
 				<Search />
 				<Input
+					defaultValue={searchInputValue}
 					placeholder='뭐든 적어주세요, 원하시는 내용을 보여드릴게요!'
 					className='w-[374px] border-none bg-neutral-50 focus:outline-none'
 					onChange={onChange}

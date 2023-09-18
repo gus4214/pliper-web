@@ -1,6 +1,7 @@
-import PromptListContainer from '@/src/components/modules/prompt/PromptListContainer';
-import PromptMenuList from '@/src/components/modules/prompt/PromptMenuList';
-import PromptSelectChips from '@/src/components/modules/prompt/PromptSelectChips';
+import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
+import PromptListContainer from '@/src/components/modules/prompt/list/PromptListContainer';
+import PromptMenuList from '@/src/components/modules/prompt/list/PromptMenuList';
+import PromptSelectChips from '@/src/components/modules/prompt/list/PromptSelectChips';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 
 const PromptTemplate = () => {
@@ -10,7 +11,9 @@ const PromptTemplate = () => {
 			<PromptSelectChips className='mt-6' />
 			<div className='mb-8' />
 			<div className='flex gap-10 justify-center'>
-				<PromptMenuList />
+				<AsyncComponentBoundary>
+					<PromptMenuList />
+				</AsyncComponentBoundary>
 				<PromptListContainer />
 			</div>
 		</div>
