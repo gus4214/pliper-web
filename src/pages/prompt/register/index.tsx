@@ -1,4 +1,4 @@
-import RegisterTemplate from '@/src/components/templates/RegisterTemplate';
+import RegisterTemplate from '@/src/components/templates/prompt/RegisterTemplate';
 import { NextPage } from 'next';
 import React from 'react';
 
