@@ -13,6 +13,7 @@ interface FormToggleChipGroupProps<TFieldValues extends FieldValues = FieldValue
 	rounded?: boolean;
 	color?: 'primary' | 'secondary';
 	className?: string;
+	onChange?: (selectedValue: string) => void;
 }
 
 const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
@@ -22,12 +23,13 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 	rounded,
 	color,
 	className,
+	onChange,
 }: FormToggleChipGroupProps<TFieldValues>) => {
 	return (
 		<Controller
 			name={name}
 			control={control}
-			render={({ field: { value, onChange } }) => (
+			render={({ field: { value, onChange: onControllerChange } }) => (
 				<div className={`${className} flex items-center gap-2`}>
 					{options.map((option) => (
 						<SelectChip
@@ -38,9 +40,11 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 							selected={value === option.code}
 							onClick={() => {
 								if (value === option.code) {
-									onChange(''); // 이미 선택된 항목을 클릭한 경우 선택을 해제합니다.
+									onControllerChange(''); // 이미 선택된 항목을 클릭한 경우 선택을 해제합니다.
+									onChange && onChange('');
 								} else {
-									onChange(option.code); // 그렇지 않으면 현재 클릭한 항목만 선택합니다.
+									onControllerChange(option.code); // 그렇지 않으면 현재 클릭한 항목만 선택합니다.
+									onChange && onChange(option.code);
 								}
 							}}
 						/>
