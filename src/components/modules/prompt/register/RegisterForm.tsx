@@ -94,9 +94,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	return (
 		<div className='w-[1144px] px-6 pt-8 pb-4 bg-neutral-50 rounded-lg flex-col items-center gap-6 flex'>
 			<div className='w-[1096px] rounded-2xl flex-col justify-center items-start gap-5 flex'>
+				{/* 제목 구간 */}
 				<LabelWithFormElement label='제목'>
 					<FormInput control={control} name='title' inputProps={{ placeholder: '제목을 25자 이내로 입력하세요' }} />
 				</LabelWithFormElement>
+
+				{/* // 페르소나 구간 */}
 				<LabelWithFormElement label='페르소나'>
 					<FormToggleChipGroup
 						name='personaType'
@@ -108,6 +111,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 						color='secondary'
 					/>
 				</LabelWithFormElement>
+
+				{/* 카테고리 구간 */}
 				<LabelWithFormElement label='카테고리' labelPosition='start'>
 					<div className='flex flex-col gap-4 justify-start'>
 						<FormToggleChipGroup
@@ -124,19 +129,23 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 						)}
 					</div>
 				</LabelWithFormElement>
+
+				{/* 사용 AI 구간 */}
 				<LabelWithFormElement label='사용 AI 플랫폼'>
-					<FormToggleChipGroup
+					<FormToggleMultiChipGroup
 						name='limModel'
 						control={control}
 						options={[
-							{ code: 'GPT3.5', label: 'GPT 3.5' },
-							{ code: 'GPT4.0', label: 'GPT 4.0' },
+							{ code: 'GPT3.5', label: 'GPT3.5' },
+							{ code: 'GPT4.0', label: 'GPT4.0' },
 							{ code: 'BARD', label: 'BARD' },
 							{ code: 'BING', label: 'BING' },
 						]}
 						color='secondary'
 					/>
 				</LabelWithFormElement>
+
+				{/* 소개 구간 */}
 				<LabelWithFormElement label='소개' labelPosition='start'>
 					<FormTextarea
 						control={control}
@@ -144,6 +153,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 						inputProps={{ placeholder: '프롬프트 템플릿에 대한 소개를 해주세요', rows: 5 }}
 					/>
 				</LabelWithFormElement>
+
+				{/* 프롬프트 템플릿 구간  */}
 				<LabelWithFormElement label='프롬프트 템플릿' labelPosition='start'>
 					<div className='w-full flex flex-col'>
 						<FormTextarea

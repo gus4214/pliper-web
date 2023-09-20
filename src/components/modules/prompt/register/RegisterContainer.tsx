@@ -11,7 +11,7 @@ export interface PromptRegisterFormData {
 	personaType: string;
 	category1Code: string;
 	category2Code: string[];
-	limModel: string;
+	limModel: string[];
 	description: string;
 	template: string;
 }
@@ -24,7 +24,7 @@ const RegisterContainer = () => {
 			title: '',
 			personaType: '',
 			category1Code: '',
-			limModel: '',
+			limModel: [],
 			description: '',
 			template: '',
 			category2Code: [],

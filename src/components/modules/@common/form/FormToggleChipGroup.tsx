@@ -14,6 +14,7 @@ interface FormToggleChipGroupProps<TFieldValues extends FieldValues = FieldValue
 	color?: 'primary' | 'secondary';
 	className?: string;
 	onChange?: (selectedValue: string) => void;
+	chipClassName?: string;
 }
 
 const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
@@ -24,6 +25,7 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 	color,
 	className,
 	onChange,
+	chipClassName,
 }: FormToggleChipGroupProps<TFieldValues>) => {
 	return (
 		<Controller
