@@ -1,5 +1,4 @@
-import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import PromptTemplate from '@/src/components/templates/PromptTemplate';
+import PromptTemplate from '@/src/components/templates/prompt/PromptTemplate';
 import { NextPage } from 'next';
 
 const PromptPage: NextPage = () => {
