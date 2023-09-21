@@ -109,6 +109,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 							{ code: 'work', label: '📝 업무' },
 						]}
 						color='secondary'
+						className='bg-white'
 					/>
 				</LabelWithFormElement>
 
@@ -121,6 +122,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 							options={dept1ChipOptions!}
 							color='secondary'
 							onChange={setSelectedDept1}
+							className='bg-white'
 						/>
 						{dept2Options.length > 0 && (
 							<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>
@@ -142,6 +144,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 							{ code: 'BING', label: 'BING' },
 						]}
 						color='secondary'
+						className='bg-white'
 					/>
 				</LabelWithFormElement>
 

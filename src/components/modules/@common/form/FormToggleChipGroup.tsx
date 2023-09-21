@@ -33,7 +33,7 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 			control={control}
 			render={({ field: { value, onChange: onControllerChange } }) => (
 				<div className={`${className} flex items-center gap-2`}>
-					{options.map((option) => (
+					{options?.map((option) => (
 						<SelectChip
 							key={option.code}
 							label={option.label}
