@@ -39,14 +39,14 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 							label={option.label}
 							color={color}
 							rounded={rounded}
-							selected={value === option.label}
+							selected={value === option.code}
 							onClick={() => {
-								if (value === option.label) {
+								if (value === option.code) {
 									onControllerChange(''); // 이미 선택된 항목을 클릭한 경우 선택을 해제합니다.
 									onChange && onChange('');
 								} else {
-									onControllerChange(option.label); // 그렇지 않으면 현재 클릭한 항목만 선택합니다.
-									onChange && onChange(option.label);
+									onControllerChange(option.code); // 그렇지 않으면 현재 클릭한 항목만 선택합니다.
+									onChange && onChange(option.code);
 								}
 							}}
 						/>

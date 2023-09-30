@@ -1,10 +1,14 @@
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
+import FormToggleChipCodeGroup from '@/src/components/modules/@common/form/FormToggleChipCodeGroup';
 import FormToggleChipGroup from '@/src/components/modules/@common/form/FormToggleChipGroup';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
+import PersonaToggleGroup from '@/src/components/modules/prompt/register/PersonaToggleGroup';
 import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
+import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register/RegisterFormPromptTemplate';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
-import React, { useEffect, useState } from 'react';
+import { Category, Dept1 } from '@/src/fetchers/prompt/types';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Input, Select, Textarea, Toggle } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -25,7 +29,7 @@ interface LabelWithTemplateFormElementProps {
 	rightElement: React.ReactNode;
 }
 
-const LabelWithFormElement: React.FC<LabelWithFormElementProps> = ({ label, labelPosition = 'center', children }) => {
+export const LabelWithFormElement: React.FC<LabelWithFormElementProps> = ({ label, labelPosition = 'center', children }) => {
 	return (
 		<div className={`w-full flex justify-start items-${labelPosition} gap-3`}>
 			<div className='w-[150px] p-2'>
@@ -36,7 +40,7 @@ const LabelWithFormElement: React.FC<LabelWithFormElementProps> = ({ label, labe
 	);
 };
 
-const LabelWithTemplateFormElement: React.FC<LabelWithTemplateFormElementProps> = ({ leftLabel, leftElement, rightLabel, rightElement }) => {
+export const LabelWithTemplateFormElement: React.FC<LabelWithTemplateFormElementProps> = ({ leftLabel, leftElement, rightLabel, rightElement }) => {
 	return (
 		<div className='w-[934px] flex p-4 bg-neutral-100 rounded-2xl gap-6'>
 			<div className='flex items-center gap-8'>
@@ -57,39 +61,43 @@ const LabelWithTemplateFormElement: React.FC<LabelWithTemplateFormElementProps> 
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const { data } = useGetPromptCategory();
+	const { control, watch, setValue } = formHandler;
 
-	// 카테고리 구간
+	const [selectedPersona, setSelectedPersona] = useState<'daily' | 'work'>('work');
+	const personaType = watch('personaType');
+
+	// 카테고리 상태 및 로직
 	const [selectedDept1, setSelectedDept1] = useState<string | null>(null);
-	const [dept2Options, setDept2Options] = useState<{ code: string; label: string }[]>([]);
-	const dept1Categories = data?.categories?.map((category) => category.dept1);
-	const dept1ChipOptions = dept1Categories?.map((dept1) => ({
+	const [dept1Categories, setDept1Categories] = useState<Dept1[]>([]);
+
+	const dept1ChipOptions = dept1Categories.map((dept1) => ({
 		code: dept1.code,
 		label: dept1.text,
 	}));
 
-	// 프롬프트 템플릿 구간
-	const [titleValue, setTitleValue] = useState<string>('');
-	const [voiceValue, setVoiceValue] = useState<string>('');
-	const [userValue, setUserValue] = useState<string>('');
+	const dept2Options = useMemo(() => {
+		if (!selectedDept1 || !personaType) return [];
+
+		const targetCategories = personaType === 'work' ? data?.jobCategories : data?.dailyCategories;
+		const selectedCategory = targetCategories?.find((category) => category.dept1.text === selectedDept1);
+		return selectedCategory ? selectedCategory.dept2.map((item) => ({ code: item.code, label: item.text })) : [];
+	}, [selectedDept1, personaType, data]);
 
 	useEffect(() => {
-		if (selectedDept1) {
-			// 선택된 dept1 카테고리에 해당하는 dept2 옵션을 추출합니다.
-			const selectedCategory = data?.categories.find((category) => category.dept1.code === selectedDept1);
-			if (selectedCategory) {
-				setDept2Options(
-					selectedCategory.dept2.map((item) => ({
-						code: item.code,
-						label: item.text,
-					}))
-				);
-			}
-		} else {
-			setDept2Options([]); // 선택이 해제된 경우 dept2 옵션을 초기화합니다.
-		}
-	}, [selectedDept1]);
+		const updateDept1Categories = (categories: Category[]) => {
+			setDept1Categories(categories.map((category) => category.dept1));
+			setValue('category1Code', '');
+			setValue('category2Code', '');
+		};
 
-	const { control, watch } = formHandler;
+		if (personaType === 'daily') {
+			setSelectedDept1(null);
+			updateDept1Categories(data?.dailyCategories || []);
+		} else if (personaType === 'work') {
+			setSelectedDept1(null);
+			updateDept1Categories(data?.jobCategories || []);
+		}
+	}, [personaType, data]);
 
 	return (
 		<div className='w-[1144px] px-6 pt-8 pb-4 bg-neutral-50 rounded-lg flex-col items-center gap-6 flex'>
@@ -101,16 +109,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 
 				{/* // 페르소나 구간 */}
 				<LabelWithFormElement label='페르소나'>
-					<FormToggleChipGroup
-						name='personaType'
-						control={control}
-						options={[
-							{ code: 'daily', label: '☕️ 일상' },
-							{ code: 'work', label: '📝 업무' },
-						]}
-						color='secondary'
-						className='bg-white'
-					/>
+					<PersonaToggleGroup formHandler={formHandler} onChange={(value) => setSelectedPersona(value as 'daily' | 'work')} />
 				</LabelWithFormElement>
 
 				{/* 카테고리 구간 */}
@@ -126,7 +125,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 						/>
 						{dept2Options.length > 0 && (
 							<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>
-								<FormToggleMultiChipGroup name='category2Code' control={control} options={dept2Options} color='secondary' />
+								<FormToggleChipGroup name='category2Code' control={control} options={dept2Options} color='secondary' />
 							</div>
 						)}
 					</div>
@@ -134,7 +133,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 
 				{/* 사용 AI 구간 */}
 				<LabelWithFormElement label='사용 AI 플랫폼'>
-					<FormToggleMultiChipGroup
+					<FormToggleChipGroup
 						name='limModel'
 						control={control}
 						options={[
@@ -159,55 +158,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 
 				{/* 프롬프트 템플릿 구간  */}
 				<LabelWithFormElement label='프롬프트 템플릿' labelPosition='start'>
-					<div className='w-full flex flex-col'>
-						<FormTextarea
-							control={control}
-							name='template'
-							inputProps={{ placeholder: '템플릿으로 생성할 프롬프트를 입력해주세요 {{제목}}', rows: 5 }}
-						/>
-						<span className='text-neutral-600 text-sm font-normal pt-3'>
-							{`➡️ 템플릿에 입력값으로 넣고 싶을 경우 {{ 파라미터 }} 형태로 넣어주세요`}
-						</span>
-						<div className='flex flex-col gap-2 pt-8'>
-							<LabelWithTemplateFormElement
-								leftLabel='제목'
-								leftElement={
-									<Select value={titleValue} onChange={(event) => setTitleValue(event.target.value)}>
-										<Select.Option value={''}>파라미터 타입 선택</Select.Option>
-										<Select.Option value={'text'}>텍스트</Select.Option>
-										<Select.Option value={'choice'}>선택</Select.Option>
-										<Select.Option value={'multiChoice'}>중복 선택</Select.Option>
-									</Select>
-								}
-								rightLabel='텍스트 추가옵션'
-								rightElement={<Input className='w-full' />}
-							/>
-							<LabelWithTemplateFormElement
-								leftLabel='보이스'
-								leftElement={
-									<Select value={voiceValue} onChange={(event) => setVoiceValue(event.target.value)}>
-										<Select.Option value={''}>파라미터 타입 선택</Select.Option>
-										<Select.Option value={'text'}>텍스트</Select.Option>
-										<Select.Option value={'choice'}>선택</Select.Option>
-										<Select.Option value={'multiChoice'}>중복 선택</Select.Option>
-									</Select>
-								}
-								rightLabel='타입별 추가옵션'
-								rightElement={<Input className='w-full' />}
-							/>
-							<LabelWithTemplateFormElement
-								leftLabel='사용자'
-								leftElement={
-									<Select value={userValue} onChange={(event) => setUserValue(event.target.value)}>
-										<Select.Option value={''}>파라미터 타입 선택</Select.Option>
-										<Select.Option value={'text'}>텍스트</Select.Option>
-									</Select>
-								}
-								rightLabel='타입별 추가옵션'
-								rightElement={<Input className='w-full' />}
-							/>
-						</div>
-					</div>
+					<RegisterFormPromptTemplate formHandler={formHandler} />
 				</LabelWithFormElement>
 			</div>
 			<div className='w-full flex items-center justify-end gap-3'>

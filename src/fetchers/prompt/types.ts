@@ -23,7 +23,8 @@ export interface GetPromptsResult {
 }
 
 export interface GetPromptCategoryResult {
-	categories: Category[];
+	dailyCategories: Category[];
+	jobCategories: Category[];
 }
 
 export interface Prompt {
