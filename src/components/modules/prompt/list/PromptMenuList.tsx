@@ -83,7 +83,7 @@ const PromptMenuList = () => {
 			<div className='w-[140px] flex-col justify-start items-start gap-6 flex'>
 				<h1 className='text-center text-neutral-800 text-xs font-bold'>카테고리</h1>
 				<div className='border-l border-neutral-200 flex-col gap-2.5 flex'>
-					{data?.categories.map((category) => (
+					{data?.jobCategories.map((category) => (
 						<div
 							css={[
 								tw`flex flex-col border-l gap-3`,

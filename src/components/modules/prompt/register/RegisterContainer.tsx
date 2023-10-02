@@ -1,4 +1,4 @@
-import RegisterForm from '@/src/components/modules/prompt/register/RegisterForm';
+import RegisterForm from '@/src/components/modules/prompt/register/form/RegisterForm';
 import RegisterHeader from '@/src/components/modules/prompt/register/RegisterHeader';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -9,8 +9,8 @@ import { Button } from 'react-daisyui';
 export interface PromptRegisterFormData {
 	title: string;
 	personaType: string;
-	category1Code: string;
-	category2Code: string;
+	category1Text: string;
+	category2Text: string;
 	limModel: string;
 	description: string;
 	template: string;
@@ -23,11 +23,11 @@ const RegisterContainer = () => {
 		defaultValues: {
 			title: '',
 			personaType: '',
-			category1Code: '',
+			category1Text: '',
 			limModel: '',
 			description: '',
 			template: '',
-			category2Code: '',
+			category2Text: '',
 		},
 	});
 

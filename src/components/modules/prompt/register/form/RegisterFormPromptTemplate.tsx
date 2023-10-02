@@ -1,7 +1,7 @@
 import React from 'react';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
 import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
-import { LabelWithTemplateFormElement } from '@/src/components/modules/prompt/register/RegisterForm';
+import { LabelWithTemplateFormElement } from '@/src/components/modules/prompt/register/form/RegisterForm';
 import { useState } from 'react';
 import { Input, Select } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';

@@ -22,6 +22,7 @@ export const apis: { [k: string]: ApiInfo } = {
 	PROFILE_API: { uri: '/v1/user/profile', method: 'GET', description: 'JWT 기반 유저 정보 조회 요청 API' },
 
 	// 프롬프트
+	GET_AI_TOOLS_API: { uri: '/v1/ai-tools', method: 'GET', description: 'AI 관련된 도구 리스트(LLM, 이미지생성) 조회' },
 	GET_CATEGORY_API: { uri: '/v1/category', method: 'GET', description: '프롬프트 카테고리 호출 API' },
 	GET_PROMPT: { uri: 'v1/prompt', method: 'GET', description: '프롬프트 템플릿 목록 요청 API' },
 	GET_PROMPT_DETAIL: { uri: 'v1/prompt/{promptId}', method: 'GET', description: '프롬프트 템플릿 상세 요청 API' },
@@ -38,4 +39,7 @@ export const apis: { [k: string]: ApiInfo } = {
 		method: 'GET',
 		description: '메인에서 노출 될 큐레이션(키워드, 주간 베스트, 클립 베스트) 요청 API',
 	},
+
+	// 마이 프롬프트
+	POST_PROMPT_TEMPLATE: { uri: '/v1/prompt', method: 'POST', description: '프롬프트 템플릿 등록 API' },
 };

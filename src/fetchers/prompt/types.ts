@@ -1,6 +1,8 @@
 import { PromptSortType } from '@/src/configs/prompt';
 import { IPageRequest } from '@/src/fetchers/types';
 
+export type GetAiToolsType = 'LLM' | 'IMAGE';
+
 export interface GetPromptsRequest extends IPageRequest {
 	category1Codes?: string[];
 	category2Codes?: string[];
@@ -9,6 +11,10 @@ export interface GetPromptsRequest extends IPageRequest {
 	lmModel?: string[];
 	sort?: string;
 	title?: string;
+}
+
+export interface GetAiToolsRequest {
+	type: GetAiToolsType;
 }
 
 export interface GetPromptsResult {
@@ -25,6 +31,18 @@ export interface GetPromptsResult {
 export interface GetPromptCategoryResult {
 	dailyCategories: Category[];
 	jobCategories: Category[];
+}
+
+export interface GetAiToolsResult {
+	tools: Tool[];
+}
+
+export interface Tool {
+	code: string;
+	description: string;
+	name: string;
+	type: string;
+	url: string;
 }
 
 export interface Prompt {

@@ -3,14 +3,15 @@ import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
 import FormToggleChipCodeGroup from '@/src/components/modules/@common/form/FormToggleChipCodeGroup';
 import FormToggleChipGroup from '@/src/components/modules/@common/form/FormToggleChipGroup';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
-import PersonaToggleGroup from '@/src/components/modules/prompt/register/PersonaToggleGroup';
+import PersonaToggleGroup from '@/src/components/modules/prompt/register/form/PersonaToggleGroup';
 import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
-import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register/RegisterFormPromptTemplate';
+import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register/form/RegisterFormPromptTemplate';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
 import { Category, Dept1 } from '@/src/fetchers/prompt/types';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Input, Select, Textarea, Toggle } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
+import AiToggleGroup from '@/src/components/modules/prompt/register/form/AiToggleGroup';
 
 interface RegisterFormProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
@@ -86,8 +87,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	useEffect(() => {
 		const updateDept1Categories = (categories: Category[]) => {
 			setDept1Categories(categories.map((category) => category.dept1));
-			setValue('category1Code', '');
-			setValue('category2Code', '');
+			setValue('category1Text', '');
+			setValue('category2Text', '');
 		};
 
 		if (personaType === 'daily') {
@@ -116,16 +117,16 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 				<LabelWithFormElement label='카테고리' labelPosition='start'>
 					<div className='flex flex-col gap-4 justify-start'>
 						<FormToggleChipGroup
-							name='category1Code'
+							name='category1Text'
 							control={control}
-							options={dept1ChipOptions!}
+							options={dept1ChipOptions || []}
 							color='secondary'
 							onChange={setSelectedDept1}
 							className='bg-white'
 						/>
 						{dept2Options.length > 0 && (
 							<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>
-								<FormToggleChipGroup name='category2Code' control={control} options={dept2Options} color='secondary' />
+								<FormToggleChipGroup name='category2Text' control={control} options={dept2Options} color='secondary' />
 							</div>
 						)}
 					</div>
@@ -133,18 +134,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 
 				{/* 사용 AI 구간 */}
 				<LabelWithFormElement label='사용 AI 플랫폼'>
-					<FormToggleChipGroup
-						name='limModel'
-						control={control}
-						options={[
-							{ code: 'GPT3.5', label: 'GPT3.5' },
-							{ code: 'GPT4.0', label: 'GPT4.0' },
-							{ code: 'BARD', label: 'BARD' },
-							{ code: 'BING', label: 'BING' },
-						]}
-						color='secondary'
-						className='bg-white'
-					/>
+					<AiToggleGroup formHandler={formHandler} />
 				</LabelWithFormElement>
 
 				{/* 소개 구간 */}
