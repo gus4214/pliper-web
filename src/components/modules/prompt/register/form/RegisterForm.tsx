@@ -1,17 +1,15 @@
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
-import FormToggleChipCodeGroup from '@/src/components/modules/@common/form/FormToggleChipCodeGroup';
 import FormToggleChipGroup from '@/src/components/modules/@common/form/FormToggleChipGroup';
-import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
-import PersonaToggleGroup from '@/src/components/modules/prompt/register/form/PersonaToggleGroup';
 import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
+import AiToggleGroup from '@/src/components/modules/prompt/register/form/AiToggleGroup';
+import PersonaToggleGroup from '@/src/components/modules/prompt/register/form/PersonaToggleGroup';
 import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register/form/RegisterFormPromptTemplate';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
 import { Category, Dept1 } from '@/src/fetchers/prompt/types';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Input, Select, Textarea, Toggle } from 'react-daisyui';
+import { Toggle } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
-import AiToggleGroup from '@/src/components/modules/prompt/register/form/AiToggleGroup';
 
 interface RegisterFormProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
@@ -23,13 +21,6 @@ interface LabelWithFormElementProps {
 	children: React.ReactNode;
 }
 
-interface LabelWithTemplateFormElementProps {
-	leftLabel: string;
-	leftElement: React.ReactNode;
-	rightLabel: string;
-	rightElement: React.ReactNode;
-}
-
 export const LabelWithFormElement: React.FC<LabelWithFormElementProps> = ({ label, labelPosition = 'center', children }) => {
 	return (
 		<div className={`w-full flex justify-start items-${labelPosition} gap-3`}>
@@ -37,25 +28,6 @@ export const LabelWithFormElement: React.FC<LabelWithFormElementProps> = ({ labe
 				<h1 className='text-black text-[13px] font-medium'>{label}</h1>
 			</div>
 			<div className='grow shrink basis-0 flex'>{children}</div>
-		</div>
-	);
-};
-
-export const LabelWithTemplateFormElement: React.FC<LabelWithTemplateFormElementProps> = ({ leftLabel, leftElement, rightLabel, rightElement }) => {
-	return (
-		<div className='w-[934px] flex p-4 bg-neutral-100 rounded-2xl gap-6'>
-			<div className='flex items-center gap-8'>
-				<div className='w-[80px] flex px-4 py-2'>
-					<h1 className='text-black text-[13px] font-medium whitespace-nowrap'>{leftLabel}</h1>
-				</div>
-				{leftElement}
-			</div>
-			<div className='grow shrink basis-0 items-center gap-3 flex'>
-				<div className='px-4 py-2 flex'>
-					<h1 className='text-black text-sm font-normal whitespace-nowrap'>{rightLabel}</h1>
-				</div>
-				{rightElement}
-			</div>
 		</div>
 	);
 };
