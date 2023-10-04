@@ -14,20 +14,22 @@ export interface PromptRegisterFormData {
 	limModel: string;
 	description: string;
 	template: string;
+	show: boolean;
 }
 
-const RegisterContainer = () => {
+const RegisterFormContainer = () => {
 	const formHandler = useForm<PromptRegisterFormData>({
 		mode: 'onChange',
 		// resolver: yupResolver(schema),
 		defaultValues: {
-			title: '',
-			personaType: '',
 			category1Text: '',
-			limModel: '',
-			description: '',
-			template: '',
 			category2Text: '',
+			description: '',
+			limModel: '',
+			personaType: '',
+			show: false,
+			title: '',
+			template: '',
 		},
 	});
 
@@ -49,4 +51,4 @@ const RegisterContainer = () => {
 	);
 };
 
-export default RegisterContainer;
+export default RegisterFormContainer;

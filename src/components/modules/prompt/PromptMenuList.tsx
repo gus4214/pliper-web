@@ -48,7 +48,7 @@ const PromptMenuList = () => {
 			<div className='w-[140px] flex-col justify-start items-start gap-6 flex'>
 				<div className='text-center text-neutral-800 text-xs font-bold'>카테고리</div>
 				<div className='border-l border-neutral-200 flex-col  gap-2.5 flex'>
-					{data?.categories?.map((category) => (
+					{data?.jobCategories?.map((category) => (
 						<div className='flex flex-col border-l border-neutral-300 gap-3' key={category.dept1.code}>
 							<Button
 								className='w-32 h-8 px-4 py-[9px] min-h-8 hover:text-teal-400 hover:font-medium hover:bg-neutral-50 text-start'

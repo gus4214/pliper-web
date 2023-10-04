@@ -1,5 +1,5 @@
 import FormToggleChipGroup from '@/src/components/modules/@common/form/FormToggleChipGroup';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
+import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
 import { useGetAiTools } from '@/src/fetchers/prompt';
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';

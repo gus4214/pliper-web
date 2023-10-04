@@ -1,45 +1,21 @@
 import React from 'react';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
+import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
 import { useState } from 'react';
 import { Button, Input, Select } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
 import { X } from 'heroicons-react';
-
-interface LabelWithTemplateFormElementProps {
-	leftLabel: string;
-	leftElement: React.ReactNode;
-	rightElement?: React.ReactNode;
-}
+import LabelWithTemplateFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithTemplateFormElement';
 
 interface RegisterFormPromptTemplateProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
 }
 
-export const LabelWithTemplateFormElement: React.FC<LabelWithTemplateFormElementProps> = ({ leftLabel, leftElement, rightElement }) => {
-	return (
-		<div className='w-[934px] flex p-4 bg-neutral-100 rounded-2xl gap-6'>
-			<div className='flex items-center gap-8'>
-				<div className='w-[80px] flex px-4 py-2'>
-					<h1 className='text-black text-[13px] font-medium whitespace-nowrap'>{leftLabel}</h1>
-				</div>
-				{leftElement}
-			</div>
-			<div className='max-w-[558px] row shrink basis-0 items-center gap-3 flex'>
-				<div className='px-4 py-2 flex'>
-					<h1 className='text-black text-sm font-normal whitespace-nowrap'>타입 별 옵션 추가</h1>
-				</div>
-				{rightElement}
-			</div>
-		</div>
-	);
-};
-
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const { control } = formHandler;
 
 	const [templateValue, setTemplateValue] = useState<string>('');
-	const [parameters, setParameters] = useState<Array<{ description: string; title: string; type: string; typeValues?: string }>>([]);
+	const [parameters, setParameters] = useState<Array<{ description: string; title: string; type: string; typeValues?: string[] }>>([]);
 
 	const regex = /{{(.*?)}}/g;
 
@@ -53,7 +29,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 				description: value,
 				title: match.replace('{{', '').replace('}}', ''),
 				type: '',
-				typeValues: '',
+				typeValues: [],
 			}));
 			setParameters(newParameters);
 		} else {
@@ -72,8 +48,6 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 			<FormTextarea
 				control={control}
 				name='template'
-				// value={templateValue}
-				// onChange={handleTextareaChange}
 				inputProps={{
 					placeholder: '템플릿으로 생성할 프롬프트를 입력해주세요 {{제목}}',
 					rows: 5,
@@ -99,17 +73,17 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 							</Select>
 						}
 						rightElement={
-							<div className='py-2 bg-neutral-100 rounded justify-start items-center gap-2 inline-flex'>
+							<div className='py-2 bg-neutral-100 rounded justify-start items-center gap-2 flex '>
 								<div className='relative w-full'>
-									<Input className='w-[103px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값1' />
+									<Input className='w-[112px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값1' />
 									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
 								</div>
 								<div className='relative w-full'>
-									<Input className='w-[103px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
+									<Input className='w-[112px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
 									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
 								</div>
 								<div className='relative w-full'>
-									<Input className='w-[103px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
+									<Input className='w-[112px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
 									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
 								</div>
 								<Button className='bg-neutral-200'>추가</Button>
