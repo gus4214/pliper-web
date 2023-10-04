@@ -6,9 +6,10 @@ interface SelectChipProps {
 	onClick?: () => void;
 	rounded?: boolean;
 	color?: 'primary' | 'secondary';
+	className?: string;
 }
 
-const SelectChip: React.FC<SelectChipProps> = ({ label, selected, onClick, color, rounded }) => {
+const SelectChip: React.FC<SelectChipProps> = ({ label, selected, onClick, color, rounded, className }) => {
 	let selectedColor;
 
 	if (selected) {
@@ -29,6 +30,7 @@ const SelectChip: React.FC<SelectChipProps> = ({ label, selected, onClick, color
 			<div
 				onClick={onClick}
 				css={[
+					tw`${className!}`,
 					tw`px-4 py-[9px] rounded border justify-center items-center flex cursor-pointer`,
 					rounded && tw`rounded-[50px]`,
 					selected ? selectedColor : tw`border-neutral-200`,

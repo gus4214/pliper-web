@@ -10,7 +10,7 @@ const PromptList = () => {
 
 	const { title, category1Codes, category2Codes, promptSort } = useAtomValue(searchFilterAtom);
 
-	const { data } = useGetPrompts({ page, limit, title, category1Codes, category2Codes, promptSort });
+	const { data } = useGetPrompts({ page, limit, title, category2Codes, promptSort });
 
 	return (
 		<>

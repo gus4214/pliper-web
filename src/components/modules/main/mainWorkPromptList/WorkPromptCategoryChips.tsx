@@ -19,7 +19,7 @@ const WorkPromptCategoryChips: React.FC<WorkPromptCategoryChipsProps> = () => {
 
 	return (
 		<div className='gap-2 flex'>
-			{data?.categories.map((category) => (
+			{data?.jobCategories.map((category) => (
 				<SelectChip
 					key={category.dept1.code}
 					label={category.dept1.text}

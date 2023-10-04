@@ -3,7 +3,14 @@ import { apis } from '@/src/fetchers/apis';
 import { accessTokenKey } from '@/src/configs/auth';
 import { getCookie } from '@/src/utils/cookie';
 import { useInfiniteQuery, useQuery } from 'react-query';
-import { GetPromptCategoryResult, GetPromptsRequest, GetPromptsResult } from '@/src/fetchers/prompt/types';
+import {
+	GetAiToolsRequest,
+	GetAiToolsResult,
+	GetAiToolsType,
+	GetPromptCategoryResult,
+	GetPromptsRequest,
+	GetPromptsResult,
+} from '@/src/fetchers/prompt/types';
 
 export const getPromptsApi = (input: GetPromptsRequest) => {
 	return callApi<GetPromptsRequest, GetPromptsResult>({
@@ -20,9 +27,18 @@ export const getPromptCategoryApi = () => {
 	});
 };
 
+export const getAiToolsApi = (type: GetAiToolsRequest) => {
+	return callApi<GetAiToolsRequest, GetAiToolsResult>({
+		api: apis.GET_AI_TOOLS_API,
+		queryString: type,
+		token: getCookie(accessTokenKey),
+	});
+};
+
 const queryKeys = {
 	getPromptCategory: () => ['prompt', 'category'] as const,
 	getPromptList: (input: GetPromptsRequest) => ['prompt', input] as const,
+	getAiTools: (type: GetAiToolsRequest) => ['aiTools', type] as const,
 };
 
 export const useGetPrompts = (input: GetPromptsRequest) => {
@@ -35,6 +51,14 @@ export const useGetPrompts = (input: GetPromptsRequest) => {
 
 export const useGetPromptCategory = () => {
 	return useQuery(queryKeys.getPromptCategory(), () => getPromptCategoryApi(), {
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
+};
+
+export const useGetAiTools = (type: GetAiToolsRequest) => {
+	return useQuery(queryKeys.getAiTools(type), () => getAiToolsApi(type), {
 		suspense: true,
 		refetchOnReconnect: false,
 		refetchOnWindowFocus: false,
