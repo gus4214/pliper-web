@@ -1,11 +1,10 @@
-import React from 'react';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
 import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
-import { useState } from 'react';
-import { Button, Input, Select } from 'react-daisyui';
-import { UseFormReturn } from 'react-hook-form';
-import { X } from 'heroicons-react';
 import LabelWithTemplateFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithTemplateFormElement';
+import OptionInputComponent from '@/src/components/modules/prompt/register/form/elements/OptionInputComponent';
+import React, { useState } from 'react';
+import { Input, Select } from 'react-daisyui';
+import { UseFormReturn } from 'react-hook-form';
 
 interface RegisterFormPromptTemplateProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
@@ -25,12 +24,16 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 
 		const matches = value.match(regex);
 		if (matches) {
-			const newParameters = matches.map((match) => ({
-				description: value,
-				title: match.replace('{{', '').replace('}}', ''),
-				type: '',
-				typeValues: [],
-			}));
+			const newTitles = matches.map((match) => match.replace('{{', '').replace('}}', ''));
+
+			const newParameters = newTitles.map((title) => {
+				// 기존 파라미터 중 일치하는 title을 찾습니다.
+				const existingParam = parameters.find((param) => param.title === title);
+
+				// 일치하는 title이 있으면 기존 값을 사용하고, 그렇지 않으면 새로운 객체를 생성합니다.
+				return existingParam || { description: '', title, type: '', typeValues: [] };
+			});
+
 			setParameters(newParameters);
 		} else {
 			setParameters([]);
@@ -40,6 +43,21 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 	const handleSelectChange = (index: number, type: string) => {
 		const updatedParameters = [...parameters];
 		updatedParameters[index].type = type;
+		setParameters(updatedParameters);
+	};
+
+	const handleTypeValuesChange = (index: number, value: string) => {
+		const updatedParameters = [...parameters];
+
+		// rightElement의 Input에서 입력한 값을 description에 저장
+		updatedParameters[index].description = value;
+
+		setParameters(updatedParameters);
+	};
+
+	const handleOptionValuesChange = (index: number, values: string[]) => {
+		const updatedParameters = [...parameters];
+		updatedParameters[index].typeValues = values;
 		setParameters(updatedParameters);
 	};
 
@@ -73,21 +91,14 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 							</Select>
 						}
 						rightElement={
-							<div className='py-2 bg-neutral-100 rounded justify-start items-center gap-2 flex '>
-								<div className='relative w-full'>
-									<Input className='w-[112px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값1' />
-									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
-								</div>
-								<div className='relative w-full'>
-									<Input className='w-[112px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
-									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
-								</div>
-								<div className='relative w-full'>
-									<Input className='w-[112px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
-									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
-								</div>
-								<Button className='bg-neutral-200'>추가</Button>
-							</div>
+							param.type === '텍스트' ? (
+								<Input
+									className='w-[442px] bg-white rounded border border-neutral-200'
+									onChange={(e) => handleTypeValuesChange(index, e.target.value)}
+								/>
+							) : param.type === '선택' || param.type === '중복 선택' ? (
+								<OptionInputComponent onValuesChange={(values) => handleOptionValuesChange(index, values)} />
+							) : null
 						}
 					/>
 				))}
