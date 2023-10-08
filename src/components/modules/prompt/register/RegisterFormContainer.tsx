@@ -5,6 +5,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
 import { Button } from 'react-daisyui';
+import { useAtomValue } from 'jotai';
+import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 
 export interface PromptRegisterFormData {
 	title: string;
@@ -27,14 +29,19 @@ const RegisterFormContainer = () => {
 			description: '',
 			limModel: '',
 			personaType: '',
-			show: false,
+			show: true,
 			title: '',
 			template: '',
 		},
 	});
 
+	const { handleSubmit } = formHandler;
+
+	const prameters = useAtomValue(parametersAtom);
+	const template = useAtomValue(templateValueAtom);
+
 	return (
-		<div className='w-[1200px] pt-6 pb-[67px] bg-white flex-col justify-start gap-6 flex'>
+		<form className='w-[1200px] pt-6 pb-[67px] bg-white flex-col justify-start gap-6 flex'>
 			<RegisterHeader />
 			<AsyncComponentBoundary>
 				<RegisterForm formHandler={formHandler} />
@@ -47,7 +54,7 @@ const RegisterFormContainer = () => {
 					<span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
 				</Button>
 			</div>
-		</div>
+		</form>
 	);
 };
 

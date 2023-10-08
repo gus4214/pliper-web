@@ -2,6 +2,8 @@ import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
 import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
 import LabelWithTemplateFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithTemplateFormElement';
 import OptionInputComponent from '@/src/components/modules/prompt/register/form/elements/OptionInputComponent';
+import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
+import { useAtom } from 'jotai';
 import React, { useState } from 'react';
 import { Input, Select } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
@@ -13,8 +15,10 @@ interface RegisterFormPromptTemplateProps {
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const { control } = formHandler;
 
-	const [templateValue, setTemplateValue] = useState<string>('');
-	const [parameters, setParameters] = useState<Array<{ description: string; title: string; type: string; typeValues?: string[] }>>([]);
+	// const [templateValue, setTemplateValue] = useState<string>('');
+	// const [parameters, setParameters] = useState<Array<{ description: string; title: string; type: string; typeValues?: string[] }>>([]);
+	const [templateValue, setTemplateValue] = useAtom(templateValueAtom);
+	const [parameters, setParameters] = useAtom(parametersAtom);
 
 	const regex = /{{(.*?)}}/g;
 

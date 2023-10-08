@@ -11,6 +11,7 @@ import { Category, Dept1 } from '@/src/fetchers/prompt/types';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Toggle } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 interface RegisterFormProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
@@ -109,7 +110,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 			</div>
 			<div className='w-full flex items-center justify-end gap-3'>
 				<span className='text-neutral-600 text-[13px] font-medium'>해당 프롬프트를 게시 하시겠습니까?</span>
-				<Toggle color='accent' />
+				{/* <Toggle color='accent' checked /> */}
+				<Controller
+					name='show'
+					control={control}
+					render={({ field: { onChange, value } }) => (
+						<Toggle color='accent' checked={value} onChange={(e) => onChange(e.target.checked)} />
+					)}
+				/>
 			</div>
 		</div>
 	);
