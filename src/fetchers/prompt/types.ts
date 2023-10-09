@@ -4,8 +4,8 @@ import { IPageRequest } from '@/src/fetchers/types';
 export type GetAiToolsType = 'LLM' | 'IMAGE';
 
 export interface GetPromptsRequest extends IPageRequest {
-	category1Codes?: string[];
-	category2Codes?: string[];
+	category1Texts?: string[];
+	category2Texts?: string[];
 	personaTypes?: string[];
 	promptSort?: PromptSortType;
 	lmModel?: string[];
@@ -15,6 +15,18 @@ export interface GetPromptsRequest extends IPageRequest {
 
 export interface GetAiToolsRequest {
 	type: GetAiToolsType;
+}
+
+export interface RegisterPromptRequest {
+	category1Text: string;
+	category2Text: string;
+	description: string;
+	llmModel: string;
+	parameters?: Parameter[];
+	personaType: string;
+	show: boolean;
+	template?: string;
+	title: string;
 }
 
 export interface GetPromptsResult {
@@ -35,6 +47,27 @@ export interface GetPromptCategoryResult {
 
 export interface GetAiToolsResult {
 	tools: Tool[];
+}
+
+export interface RegisterPromptResult {
+	category1Text: string;
+	category2Text: string;
+	createDateTime: string;
+	description: string;
+	likeCount: number;
+	llmModel: string;
+	parameters: Parameter[];
+	percents: number;
+	personaType: string;
+	precisionDown: number;
+	precisionUp: number;
+	promptId: number;
+	show: boolean;
+	template: string;
+	title: string;
+	updateDateTime: string;
+	userEmail: string;
+	viewCount: number;
 }
 
 export interface Tool {
@@ -72,7 +105,7 @@ export interface Parameter {
 	description: string;
 	title: string;
 	type: string;
-	typeValues: string;
+	typeValues: string[];
 }
 
 export interface Category {

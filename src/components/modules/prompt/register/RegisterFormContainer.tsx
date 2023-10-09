@@ -7,15 +7,16 @@ import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncCompone
 import { Button } from 'react-daisyui';
 import { useAtomValue } from 'jotai';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
+import { registerPromptApi } from '@/src/fetchers/prompt';
+import { Parameter } from '@/src/fetchers/prompt/types';
 
 export interface PromptRegisterFormData {
 	title: string;
 	personaType: string;
 	category1Text: string;
 	category2Text: string;
-	limModel: string;
+	llmModel: string;
 	description: string;
-	template: string;
 	show: boolean;
 }
 
@@ -27,21 +28,25 @@ const RegisterFormContainer = () => {
 			category1Text: '',
 			category2Text: '',
 			description: '',
-			limModel: '',
+			llmModel: '',
 			personaType: '',
 			show: true,
 			title: '',
-			template: '',
 		},
 	});
 
 	const { handleSubmit } = formHandler;
 
-	const prameters = useAtomValue(parametersAtom);
+	const parameters = useAtomValue(parametersAtom);
 	const template = useAtomValue(templateValueAtom);
 
+	const onSubmit = async (data: PromptRegisterFormData) => {
+		const result = await registerPromptApi({ ...data, template, parameters });
+		console.log('🚀 ~ file: RegisterFormContainer.tsx:45 ~ onSubmit ~ result:', result);
+	};
+
 	return (
-		<form className='w-[1200px] pt-6 pb-[67px] bg-white flex-col justify-start gap-6 flex'>
+		<div className='w-[1200px] pt-6 pb-[67px] bg-white flex-col justify-start gap-6 flex'>
 			<RegisterHeader />
 			<AsyncComponentBoundary>
 				<RegisterForm formHandler={formHandler} />
@@ -50,11 +55,11 @@ const RegisterFormContainer = () => {
 				<Button color='ghost' variant='outline' className='bg-white rounded border border-neutral-200'>
 					<span className='text-neutral-400 text-sm font-medium'>닫기</span>
 				</Button>
-				<Button color='accent' className='rounded'>
+				<Button color='accent' className='rounded' onClick={handleSubmit(onSubmit)}>
 					<span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
 				</Button>
 			</div>
-		</form>
+		</div>
 	);
 };
 

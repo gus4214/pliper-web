@@ -41,5 +41,5 @@ export const apis: { [k: string]: ApiInfo } = {
 	},
 
 	// 마이 프롬프트
-	POST_PROMPT_TEMPLATE: { uri: '/v1/prompt', method: 'POST', description: '프롬프트 템플릿 등록 API' },
+	REGISTER_PROMPT_TEMPLATE: { uri: '/v1/my-prompt', method: 'POST', description: '프롬프트 템플릿 등록 API' },
 };

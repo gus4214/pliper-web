@@ -5,7 +5,7 @@ import OptionInputComponent from '@/src/components/modules/prompt/register/form/
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { useAtom } from 'jotai';
 import React, { useState } from 'react';
-import { Input, Select } from 'react-daisyui';
+import { Input, Select, Textarea } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
 
 interface RegisterFormPromptTemplateProps {
@@ -15,8 +15,6 @@ interface RegisterFormPromptTemplateProps {
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const { control } = formHandler;
 
-	// const [templateValue, setTemplateValue] = useState<string>('');
-	// const [parameters, setParameters] = useState<Array<{ description: string; title: string; type: string; typeValues?: string[] }>>([]);
 	const [templateValue, setTemplateValue] = useAtom(templateValueAtom);
 	const [parameters, setParameters] = useAtom(parametersAtom);
 
@@ -67,15 +65,11 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 
 	return (
 		<div className='w-full flex flex-col'>
-			<FormTextarea
-				control={control}
-				name='template'
-				inputProps={{
-					placeholder: '템플릿으로 생성할 프롬프트를 입력해주세요 {{제목}}',
-					rows: 5,
-					value: templateValue,
-					onChange: handleTextareaChange,
-				}}
+			<Textarea
+				placeholder={'템플릿으로 생성할 프롬프트를 입력해주세요 {{제목}}'}
+				rows={5}
+				value={templateValue}
+				onChange={handleTextareaChange}
 			/>
 			<span className='text-neutral-600 text-sm font-normal pt-3'>
 				{`➡️ 템플릿에 입력값으로 넣고 싶을 경우 {{ 파라미터 }} 형태로 넣어주세요`}

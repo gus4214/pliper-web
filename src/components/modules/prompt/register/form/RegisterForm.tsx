@@ -19,6 +19,7 @@ interface RegisterFormProps {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const { data } = useGetPromptCategory();
+
 	const { control, watch, setValue } = formHandler;
 
 	const [selectedPersona, setSelectedPersona] = useState<'daily' | 'work'>('work');

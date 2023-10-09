@@ -18,7 +18,7 @@ const AiToggleGroup: React.FC<AiToggleGroupProps> = ({ formHandler }) => {
 		label: tool.name,
 	}));
 
-	return <FormToggleChipGroup name='limModel' control={control} options={aiPlatformChipOptions || []} color='secondary' className='bg-white' />;
+	return <FormToggleChipGroup name='llmModel' control={control} options={aiPlatformChipOptions || []} color='secondary' className='bg-white' />;
 };
 
 export default AiToggleGroup;
