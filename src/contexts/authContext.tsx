@@ -49,7 +49,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 					console.log('Error 유저 프로파일 요청', error);
 					clearCookie(accessTokenKey);
 				}
-			} else {
 			}
 			setInitialized(true);
 			setLoading(false);

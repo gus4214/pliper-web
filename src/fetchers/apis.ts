@@ -40,6 +40,8 @@ export const apis: { [k: string]: ApiInfo } = {
 		description: '메인에서 노출 될 큐레이션(키워드, 주간 베스트, 클립 베스트) 요청 API',
 	},
 
+	GET_NOTIFICATIONS_API: { uri: '/v1/notification', method: 'GET', description: '알림 내역 요청 API' },
+
 	// 마이 프롬프트
 	POST_PROMPT_TEMPLATE: { uri: '/v1/prompt', method: 'POST', description: '프롬프트 템플릿 등록 API' },
 };

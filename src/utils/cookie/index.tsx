@@ -1,6 +1,5 @@
-import { accessTokenKey } from '@/src/configs/auth';
-import { useSetAtom } from 'jotai';
-import { Cookies } from 'react-cookie';
+import {accessTokenKey} from '@/src/configs/auth';
+import {Cookies} from 'react-cookie';
 
 export interface SetCookieOptions {
 	path?: string;
