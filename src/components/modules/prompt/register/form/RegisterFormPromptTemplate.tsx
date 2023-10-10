@@ -3,6 +3,7 @@ import { PromptRegisterFormData } from '@/src/components/modules/prompt/register
 import LabelWithTemplateFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithTemplateFormElement';
 import OptionInputComponent from '@/src/components/modules/prompt/register/form/elements/OptionInputComponent';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
+import { arrayToString } from '@/src/utils/conversionUtils';
 import { useAtom } from 'jotai';
 import React, { useState } from 'react';
 import { Input, Select, Textarea } from 'react-daisyui';
@@ -57,18 +58,11 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 		setParameters(updatedParameters);
 	};
 
-	// const handleOptionValuesChange = (index: number, values: string[]) => {
-	// 	const updatedParameters = [...parameters];
-	// 	updatedParameters[index].typeValues = values;
-	// 	setParameters(updatedParameters);
-	// };
-
 	const handleOptionValuesChange = (index: number, values: string[]) => {
 		const updatedParameters = [...parameters];
 
 		// 배열을 쉼표로 구분된 문자열로 변환
-		const typeValuesString = values.join(',');
-
+		const typeValuesString = arrayToString(values);
 		updatedParameters[index].typeValues = typeValuesString; // 문자열로 저장
 		setParameters(updatedParameters);
 	};

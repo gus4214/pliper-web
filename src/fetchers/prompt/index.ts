@@ -79,26 +79,25 @@ export const useInfiniteGetPrompts = (input: GetPromptsRequest) => {
 	return useInfiniteQuery(
 		queryKeys.getPromptList(input),
 		async ({ pageParam = 1 }) => {
-			const result = await getPromptsApi({ ...input, page: pageParam });
-
-			// if (result.isError) {
-			// 	return undefined;
-			// }
-
-			return {
-				...result,
-			};
+			try {
+				const result = await getPromptsApi({ ...input, page: pageParam });
+				return result;
+			} catch (error) {
+				return undefined;
+			}
+		},
+		{
+			getNextPageParam: (lastPage, allPages) => {
+				// 마지막 페이지가 아닐 경우 다음 페이지 번호를 반환
+				if (!lastPage?.last) {
+					return (lastPage?.page ?? 0) + 1;
+				}
+				// 마지막 페이지일 경우 undefined 반환
+				return undefined;
+			},
+			suspense: true,
+			refetchOnReconnect: false,
+			refetchOnWindowFocus: false,
 		}
-		// {
-		// 	getNextPageParam: (data) => {
-		// 		if (!data || data?.last) {
-		// 			return undefined;
-		// 		}
-		// 		return (data?.pageable?.pageNumber || 0) + 2;
-		// 	},
-		// 	suspense: true,
-		// 	refetchOnReconnect: false,
-		// 	refetchOnWindowFocus: false,
-		// }
 	);
 };

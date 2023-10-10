@@ -1,6 +1,7 @@
 import PromptItem from '@/src/components/modules/prompt/list/PromptItem';
 import { useGetPrompts, useInfiniteGetPrompts } from '@/src/fetchers/prompt';
 import { searchFilterAtom, searchInputAtom } from '@/src/stores/searchForm';
+import { formatDateToKorean } from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';
 import React, { useState } from 'react';
 
@@ -8,9 +9,9 @@ const PromptList = () => {
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(8);
 
-	const { title, category2Texts, promptSort, lmModel } = useAtomValue(searchFilterAtom);
+	const { title, category2Texts, promptSort, lmModel, personaTypes } = useAtomValue(searchFilterAtom);
 
-	const { data } = useGetPrompts({ page, limit, title, category2Texts, promptSort });
+	const { data } = useGetPrompts({ page, limit, title, category2Texts, lmModel, promptSort });
 
 	const renderEmptyState = () => {
 		// title이 있을 경우의 안내문구
@@ -35,8 +36,19 @@ const PromptList = () => {
 				renderEmptyState()
 			) : (
 				<div className='flex flex-col gap-4'>
-					<PromptItem />
-					<PromptItem />
+					{data?.prompts.map((prompt) => {
+						return (
+							<PromptItem
+								personaType={prompt.personaType}
+								category1Text={prompt.category1Text}
+								userEmail={prompt.userEmail}
+								updateDateTime={formatDateToKorean(prompt.updateDateTime)}
+								title={prompt.title}
+								likeCount={prompt.likeCount}
+								viewCount={prompt.viewCount}
+							/>
+						);
+					})}
 				</div>
 			)}
 		</>
