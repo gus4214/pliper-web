@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosInstance, AxiosResponse, Method, RawAxiosRequestHeaders} from 'axios';
 import {SERVER_API} from '@/src/fetchers/apis';
-import {IBaasResponse, IRequest, IResponse} from '@/src/fetchers/types';
+import {IRequest, IResponse} from '@/src/fetchers/types';
 
 export const apiClient: AxiosInstance = axios.create({
     baseURL: `${SERVER_API}`,

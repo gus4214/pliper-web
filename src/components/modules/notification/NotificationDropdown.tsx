@@ -19,7 +19,7 @@ const NotificationDropdown: FC = () => {
 
     const handleChangeTab = (tab: number) => {
         setTabValue(tab)
-        let category = categoryOfTab[tab]
+        const category = categoryOfTab[tab]
         setCondition({...condition, groups: (category)})
     }
 

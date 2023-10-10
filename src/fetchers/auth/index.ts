@@ -1,6 +1,5 @@
 import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
-import { IBaasResponse } from '@/src/fetchers/types';
 
 export interface OAuthResult {
 	url: string;
@@ -20,7 +19,7 @@ export interface LoginUser {
 	userID: number;
 }
 
-interface RegisterUserRequest {
+export interface RegisterUserRequest {
 	nickname: string;
 	taste: string[];
 }

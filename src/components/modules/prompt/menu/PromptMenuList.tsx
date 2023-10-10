@@ -132,7 +132,7 @@ const PromptMenuList = () => {
 				<h1 className='text-center text-neutral-800 text-xs font-bold'>플랫폼</h1>
 				<div className='pl-4 py-2 flex-col gap-4 flex border-l border-teal-200'>
 					{llmData?.tools.map((tool) => (
-						<div className='items-center gap-2 flex'>
+						<div key={tool.code} className='items-center gap-2 flex'>
 							<Checkbox
 								size='sm'
 								className='w-4 h-4 rounded'

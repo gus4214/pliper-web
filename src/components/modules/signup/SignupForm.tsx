@@ -1,7 +1,7 @@
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import { temporaryTokenKey } from '@/src/configs/auth';
 import { userCategory } from '@/src/configs/signup';
-import { registerUserApi } from '@/src/fetchers/auth';
+import {registerUserApi, RegisterUserRequest} from '@/src/fetchers/auth';
 import { getCookie, saveAccessToken } from '@/src/utils/cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
@@ -56,7 +56,7 @@ const SignupForm = () => {
 
 	const temporaryToken = getCookie(temporaryTokenKey);
 
-	const onSubmit = async (data: any) => {
+	const onSubmit = async (data: RegisterUserRequest) => {
 		const result = await registerUserApi(data, temporaryToken);
 		if (result.token) {
 			saveAccessToken(result.token, result.expires_in);

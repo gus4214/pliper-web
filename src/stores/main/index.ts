@@ -10,7 +10,7 @@ export const dailyCategoryAtom = atom<string | undefined>(undefined);
 export const lastReadNotificationId = atom<number | undefined>(undefined);
 
 export const getLastNotificationViewId = atom(null, (get, set) => {
-    let notificationId = get(lastReadNotificationId);
+    const notificationId = get(lastReadNotificationId);
     if (notificationId) return notificationId;
     const notificationIdByCookie = getCookie(NOTIFICATION_ID_KEY);
     if (notificationIdByCookie) {
