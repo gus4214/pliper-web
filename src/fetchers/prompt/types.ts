@@ -105,7 +105,7 @@ export interface Parameter {
 	description: string;
 	title: string;
 	type: string;
-	typeValues: string[];
+	typeValues: string;
 }
 
 export interface Category {

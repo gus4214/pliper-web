@@ -33,7 +33,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 				const existingParam = parameters.find((param) => param.title === title);
 
 				// 일치하는 title이 있으면 기존 값을 사용하고, 그렇지 않으면 새로운 객체를 생성합니다.
-				return existingParam || { description: '', title, type: '', typeValues: [] };
+				return existingParam || { description: '', title, type: '', typeValues: '' };
 			});
 
 			setParameters(newParameters);
@@ -57,9 +57,19 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 		setParameters(updatedParameters);
 	};
 
+	// const handleOptionValuesChange = (index: number, values: string[]) => {
+	// 	const updatedParameters = [...parameters];
+	// 	updatedParameters[index].typeValues = values;
+	// 	setParameters(updatedParameters);
+	// };
+
 	const handleOptionValuesChange = (index: number, values: string[]) => {
 		const updatedParameters = [...parameters];
-		updatedParameters[index].typeValues = values;
+
+		// 배열을 쉼표로 구분된 문자열로 변환
+		const typeValuesString = values.join(',');
+
+		updatedParameters[index].typeValues = typeValuesString; // 문자열로 저장
 		setParameters(updatedParameters);
 	};
 
