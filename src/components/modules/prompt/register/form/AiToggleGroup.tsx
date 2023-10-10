@@ -1,5 +1,5 @@
 import FormToggleChipGroup from '@/src/components/modules/@common/form/FormToggleChipGroup';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
+import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
 import { useGetAiTools } from '@/src/fetchers/prompt';
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
@@ -18,7 +18,7 @@ const AiToggleGroup: React.FC<AiToggleGroupProps> = ({ formHandler }) => {
 		label: tool.name,
 	}));
 
-	return <FormToggleChipGroup name='limModel' control={control} options={aiPlatformChipOptions || []} color='secondary' className='bg-white' />;
+	return <FormToggleChipGroup name='llmModel' control={control} options={aiPlatformChipOptions || []} color='secondary' className='bg-white' />;
 };
 
 export default AiToggleGroup;

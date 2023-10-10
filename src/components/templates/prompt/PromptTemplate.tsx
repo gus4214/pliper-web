@@ -1,6 +1,6 @@
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
 import PromptListContainer from '@/src/components/modules/prompt/list/PromptListContainer';
-import PromptMenuList from '@/src/components/modules/prompt/list/PromptMenuList';
+import PromptMenuList from '@/src/components/modules/prompt/menu/PromptMenuList';
 import PromptSelectChips from '@/src/components/modules/prompt/list/PromptSelectChips';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 

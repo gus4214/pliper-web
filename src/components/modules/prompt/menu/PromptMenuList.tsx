@@ -1,5 +1,6 @@
 import { promptLLMCategory } from '@/src/configs/prompt';
-import { useGetPromptCategory } from '@/src/fetchers/prompt';
+import { useGetAiTools, useGetPromptCategory } from '@/src/fetchers/prompt';
+import { Category } from '@/src/fetchers/prompt/types';
 import { category1CodesAtom, category2CodesAtom, lmModelAtom, personaTypesAtom, searchFilterAtom } from '@/src/stores/searchForm';
 import { useAtom, useAtomValue } from 'jotai';
 import { useState } from 'react';
@@ -8,11 +9,19 @@ import tw from 'twin.macro';
 
 const PromptMenuList = () => {
 	const { data } = useGetPromptCategory();
+	const { data: llmData } = useGetAiTools({ type: 'LLM' });
 
 	const [personaType, setPersonaType] = useAtom(personaTypesAtom);
 	const [categoryOpen, setCategoryOpen] = useAtom(category1CodesAtom);
 	const [selectedCodes, setSelectedCodes] = useAtom(category2CodesAtom);
 	const [selectedModel, setSelectedModel] = useAtom(lmModelAtom);
+
+	let currentCategories = [] as Category[];
+	if (personaType === '일상' && data) {
+		currentCategories = data.dailyCategories;
+	} else if (personaType === '업무' && data) {
+		currentCategories = data.jobCategories;
+	}
 
 	// 전체 해제 버튼 활성화 여부를 결정하는 함수
 	const isAnythingSelected = () => {
@@ -21,25 +30,25 @@ const PromptMenuList = () => {
 
 	// 전체 해제 함수
 	const handleReset = () => {
-		setPersonaType(undefined);
+		setPersonaType('일상');
 		setCategoryOpen([]);
 		setSelectedCodes([]);
 		setSelectedModel([]);
 	};
 
-	const handleCategoryOpen = (code: string) => {
-		if (categoryOpen.includes(code)) {
-			setCategoryOpen((prev) => prev.filter((item) => item !== code));
+	const handleCategoryOpen = (text: string) => {
+		if (categoryOpen.includes(text)) {
+			setCategoryOpen((prev) => prev.filter((item) => item !== text));
 		} else {
-			setCategoryOpen((prev) => [...prev, code]);
+			setCategoryOpen((prev) => [...prev, text]);
 		}
 	};
 
-	const handleCheckboxChange = (code: string) => {
-		if (selectedCodes.includes(code)) {
-			setSelectedCodes((prev) => prev.filter((item) => item !== code));
+	const handleCheckboxChange = (text: string) => {
+		if (selectedCodes.includes(text)) {
+			setSelectedCodes((prev) => prev.filter((item) => item !== text));
 		} else {
-			setSelectedCodes((prev) => [...prev, code]);
+			setSelectedCodes((prev) => [...prev, text]);
 		}
 	};
 
@@ -83,7 +92,7 @@ const PromptMenuList = () => {
 			<div className='w-[140px] flex-col justify-start items-start gap-6 flex'>
 				<h1 className='text-center text-neutral-800 text-xs font-bold'>카테고리</h1>
 				<div className='border-l border-neutral-200 flex-col gap-2.5 flex'>
-					{data?.jobCategories.map((category) => (
+					{currentCategories.map((category) => (
 						<div
 							css={[
 								tw`flex flex-col border-l gap-3`,
@@ -95,19 +104,19 @@ const PromptMenuList = () => {
 								aria-label={`카테고리 ${category.dept1.text} 선택`}
 								className='w-32 h-8 px-4 py-[9px] min-h-8 hover:text-teal-400 hover:font-medium hover:bg-neutral-50 text-start'
 								color='ghost'
-								onClick={() => handleCategoryOpen(category.dept1.code)} // code를 인자로 넘깁니다.
+								onClick={() => handleCategoryOpen(category.dept1.text)} // code를 인자로 넘깁니다.
 							>
 								<span className='text-[15px] font-medium w-full'>{category.dept1.text}</span>
 							</Button>
-							{categoryOpen.includes(category.dept1.code) && ( // 현재 열린 카테고리의 code와 비교합니다.
+							{categoryOpen.includes(category.dept1.text) && ( // 현재 열린 카테고리의 code와 비교합니다.
 								<div className='pl-6 pb-2 flex-col gap-4 flex'>
 									{category.dept2.map((category2) => (
 										<div className='items-center gap-2 flex' key={category2.code}>
 											<Checkbox
 												size='sm'
 												className='w-4 h-4 rounded'
-												onChange={() => handleCheckboxChange(category2.code)}
-												checked={selectedCodes.includes(category2.code)}
+												onChange={() => handleCheckboxChange(category2.text)}
+												checked={selectedCodes.includes(category2.text)}
 												aria-label={`하위 카테고리 ${category2.text} 선택`}
 											/>
 											<span className='text-center text-neutral-700 text-sm font-normal'>{category2.text}</span>
@@ -122,16 +131,16 @@ const PromptMenuList = () => {
 			<div className='w-[140px] flex flex-col justify-start items-start gap-6'>
 				<h1 className='text-center text-neutral-800 text-xs font-bold'>플랫폼</h1>
 				<div className='pl-4 py-2 flex-col gap-4 flex border-l border-teal-200'>
-					{Object.entries(promptLLMCategory).map(([key, value]) => (
+					{llmData?.tools.map((tool) => (
 						<div className='items-center gap-2 flex'>
 							<Checkbox
 								size='sm'
 								className='w-4 h-4 rounded'
-								onChange={() => handleModelCheckboxChange(key)}
-								checked={selectedModel.includes(key)}
-								aria-label={`플랫폼 ${value} 선택`}
+								onChange={() => handleModelCheckboxChange(tool.name)}
+								checked={selectedModel.includes(tool.name)}
+								aria-label={`플랫폼 ${tool.name} 선택`}
 							/>
-							<span className='text-center text-neutral-700 text-sm font-normal'>{value}</span>
+							<span className='text-center text-neutral-700 text-sm font-normal'>{tool.name}</span>
 						</div>
 					))}
 				</div>

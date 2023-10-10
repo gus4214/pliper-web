@@ -1,45 +1,22 @@
-import React from 'react';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
-import { useState } from 'react';
-import { Button, Input, Select } from 'react-daisyui';
+import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
+import LabelWithTemplateFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithTemplateFormElement';
+import OptionInputComponent from '@/src/components/modules/prompt/register/form/elements/OptionInputComponent';
+import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
+import { useAtom } from 'jotai';
+import React, { useState } from 'react';
+import { Input, Select, Textarea } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
-import { X } from 'heroicons-react';
-
-interface LabelWithTemplateFormElementProps {
-	leftLabel: string;
-	leftElement: React.ReactNode;
-	rightElement?: React.ReactNode;
-}
 
 interface RegisterFormPromptTemplateProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
 }
 
-export const LabelWithTemplateFormElement: React.FC<LabelWithTemplateFormElementProps> = ({ leftLabel, leftElement, rightElement }) => {
-	return (
-		<div className='w-[934px] flex p-4 bg-neutral-100 rounded-2xl gap-6'>
-			<div className='flex items-center gap-8'>
-				<div className='w-[80px] flex px-4 py-2'>
-					<h1 className='text-black text-[13px] font-medium whitespace-nowrap'>{leftLabel}</h1>
-				</div>
-				{leftElement}
-			</div>
-			<div className='max-w-[558px] row shrink basis-0 items-center gap-3 flex'>
-				<div className='px-4 py-2 flex'>
-					<h1 className='text-black text-sm font-normal whitespace-nowrap'>타입 별 옵션 추가</h1>
-				</div>
-				{rightElement}
-			</div>
-		</div>
-	);
-};
-
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const { control } = formHandler;
 
-	const [templateValue, setTemplateValue] = useState<string>('');
-	const [parameters, setParameters] = useState<Array<{ description: string; title: string; type: string; typeValues?: string }>>([]);
+	const [templateValue, setTemplateValue] = useAtom(templateValueAtom);
+	const [parameters, setParameters] = useAtom(parametersAtom);
 
 	const regex = /{{(.*?)}}/g;
 
@@ -49,12 +26,16 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 
 		const matches = value.match(regex);
 		if (matches) {
-			const newParameters = matches.map((match) => ({
-				description: value,
-				title: match.replace('{{', '').replace('}}', ''),
-				type: '',
-				typeValues: '',
-			}));
+			const newTitles = matches.map((match) => match.replace('{{', '').replace('}}', ''));
+
+			const newParameters = newTitles.map((title) => {
+				// 기존 파라미터 중 일치하는 title을 찾습니다.
+				const existingParam = parameters.find((param) => param.title === title);
+
+				// 일치하는 title이 있으면 기존 값을 사용하고, 그렇지 않으면 새로운 객체를 생성합니다.
+				return existingParam || { description: '', title, type: '', typeValues: '' };
+			});
+
 			setParameters(newParameters);
 		} else {
 			setParameters([]);
@@ -67,19 +48,38 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 		setParameters(updatedParameters);
 	};
 
+	const handleTypeValuesChange = (index: number, value: string) => {
+		const updatedParameters = [...parameters];
+
+		// rightElement의 Input에서 입력한 값을 description에 저장
+		updatedParameters[index].description = value;
+
+		setParameters(updatedParameters);
+	};
+
+	// const handleOptionValuesChange = (index: number, values: string[]) => {
+	// 	const updatedParameters = [...parameters];
+	// 	updatedParameters[index].typeValues = values;
+	// 	setParameters(updatedParameters);
+	// };
+
+	const handleOptionValuesChange = (index: number, values: string[]) => {
+		const updatedParameters = [...parameters];
+
+		// 배열을 쉼표로 구분된 문자열로 변환
+		const typeValuesString = values.join(',');
+
+		updatedParameters[index].typeValues = typeValuesString; // 문자열로 저장
+		setParameters(updatedParameters);
+	};
+
 	return (
 		<div className='w-full flex flex-col'>
-			<FormTextarea
-				control={control}
-				name='template'
-				// value={templateValue}
-				// onChange={handleTextareaChange}
-				inputProps={{
-					placeholder: '템플릿으로 생성할 프롬프트를 입력해주세요 {{제목}}',
-					rows: 5,
-					value: templateValue,
-					onChange: handleTextareaChange,
-				}}
+			<Textarea
+				placeholder={'템플릿으로 생성할 프롬프트를 입력해주세요 {{제목}}'}
+				rows={5}
+				value={templateValue}
+				onChange={handleTextareaChange}
 			/>
 			<span className='text-neutral-600 text-sm font-normal pt-3'>
 				{`➡️ 템플릿에 입력값으로 넣고 싶을 경우 {{ 파라미터 }} 형태로 넣어주세요`}
@@ -99,21 +99,14 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 							</Select>
 						}
 						rightElement={
-							<div className='py-2 bg-neutral-100 rounded justify-start items-center gap-2 inline-flex'>
-								<div className='relative w-full'>
-									<Input className='w-[103px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값1' />
-									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
-								</div>
-								<div className='relative w-full'>
-									<Input className='w-[103px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
-									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
-								</div>
-								<div className='relative w-full'>
-									<Input className='w-[103px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200' placeholder='옵션값2' />
-									<X className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' />
-								</div>
-								<Button className='bg-neutral-200'>추가</Button>
-							</div>
+							param.type === '텍스트' ? (
+								<Input
+									className='w-[442px] bg-white rounded border border-neutral-200'
+									onChange={(e) => handleTypeValuesChange(index, e.target.value)}
+								/>
+							) : param.type === '선택' || param.type === '중복 선택' ? (
+								<OptionInputComponent onValuesChange={(values) => handleOptionValuesChange(index, values)} />
+							) : null
 						}
 					/>
 				))}

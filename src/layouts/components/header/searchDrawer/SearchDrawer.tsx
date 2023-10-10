@@ -2,6 +2,8 @@ import { useAuthContext } from '@/src/hooks/context';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 import PopularSearchListContainer from '@/src/layouts/components/header/searchDrawer/popularSearch/PopularSearchListContainer';
 import RecentlySearchListContainer from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchListContainer';
+import { searchInputAtom } from '@/src/stores/searchForm';
+import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 

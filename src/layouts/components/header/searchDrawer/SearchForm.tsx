@@ -1,13 +1,9 @@
-import FormInput from '@/src/components/modules/@common/form/FormInput';
-import { getPromptsApi } from '@/src/fetchers/prompt';
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { Search } from 'heroicons-react';
-import { useAtom, useSetAtom } from 'jotai';
-import { useRouter } from 'next/router';
-import React, { ChangeEvent, useEffect } from 'react';
+import { useAtom } from 'jotai';
+import React, { ChangeEvent } from 'react';
 import { Input } from 'react-daisyui';
 import { useController, useForm } from 'react-hook-form';
-import tw from 'twin.macro';
 
 interface BaseFormFields {
 	title: string;

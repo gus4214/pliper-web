@@ -10,6 +10,8 @@ import {
 	GetPromptCategoryResult,
 	GetPromptsRequest,
 	GetPromptsResult,
+	RegisterPromptRequest,
+	RegisterPromptResult,
 } from '@/src/fetchers/prompt/types';
 
 export const getPromptsApi = (input: GetPromptsRequest) => {
@@ -31,6 +33,14 @@ export const getAiToolsApi = (type: GetAiToolsRequest) => {
 	return callApi<GetAiToolsRequest, GetAiToolsResult>({
 		api: apis.GET_AI_TOOLS_API,
 		queryString: type,
+		token: getCookie(accessTokenKey),
+	});
+};
+
+export const registerPromptApi = (data: RegisterPromptRequest) => {
+	return callApi<RegisterPromptRequest, RegisterPromptResult>({
+		api: apis.REGISTER_PROMPT_TEMPLATE,
+		body: data,
 		token: getCookie(accessTokenKey),
 	});
 };

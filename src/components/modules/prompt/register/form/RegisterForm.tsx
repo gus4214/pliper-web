@@ -1,39 +1,25 @@
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
 import FormToggleChipGroup from '@/src/components/modules/@common/form/FormToggleChipGroup';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterContainer';
+import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
 import AiToggleGroup from '@/src/components/modules/prompt/register/form/AiToggleGroup';
 import PersonaToggleGroup from '@/src/components/modules/prompt/register/form/PersonaToggleGroup';
 import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register/form/RegisterFormPromptTemplate';
+import LabelWithFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithFormElement';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
 import { Category, Dept1 } from '@/src/fetchers/prompt/types';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Toggle } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 interface RegisterFormProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
 }
 
-interface LabelWithFormElementProps {
-	label: string;
-	labelPosition?: 'center' | 'start';
-	children: React.ReactNode;
-}
-
-export const LabelWithFormElement: React.FC<LabelWithFormElementProps> = ({ label, labelPosition = 'center', children }) => {
-	return (
-		<div className={`w-full flex justify-start items-${labelPosition} gap-3`}>
-			<div className='w-[150px] p-2'>
-				<h1 className='text-black text-[13px] font-medium'>{label}</h1>
-			</div>
-			<div className='grow shrink basis-0 flex'>{children}</div>
-		</div>
-	);
-};
-
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const { data } = useGetPromptCategory();
+
 	const { control, watch, setValue } = formHandler;
 
 	const [selectedPersona, setSelectedPersona] = useState<'daily' | 'work'>('work');
@@ -125,7 +111,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 			</div>
 			<div className='w-full flex items-center justify-end gap-3'>
 				<span className='text-neutral-600 text-[13px] font-medium'>해당 프롬프트를 게시 하시겠습니까?</span>
-				<Toggle color='accent' />
+				{/* <Toggle color='accent' checked /> */}
+				<Controller
+					name='show'
+					control={control}
+					render={({ field: { onChange, value } }) => (
+						<Toggle color='accent' checked={value} onChange={(e) => onChange(e.target.checked)} />
+					)}
+				/>
 			</div>
 		</div>
 	);
