@@ -10,7 +10,7 @@ export type NotificationGroup = 'SYSTEM' | 'USER'
 export type NotificationType = 'NOTIFICATION' | "EVENT" | "CLIP"
 
 export interface GetNotificationsRequest extends IPageRequest {
-    groups: NotificationGroup | NotificationGroup[];
+    groups?: NotificationGroup | NotificationGroup[];
 }
 
 export interface GetNotificationsResult {

@@ -2,6 +2,8 @@ import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
 
+const webHost = process.env.NEXT_PUBLIC_WEB
+
 interface LoginModalProps {
 	open: boolean;
 	onClose: () => void;
@@ -10,7 +12,7 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	const handleGoogleLogin = async () => {
 		try {
-			const result = await googleAuthApi('http://localhost:3000/api/auth/google/callback');
+			const result = await googleAuthApi(`${webHost}/api/auth/google/callback`);
 			// const result = await googleAuthApi('http://pliper.kr/api/auth/google/callback');
 			window.location.href = result.url;
 		} catch (error) {
@@ -20,7 +22,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 
 	const handleNaverLogin = async () => {
 		try {
-			const result = await naverAuthApi('http://localhost:3000/api/auth/naver/callback');
+			const result = await naverAuthApi(`${webHost}/api/auth/naver/callback`);
 			// const result = await naverAuthApi('http://pliper.kr/api/auth/naver/callback');
 			window.location.href = result.url;
 		} catch (error) {

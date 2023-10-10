@@ -13,8 +13,12 @@ const categoryOfTab: Record<string, NotificationGroup | NotificationGroup[]> = {
     2: "SYSTEM"
 }
 
+const itemMoreCount = 4
+
 const NotificationDropdown: FC = () => {
     const [tabValue, setTabValue] = useState(0);
+    const [condition, setCondition] = useState<GetNotificationsRequest>({limit: itemMoreCount});
+
     const {user} = useAuthContext();
 
     const handleChangeTab = (tab: number) => {
@@ -23,14 +27,16 @@ const NotificationDropdown: FC = () => {
         setCondition({...condition, groups: (category)})
     }
 
-    const [condition, setCondition] = useState<GetNotificationsRequest>();
+    const handleMoreNotifications = () => {
+        setCondition({...condition, limit: itemMoreCount + condition.limit!})
+    }
 
     return (
-        <Dropdown vertical='bottom' end>
+        <Dropdown vertical='bottom' end >
             <Button size='sm' color='ghost' shape='circle'>
                 <NotificationIcon active/>
             </Button>
-            <Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg z-10'>
+            <Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg z-10 block'>
                 <div className='w-[380px] h-9 px-6 py-2 justify-start items-center flex'>
                     <span className='text-black text-xl font-bold leading-tight'>알림 내역</span>
                 </div>
@@ -40,11 +46,11 @@ const NotificationDropdown: FC = () => {
                     <Tabs.Tab value={2}>공지 및 이벤트</Tabs.Tab>
                 </Tabs>
                 <AsyncComponentBoundary pendingFallback={<NotificationSkeleton/>}>
-                    <NotificationTabList condition={condition}/>
+                    <NotificationTabList condition={condition} onMore={handleMoreNotifications}/>
                 </AsyncComponentBoundary>
             </Dropdown.Menu>
         </Dropdown>
     );
 };
 
-export default NotificationDropdown;
+export default React.memo(NotificationDropdown);
