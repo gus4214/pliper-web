@@ -10,8 +10,8 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	const handleGoogleLogin = async () => {
 		try {
-			const result = await googleAuthApi('http://localhost:3000/api/auth/google/callback');
-			// const result = await googleAuthApi('http://pliper.kr/api/auth/google/callback');
+			// const result = await googleAuthApi('http://localhost:3000/api/auth/google/callback');
+			const result = await googleAuthApi('http://pliper.kr/api/auth/google/callback');
 			window.location.href = result.url;
 		} catch (error) {
 			console.error('Error in GoogleAuthApi:', error);
@@ -20,8 +20,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 
 	const handleNaverLogin = async () => {
 		try {
-			const result = await naverAuthApi('http://localhost:3000/api/auth/naver/callback');
-			// const result = await naverAuthApi('http://pliper.kr/api/auth/naver/callback');
+			// const result = await naverAuthApi('http://localhost:3000/api/auth/naver/callback');
+			const result = await naverAuthApi('http://pliper.kr/api/auth/naver/callback');
 			window.location.href = result.url;
 		} catch (error) {
 			console.error('Error in NaverAuthApi:', error);
