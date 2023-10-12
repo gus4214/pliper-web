@@ -19,10 +19,11 @@ interface RegisterFormProps {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const { data } = useGetPromptCategory();
+	console.log('🚀 ~ file: RegisterForm.tsx:22 ~ data:', data);
 
 	const { control, watch, setValue } = formHandler;
 
-	const [selectedPersona, setSelectedPersona] = useState<'daily' | 'work'>('work');
+	const [selectedPersona, setSelectedPersona] = useState<'일상' | '업무'>('업무');
 	const personaType = watch('personaType');
 
 	// 카테고리 상태 및 로직
@@ -37,7 +38,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const dept2Options = useMemo(() => {
 		if (!selectedDept1 || !personaType) return [];
 
-		const targetCategories = personaType === 'work' ? data?.jobCategories : data?.dailyCategories;
+		const targetCategories = personaType === '업무' ? data?.jobCategories : data?.dailyCategories;
 		const selectedCategory = targetCategories?.find((category) => category.dept1.text === selectedDept1);
 		return selectedCategory ? selectedCategory.dept2.map((item) => ({ code: item.code, label: item.text })) : [];
 	}, [selectedDept1, personaType, data]);
@@ -49,10 +50,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 			setValue('category2Text', '');
 		};
 
-		if (personaType === 'daily') {
+		if (personaType === '일상') {
 			setSelectedDept1(null);
 			updateDept1Categories(data?.dailyCategories || []);
-		} else if (personaType === 'work') {
+		} else if (personaType === '업무') {
 			setSelectedDept1(null);
 			updateDept1Categories(data?.jobCategories || []);
 		}
@@ -68,7 +69,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 
 				{/* // 페르소나 구간 */}
 				<LabelWithFormElement label='페르소나'>
-					<PersonaToggleGroup formHandler={formHandler} onChange={(value) => setSelectedPersona(value as 'daily' | 'work')} />
+					<PersonaToggleGroup formHandler={formHandler} onChange={(value) => setSelectedPersona(value as '일상' | '업무')} />
 				</LabelWithFormElement>
 
 				{/* 카테고리 구간 */}

@@ -6,7 +6,7 @@ export type GetAiToolsType = 'LLM' | 'IMAGE';
 export interface GetPromptsRequest extends IPageRequest {
 	category1Texts?: string[];
 	category2Texts?: string[];
-	personaTypes?: string[];
+	personaTypes?: string;
 	promptSort?: PromptSortType;
 	lmModel?: string[];
 	sort?: string;

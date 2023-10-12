@@ -9,6 +9,8 @@ import { useAtomValue } from 'jotai';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { registerPromptApi } from '@/src/fetchers/prompt';
 import { Parameter } from '@/src/fetchers/prompt/types';
+import { useConfirmModal } from '@/src/hooks/modal';
+import { useRouter } from 'next/router';
 
 export interface PromptRegisterFormData {
 	title: string;
@@ -37,12 +39,27 @@ const RegisterFormContainer = () => {
 
 	const { handleSubmit } = formHandler;
 
+	const router = useRouter();
+
+	const [open, close] = useConfirmModal();
+
 	const parameters = useAtomValue(parametersAtom);
 	const template = useAtomValue(templateValueAtom);
 
 	const onSubmit = async (data: PromptRegisterFormData) => {
-		const result = await registerPromptApi({ ...data, template, parameters });
-		console.log('🚀 ~ file: RegisterFormContainer.tsx:45 ~ onSubmit ~ result:', result);
+		open({
+			title: '프롬프트 템플릿 생성하시겠어요?',
+			description: '작성하신 내용으로 템플릿이 생성됩니다.',
+			onConfirm: async () => {
+				try {
+					const result = await registerPromptApi({ ...data, template, parameters });
+					router.push(`/prompt/${result.promptId}`);
+					close();
+				} catch (error) {
+					console.error('Error in RegisterPromptApi:', error);
+				}
+			},
+		});
 	};
 
 	return (
