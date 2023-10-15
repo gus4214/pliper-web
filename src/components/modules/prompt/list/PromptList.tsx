@@ -9,9 +9,9 @@ const PromptList = () => {
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(8);
 
-	const { title, category2Texts, promptSort, lmModel, personaTypes } = useAtomValue(searchFilterAtom);
+	const { title, category1Texts, category2Texts, promptSort, lmModel, personaTypes } = useAtomValue(searchFilterAtom);
 
-	const { data } = useGetPrompts({ page, limit, title, category2Texts, lmModel, promptSort });
+	const { data } = useGetPrompts({ page, limit, title, category1Texts, category2Texts, lmModel, promptSort, personaTypes });
 
 	const renderEmptyState = () => {
 		// title이 있을 경우의 안내문구
@@ -36,7 +36,7 @@ const PromptList = () => {
 				renderEmptyState()
 			) : (
 				<div className='flex flex-col gap-4'>
-					{data?.prompts.map((prompt) => {
+					{data?.prompts?.map((prompt) => {
 						return (
 							<PromptItem
 								personaType={prompt.personaType}
