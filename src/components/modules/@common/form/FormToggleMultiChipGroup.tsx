@@ -13,6 +13,7 @@ interface FormToggleMultiChipGroupProps<TFieldValues extends FieldValues = Field
 	rounded?: boolean;
 	color?: 'primary' | 'secondary';
 	className?: string;
+	chipClassName?: string;
 }
 
 const FormToggleMultiChipGroup = <TFieldValues extends FieldValues = FieldValues>({
@@ -22,6 +23,7 @@ const FormToggleMultiChipGroup = <TFieldValues extends FieldValues = FieldValues
 	rounded,
 	color,
 	className,
+	chipClassName,
 }: FormToggleMultiChipGroupProps<TFieldValues>) => {
 	return (
 		<Controller
@@ -47,6 +49,7 @@ const FormToggleMultiChipGroup = <TFieldValues extends FieldValues = FieldValues
 										onChange([...value, option.code]);
 									}
 								}}
+								className={chipClassName}
 							/>
 						);
 					})}

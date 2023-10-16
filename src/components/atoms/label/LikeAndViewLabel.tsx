@@ -3,7 +3,7 @@ import React from 'react';
 interface LikeAndViewLabelProps {
 	likeCount: string;
 	viewCount: string;
-	percent?: string;
+	percent?: string | number;
 }
 
 const LikeAndViewLabel: React.FC<LikeAndViewLabelProps> = ({ likeCount, viewCount, percent }) => {

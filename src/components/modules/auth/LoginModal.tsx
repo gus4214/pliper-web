@@ -2,7 +2,7 @@ import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
 
-const webHost = process.env.NEXT_PUBLIC_WEB
+const webHost = process.env.NEXT_PUBLIC_WEB;
 
 interface LoginModalProps {
 	open: boolean;

@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import LoginModal from '@/src/components/modules/@common/modals/LoginModal';
+import LoginModal from '@/src/components/modules/auth/LoginModal';
 import { closeLoginModalAtom, confirmModalAtom, loginModalAtom } from '@/src/stores/modal';
 import ConfirmModal from '@/src/components/modules/@common/modals/ConfirmModal';
 

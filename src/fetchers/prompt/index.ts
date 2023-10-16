@@ -2,7 +2,7 @@ import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
 import { accessTokenKey } from '@/src/configs/auth';
 import { getCookie } from '@/src/utils/cookie';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { QueryClient, useInfiniteQuery, useQuery } from 'react-query';
 import {
 	GetAiToolsRequest,
 	GetAiToolsResult,
@@ -10,6 +10,7 @@ import {
 	GetPromptCategoryResult,
 	GetPromptsRequest,
 	GetPromptsResult,
+	Prompt,
 	RegisterPromptRequest,
 	RegisterPromptResult,
 } from '@/src/fetchers/prompt/types';
@@ -19,6 +20,14 @@ export const getPromptsApi = (input: GetPromptsRequest) => {
 		api: apis.GET_PROMPT,
 		queryString: input,
 		token: getCookie(accessTokenKey),
+	});
+};
+
+export const getPromptApi = (promptId: string, token?: string) => {
+	return callApi<string, Prompt>({
+		api: apis.GET_PROMPT_DETAIL,
+		slug: { promptId },
+		token: token,
 	});
 };
 
@@ -48,11 +57,20 @@ export const registerPromptApi = (data: RegisterPromptRequest) => {
 const queryKeys = {
 	getPromptCategory: () => ['prompt', 'category'] as const,
 	getPromptList: (input: GetPromptsRequest) => ['prompt', input] as const,
+	getPrompt: (promptId: string, token: string | undefined) => ['prompt', 'detail', promptId, token || null] as const,
 	getAiTools: (type: GetAiToolsRequest) => ['aiTools', type] as const,
 };
 
 export const useGetPrompts = (input: GetPromptsRequest) => {
 	return useQuery(queryKeys.getPromptList(input), () => getPromptsApi(input), {
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
+};
+
+export const useGetPrompt = (promptId: string, token?: string) => {
+	return useQuery(queryKeys.getPrompt(promptId, token), () => getPromptApi(promptId, token), {
 		suspense: true,
 		refetchOnReconnect: false,
 		refetchOnWindowFocus: false,
@@ -100,4 +118,9 @@ export const useInfiniteGetPrompts = (input: GetPromptsRequest) => {
 			refetchOnWindowFocus: false,
 		}
 	);
+};
+
+export const prefetchGetPrompt = (client: QueryClient, promptId: string, token?: string | null) => {
+	const accessToken = token || undefined;
+	return client.prefetchQuery(queryKeys.getPrompt(promptId, accessToken), () => getPromptApi(promptId, accessToken));
 };
