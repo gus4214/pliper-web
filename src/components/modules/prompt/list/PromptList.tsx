@@ -39,6 +39,7 @@ const PromptList = () => {
 					{data?.prompts.map((prompt) => {
 						return (
 							<PromptItem
+								key={prompt.promptId}
 								personaType={prompt.personaType}
 								category1Text={prompt.category1Text}
 								userEmail={prompt.userEmail}
