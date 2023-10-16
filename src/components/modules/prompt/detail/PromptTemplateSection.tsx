@@ -1,12 +1,15 @@
-import SelectChip from '@/src/components/atoms/chip/SelectChip';
+import HandThumbsDownIcon from '@/src/components/atoms/icons/HandThumbsDownIcon';
+import HandThumbsUpIcon from '@/src/components/atoms/icons/HandThumbsUpIcon';
+import HeartIcon from '@/src/components/atoms/icons/HeartIcon';
+import PlipOutlineIcon from '@/src/components/atoms/icons/PlipOutlineIcon';
 import FormInput from '@/src/components/modules/@common/form/FormInput';
-import FormToggleChipCodeGroup from '@/src/components/modules/@common/form/FormToggleChipCodeGroup';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
+import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail/PromptInteractionButtonGroup';
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
 import { Parameter } from '@/src/fetchers/prompt/types';
 import { stringToArray } from '@/src/utils/conversionUtils';
 import React, { useState } from 'react';
-import { Button, Input, Select, Textarea } from 'react-daisyui';
+import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
 
 interface PromptTemplateSectionProps {
@@ -115,12 +118,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 					/>
 				</div>
 			</div>
-			<div className='w-full h-[72px] p-4 bg-sky-200 bg-opacity-10 rounded-lg justify-between items-center flex'>
-				<div className='justify-end items-center flex'>
-					<span className='text-neutral-400 text-xs font-normal'>좋아요</span>
-					<Button onClick={createPrompt}>생성하기</Button>
-				</div>
-			</div>
+			<PromptInteractionButtonGroup onCreateClick={createPrompt} />
 		</div>
 	);
 };
