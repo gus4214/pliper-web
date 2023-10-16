@@ -19,7 +19,6 @@ interface RegisterFormProps {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const { data } = useGetPromptCategory();
-	console.log('🚀 ~ file: RegisterForm.tsx:22 ~ data:', data);
 
 	const { control, watch, setValue } = formHandler;
 

@@ -10,6 +10,7 @@ interface PromptItemProps {
 	viewCount: number;
 	percents: number;
 	title: string;
+	onClick?: () => void;
 }
 
 const PromptItem: React.FC<Partial<PromptItemProps>> = ({
@@ -21,9 +22,13 @@ const PromptItem: React.FC<Partial<PromptItemProps>> = ({
 	viewCount,
 	percents,
 	title,
+	onClick,
 }) => {
 	return (
-		<div className='w-[944px] pl-4 pr-8 py-4 bg-white bg-opacity-5 rounded-2xl border border-neutral-200 hover:shadow  hover:border-teal-200 justify-start items-center gap-4 flex cursor-pointer'>
+		<div
+			className='w-[944px] pl-4 pr-8 py-4 bg-white bg-opacity-5 rounded-2xl border border-neutral-200 hover:shadow  hover:border-teal-200 justify-start items-center gap-4 flex cursor-pointer'
+			onClick={onClick}
+		>
 			<div className='w-20 py-1.5 bg-white rounded flex-col justify-center items-center gap-2 flex'>
 				<span className='text-center text-neutral-400 text-[13px] font-semibold'>{personaType}</span>
 				<span className='text-center text-neutral-200 text-[13px] font-normal'>/</span>
