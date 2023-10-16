@@ -39,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			res.redirect('/signup');
 		} else {
 			console.error('Error in googleAuthCallback:', error);
-			res.status(500).send('An error occurred during authentication.');
+			res.status(500).send('An error occurred during authentication.' + error);
 		}
 	}
 };
