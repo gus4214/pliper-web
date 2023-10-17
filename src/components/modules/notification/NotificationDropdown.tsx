@@ -6,6 +6,7 @@ import AsyncComponentBoundary from "@/src/components/atoms/suspense/AsyncCompone
 import {useAuthContext} from "@/src/hooks/context";
 import {GetNotificationsRequest, NotificationGroup} from "@/src/fetchers/notification";
 import NotificationSkeleton from "@/src/components/modules/notification/NotificationSkeleton";
+import {AuthenticationUser} from "@/src/stores/auth";
 
 const categoryOfTab: Record<string, NotificationGroup | NotificationGroup[]> = {
     0: ["USER", "SYSTEM"],
@@ -32,7 +33,7 @@ const NotificationDropdown: FC = () => {
     }
 
     return (
-        <Dropdown vertical='bottom' end >
+        <Dropdown vertical='bottom' end>
             <Button size='sm' color='ghost' shape='circle'>
                 <NotificationIcon active/>
             </Button>
@@ -42,7 +43,7 @@ const NotificationDropdown: FC = () => {
                 </div>
                 <Tabs value={tabValue} onChange={handleChangeTab} className='px-2'>
                     <Tabs.Tab value={0}>전체</Tabs.Tab>
-                    {user ? <Tabs.Tab value={1}>My PLIP</Tabs.Tab> : <></>}
+                    {user ? <Tabs.Tab value={1}>My PLIP</Tabs.Tab>: <></> }
                     <Tabs.Tab value={2}>공지 및 이벤트</Tabs.Tab>
                 </Tabs>
                 <AsyncComponentBoundary pendingFallback={<NotificationSkeleton/>}>

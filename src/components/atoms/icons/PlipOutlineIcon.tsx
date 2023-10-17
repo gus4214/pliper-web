@@ -4,7 +4,7 @@ const PlipOutlineIcon = () => {
 	return (
 		<>
 			<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40' fill='none' className='cursor-pointer'>
-				<g clip-path='url(#clip0_1083_2683)'>
+				<g clipPath='url(#clip0_1083_2683)'>
 					<path
 						d='M30.125 0H9.875C4.42119 0 0 4.42119 0 9.875V30.125C0 35.5788 4.42119 40 9.875 40H30.125C35.5788 40 40 35.5788 40 30.125V9.875C40 4.42119 35.5788 0 30.125 0Z'
 						fill='white'
@@ -14,7 +14,7 @@ const PlipOutlineIcon = () => {
 						fill='#39CCCC'
 					/>
 				</g>
-				<rect x='0.5' y='0.5' width='39' height='39' rx='7.5' stroke='#39CCCC' stroke-opacity='0.2' />
+				<rect x='0.5' y='0.5' width='39' height='39' rx='7.5' stroke='#39CCCC' strokeOpacity='0.2' />
 				<defs>
 					<clipPath id='clip0_1083_2683'>
 						<rect width='40' height='40' rx='8' fill='white' />

@@ -27,6 +27,14 @@ export const apis: { [k: string]: ApiInfo } = {
 	GET_PROMPT: { uri: 'v1/prompt', method: 'GET', description: '프롬프트 템플릿 목록 요청 API' },
 	GET_PROMPT_DETAIL: { uri: 'v1/prompt/{promptId}', method: 'GET', description: '프롬프트 템플릿 상세 요청 API' },
 
+	// 프롬프트 인터렉션
+	CLIP_PROMPT: { uri: 'v1/prompt/{id}/clip', method: 'PUT', description: '프롬프트 클립 API' },
+	CANCEL_CLIP_PROMPT: { uri: 'v1/prompt/{id}/clip', method: 'DELETE', description: '프롬프트 클립 취소 API' },
+	LIKE_PROMPT: { uri: 'v1/prompt/{id}/like', method: 'PUT', description: '프롬프트 좋아요 API' },
+	CANCEL_LIKE_PROMPT: { uri: 'v1/prompt/{id}/like', method: 'DELETE', description: '프롬프트 좋아요 취소 API' },
+	RELIABILITY_PROMPT: { uri: 'v1/prompt/{id}/reliability', method: 'PUT', description: '프롬프트 정확도 API' },
+	CANCEL_RELIABILITY_PROMPT: { uri: 'v1/prompt/{id}/reliability', method: 'DELETE', description: '프롬프트 정확도 취소 API' },
+
 	// 프롬프트 템플릿 검색
 	GET_SEARCHED_BY_USER: { uri: '/v1/search', method: 'GET', description: '유저 검색 히스토리 요청 API' },
 	DELETE_SEARCHED_BY_USER: { uri: '/v1/search/{historyId}', method: 'DELETE', description: '유저 검색 히스토리 삭제 요청 API' },

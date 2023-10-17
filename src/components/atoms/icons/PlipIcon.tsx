@@ -3,7 +3,7 @@ import { FC } from 'react';
 const PlipIcon: FC = () => {
 	return (
 		<svg width='32' height='33' viewBox='0 0 32 33' fill='none' xmlns='http://www.w3.org/2000/svg'>
-			<g clip-path='url(#clip0_730_2647)'>
+			<g clipPath='url(#clip0_730_2647)'>
 				<path
 					d='M24.1 0.5H7.9C3.53695 0.5 0 4.03695 0 8.4V24.6C0 28.9631 3.53695 32.5 7.9 32.5H24.1C28.4631 32.5 32 28.9631 32 24.6V8.4C32 4.03695 28.4631 0.5 24.1 0.5Z'
 					fill='#39CCCC'
