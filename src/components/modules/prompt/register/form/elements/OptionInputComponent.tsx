@@ -41,8 +41,8 @@ const OptionInputComponent: React.FC<OptionInputComponentProps> = ({ onValuesCha
 	};
 
 	return (
-		<div className=' bg-neutral-100 rounded justify-start items-center flex w-[442px]'>
-			<div className='w-[442px] flex gap-2 overflow-x-auto overflow-y-hidden'>
+		<div className=' bg-neutral-100 rounded justify-start items-center flex w-full'>
+			<div className='w-full flex gap-2 flex-wrap'>
 				{options.map((option, index) => (
 					<div className='relative w-[112px]' key={index}>
 						<Input

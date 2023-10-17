@@ -24,7 +24,7 @@ const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ formHandler, on
 				{ code: '일상', label: '☕️ 일상' },
 			]}
 			color='secondary'
-			className='bg-white'
+			chipClassName='bg-white'
 			onChange={onChange}
 		/>
 	);

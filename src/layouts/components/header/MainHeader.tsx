@@ -10,6 +10,7 @@ import SearchDrawer from '@/src/layouts/components/header/searchDrawer/SearchDra
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { useSetAtom } from 'jotai';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
+import { useRouter } from 'next/router';
 
 interface MainHeaderProps {
 	position: 'fixed' | 'static';
@@ -17,6 +18,7 @@ interface MainHeaderProps {
 
 const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 	const barPosition = position === 'fixed' ? 'sticky' : 'static';
+	const router = useRouter();
 
 	const { user, logout } = useAuthContext();
 
@@ -39,7 +41,9 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 					<Image src={'/images/logo/pliper.svg'} alt='logo' width={96} height={24} />
 				</Link>
 				<div className='flex-1 ml-[159px] w-[190px]'>
-					<Button color='ghost'>프롬프트</Button>
+					<Button color='ghost' onClick={() => router.push('/prompt')}>
+						프롬프트
+					</Button>
 					<Button color='ghost'>메뉴명 2</Button>
 				</div>
 				<div className='flex gap-4'>

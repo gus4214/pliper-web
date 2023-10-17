@@ -1,3 +1,4 @@
+import PlipNoneIcon from '@/src/components/atoms/icons/PlipNoneIcon';
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
 import React from 'react';
 
@@ -46,7 +47,9 @@ const PromptItem: React.FC<Partial<PromptItemProps>> = ({
 						<LikeAndViewLabel likeCount={String(likeCount)} viewCount={String(viewCount)} percent={percents} />
 					</div>
 				</div>
-				<div className='w-8 h-8 relative' />
+				<div className='w-8 h-8 relative'>
+					<PlipNoneIcon />
+				</div>
 			</div>
 		</div>
 	);
