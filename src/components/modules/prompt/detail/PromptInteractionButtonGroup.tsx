@@ -5,9 +5,11 @@ import PlipOutlineIcon from '@/src/components/atoms/icons/PlipOutlineIcon';
 import {Button} from 'react-daisyui';
 import {
     cancelClipPromptApi,
-    cancelLikePromptApi, cancelReliabilityPromptApi,
+    cancelLikePromptApi,
+    cancelReliabilityPromptApi,
     clipPromptApi,
-    likePromptApi, reliabilityPromptApi
+    likePromptApi,
+    reliabilityPromptApi
 } from "@/src/fetchers/prompt/Interaction";
 import {useState} from "react";
 
@@ -70,9 +72,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
                 </Button>
             </div>
             <div className='flex gap-3'>
-                <Button onClick={() => handleClipPrompt(!clip)}>
-                    <PlipOutlineIcon/>
-                </Button>
+                <PlipOutlineIcon/>
                 <Button color='accent' onClick={onCreateClick} className='min-h-8 h-10'>
                     <span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
                 </Button>
