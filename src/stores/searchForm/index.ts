@@ -6,7 +6,7 @@ export const category1CodesAtom = atom<string[]>([]);
 export const category2CodesAtom = atom<string[]>([]);
 export const promptSortAtom = atom<PromptSortType>('ACCURACY');
 export const lmModelAtom = atom<string[]>([]);
-export const personaTypesAtom = atom<string | undefined>('일상');
+export const personaTypesAtom = atom<string | undefined>('');
 
 export const searchFilterAtom = atom((get) => ({
 	title: get(searchInputAtom),

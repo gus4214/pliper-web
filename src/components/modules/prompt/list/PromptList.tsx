@@ -1,19 +1,19 @@
 import PromptItem from '@/src/components/modules/prompt/list/PromptItem';
-import { useGetPrompts, useInfiniteGetPrompts } from '@/src/fetchers/prompt';
-import { searchFilterAtom, searchInputAtom } from '@/src/stores/searchForm';
+import { useGetPrompts } from '@/src/fetchers/prompt';
+import { searchFilterAtom } from '@/src/stores/searchForm';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const PromptList = () => {
 	const router = useRouter();
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(8);
 
-	const { title, category1Texts, category2Texts, promptSort, lmModel, personaTypes } = useAtomValue(searchFilterAtom);
+	const { title, category2Texts, promptSort, lmModel, personaTypes } = useAtomValue(searchFilterAtom);
 
-	const { data } = useGetPrompts({ page, limit, title, category1Texts, category2Texts, lmModel, promptSort, personaTypes });
+	const { data } = useGetPrompts({ page, limit, title, category2Texts, llmModel: lmModel, promptSort, personaTypes });
 
 	const renderEmptyState = () => {
 		// title이 있을 경우의 안내문구
@@ -49,6 +49,7 @@ const PromptList = () => {
 								title={prompt.title}
 								likeCount={prompt.likeCount}
 								viewCount={prompt.viewCount}
+								percents={prompt.percents}
 								onClick={() => router.push(`/prompt/${prompt.promptId}`)}
 							/>
 						);

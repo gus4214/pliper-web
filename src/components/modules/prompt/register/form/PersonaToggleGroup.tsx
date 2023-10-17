@@ -11,9 +11,9 @@ interface PersonaToggleGroupProps {
 const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ formHandler, onChange }) => {
 	const { control, setValue } = formHandler;
 
-	useEffect(() => {
-		setValue('personaType', '업무');
-	}, []);
+	// useEffect(() => {
+	// 	setValue('personaType', '업무');
+	// }, []);
 
 	return (
 		<FormToggleChipCodeGroup

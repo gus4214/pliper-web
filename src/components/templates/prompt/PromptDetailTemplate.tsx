@@ -1,5 +1,4 @@
 import PromptCategoryChip from '@/src/components/atoms/chip/PromptCategoryChip';
-import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
 import PromptDetailInfoHeader from '@/src/components/modules/prompt/detail/PromptDetailInfoHeader';
 import PromptTemplateSection from '@/src/components/modules/prompt/detail/PromptTemplateSection';
 import { useGetPrompt } from '@/src/fetchers/prompt';
@@ -28,6 +27,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ token }) =>
 		userEmail,
 		updateDateTime,
 		description,
+		llmModel,
 	} = data!;
 
 	return (
@@ -41,6 +41,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ token }) =>
 				viewCount={viewCount}
 				percents={percents}
 				userEmail={userEmail}
+				llmModel={llmModel}
 				updateDateTime={updateDateTime}
 				description={description}
 			/>

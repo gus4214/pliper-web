@@ -14,8 +14,6 @@ interface RegisterFormPromptTemplateProps {
 }
 
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
-	const { control } = formHandler;
-
 	const [templateValue, setTemplateValue] = useAtom(templateValueAtom);
 	const [parameters, setParameters] = useAtom(parametersAtom);
 
@@ -95,11 +93,15 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 						rightElement={
 							param.type === '텍스트' ? (
 								<Input
+									value={param.description}
 									className='w-full bg-white rounded border border-neutral-200'
 									onChange={(e) => handleTypeValuesChange(index, e.target.value)}
 								/>
 							) : param.type === '선택' || param.type === '중복 선택' ? (
-								<OptionInputComponent onValuesChange={(values) => handleOptionValuesChange(index, values)} />
+								<OptionInputComponent
+									typeValues={param.typeValues}
+									onValuesChange={(values) => handleOptionValuesChange(index, values)}
+								/>
 							) : null
 						}
 					/>

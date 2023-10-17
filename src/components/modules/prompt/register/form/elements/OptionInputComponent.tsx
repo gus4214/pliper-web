@@ -1,14 +1,16 @@
+import { stringToArray } from '@/src/utils/conversionUtils';
 import { X } from 'heroicons-react';
 import React, { useState } from 'react';
 import { Button, Input } from 'react-daisyui';
 
 interface OptionInputComponentProps {
 	onValuesChange?: (values: string[]) => void;
+	typeValues: string;
 }
 
-const OptionInputComponent: React.FC<OptionInputComponentProps> = ({ onValuesChange }) => {
-	const [options, setOptions] = useState<string[]>(['옵션값1']); // 초기 상태를 ['옵션값1']로 변경합니다.
-	const [values, setValues] = useState<string[]>([]);
+const OptionInputComponent: React.FC<OptionInputComponentProps> = ({ onValuesChange, typeValues }) => {
+	const [options, setOptions] = useState<string[]>(stringToArray(typeValues) || ['옵션값1']);
+	const [values, setValues] = useState<string[]>(stringToArray(typeValues) || []);
 
 	const handleAddOption = () => {
 		if (options.length < 10) {
