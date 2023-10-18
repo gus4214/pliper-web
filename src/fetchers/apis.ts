@@ -35,6 +35,9 @@ export const apis: { [k: string]: ApiInfo } = {
 	RELIABILITY_PROMPT: { uri: 'v1/prompt/{id}/reliability', method: 'PUT', description: '프롬프트 정확도 API' },
 	CANCEL_RELIABILITY_PROMPT: { uri: 'v1/prompt/{id}/reliability', method: 'DELETE', description: '프롬프트 정확도 취소 API' },
 
+	// 인증된 유저의 프롬프트
+	GET_INTERACTION_BY_PROMPTS: { uri: 'v1/my-prompt/interaction', method: 'GET', description: '유저의 인터렉션 조회 API' },
+
 	// 프롬프트 템플릿 검색
 	GET_SEARCHED_BY_USER: { uri: '/v1/search', method: 'GET', description: '유저 검색 히스토리 요청 API' },
 	DELETE_SEARCHED_BY_USER: { uri: '/v1/search/{historyId}', method: 'DELETE', description: '유저 검색 히스토리 삭제 요청 API' },
