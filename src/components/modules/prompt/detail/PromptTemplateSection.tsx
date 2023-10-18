@@ -1,23 +1,18 @@
-import HandThumbsDownIcon from '@/src/components/atoms/icons/HandThumbsDownIcon';
-import HandThumbsUpIcon from '@/src/components/atoms/icons/HandThumbsUpIcon';
-import HeartIcon from '@/src/components/atoms/icons/HeartIcon';
-import PlipOutlineIcon from '@/src/components/atoms/icons/PlipOutlineIcon';
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
 import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail/PromptInteractionButtonGroup';
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
-import { Parameter } from '@/src/fetchers/prompt/types';
+import { Prompt } from '@/src/fetchers/prompt/types';
 import { stringToArray } from '@/src/utils/conversionUtils';
 import React, { useState } from 'react';
-import { Button, Select, Textarea } from 'react-daisyui';
+import { Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
 
 interface PromptTemplateSectionProps {
-	parameters: Parameter[];
-	template: string;
+	prompt: Prompt;
 }
 
-const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters, template }) => {
+const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ prompt: { parameters, template, promptId } }) => {
 	const formHandler = useForm<Record<string, string>>({
 		mode: 'onChange',
 		defaultValues: parameters?.reduce(
@@ -118,7 +113,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 					/>
 				</div>
 			</div>
-			<PromptInteractionButtonGroup onCreateClick={createPrompt} />
+			<PromptInteractionButtonGroup onCreateClick={createPrompt} promptId={promptId} />
 		</div>
 	);
 };

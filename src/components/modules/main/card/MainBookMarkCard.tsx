@@ -12,7 +12,7 @@ const MainBookMarkCard: React.FC<MainBookMarkCardProps> = ({ src, title, user, b
 	return (
 		<div className='flex flex-col justify-center gap-[18px]'>
 			<div className='w-[260px] h-40 relative cursor-pointer'>
-				<Image src={src} alt={title} fill objectFit='cover' className='rounded-tl-lg rounded-tr-[50px] rounded-bl-lg rounded-br-[50px]' />
+				<Image src={src} alt={title} fill className='rounded-tl-lg rounded-tr-[50px] rounded-bl-lg rounded-br-[50px] object-cover' />
 				<div className='left-0 top-[-16px] absolute'>{badge}</div>
 			</div>
 			<div className='w-[260px] flex flex-col gap-3'>

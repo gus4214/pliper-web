@@ -29,6 +29,20 @@ export interface RegisterPromptRequest {
 	title: string;
 }
 
+export interface GetInteractionByPromptsRequest {
+	promptIds: number[]
+}
+
+export  interface InteractionByPrompt {
+	promptId: number;
+	isLike: boolean;
+	isClip: boolean;
+	isReliability: boolean;
+	reliability?: "UP" | "DOWN"
+}
+
+// =======================================
+
 export interface GetPromptsResult {
 	first: boolean;
 	last: boolean;
@@ -69,6 +83,12 @@ export interface RegisterPromptResult {
 	userEmail: string;
 	viewCount: number;
 }
+
+export interface GetInteractionByPromptsResult {
+	interactions: InteractionByPrompt[]
+	email: string
+}
+
 
 export interface Tool {
 	code: string;

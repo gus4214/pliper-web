@@ -7,6 +7,30 @@ import {useAuthContext} from "@/src/hooks/context";
 import {GetNotificationsRequest, NotificationGroup} from "@/src/fetchers/notification";
 import NotificationSkeleton from "@/src/components/modules/notification/NotificationSkeleton";
 
+interface TabsProps {
+    tabValue: number;
+    handleChangeTab: (tab: number) => void
+}
+
+const AuthTabs: FC<TabsProps> = ({tabValue, handleChangeTab}) => {
+    return (
+        <Tabs value={tabValue} onChange={handleChangeTab} className='px-2'>
+            <Tabs.Tab value={0}>전체</Tabs.Tab>
+            <Tabs.Tab value={1}>My PLIP</Tabs.Tab>
+            <Tabs.Tab value={2}>공지 및 이벤트</Tabs.Tab>
+        </Tabs>
+    )
+}
+
+const NoAuthTabs: FC<TabsProps> = ({tabValue, handleChangeTab}) => {
+    return (
+        <Tabs value={tabValue} onChange={handleChangeTab} className='px-2'>
+            <Tabs.Tab value={0}>전체</Tabs.Tab>
+            <Tabs.Tab value={2}>공지 및 이벤트</Tabs.Tab>
+        </Tabs>
+    )
+}
+
 const categoryOfTab: Record<string, NotificationGroup | NotificationGroup[]> = {
     0: ["USER", "SYSTEM"],
     1: "USER",
@@ -32,7 +56,7 @@ const NotificationDropdown: FC = () => {
     }
 
     return (
-        <Dropdown vertical='bottom' end >
+        <Dropdown vertical='bottom' end>
             <Button size='sm' color='ghost' shape='circle'>
                 <NotificationIcon active/>
             </Button>
@@ -40,11 +64,8 @@ const NotificationDropdown: FC = () => {
                 <div className='w-[380px] h-9 px-6 py-2 justify-start items-center flex'>
                     <span className='text-black text-xl font-bold leading-tight'>알림 내역</span>
                 </div>
-                <Tabs value={tabValue} onChange={handleChangeTab} className='px-2'>
-                    <Tabs.Tab value={0}>전체</Tabs.Tab>
-                    {user ? <Tabs.Tab value={1}>My PLIP</Tabs.Tab> : <></>}
-                    <Tabs.Tab value={2}>공지 및 이벤트</Tabs.Tab>
-                </Tabs>
+                {user ? <AuthTabs  {...{tabValue, handleChangeTab}} /> :
+                    <NoAuthTabs {...{tabValue, handleChangeTab}} />}
                 <AsyncComponentBoundary pendingFallback={<NotificationSkeleton/>}>
                     <NotificationTabList condition={condition} onMore={handleMoreNotifications}/>
                 </AsyncComponentBoundary>
