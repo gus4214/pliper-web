@@ -9,7 +9,7 @@ import LabelWithFormElement from '@/src/components/modules/prompt/register/form/
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
 import { Category, Dept1 } from '@/src/fetchers/prompt/types';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Toggle } from 'react-daisyui';
+import { Button, Toggle } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
@@ -20,7 +20,7 @@ interface RegisterFormProps {
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const { data } = useGetPromptCategory();
 
-	const { control, watch, setValue, getValues } = formHandler;
+	const { control, watch, getValues } = formHandler;
 
 	const [selectedPersona, setSelectedPersona] = useState<'일상' | '업무'>('업무');
 	const personaType = watch('personaType');
