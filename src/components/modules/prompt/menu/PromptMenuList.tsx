@@ -91,13 +91,13 @@ const PromptMenuList = () => {
 				<div className='w-[140px] flex-col justify-start items-start gap-6 flex'>
 					<h1 className='text-center text-neutral-800 text-xs font-bold'>카테고리</h1>
 					<div className='border-l border-neutral-200 flex-col gap-2.5 flex'>
-						{currentCategories.map((category) => (
+						{currentCategories.map((category, i) => (
 							<div
 								css={[
 									tw`flex flex-col border-l gap-3`,
 									categoryOpen.includes(category.dept1.code) ? tw`border-teal-200` : tw`border-neutral-300`,
 								]}
-								key={category.dept1.code}
+								key={i}
 							>
 								<Button
 									aria-label={`카테고리 ${category.dept1.text} 선택`}
@@ -109,8 +109,8 @@ const PromptMenuList = () => {
 								</Button>
 								{categoryOpen.includes(category.dept1.text) && ( // 현재 열린 카테고리의 code와 비교합니다.
 									<div className='pl-6 pb-2 flex-col gap-4 flex'>
-										{category.dept2.map((category2) => (
-											<div className='items-center gap-2 flex' key={category2.code}>
+										{category.dept2.map((category2, i) => (
+											<div className='items-center gap-2 flex' key={i}>
 												<Checkbox
 													size='sm'
 													className='w-4 h-4 rounded'
@@ -131,8 +131,8 @@ const PromptMenuList = () => {
 			<div className='w-[140px] flex flex-col justify-start items-start gap-6'>
 				<h1 className='text-center text-neutral-800 text-xs font-bold'>플랫폼</h1>
 				<div className='pl-4 py-2 flex-col gap-4 flex border-l border-teal-200'>
-					{llmData?.tools.map((tool) => (
-						<div key={tool.code} className='items-center gap-2 flex'>
+					{llmData?.tools.map((tool, i) => (
+						<div key={i} className='items-center gap-2 flex'>
 							<Checkbox
 								size='sm'
 								className='w-4 h-4 rounded'

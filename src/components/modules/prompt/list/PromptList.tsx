@@ -4,16 +4,36 @@ import { searchFilterAtom } from '@/src/stores/searchForm';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { getInteractionByPromptsApi, useGetInteractionByPrompts } from '@/src/fetchers/prompt/my-prompt';
+import { useAuthContext } from '@/src/hooks/context';
+import { InteractionByPrompt } from '@/src/fetchers/prompt/types';
 
-const PromptList = () => {
+const PromptList: FC = () => {
+	const { user, loading } = useAuthContext();
 	const router = useRouter();
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(8);
 
 	const { title, category2Texts, promptSort, lmModel, personaTypes } = useAtomValue(searchFilterAtom);
 
-	const { data } = useGetPrompts({ page, limit, title, category2Texts, llmModel: lmModel, promptSort, personaTypes });
+	const { data, isFetching } = useGetPrompts({
+		page,
+		limit,
+		title,
+		category2Texts,
+		llmModel: lmModel,
+		promptSort,
+		personaTypes,
+	});
+
+	// 인터렉션 추출
+	const promptIds = data?.prompts.map((v) => v.promptId);
+	const { data: interactions } = useGetInteractionByPrompts({ promptIds: promptIds! }, { enabled: !!promptIds && !!user });
+	const mapOfPromptInteraction = interactions?.interactions.reduce((acc, curr) => {
+		acc.set(curr.promptId, curr);
+		return acc;
+	}, new Map<number, InteractionByPrompt>());
 
 	const renderEmptyState = () => {
 		// title이 있을 경우의 안내문구
@@ -51,6 +71,7 @@ const PromptList = () => {
 								viewCount={prompt.viewCount}
 								percents={prompt.percents}
 								onClick={() => router.push(`/prompt/${prompt.promptId}`)}
+								interaction={mapOfPromptInteraction?.get(prompt.promptId)}
 							/>
 						);
 					})}

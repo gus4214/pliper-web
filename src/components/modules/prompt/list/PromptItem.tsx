@@ -1,6 +1,13 @@
 import PlipNoneIcon from '@/src/components/atoms/icons/PlipNoneIcon';
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
 import React from 'react';
+import { InteractionByPrompt } from "@/src/fetchers/prompt/types";
+import PlipIcon from "@/src/components/atoms/icons/PlipIcon";
+
+interface InteractionProps {
+	IsLike: boolean;
+	IsPlip: boolean;
+}
 
 interface PromptItemProps {
 	personaType: string;
@@ -12,6 +19,7 @@ interface PromptItemProps {
 	percents: number;
 	title: string;
 	onClick?: () => void;
+	interaction?: InteractionByPrompt;
 }
 
 const PromptItem: React.FC<Partial<PromptItemProps>> = ({
@@ -24,6 +32,7 @@ const PromptItem: React.FC<Partial<PromptItemProps>> = ({
 	percents,
 	title,
 	onClick,
+	interaction,
 }) => {
 	return (
 		<div
@@ -44,11 +53,11 @@ const PromptItem: React.FC<Partial<PromptItemProps>> = ({
 							<span className='text-center text-neutral-400 text-[13px] font-normal'>{updateDateTime}</span>
 						</div>
 						<span className='text-lg font-medium'>{title}</span>
-						<LikeAndViewLabel likeCount={String(likeCount)} viewCount={String(viewCount)} percents={percents} />
+						<LikeAndViewLabel likeCount={String(likeCount)} viewCount={String(viewCount)} percents={percents} isLikeAuthUser={interaction?.isLike}/>
 					</div>
 				</div>
 				<div className='w-8 h-8 relative'>
-					<PlipNoneIcon />
+					{interaction?.isClip ? <PlipIcon /> : <PlipNoneIcon /> }
 				</div>
 			</div>
 		</div>

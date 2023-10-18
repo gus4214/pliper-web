@@ -4,8 +4,6 @@ import MainHotTopicContainer from '@/src/components/modules/main/mainHotTopic/Ma
 import MainVisualContainer from '@/src/components/modules/main/mainVisual/MainVisualContainer';
 import MainWorkPromptContainer from '@/src/components/modules/main/mainWorkPromptList/MainWorkPromptContainer';
 import { useGetCurationMain } from '@/src/fetchers/main';
-import { workCategoryAtom } from '@/src/stores/main';
-import { useAtomValue } from 'jotai';
 
 const MainTemplate = () => {
 	const { data } = useGetCurationMain({ dailyCategory: null, jobCategory: null });

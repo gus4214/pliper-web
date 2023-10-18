@@ -33,12 +33,12 @@ export interface GetInteractionByPromptsRequest {
 	promptIds: number[]
 }
 
-export  interface InteractionByPrompt {
+export interface InteractionByPrompt {
 	promptId: number;
 	isLike: boolean;
 	isClip: boolean;
 	isReliability: boolean;
-	reliability?: "UP" | "DOWN"
+	reliability?: 'UP' | 'DOWN';
 }
 
 // =======================================

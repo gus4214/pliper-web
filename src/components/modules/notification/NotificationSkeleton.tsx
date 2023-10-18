@@ -12,7 +12,12 @@ export const NotificationSkeleton = () => {
                     <Skeleton/>
                 </div>
             </div>
-
+            <div
+              className='w-[368px] p-4 bg-white rounded-lg border border-neutral-200 flex-col justify-center items-start gap-3 inline-flex cursor-pointer'>
+                <div className='justify-start items-center gap-2.5 inline-flex'>
+                    <Skeleton/>
+                </div>
+            </div>
         </div>
     </div>
 }

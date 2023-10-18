@@ -56,8 +56,8 @@ const NotificationDropdown: FC = () => {
     }
 
     return (
-        <Dropdown vertical='bottom' end>
-            <Button size='sm' color='ghost' shape='circle'>
+        <Dropdown vertical='bottom' end >
+            <Button size='sm' color='ghost' shape='circle'  >
                 <NotificationIcon active/>
             </Button>
             <Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg z-10 block'>
