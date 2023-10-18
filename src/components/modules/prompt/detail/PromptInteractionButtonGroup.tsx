@@ -2,109 +2,151 @@ import HandThumbsDownIcon from '@/src/components/atoms/icons/HandThumbsDownIcon'
 import HandThumbsUpIcon from '@/src/components/atoms/icons/HandThumbsUpIcon';
 import HeartIcon from '@/src/components/atoms/icons/HeartIcon';
 import PlipOutlineIcon from '@/src/components/atoms/icons/PlipOutlineIcon';
-import { Button } from 'react-daisyui';
+import {Button} from 'react-daisyui';
 import {
-	cancelClipPromptApi,
-	cancelLikePromptApi,
-	cancelReliabilityPromptApi,
-	clipPromptApi,
-	likePromptApi,
-	reliabilityPromptApi,
+    cancelClipPromptApi,
+    cancelLikePromptApi,
+    cancelReliabilityPromptApi,
+    clipPromptApi,
+    likePromptApi,
+    reliabilityPromptApi,
 } from '@/src/fetchers/prompt/Interaction';
-import { useEffect, useState } from 'react';
-import { getInteractionByPromptsApi } from '@/src/fetchers/prompt/my-prompt';
-import { useAuthContext } from '@/src/hooks/context';
+import {useEffect, useState} from 'react';
+import {getInteractionByPromptsApi} from '@/src/fetchers/prompt/my-prompt';
+import {useAuthContext} from '@/src/hooks/context';
+import {AnimatePresence, motion, useAnimation} from 'framer-motion';
+
 
 interface PromptInteractionButtonGroupProps {
-	promptId: number;
-	onCreateClick: () => void;
+    promptId: number;
+    onCreateClick: () => void;
 }
 
-const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> = ({ promptId, onCreateClick }) => {
-	const { user, loading } = useAuthContext();
-	const [like, setLike] = useState<boolean>(false);
-	const [plip, setPlip] = useState<boolean>(false);
-	const [reliability, setReliability] = useState<'UP' | 'DOWN' | undefined>();
+const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> = ({promptId, onCreateClick}) => {
+    const {user, loading} = useAuthContext();
+    const [like, setLike] = useState<boolean>(false);
+    const [plip, setPlip] = useState<boolean>(false);
+    const [reliability, setReliability] = useState<'UP' | 'DOWN' | undefined>();
 
-	useEffect(() => {
-		if (user) {
-			const data = getInteractionByPromptsApi({ promptIds: [promptId] });
-			data.then((result) => {
-				const interaction = result.interactions?.find((interaction) => interaction.promptId === promptId);
-				if (interaction) {
-					setLike(interaction.isLike);
-					setPlip(interaction.isClip);
-					interaction.isReliability && setReliability(interaction.reliability);
-				}
-			});
-		}
-	}, [promptId, user]);
+    useEffect(() => {
+        if (user) {
+            const data = getInteractionByPromptsApi({promptIds: [promptId]});
+            data.then((result) => {
+                const interaction = result.interactions?.find((interaction) => interaction.promptId === promptId);
+                if (interaction) {
+                    setLike(interaction.isLike);
+                    setPlip(interaction.isClip);
+                    interaction.isReliability && setReliability(interaction.reliability);
+                }
+            });
+        }
+    }, [promptId, user]);
 
-	const handlePlipPrompt = (clip?: boolean) => {
-		if (clip) {
-			clipPromptApi(promptId);
-		} else {
-			cancelClipPromptApi(promptId);
-		}
-		setPlip(!!clip);
-	};
+    const animations = useAnimation()
 
-	const handleLikePrompt = (like?: boolean) => {
-		if (like) {
-			likePromptApi(promptId);
-		} else {
-			cancelLikePromptApi(promptId);
-		}
-		setLike(!!like);
-	};
+    const variants = {
+        hidden: {
+            scale: 1.0,
+            opacity: 0,
+        },
+        init: {
+            scale: 1.0,
+            opacity: 1,
+        },
+        action: {
+            scale: 3.0,
+            opacity: 0,
+            transition: {
+                type: "spring",
+                stiffness: 200,
+                damping: 30
+            }
+        },
+    };
 
-	const handleReliabilityPrompt = (reliability?: 'UP' | 'DOWN') => {
-		const isActive = !!reliability
-		if (reliability) {
-			reliabilityPromptApi(promptId, reliability);
-			setReliability(reliability);
-		} else {
-			cancelReliabilityPromptApi(promptId);
-			setReliability(undefined);
-		}
-	};
+    const handlePlipPrompt = (clip?: boolean) => {
+        if (clip) {
+            animations.set("init")
+            animations.start("action")
+            clipPromptApi(promptId);
 
-	const isActiveReliabilityUp = reliability === 'UP'
-	const isActiveReliabilityDown = reliability === 'DOWN'
+        } else {
+            animations.set("hidden")
+            animations.stop()
+            cancelClipPromptApi(promptId);
+        }
+        setPlip(!!clip);
 
-	return (
-		<div className='w-full h-[72px] p-4 bg-sky-200 bg-opacity-10 rounded-lg justify-between items-center flex'>
-			<div className='justify-end items-center flex'>
-				<Button color='ghost' startIcon={<HeartIcon isLike={like} />} onClick={() => handleLikePrompt(!like)}>
-					<span className='text-neutral-400 text-sm font-normal whitespace-nowrap'>좋아요</span>
-				</Button>
-				<Button
-					color='ghost'
-					startIcon={<HandThumbsUpIcon isUp={reliability === 'UP'} />}
-					onClick={() => {
-						handleReliabilityPrompt(!isActiveReliabilityUp ? 'UP' : undefined);
-					}}
-				>
-					<span className='text-neutral-400 text-sm font-normal'>정확해요</span>
-				</Button>
-				<Button
-					color='ghost'
-					startIcon={<HandThumbsDownIcon isDown={reliability === 'DOWN'} />}
-					onClick={() => handleReliabilityPrompt(!isActiveReliabilityDown ? 'DOWN' : undefined)}
-				>
-					<span className='text-neutral-400 text-sm font-normal'>아쉬워요</span>
-				</Button>
-			</div>
-			<div className='flex gap-3'>
-				<div className={'hover:opacity-70 opacity-100 transition duration-300 ease-in-out'} onClick={() => handlePlipPrompt(!plip)}>
-					<PlipOutlineIcon isPlip={plip} />
-				</div>
-				<Button color='accent' onClick={onCreateClick} className='min-h-8 h-10'>
-					<span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
-				</Button>
-			</div>
-		</div>
-	);
+    };
+
+    const handleLikePrompt = (like?: boolean) => {
+        if (like) {
+            likePromptApi(promptId);
+        } else {
+            cancelLikePromptApi(promptId);
+        }
+        setLike(!!like);
+    };
+
+    const handleReliabilityPrompt = (reliability?: 'UP' | 'DOWN') => {
+        const isActive = !!reliability
+        if (reliability) {
+            reliabilityPromptApi(promptId, reliability);
+            setReliability(reliability);
+        } else {
+            cancelReliabilityPromptApi(promptId);
+            setReliability(undefined);
+        }
+    };
+
+    const isActiveReliabilityUp = reliability === 'UP'
+    const isActiveReliabilityDown = reliability === 'DOWN'
+
+
+    return (
+        <div className='w-full h-[72px] p-4 bg-sky-200 bg-opacity-10 rounded-lg justify-between items-center flex'>
+            <div className='justify-end items-center flex'>
+                <Button color='ghost' startIcon={<HeartIcon isLike={like}/>} onClick={() => handleLikePrompt(!like)}>
+                    <span className='text-neutral-400 text-sm font-normal whitespace-nowrap'>좋아요</span>
+                </Button>
+                <Button
+                    color='ghost'
+                    startIcon={<HandThumbsUpIcon isUp={reliability === 'UP'}/>}
+                    onClick={() => {
+                        handleReliabilityPrompt(!isActiveReliabilityUp ? 'UP' : undefined);
+                    }}
+                >
+                    <span className='text-neutral-400 text-sm font-normal'>정확해요</span>
+                </Button>
+                <Button
+                    color='ghost'
+                    startIcon={<HandThumbsDownIcon isDown={reliability === 'DOWN'}/>}
+                    onClick={() => handleReliabilityPrompt(!isActiveReliabilityDown ? 'DOWN' : undefined)}
+                >
+                    <span className='text-neutral-400 text-sm font-normal'>아쉬워요</span>
+                </Button>
+            </div>
+            <div className='flex gap-3'>
+                <div className={'hover:opacity-70 opacity-100 transition duration-300 ease-in-out'}
+                     onClick={() => handlePlipPrompt(!plip)}>
+                    <motion.div whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} transition={{
+                        type: "spring", stiffness: 400, damping: 10
+                    }}>
+                        <PlipOutlineIcon isPlip={plip}/>
+                    </motion.div>
+                </div>
+                <Button color='accent' onClick={onCreateClick} className='min-h-8 h-10'>
+                    <span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
+                </Button>
+            </div>
+            {/*애니메이션 */}
+            <div className={' fixed top-[50%] left-[50%]'}>
+                <motion.div layout variants={variants} initial={"hidden"} animate={animations} >
+                    <PlipOutlineIcon isPlip/>
+                </motion.div>
+            </div>
+        </div>
+    );
 };
 
 export default PromptInteractionButtonGroup;
