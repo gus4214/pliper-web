@@ -30,7 +30,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
 		if (user) {
 			const data = getInteractionByPromptsApi({ promptIds: [promptId] });
 			data.then((result) => {
-				const interaction = result.interactions.find((interaction) => interaction.promptId === promptId);
+				const interaction = result.interactions?.find((interaction) => interaction.promptId === promptId);
 				if (interaction) {
 					setLike(interaction.isLike);
 					setPlip(interaction.isClip);

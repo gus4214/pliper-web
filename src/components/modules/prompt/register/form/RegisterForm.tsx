@@ -20,13 +20,13 @@ interface RegisterFormProps {
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	const { data } = useGetPromptCategory();
 
-	const { control, watch, setValue } = formHandler;
+	const { control, watch, setValue, getValues } = formHandler;
 
 	const [selectedPersona, setSelectedPersona] = useState<'일상' | '업무'>('업무');
 	const personaType = watch('personaType');
 
 	// 카테고리 상태 및 로직
-	const [selectedDept1, setSelectedDept1] = useState<string | null>(null);
+	const [selectedDept1, setSelectedDept1] = useState<string | null>(getValues('category1Text'));
 	const [dept1Categories, setDept1Categories] = useState<Dept1[]>([]);
 
 	const dept1ChipOptions = dept1Categories.map((dept1) => ({
@@ -45,15 +45,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 	useEffect(() => {
 		const updateDept1Categories = (categories: Category[]) => {
 			setDept1Categories(categories.map((category) => category.dept1));
-			setValue('category1Text', '');
-			setValue('category2Text', '');
 		};
 
 		if (personaType === '일상') {
-			setSelectedDept1(null);
+			// setSelectedDept1(null);
 			updateDept1Categories(data?.dailyCategories || []);
 		} else if (personaType === '업무') {
-			setSelectedDept1(null);
+			// setSelectedDept1(null);
 			updateDept1Categories(data?.jobCategories || []);
 		}
 	}, [personaType, data]);
@@ -80,7 +78,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler }) => {
 							options={dept1ChipOptions || []}
 							color='secondary'
 							onChange={setSelectedDept1}
-							className='bg-white'
+							chipClassName='bg-white'
 						/>
 						{dept2Options.length > 0 && (
 							<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>

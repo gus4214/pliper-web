@@ -1,3 +1,4 @@
+import PlipNoneIcon from '@/src/components/atoms/icons/PlipNoneIcon';
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
 import React from 'react';
 
@@ -43,10 +44,12 @@ const PromptItem: React.FC<Partial<PromptItemProps>> = ({
 							<span className='text-center text-neutral-400 text-[13px] font-normal'>{updateDateTime}</span>
 						</div>
 						<span className='text-lg font-medium'>{title}</span>
-						<LikeAndViewLabel likeCount={String(likeCount)} viewCount={String(viewCount)} percent={percents} />
+						<LikeAndViewLabel likeCount={String(likeCount)} viewCount={String(viewCount)} percents={percents} />
 					</div>
 				</div>
-				<div className='w-8 h-8 relative' />
+				<div className='w-8 h-8 relative'>
+					<PlipNoneIcon />
+				</div>
 			</div>
 		</div>
 	);

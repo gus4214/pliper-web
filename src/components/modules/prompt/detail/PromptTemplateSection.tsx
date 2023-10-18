@@ -15,7 +15,7 @@ interface PromptTemplateSectionProps {
 const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ prompt: { parameters, template, promptId } }) => {
 	const formHandler = useForm<Record<string, string>>({
 		mode: 'onChange',
-		defaultValues: parameters.reduce(
+		defaultValues: parameters?.reduce(
 			(acc, parameter) => {
 				acc[parameter.title] = ''; // 각 parameter의 기본값을 빈 문자열로 설정
 				return acc;
@@ -46,7 +46,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ prompt: {
 				<div className='flex flex-col gap-4'>
 					<h1 className='pl-2 text-neutral-400 text-sm font-medium'>입력값</h1>
 					<div className='flex flex-col gap-2 w-[556px]'>
-						{parameters.map((parameter, i) => {
+						{parameters?.map((parameter, i) => {
 							let element; // 이 변수에 각 type에 따른 컴포넌트를 저장할 예정입니다.
 
 							switch (parameter.type) {

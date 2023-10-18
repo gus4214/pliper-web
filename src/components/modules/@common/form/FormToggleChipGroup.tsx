@@ -49,6 +49,7 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 									onChange && onChange(option.label);
 								}
 							}}
+							className={chipClassName}
 						/>
 					))}
 				</div>

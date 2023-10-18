@@ -11,6 +11,7 @@ interface PromptDetailInfoHeaderProps {
 	percents: number;
 	title: string;
 	userEmail: string;
+	llmModel: string;
 	updateDateTime: string;
 	description: string;
 }
@@ -24,6 +25,7 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 	viewCount,
 	percents,
 	userEmail,
+	llmModel,
 	updateDateTime,
 	description,
 }) => {
@@ -37,8 +39,9 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 								<PromptCategoryChip text={personaType} />
 								<PromptCategoryChip text={category1Text} color='light' />
 								<PromptCategoryChip text={category2Text} color='gray' />
+								<PromptCategoryChip text={llmModel} color='gray' />
 							</div>
-							<LikeAndViewLabel likeCount={String(likeCount)} viewCount={String(viewCount)} percent={percents} />
+							<LikeAndViewLabel likeCount={String(likeCount)} viewCount={String(viewCount)} percents={percents} />
 						</div>
 						<div className='flex-col justify-start items-start gap-2.5 flex'>
 							<h1 className='text-black text-xl font-bold'>{title}</h1>
@@ -51,7 +54,7 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 					</div>
 				</div>
 				<div className='flex flex-col justify-start pt-4 gap-12'>
-					<span className='text-black text-base font-normal'>{description}</span>
+					<span className='text-black text-base font-normal whitespace-break-spaces'>{description}</span>
 					<span className='text-neutral-400 text-[13px] font-normal'>#기획#카드뉴스#기획초안</span>
 				</div>
 			</div>

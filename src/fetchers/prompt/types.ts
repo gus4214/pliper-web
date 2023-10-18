@@ -8,7 +8,7 @@ export interface GetPromptsRequest extends IPageRequest {
 	category2Texts?: string[];
 	personaTypes?: string;
 	promptSort?: PromptSortType;
-	lmModel?: string[];
+	llmModel?: string[];
 	sort?: string;
 	title?: string;
 }

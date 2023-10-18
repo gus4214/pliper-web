@@ -11,9 +11,9 @@ interface PersonaToggleGroupProps {
 const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ formHandler, onChange }) => {
 	const { control, setValue } = formHandler;
 
-	useEffect(() => {
-		setValue('personaType', '업무');
-	}, []);
+	// useEffect(() => {
+	// 	setValue('personaType', '업무');
+	// }, []);
 
 	return (
 		<FormToggleChipCodeGroup
@@ -24,7 +24,7 @@ const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ formHandler, on
 				{ code: '일상', label: '☕️ 일상' },
 			]}
 			color='secondary'
-			className='bg-white'
+			chipClassName='bg-white'
 			onChange={onChange}
 		/>
 	);

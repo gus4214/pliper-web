@@ -1,14 +1,16 @@
+import { stringToArray } from '@/src/utils/conversionUtils';
 import { X } from 'heroicons-react';
 import React, { useState } from 'react';
 import { Button, Input } from 'react-daisyui';
 
 interface OptionInputComponentProps {
 	onValuesChange?: (values: string[]) => void;
+	typeValues: string;
 }
 
-const OptionInputComponent: React.FC<OptionInputComponentProps> = ({ onValuesChange }) => {
-	const [options, setOptions] = useState<string[]>(['옵션값1']); // 초기 상태를 ['옵션값1']로 변경합니다.
-	const [values, setValues] = useState<string[]>([]);
+const OptionInputComponent: React.FC<OptionInputComponentProps> = ({ onValuesChange, typeValues }) => {
+	const [options, setOptions] = useState<string[]>(stringToArray(typeValues) || ['옵션값1']);
+	const [values, setValues] = useState<string[]>(stringToArray(typeValues) || []);
 
 	const handleAddOption = () => {
 		if (options.length < 10) {
@@ -41,8 +43,8 @@ const OptionInputComponent: React.FC<OptionInputComponentProps> = ({ onValuesCha
 	};
 
 	return (
-		<div className=' bg-neutral-100 rounded justify-start items-center flex w-[442px]'>
-			<div className='w-[442px] flex gap-2 overflow-x-auto overflow-y-hidden'>
+		<div className=' bg-neutral-100 rounded justify-start items-center flex w-full'>
+			<div className='w-full flex gap-2 flex-wrap'>
 				{options.map((option, index) => (
 					<div className='relative w-[112px]' key={index}>
 						<Input
