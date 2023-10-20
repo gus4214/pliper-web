@@ -1,6 +1,6 @@
 import { useGetAiTools, useGetPromptCategory } from '@/src/fetchers/prompt';
 import { Category } from '@/src/fetchers/prompt/types';
-import { category1CodesAtom, category2CodesAtom, lmModelAtom, personaTypesAtom } from '@/src/stores/searchForm';
+import { category1CodesAtom, category2CodesAtom, llmModelAtom, personaTypesAtom } from '@/src/stores/searchForm';
 import { useAtom } from 'jotai';
 import { Button, Checkbox } from 'react-daisyui';
 import tw from 'twin.macro';
@@ -12,7 +12,7 @@ const PromptMenuList = () => {
 	const [personaType, setPersonaType] = useAtom(personaTypesAtom);
 	const [categoryOpen, setCategoryOpen] = useAtom(category1CodesAtom);
 	const [selectedCodes, setSelectedCodes] = useAtom(category2CodesAtom);
-	const [selectedModel, setSelectedModel] = useAtom(lmModelAtom);
+	const [selectedModel, setSelectedModel] = useAtom(llmModelAtom);
 
 	let currentCategories = [] as Category[];
 	if (personaType === '일상' && data) {
