@@ -2,6 +2,7 @@ import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncCompone
 import PromptListContainer from '@/src/components/modules/prompt/list/PromptListContainer';
 import PromptSelectChips from '@/src/components/modules/prompt/list/PromptSelectChips';
 import PromptMenuList from '@/src/components/modules/prompt/menu/PromptMenuList';
+import PromptMenuListContainer from '@/src/components/modules/prompt/menu/PromptMenuListContainer';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 
 const PromptTemplate = () => {
@@ -11,9 +12,7 @@ const PromptTemplate = () => {
 			<PromptSelectChips className='mt-6' />
 			<div className='mb-8' />
 			<div className='flex gap-10 justify-center'>
-				<AsyncComponentBoundary>
-					<PromptMenuList />
-				</AsyncComponentBoundary>
+				<PromptMenuListContainer />
 				<PromptListContainer />
 			</div>
 		</div>
