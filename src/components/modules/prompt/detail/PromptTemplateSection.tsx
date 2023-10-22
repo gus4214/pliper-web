@@ -2,17 +2,23 @@ import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
 import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail/PromptInteractionButtonGroup';
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
-import { Prompt } from '@/src/fetchers/prompt/types';
+import { Parameter, Prompt } from '@/src/fetchers/prompt/types';
 import { stringToArray } from '@/src/utils/conversionUtils';
 import React, { useState } from 'react';
-import { Select, Textarea } from 'react-daisyui';
+import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
 
 interface PromptTemplateSectionProps {
-	prompt: Prompt;
+	// prompt: Prompt;
+	parameters: Parameter[];
+	template: string;
+	promptId?: number;
+	preview?: boolean;
 }
 
-const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ prompt: { parameters, template, promptId } }) => {
+const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters, template, promptId, preview }) => {
+	const layoutWidth = preview ? 'w-[440px]' : 'w-[556px]';
+
 	const formHandler = useForm<Record<string, string>>({
 		mode: 'onChange',
 		defaultValues: parameters?.reduce(
@@ -41,11 +47,11 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ prompt: {
 	};
 
 	return (
-		<div className='flex flex-col gap-6'>
+		<div className='flex flex-col gap-6 items-center'>
 			<div className='flex gap-4 w-full'>
 				<div className='flex flex-col gap-4'>
 					<h1 className='pl-2 text-neutral-400 text-sm font-medium'>입력값</h1>
-					<div className='flex flex-col gap-2 w-[556px]'>
+					<div className={`flex flex-col gap-2 ${layoutWidth}`}>
 						{parameters?.map((parameter, i) => {
 							let element; // 이 변수에 각 type에 따른 컴포넌트를 저장할 예정입니다.
 
@@ -107,13 +113,29 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ prompt: {
 					<h1 className='pl-2 text-neutral-400 text-sm font-medium'>프롬프트</h1>
 					<Textarea
 						value={filledTemplate}
-						className='w-[556px] h-72 border-8 border-neutral-100'
+						className={`${layoutWidth} h-72 border-8 border-neutral-100`}
 						bordered={false}
 						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
 					/>
 				</div>
 			</div>
-			<PromptInteractionButtonGroup onCreateClick={createPrompt} promptId={promptId} />
+			{preview ? (
+				<div className='w-[225px] gap-3 flex'>
+					<Button variant='outline'>수정하기</Button>
+					<Button
+						variant='outline'
+						color='accent'
+						onClick={(e) => {
+							e.preventDefault();
+							createPrompt();
+						}}
+					>
+						프롬프트 생성하기
+					</Button>
+				</div>
+			) : (
+				<PromptInteractionButtonGroup onCreateClick={createPrompt} promptId={promptId!} />
+			)}
 		</div>
 	);
 };

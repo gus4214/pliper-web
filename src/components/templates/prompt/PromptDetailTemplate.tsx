@@ -14,8 +14,22 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ token }) =>
 
 	const { data } = useGetPrompt(query.id as string, token);
 
-	const { personaType, category1Text, category2Text, title, likeCount, viewCount, percents, llmModel, userEmail, updateDateTime, description } =
-		data!;
+	const {
+		parameters,
+		template,
+		promptId,
+		personaType,
+		category1Text,
+		category2Text,
+		title,
+		likeCount,
+		viewCount,
+		percents,
+		llmModel,
+		userEmail,
+		updateDateTime,
+		description,
+	} = data!;
 
 	return (
 		<div className='w-[1176px] px-6 flex flex-col items-center mx-auto pt-[57px] pb-[104px]'>
@@ -34,7 +48,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ token }) =>
 			/>
 			<div className='mt-12' />
 			<AsyncComponentBoundary>
-				<PromptTemplateSection prompt={data!} />
+				<PromptTemplateSection parameters={parameters} template={template} promptId={promptId} />
 			</AsyncComponentBoundary>
 		</div>
 	);
