@@ -21,8 +21,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 
 	const handleNaverLogin = async () => {
 		try {
-			// const result = await naverAuthApi(`${webHost}/api/auth/naver/callback`);
-			const result = await naverAuthApi('http://localhost:3000/api/auth/naver/callback');
+			const result = await naverAuthApi(`${webHost}/api/auth/naver/callback`);
 			window.location.href = result.url;
 		} catch (error) {
 			console.error('Error in NaverAuthApi:', error);

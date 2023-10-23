@@ -1,4 +1,5 @@
 import MyPageUserSummaryLoader from '@/src/components/modules/mypage/MyPageUserSummaryLoader';
+import InteractionSection from '@/src/components/modules/mypage/profile/interactionSection/InteractionSection';
 import ProfileSection from '@/src/components/modules/mypage/profile/profileSection/ProfileSection';
 import React from 'react';
 
@@ -10,6 +11,7 @@ const MyPageProfileTemplate = () => {
 					{/* 유저 정보 */}
 					<ProfileSection />
 					{/* 유저 히스토리, 좋아요, 정확도 탭 */}
+					<InteractionSection />
 				</div>
 			</div>
 		</MyPageUserSummaryLoader>
