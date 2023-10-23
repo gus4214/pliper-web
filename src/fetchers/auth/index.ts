@@ -1,5 +1,9 @@
+import { accessTokenKey } from '@/src/configs/auth';
 import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
+import { UserSummary } from '@/src/fetchers/auth/types';
+import { getCookie } from '@/src/utils/cookie';
+import { useQuery } from 'react-query';
 
 export interface OAuthResult {
 	url: string;
@@ -31,26 +35,12 @@ export const googleAuthApi = (callbackUrl: string) => {
 	});
 };
 
-// export const googleAuthCallbackApi = (code: string) => {
-// 	return callApi<{ code: string }, OAuthCallbackResult>({
-// 		api: apis.GOOGLE_AUTH_CALLBACK_API,
-// 		queryString: { code },
-// 	});
-// };
-
 export const naverAuthApi = (callbackUrl: string) => {
 	return callApi<{ callbackUrl: string }, OAuthResult>({
 		api: apis.NAVER_AUTH_API,
 		queryString: { callbackUrl },
 	});
 };
-
-// export const naverAuthCallbackApi = (code: string) => {
-// 	return callApi<{ code: string }, OAuthResult>({
-// 		api: apis.NAVER_AUTH_CALLBACK_API,
-// 		queryString: { code },
-// 	});
-// };
 
 export const profileApi = (token: string) => {
 	return callApi<never, LoginUser>({
@@ -64,5 +54,25 @@ export const registerUserApi = (data: RegisterUserRequest, token: string) => {
 		api: apis.REGISTER_API,
 		body: data,
 		token: token,
+	});
+};
+
+export const getUserSummaryApi = (token?: string) => {
+	return callApi<never, UserSummary>({
+		api: apis.GET_USER_SUMMARY,
+		token: token || getCookie(accessTokenKey),
+	});
+};
+
+const queryKeys = {
+	getUserSummary: () => ['user', 'summary'] as const,
+};
+
+export const useGetUserSummary = (token?: string, options?: object) => {
+	return useQuery(queryKeys.getUserSummary(), () => getUserSummaryApi(token), {
+		suspense: false,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+		...options,
 	});
 };

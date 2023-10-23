@@ -3,11 +3,11 @@ import { Avatar, Button } from 'react-daisyui';
 interface UserInfoHeaderProps {
 	nickname: string;
 	taste: string;
-	oauthEmail: string;
+	oauthType: string;
 	action: React.ReactNode;
 }
 
-const UserInfoHeader: React.FC<UserInfoHeaderProps> = ({ nickname, taste, oauthEmail, action }) => {
+const UserInfoHeader: React.FC<UserInfoHeaderProps> = ({ nickname, taste, oauthType, action }) => {
 	return (
 		<div className='w-[976px] h-[180px] justify-between items-start inline-flex'>
 			<div className='flex flex-col gap-4'>
@@ -21,15 +21,10 @@ const UserInfoHeader: React.FC<UserInfoHeaderProps> = ({ nickname, taste, oauthE
 							<span className='text-center text-white text-sm font-normal'>{taste}</span>
 						</div>
 					</div>
-					<span className='text-center text-neutral-400 text-sm font-normal'>{oauthEmail}</span>
+					<span className='text-center text-neutral-400 text-sm font-normal'>{oauthType}</span>
 				</div>
 			</div>
-			<div className='grow shrink basis-0 flex-col justify-start items-end flex'>
-				{/* <Button variant='outline' className='rounded border border-neutral-200 h-[34px] min-h-[34px]'>
-					<span className='text-center text-black text-sm font-normal'>프로필 관리</span>
-				</Button> */}
-				{action}
-			</div>
+			<div className='grow shrink basis-0 flex-col justify-start items-end flex'>{action}</div>
 		</div>
 	);
 };

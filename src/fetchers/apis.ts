@@ -20,6 +20,7 @@ export const apis: { [k: string]: ApiInfo } = {
 
 	// 유저정보
 	PROFILE_API: { uri: '/v1/user/profile', method: 'GET', description: 'JWT 기반 유저 정보 조회 요청 API' },
+	GET_USER_SUMMARY: { uri: '/v1/user/summary', method: 'GET', description: '유저 마이페이지 개요 조회 요청 API' },
 
 	// 프롬프트
 	GET_AI_TOOLS_API: { uri: '/v1/ai-tools', method: 'GET', description: 'AI 관련된 도구 리스트(LLM, 이미지생성) 조회' },
