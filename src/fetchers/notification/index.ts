@@ -21,6 +21,10 @@ export interface GetNotificationsResult {
 	first: boolean;
 }
 
+export interface GetNotificationCountResult {
+	total: number;
+}
+
 export interface NotificationItem {
 	notificationId: number;
 	group: NotificationGroup;
@@ -38,8 +42,24 @@ export const getNotifications = (input?: GetNotificationsRequest) => {
 	});
 };
 
+export const getNotificationCount = () => {
+	return callApi<never, GetNotificationCountResult>({
+		api: apis.GET_NOTIFICATION_COUNT_API,
+		token: getCookie(accessTokenKey),
+	});
+};
+
+
 export const useGetNotifications = (input?: GetNotificationsRequest) => {
 	return useQuery(['notification', 'list', input] as const, () => getNotifications(input), {
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
+};
+
+export const useGetNotificationCount = () => {
+	return useQuery(['notification', 'count'] as const, () => getNotificationCount(), {
 		suspense: true,
 		refetchOnReconnect: false,
 		refetchOnWindowFocus: false,
@@ -64,7 +84,11 @@ export const useInfiniteGetNotifications = (input?: GetNotificationsRequest) => 
 			getNextPageParam: (lastPage, pages) => {
 				// lastPage와 pages는 콜백함수에서 리턴한 값을 의미한다!!
 				// lastPage: 직전에 반환된 리턴값, pages: 여태 받아온 전체 페이지
-				if (!lastPage) return lastPage.currentPage + 1;
+
+				if (!lastPage.last) {
+					return lastPage.currentPage + 1;
+				}
+
 				// 마지막 페이지면 undefined가 리턴되어서 hasNextPage는 false가 됨!
 				return undefined;
 			},

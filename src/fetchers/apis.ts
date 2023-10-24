@@ -53,6 +53,7 @@ export const apis: { [k: string]: ApiInfo } = {
 	},
 
 	GET_NOTIFICATIONS_API: { uri: '/v1/notification', method: 'GET', description: '알림 내역 요청 API' },
+	GET_NOTIFICATION_COUNT_API: { uri: '/v1/notification-count', method: 'GET', description: '알림 개수 요청 API' },
 
 	// 마이 프롬프트
 	REGISTER_PROMPT_TEMPLATE: { uri: '/v1/my-prompt', method: 'POST', description: '프롬프트 템플릿 등록 API' },

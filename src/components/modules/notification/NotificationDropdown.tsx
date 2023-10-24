@@ -1,11 +1,16 @@
 import NotificationIcon from '@/src/components/atoms/icons/NotificationIcon';
 import React, {FC, useState} from 'react';
 import {Button, Dropdown, Tabs} from 'react-daisyui';
-import NotificationTabList from "@/src/components/modules/notification/NotificationTabList";
 import AsyncComponentBoundary from "@/src/components/atoms/suspense/AsyncComponentBoundary";
 import {useAuthContext} from "@/src/hooks/context";
 import {GetNotificationsRequest, NotificationGroup} from "@/src/fetchers/notification";
 import NotificationSkeleton from "@/src/components/modules/notification/NotificationSkeleton";
+import dynamic from "next/dynamic";
+import {useNotification} from "@/src/hooks/notification";
+
+const NotificationTabList = dynamic(() => import( "@/src/components/modules/notification/NotificationTabList"), {
+    ssr: false,
+})
 
 interface TabsProps {
     tabValue: number;
@@ -40,10 +45,13 @@ const categoryOfTab: Record<string, NotificationGroup | NotificationGroup[]> = {
 const itemMoreCount = 4
 
 const NotificationDropdown: FC = () => {
+    const [open, setOpen] = useState(false);
     const [tabValue, setTabValue] = useState(0);
     const [condition, setCondition] = useState<GetNotificationsRequest>({limit: itemMoreCount, page: 1});
 
+    const {active, showNotifications} = useNotification()
     const {user} = useAuthContext();
+
 
     const handleChangeTab = (tab: number) => {
         setTabValue(tab)
@@ -55,11 +63,14 @@ const NotificationDropdown: FC = () => {
         setCondition({...condition, limit: itemMoreCount + condition.limit!})
     }
 
+
     return (
-        <Dropdown vertical='bottom' end >
-            <Button size='sm' color='ghost' shape='circle'  >
-                <NotificationIcon active/>
-            </Button>
+        <Dropdown vertical='bottom' end>
+            <Dropdown.Toggle button={false}>
+                <Button size='sm' color='ghost' shape='circle' onClick={() => showNotifications()}>
+                    <NotificationIcon active={active}/>
+                </Button>
+            </Dropdown.Toggle>
             <Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg z-10 block'>
                 <div className='w-[380px] h-9 px-6 py-2 justify-start items-center flex'>
                     <span className='text-black text-xl font-bold leading-tight'>알림 내역</span>
@@ -74,4 +85,4 @@ const NotificationDropdown: FC = () => {
     );
 };
 
-export default React.memo(NotificationDropdown);
+export default NotificationDropdown;
