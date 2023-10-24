@@ -5,7 +5,7 @@ import { userAtom } from '@/src/stores/auth';
 import { LoginUser } from '@/src/fetchers/auth';
 
 export interface AuthenticationEvent {
-	nickName: string;
+	nickname: string;
 	accessToken: string;
 	refreshToken: string;
 	accessTokenExpiresIn: number;
@@ -18,7 +18,7 @@ export const saveUserAtom = atom(null, async (get, set, user: LoginUser | undefi
 
 export const saveTokenAndUserAtom = atom(null, async (_get, set, auth: AuthenticationEvent) => {
 	set(userAtom, {
-		nickName: auth.nickName,
+		nickname: auth.nickname,
 	});
 	saveAccessToken(auth.accessToken, auth.accessTokenExpiresIn);
 });

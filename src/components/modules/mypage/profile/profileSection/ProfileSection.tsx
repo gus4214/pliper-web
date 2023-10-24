@@ -9,9 +9,9 @@ const ProfileSection = () => {
 	return (
 		<div className='flex flex-col gap-8'>
 			<UserInfoHeader
-				nickname={user?.nickname!}
-				taste={user?.taste!}
-				oauthType={user?.oauthType!}
+				nickname={user?.nickname as string}
+				taste={user?.taste as string}
+				oauthType={user?.oauthType as string}
 				action={
 					<Button variant='outline' className='rounded border border-neutral-200 h-[34px] min-h-[34px]'>
 						<span className='text-center text-black text-sm font-normal'>프로필 관리</span>
