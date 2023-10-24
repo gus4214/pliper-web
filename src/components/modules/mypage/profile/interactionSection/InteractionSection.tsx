@@ -5,8 +5,6 @@ import { Tabs } from 'react-daisyui';
 const InteractionSection = () => {
 	const [tabValue, setTabValue] = useState(0);
 
-	const { data } = useGetMyPromptsByView({ page: 1, limit: 10 });
-
 	return (
 		<>
 			<div className='w-full flex justify-start'>
