@@ -53,6 +53,7 @@ export const apis: { [k: string]: ApiInfo } = {
 	},
 
 	GET_NOTIFICATIONS_API: { uri: '/v1/notification', method: 'GET', description: '알림 내역 요청 API' },
+	GET_NOTIFICATION_COUNT_API: { uri: '/v1/notification-count', method: 'GET', description: '알림 개수 요청 API' },
 
 	// 마이 클립
 	GET_MY_CLIPS: { uri: '/v1/clips', method: 'GET', description: '프롬프트 템플릿 클립 목록 요청 API' },

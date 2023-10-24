@@ -1,21 +1,17 @@
 import {atom} from 'jotai';
-import {getCookie} from "@/src/utils/cookie";
+import {getCookie, setCookie} from "@/src/utils/cookie";
 
-const NOTIFICATION_ID_KEY = "NOTI_ID"
+export const NOTIFICATION_ID_KEY = "cached_notification_tc"
 
 export const workCategoryAtom = atom<string | undefined>(undefined);
 export const dailyCategoryAtom = atom<string | undefined>(undefined);
 
 // 마지막으로 읽은 알림
-export const lastReadNotificationId = atom<number | undefined>(undefined);
+export const totalNotificationCountAtom = atom<number | undefined>(undefined);
 
-export const getLastNotificationViewId = atom(null, (get, set) => {
-    const notificationId = get(lastReadNotificationId);
-    if (notificationId) return notificationId;
-    const notificationIdByCookie = getCookie(NOTIFICATION_ID_KEY);
-    if (notificationIdByCookie) {
-        set(lastReadNotificationId, notificationId);
-        return notificationIdByCookie;
-    }
-    return null;
+export const setTotalNotificationCountAtom = atom(null, (get, set, count: number) => {
+    set(totalNotificationCountAtom, count);
+    setCookie(NOTIFICATION_ID_KEY, count, {
+        path: "/", maxAge: 365 * 60 * 60 * 24
+    });
 });
