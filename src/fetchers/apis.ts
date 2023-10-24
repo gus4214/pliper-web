@@ -54,6 +54,14 @@ export const apis: { [k: string]: ApiInfo } = {
 
 	GET_NOTIFICATIONS_API: { uri: '/v1/notification', method: 'GET', description: '알림 내역 요청 API' },
 
+	// 마이 클립
+	GET_MY_CLIPS: { uri: '/v1/clips', method: 'GET', description: '프롬프트 템플릿 클립 목록 요청 API' },
+
 	// 마이 프롬프트
 	REGISTER_PROMPT_TEMPLATE: { uri: '/v1/my-prompt', method: 'POST', description: '프롬프트 템플릿 등록 API' },
+	GET_MY_PROMPT: { uri: '/v1/my-prompt', method: 'GET', description: '내가 만든 프롬프트 템플릿 목록 요청 API' },
+	GET_MY_PROMPT_INTERACTION: { uri: '/v1/my-prompt/interaction', method: 'GET', description: '유저의 인터렉션 여부 조회 요청 API' },
+	GET_MY_PROMPT_LIKE: { uri: '/v1/my-prompt/like', method: 'GET', description: '내가 좋아요한 프롬프트 템플릿 목록 요청 API' },
+	GET_MY_PROMPT_RELIABILITY: { uri: '/v1/my-prompt/reliability', method: 'GET', description: '내가 정확도 UP한 프롬프트 템플릿 목록 요청 API' },
+	GET_MY_PROMPT_VIEW: { uri: '/v1/my-prompt/view', method: 'GET', description: '내가 조회한 프롬프트 템플릿 목록 요청 API' },
 };
