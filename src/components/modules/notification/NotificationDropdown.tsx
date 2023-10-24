@@ -41,7 +41,7 @@ const itemMoreCount = 4
 
 const NotificationDropdown: FC = () => {
     const [tabValue, setTabValue] = useState(0);
-    const [condition, setCondition] = useState<GetNotificationsRequest>({limit: itemMoreCount});
+    const [condition, setCondition] = useState<GetNotificationsRequest>({limit: itemMoreCount, page: 1});
 
     const {user} = useAuthContext();
 

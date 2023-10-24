@@ -1,49 +1,76 @@
-import {callApi} from '@/src/fetchers';
-import {apis} from '@/src/fetchers/apis';
-import {accessTokenKey} from '@/src/configs/auth';
-import {getCookie} from '@/src/utils/cookie';
-import {useQuery} from 'react-query';
-import {IPageRequest} from "@/src/fetchers/types";
+import { callApi } from '@/src/fetchers';
+import { apis } from '@/src/fetchers/apis';
+import { accessTokenKey } from '@/src/configs/auth';
+import { getCookie } from '@/src/utils/cookie';
+import { useInfiniteQuery, useQuery } from 'react-query';
+import { IPageRequest } from '@/src/fetchers/types';
 
-export type NotificationGroup = 'SYSTEM' | 'USER'
+export type NotificationGroup = 'SYSTEM' | 'USER';
 
-export type NotificationType = 'NOTIFICATION' | "EVENT" | "CLIP"
+export type NotificationType = 'NOTIFICATION' | 'EVENT' | 'CLIP';
 
 export interface GetNotificationsRequest extends IPageRequest {
-    groups?: NotificationGroup | NotificationGroup[];
+	groups?: NotificationGroup | NotificationGroup[];
 }
 
 export interface GetNotificationsResult {
-    notifications: NotificationItem[];
-    totalRows: number;
-    totalPages: number;
-    last: boolean;
-    first: boolean;
+	notifications: NotificationItem[];
+	totalRows: number;
+	totalPages: number;
+	last: boolean;
+	first: boolean;
 }
 
 export interface NotificationItem {
-    notificationId: number;
-    group: NotificationGroup;
-    type: NotificationType;
-    userEmail?: string
-    content: string
-    notificationDateTime: string
+	notificationId: number;
+	group: NotificationGroup;
+	type: NotificationType;
+	userEmail?: string;
+	content: string;
+	notificationDateTime: string;
 }
 
-
 export const getNotifications = (input?: GetNotificationsRequest) => {
-    return callApi<GetNotificationsRequest, GetNotificationsResult>({
-        api: apis.GET_NOTIFICATIONS_API,
-        queryString: input,
-        token: getCookie(accessTokenKey),
-    });
+	return callApi<GetNotificationsRequest, GetNotificationsResult>({
+		api: apis.GET_NOTIFICATIONS_API,
+		queryString: input,
+		token: getCookie(accessTokenKey),
+	});
 };
 
-
 export const useGetNotifications = (input?: GetNotificationsRequest) => {
-    return useQuery(['notification', 'list', input] as const, () => getNotifications(input), {
-        suspense: true,
-        refetchOnReconnect: false,
-        refetchOnWindowFocus: false,
-    });
+	return useQuery(['notification', 'list', input] as const, () => getNotifications(input), {
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
+};
+
+export const useInfiniteGetNotifications = (input?: GetNotificationsRequest) => {
+
+	const notifications = async ({ pageParam = 1 }) => {
+		const data = await getNotifications({ ...input, page: pageParam });
+
+		return {
+			...data,
+			currentPage: pageParam,
+		}
+	}
+
+	return useInfiniteQuery(
+		['notification', 'list', input] as const,
+		notifications,
+		{
+			getNextPageParam: (lastPage, pages) => {
+				// lastPage와 pages는 콜백함수에서 리턴한 값을 의미한다!!
+				// lastPage: 직전에 반환된 리턴값, pages: 여태 받아온 전체 페이지
+				if (!lastPage) return lastPage.currentPage + 1;
+				// 마지막 페이지면 undefined가 리턴되어서 hasNextPage는 false가 됨!
+				return undefined;
+			},
+			suspense: true,
+			refetchOnReconnect: false,
+			refetchOnWindowFocus: false,
+		}
+	);
 };
