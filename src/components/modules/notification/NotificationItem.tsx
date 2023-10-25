@@ -1,8 +1,10 @@
 import React from 'react';
-import {NotificationGroup} from "@/src/fetchers/notification";
+import {NotificationGroup, NotificationType} from "@/src/fetchers/notification";
+import {titleOfGroup, titleOfType} from "@/src/configs/notification";
 
 interface NotificationItemProps {
     group: NotificationGroup;
+    type: NotificationType;
     date: string;
     text: string;
     confirmed?: boolean;
@@ -24,7 +26,7 @@ export const NotificationEmptyItem = () => {
     </div>
 }
 
-const NotificationItem: React.FC<NotificationItemProps> = ({group, date, text, confirmed = false}) => {
+const NotificationItem: React.FC<NotificationItemProps> = ({group, type,  date, text, confirmed = false}) => {
     const dotColor = !confirmed ? 'bg-teal-400' : 'bg-neutral-300 ';
     const categoryColor = !confirmed ? 'text-black' : 'text-neutral-400';
     const textColor = !confirmed ? 'text-zinc-800' : 'text-neutral-400';
@@ -35,7 +37,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({group, date, text, c
                 className='p-4 bg-white rounded-lg border border-neutral-200 flex-col justify-center items-start gap-3 inline-flex cursor-pointer'>
                 <div className='self-stretch justify-start items-center gap-2 inline-flex'>
                     <div className={`w-1.5 h-1.5 ${dotColor} rounded-full`}/>
-                    <div className={`${categoryColor} text-[15px] font-semibold leading-[15px]`}>{group}</div>
+                    <div className={`${categoryColor} text-[15px] font-semibold leading-[15px]`}>{titleOfType[type] || titleOfGroup[group]}</div>
                     <div className='text-neutral-400 text-[13px] font-normal leading-[13px]'>{date}</div>
                 </div>
                 <div className='justify-start items-center gap-2.5 inline-flex'>

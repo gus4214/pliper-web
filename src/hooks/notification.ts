@@ -13,7 +13,6 @@ export const useNotification = () => {
     useEffect(() => {
         getNotificationCount().then((result) => {
             setLatestCount(result.total)
-            console.log(result.total, getCachedNotificationCount())
             setActive(result.total > getCachedNotificationCount())
         })
     }, [])

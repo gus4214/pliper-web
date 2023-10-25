@@ -3,10 +3,12 @@ import MainTemplate from '@/src/components/templates/MainTemplate';
 import { prefetchGetCurationMain } from '@/src/fetchers/main';
 import { GetServerSideProps } from 'next';
 import { QueryClient, dehydrate } from 'react-query';
+import {Seo} from "@/src/components/modules/@common/seo/Seo";
 
 export default function Home() {
 	return (
 		<>
+			<Seo  />
 			<MainTemplate />
 		</>
 	);

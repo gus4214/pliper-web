@@ -23,7 +23,7 @@ const NotificationTabList: FC<NotificationTabListProps> = ({condition, onMore}) 
                         <React.Fragment key={index}>
                             {!page?.notifications && <NotificationEmptyItem/>}
                             {page?.notifications?.map((item, i) => (
-                                <NotificationItem key={i} group={item.group} date={item.notificationDateTime}
+                                <NotificationItem key={i} group={item.group} type={item.type} date={item.notificationDateTime}
                                                   text={item.content}/>
                             ))}
                         </React.Fragment>
