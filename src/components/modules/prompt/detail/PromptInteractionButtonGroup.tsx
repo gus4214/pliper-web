@@ -14,7 +14,8 @@ import {
 import {useEffect, useState} from 'react';
 import {getInteractionByPromptsApi} from '@/src/fetchers/prompt/my-prompt';
 import {useAuthContext} from '@/src/hooks/context';
-import {AnimatePresence, motion, useAnimation} from 'framer-motion';
+import {motion} from 'framer-motion';
+import PlipAnimation, {usePlipAnimation} from "@/src/components/modules/prompt/animation/PlipAnimation";
 
 
 interface PromptInteractionButtonGroupProps {
@@ -27,6 +28,8 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
     const [like, setLike] = useState<boolean>(false);
     const [plip, setPlip] = useState<boolean>(false);
     const [reliability, setReliability] = useState<'UP' | 'DOWN' | undefined>();
+
+    const {active, disable, control} = usePlipAnimation();
 
     useEffect(() => {
         if (user) {
@@ -42,41 +45,16 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
         }
     }, [promptId, user]);
 
-    const animations = useAnimation()
-
-    const variants = {
-        hidden: {
-            scale: 1.0,
-            opacity: 0,
-        },
-        init: {
-            scale: 1.0,
-            opacity: 1,
-        },
-        action: {
-            scale: 3.0,
-            opacity: 0,
-            transition: {
-                type: "spring",
-                stiffness: 200,
-                damping: 30
-            }
-        },
-    };
-
     const handlePlipPrompt = (clip?: boolean) => {
         if (clip) {
-            animations.set("init")
-            animations.start("action")
+            active()
             clipPromptApi(promptId);
 
         } else {
-            animations.set("hidden")
-            animations.stop()
+            disable()
             cancelClipPromptApi(promptId);
         }
         setPlip(!!clip);
-
     };
 
     const handleLikePrompt = (like?: boolean) => {
@@ -101,7 +79,6 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
 
     const isActiveReliabilityUp = reliability === 'UP'
     const isActiveReliabilityDown = reliability === 'DOWN'
-
 
     return (
         <div className='w-full h-[72px] p-4 bg-sky-200 bg-opacity-10 rounded-lg justify-between items-center flex'>
@@ -139,12 +116,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
                     <span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
                 </Button>
             </div>
-            {/*애니메이션 */}
-            <div className={' fixed top-[50%] left-[50%]'}>
-                <motion.div layout variants={variants} initial={"hidden"} animate={animations} >
-                    <PlipOutlineIcon isPlip/>
-                </motion.div>
-            </div>
+            <PlipAnimation control={control}/>
         </div>
     );
 };

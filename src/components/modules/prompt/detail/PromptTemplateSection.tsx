@@ -4,7 +4,7 @@ import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
 import { Parameter, Prompt } from '@/src/fetchers/prompt/types';
 import { stringToArray } from '@/src/utils/conversionUtils';
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
 import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -17,7 +17,9 @@ interface PromptTemplateSectionProps {
 }
 
 const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters, template, promptId, preview }) => {
-	const layoutWidth = preview ? 'w-[440px]' : 'w-[556px]';
+
+	const [filledTemplate, setFilledTemplate] = useState('');
+	const ref = useRef<HTMLTextAreaElement | null>(null);
 
 	const formHandler = useForm<Record<string, string>>({
 		mode: 'onChange',
@@ -31,7 +33,9 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 	});
 
 	const { control, getValues } = formHandler;
-	const [filledTemplate, setFilledTemplate] = useState('');
+	const layoutWidth = preview ? 'w-[440px]' : 'w-[556px]';
+	const promptTitle = filledTemplate ? 'text-teal-400' : 'text-neutral-400';
+	const promptTextArea = filledTemplate ? 'border-teal-400' : 'border-neutral-100';
 
 	const createPrompt = () => {
 		let newTemplate = template;
@@ -43,7 +47,8 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 			newTemplate = newTemplate.replace(placeholder, value);
 		});
 
-		setFilledTemplate(newTemplate); // 채워진 템플릿을 상태에 업데이트
+		setFilledTemplate(newTemplate+""); // 채워진 템플릿을 상태에 업데이트
+		ref.current?.focus();
 	};
 
 	return (
@@ -110,10 +115,11 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 					</div>
 				</div>
 				<div className='flex flex-col gap-4'>
-					<h1 className='pl-2 text-neutral-400 text-sm font-medium'>프롬프트</h1>
+					<h1 className={`pl-2 ${promptTitle} text-sm font-medium`}>프롬프트</h1>
 					<Textarea
+						ref={ref}
 						value={filledTemplate}
-						className={`${layoutWidth} h-72 border-8 border-neutral-100`}
+						className={`${layoutWidth} h-72 border-8 ${promptTextArea}`}
 						bordered={false}
 						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
 					/>

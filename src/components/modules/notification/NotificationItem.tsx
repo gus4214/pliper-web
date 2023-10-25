@@ -1,6 +1,7 @@
 import React from 'react';
 import {NotificationGroup, NotificationType} from "@/src/fetchers/notification";
 import {titleOfGroup, titleOfType} from "@/src/configs/notification";
+import {formatDateToKorean} from "@/src/utils/dateUtils";
 
 interface NotificationItemProps {
     group: NotificationGroup;
@@ -38,7 +39,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({group, type,  date, 
                 <div className='self-stretch justify-start items-center gap-2 inline-flex'>
                     <div className={`w-1.5 h-1.5 ${dotColor} rounded-full`}/>
                     <div className={`${categoryColor} text-[15px] font-semibold leading-[15px]`}>{titleOfType[type] || titleOfGroup[group]}</div>
-                    <div className='text-neutral-400 text-[13px] font-normal leading-[13px]'>{date}</div>
+                    <div className='text-neutral-400 text-[13px] font-normal leading-[13px]'>{formatDateToKorean(date)}</div>
                 </div>
                 <div className='justify-start items-center gap-2.5 inline-flex'>
                     <div className={`${textColor} text-sm font-normal leading-[14px]`}>{text}</div>
