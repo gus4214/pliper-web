@@ -1,5 +1,6 @@
 import { useAuthContext } from '@/src/hooks/context';
 import { useLoginModal } from '@/src/hooks/modal';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Dropdown, Button, Divider, Avatar } from 'react-daisyui';
 
@@ -10,6 +11,7 @@ interface UserDropdownProps {
 
 const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) => {
 	const [open, close] = useLoginModal();
+	const router = useRouter();
 
 	return (
 		<>
@@ -21,8 +23,12 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) =
 						</Avatar>
 					</Button>
 					<Dropdown.Menu className='w-[130px] rounded-lg z-10'>
-						<Dropdown.Item className='p-3 justify-center'>개인 스페이스</Dropdown.Item>
-						<Dropdown.Item className='p-3 justify-center'> 플립 만들기</Dropdown.Item>
+						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/mypage/profile')}>
+							개인 스페이스
+						</Dropdown.Item>
+						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/prompt/register')}>
+							플립 만들기
+						</Dropdown.Item>
 						<Dropdown.Item className='p-3 justify-center'>My PLIP</Dropdown.Item>
 						<Divider className='m-0' />
 						<Dropdown.Item className='p-3 justify-center' onClick={handleLogout}>
