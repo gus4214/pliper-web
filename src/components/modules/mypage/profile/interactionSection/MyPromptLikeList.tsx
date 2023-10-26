@@ -4,11 +4,13 @@ import PromptItem from '@/src/components/modules/prompt/list/PromptItem';
 import { useInfiniteGetMyPromptsByLike } from '@/src/fetchers/prompt/my-prompt';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const MyPromptLikeList = () => {
 	const { data, fetchNextPage, isFetchingNextPage } = useInfiniteGetMyPromptsByLike({ page: 1, limit: 10 });
+	const router = useRouter();
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
 	const promptIds = data?.pages.flatMap((page) => page?.prompts.map((v) => v.promptId) || []);
@@ -43,6 +45,7 @@ const MyPromptLikeList = () => {
 							percents={prompt.percents}
 							layoutWidthClassName='w-[464px]'
 							titleWidthClassName='w-[276px]'
+							onClick={() => router.push(`/prompt/${prompt.promptId}`)}
 							interaction={getInteractionByPromptId(prompt.promptId)}
 						/>
 					))}

@@ -1,6 +1,7 @@
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import ListItem from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/ListItem';
 import { CreatedPrompt } from '@/src/fetchers/auth/types';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 interface MyPromptListProps {
@@ -8,6 +9,7 @@ interface MyPromptListProps {
 }
 
 const MyPromptList: React.FC<MyPromptListProps> = ({ createdPrompts }) => {
+	const router = useRouter();
 	// 배열의 마지막에서 3개의 요소만 추출
 	const lastThreePromptClips = createdPrompts.slice(-3);
 
@@ -20,6 +22,7 @@ const MyPromptList: React.FC<MyPromptListProps> = ({ createdPrompts }) => {
 			{lastThreePromptClips.map((promptClip) => (
 				<ListItem
 					key={promptClip.promptId}
+					onClick={() => router.push(`/prompt/${promptClip.promptId}`)}
 					icon={
 						<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
 							<path
