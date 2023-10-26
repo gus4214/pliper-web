@@ -1,14 +1,18 @@
-import ListItem from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/ListItem';
+import MyPlipList from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/MyPlipList';
 import MyPromptList from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/MyPromptList';
 import PlipAndMyPromptBox from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/PlipAndMyPromptBox';
-import PlipList from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/PlipList';
-import { Button } from 'react-daisyui';
+import { myPageUserSummaryAtom } from '@/src/stores/mypage';
+import { useAtomValue } from 'jotai';
 
 const PlipAndMyPrompt = () => {
+	const myPageUserSummary = useAtomValue(myPageUserSummaryAtom);
+
+	const { clipCount, createdPromptsCount, promptClips, createdPrompts } = myPageUserSummary!;
+
 	return (
 		<div className='w-full flex justify-between'>
-			<PlipAndMyPromptBox title='플립' count={22} list={<PlipList />} />
-			<PlipAndMyPromptBox title='내가 만든 프롬프트' count={5} list={<MyPromptList />} />
+			<PlipAndMyPromptBox title='플립' count={clipCount} list={<MyPlipList promptClips={promptClips} />} />
+			<PlipAndMyPromptBox title='내가 만든 프롬프트' count={createdPromptsCount} list={<MyPromptList createdPrompts={createdPrompts} />} />
 		</div>
 	);
 };

@@ -14,7 +14,7 @@ const PromptList: FC = () => {
 	const { user, loading } = useAuthContext();
 	const router = useRouter();
 	const [page, setPage] = useState<number>(1);
-	const [limit, setLimit] = useState<number>(8);
+	const [limit, setLimit] = useState<number>(10);
 
 	const { title, category2Texts, promptSort, llmModel, personaTypes } = useAtomValue(searchFilterAtom);
 

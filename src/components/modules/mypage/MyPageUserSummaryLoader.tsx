@@ -34,14 +34,14 @@ const MyPageUserSummaryLoader: React.FC<MyPageUserSummaryLoaderProps> = ({ child
 		});
 	}, [myPageUserSummary, isLoading]);
 
-	// if (isEmptyData) {
-	// 	router.push('/');
-	// 	return <FallbackSpinner />;
-	// }
+	if (isEmptyData) {
+		router.push('/');
+		return <FallbackSpinner />;
+	}
 
-	// if (!myPageUserSummary) {
-	// 	return <FallbackSpinner />;
-	// }
+	if (!myPageUserSummary) {
+		return <FallbackSpinner />;
+	}
 
 	return <>{children}</>;
 };
