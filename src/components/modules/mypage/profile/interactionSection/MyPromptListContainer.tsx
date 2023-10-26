@@ -9,7 +9,7 @@ const MyPromptListContainer: React.FC<MyPromptListContainerProps> = ({ list }) =
 	return (
 		<div className='w-full flex justify-center'>
 			<AsyncComponentBoundary>
-				<div className='flex gap-4 flex-wrap w-[944px]'>{list}</div>
+				<div className='flex flex-wrap gap-4 max-h-[584px] overflow-y-auto'>{list}</div>
 			</AsyncComponentBoundary>
 		</div>
 	);

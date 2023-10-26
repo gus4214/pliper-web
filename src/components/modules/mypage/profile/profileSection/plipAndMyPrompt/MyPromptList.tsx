@@ -1,3 +1,4 @@
+import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import ListItem from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/ListItem';
 import { CreatedPrompt } from '@/src/fetchers/auth/types';
 import React from 'react';
@@ -9,6 +10,10 @@ interface MyPromptListProps {
 const MyPromptList: React.FC<MyPromptListProps> = ({ createdPrompts }) => {
 	// 배열의 마지막에서 3개의 요소만 추출
 	const lastThreePromptClips = createdPrompts.slice(-3);
+
+	if (createdPrompts.length === 0) {
+		return <PromptEmptyText />;
+	}
 
 	return (
 		<div className='flex flex-col gap-2.5'>

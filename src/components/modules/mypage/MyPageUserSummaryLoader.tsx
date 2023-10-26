@@ -16,7 +16,7 @@ const MyPageUserSummaryLoader: React.FC<MyPageUserSummaryLoaderProps> = ({ child
 
 	const router = useRouter();
 	const storedAccessToken = getCookie(accessTokenKey);
-	const { data, isLoading } = useGetUserSummary(storedAccessToken, { enabled: myPageUserSummary === undefined });
+	const { data, isLoading, refetch } = useGetUserSummary(storedAccessToken, { enabled: myPageUserSummary === undefined });
 
 	const isEmptyData = JSON.stringify(data) === '{}';
 

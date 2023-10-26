@@ -120,3 +120,49 @@ export const useInfiniteGetMyPromptsByView = (input: GetPromptsRequest) => {
 		refetchOnWindowFocus: false,
 	});
 };
+
+export const useInfiniteGetMyPromptsByReliability = (input: GetPromptsRequest) => {
+	const myPromptsByReliability = async ({ pageParam = 1 }) => {
+		const data = await getMyPromptsByReliabilityApi({ ...input, page: pageParam });
+
+		return {
+			...data,
+			currentPage: pageParam,
+		};
+	};
+
+	return useInfiniteQuery(queryKeys.getMyPromptsByReliability(input), myPromptsByReliability, {
+		getNextPageParam: (lastPage, allPages) => {
+			if (lastPage.page !== lastPage.totalPages) {
+				return lastPage.currentPage + 1;
+			}
+			return undefined;
+		},
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
+};
+
+export const useInfiniteGetMyPromptsByLike = (input: GetPromptsRequest) => {
+	const myPromptsByLike = async ({ pageParam = 1 }) => {
+		const data = await getMyPromptsByLikeApi({ ...input, page: pageParam });
+
+		return {
+			...data,
+			currentPage: pageParam,
+		};
+	};
+
+	return useInfiniteQuery(queryKeys.getMyPromptsByLike(input), myPromptsByLike, {
+		getNextPageParam: (lastPage, allPages) => {
+			if (lastPage.page !== lastPage.totalPages) {
+				return lastPage.currentPage + 1;
+			}
+			return undefined;
+		},
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
+};

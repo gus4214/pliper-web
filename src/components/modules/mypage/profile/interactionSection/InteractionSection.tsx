@@ -19,7 +19,7 @@ const InteractionSection = () => {
 	const userSummary = useAtomValue(myPageUserSummaryAtom);
 
 	return (
-		<div className='w-[944px] flex flex-col gap-6'>
+		<div className='w-[964px] flex flex-col gap-6'>
 			<div className='w-full flex justify-start'>
 				<Tabs value={tabValue} onChange={setTabValue} variant='bordered'>
 					<Tabs.Tab value={0} className='h-[54px]'>
