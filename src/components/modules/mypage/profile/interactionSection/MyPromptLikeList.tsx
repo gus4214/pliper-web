@@ -1,6 +1,6 @@
 import Loading from '@/src/components/atoms/loading/Loading';
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
-import PromptItem from '@/src/components/modules/prompt/list/PromptItem';
+import PromptItemWithInteraction from '@/src/components/modules/@common/listItems/PromptItemWithInteraction';
 import { useInfiniteGetMyPromptsByLike } from '@/src/fetchers/prompt/my-prompt';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
@@ -33,7 +33,7 @@ const MyPromptLikeList = () => {
 				<React.Fragment key={index}>
 					{!page?.prompts && <PromptEmptyText />}
 					{page?.prompts.map((prompt) => (
-						<PromptItem
+						<PromptItemWithInteraction
 							key={prompt.promptId}
 							personaType={prompt.personaType}
 							category1Text={prompt.category1Text}

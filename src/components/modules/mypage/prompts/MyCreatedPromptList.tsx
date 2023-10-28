@@ -1,16 +1,28 @@
 import Loading from '@/src/components/atoms/loading/Loading';
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
-import PromptItemWithInteraction from '@/src/components/modules/@common/listItems/PromptItemWithInteraction';
-import { useInfiniteGetMyPromptsByReliability } from '@/src/fetchers/prompt/my-prompt';
+import PromptItemWithActions from '@/src/components/modules/@common/listItems/PromptItemWithActions';
+import { useInfiniteGetMyCreatedPrompts } from '@/src/fetchers/prompt/my-prompt';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
+import { searchFilterAtom } from '@/src/stores/searchForm';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
+import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const MyPromptReliabilityList = () => {
-	const { data, fetchNextPage, isFetchingNextPage } = useInfiniteGetMyPromptsByReliability({ page: 1, limit: 10 });
+const MyCreatedPromptList = () => {
 	const router = useRouter();
+
+	const { title, category2Texts, llmModel, personaTypes } = useAtomValue(searchFilterAtom);
+	const { data, fetchNextPage, isFetchingNextPage } = useInfiniteGetMyCreatedPrompts({
+		page: 1,
+		limit: 10,
+		title,
+		category2Texts,
+		llmModel,
+		personaTypes,
+	});
+	console.log('🚀 ~ file: MyCreatedPromptList.tsx:25 ~ MyCreatedPromptList ~ data:', data);
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
 	const promptIds = data?.pages.flatMap((page) => page?.prompts.map((v) => v.promptId) || []);
@@ -21,19 +33,35 @@ const MyPromptReliabilityList = () => {
 		threshold: 0.3,
 	});
 
+	const renderEmptyState = () => {
+		// title이 있을 경우의 안내문구
+		if (title) {
+			return (
+				<div className='flex justify-center my-[10px]'>
+					<span className='text-neutral-400 text-lg font-normal'>{`"${title}" 에 대한 검색결과가 없습니다.`}</span>
+				</div>
+			);
+		}
+		// title이 없을 경우의 안내문구
+		return <PromptEmptyText />;
+	};
+
 	useEffect(() => {
 		if (inView) {
 			fetchNextPage();
 		}
 	}, [inView]);
 
+	if (data?.pages[0]?.prompts.length === 0) {
+		return renderEmptyState();
+	}
+
 	return (
 		<>
 			{data?.pages.map((page, index) => (
 				<React.Fragment key={index}>
-					{!page?.prompts && <PromptEmptyText />}
 					{page?.prompts.map((prompt) => (
-						<PromptItemWithInteraction
+						<PromptItemWithActions
 							key={prompt.promptId}
 							personaType={prompt.personaType}
 							category1Text={prompt.category1Text}
@@ -43,10 +71,8 @@ const MyPromptReliabilityList = () => {
 							likeCount={prompt.likeCount}
 							viewCount={prompt.viewCount}
 							percents={prompt.percents}
-							layoutWidthClassName='w-[464px]'
-							titleWidthClassName='w-[276px]'
-							onClick={() => router.push(`/prompt/${prompt.promptId}`)}
 							interaction={getInteractionByPromptId(prompt.promptId)}
+							show={prompt.show}
 						/>
 					))}
 				</React.Fragment>
@@ -62,4 +88,4 @@ const MyPromptReliabilityList = () => {
 	);
 };
 
-export default MyPromptReliabilityList;
+export default MyCreatedPromptList;

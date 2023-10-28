@@ -2,6 +2,7 @@ import { useGetAiTools, useGetPromptCategory } from '@/src/fetchers/prompt';
 import { Category } from '@/src/fetchers/prompt/types';
 import { category1CodesAtom, category2CodesAtom, llmModelAtom, personaTypesAtom } from '@/src/stores/searchForm';
 import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 import { Button, Checkbox } from 'react-daisyui';
 import tw from 'twin.macro';
 
@@ -57,6 +58,10 @@ const PromptMenuList = () => {
 			setSelectedModel((prev) => [...prev, model]);
 		}
 	};
+
+	useEffect(() => {
+		return () => handleReset();
+	}, []);
 
 	return (
 		<div className='w-44 px-4 flex-col gap-8 flex'>

@@ -3,16 +3,28 @@ import MyPromptList from '@/src/components/modules/mypage/profile/profileSection
 import PlipAndMyPromptBox from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/PlipAndMyPromptBox';
 import { myPageUserSummaryAtom } from '@/src/stores/mypage';
 import { useAtomValue } from 'jotai';
+import { useRouter } from 'next/router';
 
 const PlipAndMyPrompt = () => {
 	const myPageUserSummary = useAtomValue(myPageUserSummaryAtom);
+	const router = useRouter();
 
 	const { clipCount, createdPromptsCount, promptClips, createdPrompts } = myPageUserSummary!;
 
 	return (
 		<div className='w-full flex justify-between'>
-			<PlipAndMyPromptBox title='플립' count={clipCount} list={<MyPlipList promptClips={promptClips} />} />
-			<PlipAndMyPromptBox title='내가 만든 프롬프트' count={createdPromptsCount} list={<MyPromptList createdPrompts={createdPrompts} />} />
+			<PlipAndMyPromptBox
+				title='플립'
+				count={clipCount}
+				list={<MyPlipList promptClips={promptClips} />}
+				onMoreButtonClick={() => router.push('/mypage/plip')}
+			/>
+			<PlipAndMyPromptBox
+				title='내가 만든 프롬프트'
+				count={createdPromptsCount}
+				list={<MyPromptList createdPrompts={createdPrompts} />}
+				onMoreButtonClick={() => router.push('/mypage/created-prompt')}
+			/>
 		</div>
 	);
 };

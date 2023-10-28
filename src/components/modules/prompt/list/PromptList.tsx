@@ -1,14 +1,14 @@
-import PromptItem from '@/src/components/modules/prompt/list/PromptItem';
+import PromptItemWithInteraction from '@/src/components/modules/@common/listItems/PromptItemWithInteraction';
 import { useGetPrompts } from '@/src/fetchers/prompt';
+import { useGetInteractionByPrompts } from '@/src/fetchers/prompt/my-prompt';
+import { InteractionByPrompt } from '@/src/fetchers/prompt/types';
+import { useAuthContext } from '@/src/hooks/context';
 import { searchFilterAtom } from '@/src/stores/searchForm';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
+import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useState } from 'react';
-import { getInteractionByPromptsApi, useGetInteractionByPrompts } from '@/src/fetchers/prompt/my-prompt';
-import { useAuthContext } from '@/src/hooks/context';
-import { InteractionByPrompt } from '@/src/fetchers/prompt/types';
-import { motion } from 'framer-motion';
+import { FC, useState } from 'react';
 
 const PromptList: FC = () => {
 	const { user, loading } = useAuthContext();
@@ -78,7 +78,7 @@ const PromptList: FC = () => {
 										show: { opacity: 1 },
 									}}
 								>
-									<PromptItem
+									<PromptItemWithInteraction
 										key={prompt.promptId}
 										personaType={prompt.personaType}
 										category1Text={prompt.category1Text}
