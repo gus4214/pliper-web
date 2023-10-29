@@ -1,6 +1,6 @@
 import PromptDetailInfoHeader from '@/src/components/modules/prompt/detail/PromptDetailInfoHeader';
 import PromptTemplateSection from '@/src/components/modules/prompt/detail/PromptTemplateSection';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
+import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { X } from 'heroicons-react';
 import { useAtomValue } from 'jotai';

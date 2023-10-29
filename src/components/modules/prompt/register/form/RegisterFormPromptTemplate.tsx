@@ -1,11 +1,10 @@
-import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
 import LabelWithTemplateFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithTemplateFormElement';
 import OptionInputComponent from '@/src/components/modules/prompt/register/form/elements/OptionInputComponent';
+import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { arrayToString } from '@/src/utils/conversionUtils';
 import { useAtom } from 'jotai';
-import React, { useState } from 'react';
+import React from 'react';
 import { Input, Select, Textarea } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
 

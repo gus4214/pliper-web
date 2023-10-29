@@ -1,6 +1,5 @@
 import FormToggleChipCodeGroup from '@/src/components/modules/@common/form/FormToggleChipCodeGroup';
-import { PromptRegisterFormData } from '@/src/components/modules/prompt/register/RegisterFormContainer';
-import { useEffect } from 'react';
+import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
 import { UseFormReturn } from 'react-hook-form';
 
 interface PersonaToggleGroupProps {
