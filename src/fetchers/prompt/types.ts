@@ -30,7 +30,7 @@ export interface RegisterPromptRequest {
 }
 
 export interface GetInteractionByPromptsRequest {
-	promptIds: number[]
+	promptIds: number[];
 }
 
 export interface InteractionByPrompt {
@@ -85,10 +85,9 @@ export interface RegisterPromptResult {
 }
 
 export interface GetInteractionByPromptsResult {
-	interactions: InteractionByPrompt[]
-	email: string
+	interactions: InteractionByPrompt[];
+	email: string;
 }
-
 
 export interface Tool {
 	code: string;
@@ -99,9 +98,7 @@ export interface Tool {
 }
 
 export interface Prompt {
-	category1Code: string;
 	category1Text: string;
-	category2Code: string;
 	category2Text: string;
 	createDateTime: string;
 	description: string;

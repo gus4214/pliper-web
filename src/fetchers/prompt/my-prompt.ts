@@ -3,14 +3,14 @@ import {
 	GetInteractionByPromptsResult,
 	GetPromptsRequest,
 	GetPromptsResult,
+	Prompt,
 	RegisterPromptRequest,
 } from '@/src/fetchers/prompt/types';
 import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
 import { getCookie } from '@/src/utils/cookie';
 import { accessTokenKey } from '@/src/configs/auth';
-import { useInfiniteQuery, useQuery } from 'react-query';
-import { UseQueryOptions } from 'react-query/types/react/types';
+import { QueryClient, useInfiniteQuery, useQuery } from 'react-query';
 
 export const getInteractionByPromptsApi = (input: GetInteractionByPromptsRequest) => {
 	return callApi<GetInteractionByPromptsRequest, GetInteractionByPromptsResult>({
@@ -61,12 +61,23 @@ export const updateMyPromptApi = (input: RegisterPromptRequest, promptId: number
 	});
 };
 
+// 상세
+
+export const getMyPromptApi = (promptId: string, token?: string) => {
+	return callApi<string, Prompt>({
+		api: apis.GET_MY_PROMPT_DETAIL,
+		slug: { promptId },
+		token: token,
+	});
+};
+
 const queryKeys = {
 	getPromptCategory: (input: GetInteractionByPromptsRequest) => ['my-prompt', 'inter', input] as const,
-	getMyCreatedPrompts: (input: GetPromptsRequest) => ['prompt', 'user', input] as const,
-	getMyPromptsByLike: (input: GetPromptsRequest) => ['prompt', 'user', 'like', input] as const,
-	getMyPromptsByReliability: (input: GetPromptsRequest) => ['prompt', 'user', 'reliability', input] as const,
-	getMyPromptsByView: (input: GetPromptsRequest) => ['prompt', 'user', 'view', input] as const,
+	getMyCreatedPrompts: (input: GetPromptsRequest) => ['my-prompt', 'user', input] as const,
+	getMyPromptsByLike: (input: GetPromptsRequest) => ['my-prompt', 'user', 'like', input] as const,
+	getMyPromptsByReliability: (input: GetPromptsRequest) => ['my-prompt', 'user', 'reliability', input] as const,
+	getMyPromptsByView: (input: GetPromptsRequest) => ['my-prompt', 'user', 'view', input] as const,
+	getMyPrompt: (promptId: string, token: string | undefined) => ['my-prompt', 'detail', promptId, token || null] as const,
 };
 
 export const useGetInteractionByPrompts = (input: GetInteractionByPromptsRequest, options?: object) => {
@@ -171,4 +182,19 @@ export const useInfiniteGetMyPromptsByLike = (input: GetPromptsRequest) => {
 		refetchOnReconnect: false,
 		refetchOnWindowFocus: false,
 	});
+};
+
+// 상세
+
+export const useGetMyPrompt = (promptId: string, token?: string) => {
+	return useQuery(queryKeys.getMyPrompt(promptId, token), () => getMyPromptApi(promptId, token), {
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
+};
+
+export const prefetchGetMyPrompt = (client: QueryClient, promptId: string, token?: string | null) => {
+	const accessToken = token || undefined;
+	return client.prefetchQuery(queryKeys.getMyPrompt(promptId, accessToken), () => getMyPromptApi(promptId, accessToken));
 };

@@ -1,5 +1,6 @@
 import ListTitleHeaderBox from '@/src/components/atoms/box/mypage/ListTitleHeaderBox';
 import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageButton';
+import MyPlipListContainer from '@/src/components/modules/mypage/plip/MyPlipListContainer';
 import PromptMenuListContainer from '@/src/components/modules/prompt/menu/PromptMenuListContainer';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 
@@ -15,6 +16,7 @@ const MyPagePlipTemplate = () => {
 					{/* 리스트 */}
 					<div className='flex flex-col gap-4'>
 						<SearchForm twStyle='w-[944px]' />
+						<MyPlipListContainer />
 					</div>
 				</div>
 			</div>
