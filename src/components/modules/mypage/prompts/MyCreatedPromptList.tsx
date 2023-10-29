@@ -1,5 +1,6 @@
 import Loading from '@/src/components/atoms/loading/Loading';
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
+import SearchTitleEmptyText from '@/src/components/atoms/text/SearchTitleEmptyText';
 import PromptItemWithActions from '@/src/components/modules/@common/listItems/PromptItemWithActions';
 import { useInfiniteGetMyCreatedPrompts } from '@/src/fetchers/prompt/my-prompt';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
@@ -22,7 +23,6 @@ const MyCreatedPromptList = () => {
 		llmModel,
 		personaTypes,
 	});
-	console.log('🚀 ~ file: MyCreatedPromptList.tsx:25 ~ MyCreatedPromptList ~ data:', data);
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
 	const promptIds = data?.pages.flatMap((page) => page?.prompts.map((v) => v.promptId) || []);
@@ -36,11 +36,7 @@ const MyCreatedPromptList = () => {
 	const renderEmptyState = () => {
 		// title이 있을 경우의 안내문구
 		if (title) {
-			return (
-				<div className='flex justify-center my-[10px]'>
-					<span className='text-neutral-400 text-lg font-normal'>{`"${title}" 에 대한 검색결과가 없습니다.`}</span>
-				</div>
-			);
+			return <SearchTitleEmptyText title={title} />;
 		}
 		// title이 없을 경우의 안내문구
 		return <PromptEmptyText />;
@@ -72,6 +68,8 @@ const MyCreatedPromptList = () => {
 							viewCount={prompt.viewCount}
 							percents={prompt.percents}
 							interaction={getInteractionByPromptId(prompt.promptId)}
+							onClick={() => router.push(`/prompt/${prompt.promptId}`)}
+							onEditClick={() => router.push(`/mypage/created-prompt/${prompt.promptId}`)}
 							show={prompt.show}
 						/>
 					))}

@@ -64,4 +64,7 @@ export const apis: { [k: string]: ApiInfo } = {
 	GET_MY_PROMPT_LIKE: { uri: '/v1/my-prompt/like', method: 'GET', description: '내가 좋아요한 프롬프트 템플릿 목록 요청 API' },
 	GET_MY_PROMPT_RELIABILITY: { uri: '/v1/my-prompt/reliability', method: 'GET', description: '내가 정확도 UP한 프롬프트 템플릿 목록 요청 API' },
 	GET_MY_PROMPT_VIEW: { uri: '/v1/my-prompt/view', method: 'GET', description: '내가 조회한 프롬프트 템플릿 목록 요청 API' },
+	GET_MY_PROMPT_DETAIL: { uri: '/v1/my-prompt/{promptId}', method: 'GET', description: '내가 생성한 프롬프트 템플릿 상세 요청 API' },
+	UPDATE_MY_PROMPT: { uri: '/v1/my-prompt/{promptId}', method: 'PUT', description: '내가 생성한 프롬프트 템플릿 수정 요청 API' },
+	DELETE_MY_PROMPT: { uri: '/v1/my-prompt/{promptId}', method: 'DELETE', description: '내가 생성한 프롬프트 템플릿 삭제 요청 API' },
 };

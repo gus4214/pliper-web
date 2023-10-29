@@ -36,7 +36,7 @@ const PromptItem: React.FC<PromptItemProps> = ({
 	return (
 		<div
 			className={`${layoutWidthClassName} pl-4 pr-6 py-4 bg-white bg-opacity-5 rounded-2xl border border-neutral-200 hover:shadow  hover:border-teal-200 justify-start items-center gap-4 flex cursor-pointer`}
-			onClick={onClick}
+			onClick={onClick && onClick}
 		>
 			<div className='w-20 py-1.5 bg-white rounded flex-col justify-center items-center gap-2 flex'>
 				<span className='text-center text-neutral-400 text-[13px] font-semibold'>{personaType}</span>

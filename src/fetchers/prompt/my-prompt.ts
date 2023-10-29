@@ -1,4 +1,10 @@
-import { GetInteractionByPromptsRequest, GetInteractionByPromptsResult, GetPromptsRequest, GetPromptsResult } from '@/src/fetchers/prompt/types';
+import {
+	GetInteractionByPromptsRequest,
+	GetInteractionByPromptsResult,
+	GetPromptsRequest,
+	GetPromptsResult,
+	RegisterPromptRequest,
+} from '@/src/fetchers/prompt/types';
 import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
 import { getCookie } from '@/src/utils/cookie';
@@ -42,6 +48,15 @@ export const getMyPromptsByViewApi = (input: GetPromptsRequest) => {
 	return callApi<GetPromptsRequest, GetPromptsResult>({
 		api: apis.GET_MY_PROMPT_VIEW,
 		queryString: input,
+		token: getCookie(accessTokenKey),
+	});
+};
+
+export const updateMyPromptApi = (input: RegisterPromptRequest, promptId: number) => {
+	return callApi<RegisterPromptRequest, GetPromptsResult>({
+		api: apis.UPDATE_MY_PROMPT,
+		slug: { promptId },
+		body: input,
 		token: getCookie(accessTokenKey),
 	});
 };
