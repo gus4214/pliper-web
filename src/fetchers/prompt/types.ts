@@ -81,6 +81,7 @@ export interface RegisterPromptResult {
 	title: string;
 	updateDateTime: string;
 	userEmail: string;
+	userNickname: string;
 	viewCount: number;
 }
 
@@ -115,6 +116,7 @@ export interface Prompt {
 	title: string;
 	updateDateTime: string;
 	userEmail: string;
+	userNickname: string;
 	viewCount: number;
 }
 

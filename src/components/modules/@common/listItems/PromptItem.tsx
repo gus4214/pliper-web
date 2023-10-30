@@ -6,6 +6,7 @@ export interface PromptItemProps {
 	personaType: string;
 	category1Text: string;
 	userEmail: string;
+	userNickname: string;
 	updateDateTime: string;
 	likeCount: number;
 	viewCount: number;
@@ -22,6 +23,7 @@ const PromptItem: React.FC<PromptItemProps> = ({
 	personaType,
 	category1Text,
 	userEmail,
+	userNickname,
 	updateDateTime,
 	likeCount,
 	viewCount,
@@ -47,7 +49,7 @@ const PromptItem: React.FC<PromptItemProps> = ({
 				<div className='justify-start items-center gap-4 flex'>
 					<div className='flex-col justify-start items-start gap-4 flex'>
 						<div className='items-center gap-2 flex'>
-							<span className='text-center text-neutral-400 text-[13px] font-normal'>{userEmail}</span>
+							<span className='text-center text-neutral-400 text-[13px] font-normal'>{userNickname}</span>
 							<div className='w-1 h-1 bg-neutral-200 rounded-full' />
 							<span className='text-center text-neutral-400 text-[13px] font-normal'>{updateDateTime}</span>
 						</div>

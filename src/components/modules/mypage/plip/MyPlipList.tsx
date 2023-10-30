@@ -70,6 +70,7 @@ const MyPlipList = () => {
 							personaType={prompt.personaType}
 							category1Text={prompt.category1Text}
 							userEmail={prompt.userEmail}
+							userNickname={prompt.userNickname}
 							updateDateTime={formatDateToKorean(prompt.updateDateTime)}
 							title={prompt.title}
 							likeCount={prompt.likeCount}

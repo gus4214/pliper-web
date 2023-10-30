@@ -25,6 +25,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({prompt}) => 
         percents,
         llmModel,
         userEmail,
+        userNickname,
         updateDateTime,
         description,
     } = prompt;
@@ -42,6 +43,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({prompt}) => 
                     percents={percents}
                     llmModel={llmModel}
                     userEmail={userEmail}
+                    userNickname={userNickname}
                     updateDateTime={updateDateTime}
                     description={description}
                 />

@@ -11,6 +11,7 @@ interface PromptDetailInfoHeaderProps {
 	percents?: number;
 	title: string;
 	userEmail?: string;
+	userNickname?: string;
 	llmModel: string;
 	updateDateTime?: string;
 	description: string;
@@ -26,6 +27,7 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 	viewCount,
 	percents,
 	userEmail,
+	userNickname,
 	llmModel,
 	updateDateTime,
 	description,
@@ -51,7 +53,7 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 							<h1 className='text-black text-xl font-bold'>{title}</h1>
 							{!preview && (
 								<div className='justify-start items-center gap-2 flex'>
-									<span className='text-center text-neutral-400 text-[13px] font-normal'>{userEmail}</span>
+									<span className='text-center text-neutral-400 text-[13px] font-normal'>{userNickname}</span>
 									<div className='w-1 h-1 bg-neutral-200 rounded-full' />
 									<span className='text-center text-neutral-400 text-[13px] font-normal'>
 										{formatDateToKorean(updateDateTime!)}
