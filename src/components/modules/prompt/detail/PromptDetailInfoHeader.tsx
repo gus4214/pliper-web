@@ -63,9 +63,8 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 						</div>
 					</div>
 				</div>
-				<div className='flex flex-col justify-start pt-4 gap-12'>
+				<div className='flex flex-col justify-start pt-4 pb-12'>
 					<span className='text-black text-base font-normal whitespace-break-spaces'>{description}</span>
-					<span className='text-neutral-400 text-[13px] font-normal'>#기획#기획초안</span>
 				</div>
 			</div>
 		</div>

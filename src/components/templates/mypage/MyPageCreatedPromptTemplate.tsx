@@ -1,6 +1,6 @@
 import ListTitleHeaderBox from '@/src/components/atoms/box/mypage/ListTitleHeaderBox';
 import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageButton';
-import MyCreatedPromptListContainer from '@/src/components/modules/mypage/prompts/MyCreatedPromptListContainer';
+import MyCreatedPromptListContainer from '@/src/components/modules/mypage/created-prompt/MyCreatedPromptListContainer';
 import PromptMenuListContainer from '@/src/components/modules/prompt/menu/PromptMenuListContainer';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 

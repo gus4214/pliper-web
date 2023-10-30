@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface TrashOutlineIconProps {
-	onClick?: () => void;
+	onClick?: (event: React.MouseEvent<SVGSVGElement>) => void;
 }
 
 const TrashOutlineIcon: React.FC<TrashOutlineIconProps> = ({ onClick }) => {

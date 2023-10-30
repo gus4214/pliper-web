@@ -5,7 +5,6 @@ import React from 'react';
 export interface PromptItemProps {
 	personaType: string;
 	category1Text: string;
-	userEmail: string;
 	userNickname: string;
 	updateDateTime: string;
 	likeCount: number;
@@ -22,7 +21,6 @@ export interface PromptItemProps {
 const PromptItem: React.FC<PromptItemProps> = ({
 	personaType,
 	category1Text,
-	userEmail,
 	userNickname,
 	updateDateTime,
 	likeCount,

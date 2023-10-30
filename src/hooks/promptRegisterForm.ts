@@ -1,4 +1,6 @@
+import { updateMyPromptApi } from './../fetchers/prompt/my-prompt';
 import { registerPromptApi } from '@/src/fetchers/prompt';
+import { Prompt } from '@/src/fetchers/prompt/types';
 import { useConfirmModal } from '@/src/hooks/modal';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { useAtom } from 'jotai';
@@ -16,17 +18,18 @@ export interface PromptRegisterFormData {
 	show: boolean;
 }
 
-const usePromptRegisterForm = () => {
+const usePromptRegisterForm = (data?: Prompt) => {
+	const promptId = data?.promptId;
 	const formHandler = useForm<PromptRegisterFormData>({
 		mode: 'onChange',
 		defaultValues: {
-			category1Text: '',
-			category2Text: '',
-			description: '',
-			llmModel: '',
-			personaType: '업무',
-			show: true,
-			title: '',
+			category1Text: data?.category1Text || '',
+			category2Text: data?.category2Text || '',
+			description: data?.description || '',
+			llmModel: data?.llmModel || '',
+			personaType: data?.personaType || '업무',
+			show: data?.show || true,
+			title: data?.title || '',
 		},
 	});
 	const { handleSubmit, getValues } = formHandler;
@@ -36,7 +39,7 @@ const usePromptRegisterForm = () => {
 	const [parameters, setParameters] = useAtom(parametersAtom);
 	const [template, setTemplate] = useAtom(templateValueAtom);
 
-	const onSubmit = async (data: PromptRegisterFormData) => {
+	const onRegisterSubmit = async (data: PromptRegisterFormData) => {
 		open({
 			title: '프롬프트 템플릿 생성하시겠어요?',
 			description: '작성하신 내용으로 템플릿이 생성됩니다.',
@@ -47,6 +50,22 @@ const usePromptRegisterForm = () => {
 					close();
 				} catch (error) {
 					console.error('Error in RegisterPromptApi:', error);
+				}
+			},
+		});
+	};
+
+	const onUpdateSubmit = async (data: PromptRegisterFormData) => {
+		open({
+			title: '프롬프트 템플릿의 내용을 수정하시겠어요?',
+			description: '작성하신 내용으로 템플릿이 수정됩니다.',
+			onConfirm: async () => {
+				try {
+					const result = await updateMyPromptApi({ ...data, template, parameters }, promptId!);
+					router.push(`/prompt/${result.promptId}`);
+					close();
+				} catch (error) {
+					console.error('Error in updateMyPromptApi:', error);
 				}
 			},
 		});
@@ -74,10 +93,17 @@ const usePromptRegisterForm = () => {
 			formHandler.reset(temporaryData.formValues);
 			setTemplate(temporaryData.template);
 			setParameters(temporaryData.parameters);
+			return;
+		}
+
+		if (data) {
+			setTemplate(data.template);
+			setParameters(data.parameters);
+			return;
 		}
 	}, []);
 
-	const onCancelButtonClick = () => {
+	const handleSaveTemporarily = () => {
 		open({
 			title: '템플릿을 임시저장 하시겠어요?',
 			description: '작성하신 내용의 템플릿을 임시저장 합니다.',
@@ -94,8 +120,9 @@ const usePromptRegisterForm = () => {
 
 	return {
 		formHandler,
-		onSubmit: handleSubmit(onSubmit),
-		onCancelButtonClick,
+		onRegisterSubmit: handleSubmit(onRegisterSubmit),
+		onUpdateSubmit: handleSubmit(onUpdateSubmit),
+		handleSaveTemporarily,
 	};
 };
 

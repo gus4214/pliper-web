@@ -29,7 +29,9 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) =
 						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/prompt/register')}>
 							플립 만들기
 						</Dropdown.Item>
-						<Dropdown.Item className='p-3 justify-center'>My PLIP</Dropdown.Item>
+						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/mypage/plip')}>
+							My PLIP
+						</Dropdown.Item>
 						<Divider className='m-0' />
 						<Dropdown.Item className='p-3 justify-center' onClick={handleLogout}>
 							로그아웃

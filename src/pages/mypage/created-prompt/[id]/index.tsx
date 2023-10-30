@@ -1,3 +1,4 @@
+import MyPageCreatedPromptDetailTemplate from '@/src/components/templates/mypage/MyPageCreatedPromptDetailTemplate';
 import RegisterTemplate from '@/src/components/templates/prompt/RegisterTemplate';
 import { accessTokenKey } from '@/src/configs/auth';
 import { prefetchGetMyPrompt, useGetMyPrompt } from '@/src/fetchers/prompt/my-prompt';
@@ -13,7 +14,7 @@ const MyCreatedPromptDetailPage: NextPage<MyCreatedPromptDetailPageProps> = ({ t
 	const { query } = useRouter();
 	const { data } = useGetMyPrompt(query.id as string, token);
 
-	return <RegisterTemplate />;
+	return <MyPageCreatedPromptDetailTemplate data={data!} />;
 };
 
 export default MyCreatedPromptDetailPage;

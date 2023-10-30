@@ -5,6 +5,7 @@ import {
 	GetPromptsResult,
 	Prompt,
 	RegisterPromptRequest,
+	RegisterPromptResult,
 } from '@/src/fetchers/prompt/types';
 import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
@@ -52,11 +53,19 @@ export const getMyPromptsByViewApi = (input: GetPromptsRequest) => {
 	});
 };
 
-export const updateMyPromptApi = (input: RegisterPromptRequest, promptId: number) => {
-	return callApi<RegisterPromptRequest, GetPromptsResult>({
+export const updateMyPromptApi = (input: Partial<RegisterPromptRequest>, promptId: number) => {
+	return callApi<Partial<RegisterPromptRequest>, RegisterPromptResult>({
 		api: apis.UPDATE_MY_PROMPT,
 		slug: { promptId },
 		body: input,
+		token: getCookie(accessTokenKey),
+	});
+};
+
+export const deleteMyPromptApi = (promptId: number) => {
+	return callApi<number, RegisterPromptResult>({
+		api: apis.DELETE_MY_PROMPT,
+		slug: { promptId },
 		token: getCookie(accessTokenKey),
 	});
 };

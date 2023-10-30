@@ -2,7 +2,8 @@ import Loading from '@/src/components/atoms/loading/Loading';
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import SearchTitleEmptyText from '@/src/components/atoms/text/SearchTitleEmptyText';
 import PromptItemWithActions from '@/src/components/modules/@common/listItems/PromptItemWithActions';
-import { useInfiniteGetMyCreatedPrompts } from '@/src/fetchers/prompt/my-prompt';
+import { deleteMyPromptApi, updateMyPromptApi, useInfiniteGetMyCreatedPrompts } from '@/src/fetchers/prompt/my-prompt';
+import { useConfirmModal } from '@/src/hooks/modal';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
 import { searchFilterAtom } from '@/src/stores/searchForm';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
@@ -13,9 +14,10 @@ import { useInView } from 'react-intersection-observer';
 
 const MyCreatedPromptList = () => {
 	const router = useRouter();
+	const [open, close] = useConfirmModal();
 
 	const { title, category2Texts, llmModel, personaTypes } = useAtomValue(searchFilterAtom);
-	const { data, fetchNextPage, isFetchingNextPage } = useInfiniteGetMyCreatedPrompts({
+	const { data, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteGetMyCreatedPrompts({
 		page: 1,
 		limit: 10,
 		title,
@@ -32,6 +34,62 @@ const MyCreatedPromptList = () => {
 		/* Optional options */
 		threshold: 0.3,
 	});
+
+	const handlePromptItemClick = (id: number, show: boolean) => {
+		if (show) {
+			router.push(`/mypage/created-prompt/${id}`);
+		} else {
+			handlePromptShowToggle(id, show);
+		}
+	};
+
+	const handleDeletePrompt = async (id: number) => {
+		open({
+			title: '프롬프트를 삭제 하시겠어요?',
+			description: '삭제된 프롬프트는 복구가 불가능합니다.',
+			onConfirm: async () => {
+				try {
+					const result = await deleteMyPromptApi(id);
+					refetch();
+					close();
+				} catch (error) {
+					console.error('Error in DeletePromptApi:', error);
+				}
+			},
+		});
+	};
+
+	const handlePromptShowToggle = async (id: number, show: boolean) => {
+		if (show) {
+			open({
+				title: '프롬프트를 게시를 취소하시겠어요?',
+				description: '공개된 프롬프트 템플릿의 게시를 취소합니다.',
+				onConfirm: async () => {
+					try {
+						const result = await updateMyPromptApi({ show: false }, id);
+						refetch();
+						close();
+					} catch (error) {
+						console.error('Error in DeletePromptApi:', error);
+					}
+				},
+			});
+		} else {
+			open({
+				title: '프롬프트를 게시하시겠어요?',
+				description: '게시하게 되면 프롬프트 템플릿이 사용자들에게 노출 됩니다.',
+				onConfirm: async () => {
+					try {
+						const result = await updateMyPromptApi({ show: true }, id);
+						refetch();
+						close();
+					} catch (error) {
+						console.error('Error in DeletePromptApi:', error);
+					}
+				},
+			});
+		}
+	};
 
 	const renderEmptyState = () => {
 		// title이 있을 경우의 안내문구
@@ -61,7 +119,6 @@ const MyCreatedPromptList = () => {
 							key={prompt.promptId}
 							personaType={prompt.personaType}
 							category1Text={prompt.category1Text}
-							userEmail={prompt.userEmail}
 							userNickname={prompt.userNickname}
 							updateDateTime={formatDateToKorean(prompt.updateDateTime)}
 							title={prompt.title}
@@ -69,8 +126,10 @@ const MyCreatedPromptList = () => {
 							viewCount={prompt.viewCount}
 							percents={prompt.percents}
 							interaction={getInteractionByPromptId(prompt.promptId)}
-							onClick={() => router.push(`/prompt/${prompt.promptId}`)}
+							onClick={() => handlePromptItemClick(prompt.promptId, prompt.show)}
 							onEditClick={() => router.push(`/mypage/created-prompt/${prompt.promptId}`)}
+							onDeleteClick={() => handleDeletePrompt(prompt.promptId)}
+							onToggleClick={() => handlePromptShowToggle(prompt.promptId, prompt.show)}
 							show={prompt.show}
 						/>
 					))}
