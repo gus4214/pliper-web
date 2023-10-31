@@ -77,7 +77,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 			</span>
 			<div className='flex flex-col gap-2 pt-8'>
 				{/* parameter가 있을 경우에만 LabelWithTemplateFormElement 렌더링 */}
-				{parameters.map((param, index) => (
+				{parameters?.map((param, index) => (
 					<LabelWithTemplateFormElement
 						key={index}
 						leftLabel={param.title}
