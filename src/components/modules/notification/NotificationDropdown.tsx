@@ -21,7 +21,7 @@ const AuthTabs: FC<TabsProps> = ({tabValue, handleChangeTab}) => {
     return (
         <Tabs value={tabValue} onChange={handleChangeTab} className='px-2'>
             <Tabs.Tab value={0}>전체</Tabs.Tab>
-            <Tabs.Tab value={1}>My PLIP</Tabs.Tab>
+            <Tabs.Tab value={1}>마이 플립</Tabs.Tab>
             <Tabs.Tab value={2}>공지 및 이벤트</Tabs.Tab>
         </Tabs>
     )

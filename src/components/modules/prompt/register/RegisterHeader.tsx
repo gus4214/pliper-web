@@ -3,7 +3,7 @@ import React from 'react';
 const RegisterHeader = () => {
 	return (
 		<div className='px-4 flex flex-col gap-4 justify-start'>
-			<h1 className='text-black text-xl font-bold'>프롬프트 만들기</h1>
+			<h1 className='text-black text-xl font-bold'>프롬프트 생성</h1>
 			<h2 className='text-black text-sm font-normal'>
 				아래 프롬프트 템플릿은 기획 초안에 작성 가능한 템플릿 입니다.
 				<br />

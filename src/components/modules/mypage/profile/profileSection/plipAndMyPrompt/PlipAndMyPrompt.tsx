@@ -14,13 +14,13 @@ const PlipAndMyPrompt = () => {
 	return (
 		<div className='w-full flex justify-between'>
 			<PlipAndMyPromptBox
-				title='플립'
+				title='마이 플립'
 				count={clipCount}
 				list={<MyPlipList promptClips={promptClips} />}
 				onMoreButtonClick={() => router.push('/mypage/plip')}
 			/>
 			<PlipAndMyPromptBox
-				title='내가 만든 프롬프트'
+				title='생성한 프롬프트'
 				count={createdPromptsCount}
 				list={<MyPromptList createdPrompts={createdPrompts} />}
 				onMoreButtonClick={() => router.push('/mypage/created-prompt')}

@@ -7,7 +7,7 @@ import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm'
 const MyPageCreatedPromptTemplate = () => {
 	return (
 		<div className='w-full h-full flex flex-col items-center'>
-			<ListTitleHeaderBox title={'내가 만든 프롬프트'} />
+			<ListTitleHeaderBox title={'생성한 프롬프트'} />
 			<div className='w-[1160px] flex flex-col pt-6 pb-[85px] gap-8'>
 				<GoBackToMyPageButton />
 				<div className='flex  w-full gap-10'>
@@ -15,7 +15,7 @@ const MyPageCreatedPromptTemplate = () => {
 					<PromptMenuListContainer />
 					{/* 리스트 */}
 					<div className='flex flex-col gap-4'>
-						<SearchForm twStyle='w-[944px]' />
+						<SearchForm twStyle='w-[944px]' placeholder={'내가 생성한 프롬프트 명을 입력해주세요!'} />
 						<MyCreatedPromptListContainer />
 					</div>
 				</div>

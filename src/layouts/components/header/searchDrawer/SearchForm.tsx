@@ -10,11 +10,12 @@ interface BaseFormFields {
 }
 
 interface SearchFormProps {
+	placeholder?: string;
 	onEnter?: () => void;
 	twStyle?: string;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onEnter, twStyle }) => {
+const SearchForm: React.FC<SearchFormProps> = ({ placeholder = '뭐든 적어주세요, 원하시는 내용을 보여드릴게요!', onEnter, twStyle }) => {
 	const [searchInputValue, setSearchInputValue] = useAtom(searchInputAtom);
 
 	const formHandler = useForm<BaseFormFields>({
@@ -47,7 +48,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onEnter, twStyle }) => {
 				<Search />
 				<Input
 					defaultValue={searchInputValue}
-					placeholder='뭐든 적어주세요, 원하시는 내용을 보여드릴게요!'
+					placeholder={placeholder}
 					className='w-[374px] border-none bg-neutral-50 focus:outline-none'
 					onChange={onChange}
 				/>
