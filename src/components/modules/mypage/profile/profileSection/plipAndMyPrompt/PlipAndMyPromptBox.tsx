@@ -16,13 +16,11 @@ const PlipAndMyPromptBox: React.FC<PlipAndMyPromptBoxProps> = ({ title, count, l
 					<span className='text-neutral-700 text-sm font-normal'>{title}</span>
 					<span className='text-center text-teal-200 text-sm font-medium'>{count}</span>
 				</div>
-				<Button color='ghost' className='h-7 min-h-7'>
-					<span className='text-center text-black text-xs font-normal' onClick={onMoreButtonClick}>
-						더보기
-					</span>
-				</Button>
+				<span className='p-2 text-center text-black text-xs font-normal cursor-pointer' onClick={onMoreButtonClick}>
+					더보기
+				</span>
 			</div>
-			<div className='w-[460px] h-[184px] flex flex-col p-4 bg-neutral-50 rounded gap-2.5'>{list}</div>
+			<div className='w-full h-[184px] flex flex-col p-4 bg-neutral-50 rounded gap-2.5'>{list}</div>
 		</div>
 	);
 };

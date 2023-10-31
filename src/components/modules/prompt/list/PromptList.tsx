@@ -58,26 +58,26 @@ const PromptList: FC = () => {
 			{data!.prompts.length <= 0 ? (
 				renderEmptyState()
 			) : (
-				<motion.div
-					variants={{
-						hidden: { opacity: 0 },
-						show: {
-							opacity: 1,
-						},
-					}}
-					initial='hidden'
-					animate='show'
-				>
+				// <motion.div
+				// 	variants={{
+				// 		hidden: { opacity: 0 },
+				// 		show: {
+				// 			opacity: 1,
+				// 		},
+				// 	}}
+				// 	initial='hidden'
+				// 	animate='show'
+				// >
 					<div className='flex flex-col gap-4'>
 						{data?.prompts?.map((prompt) => {
 							return (
-								<motion.div
-									key={prompt.promptId}
-									variants={{
-										hidden: { opacity: 0 },
-										show: { opacity: 1 },
-									}}
-								>
+								// <motion.div
+								// 	key={prompt.promptId}
+								// 	variants={{
+								// 		hidden: { opacity: 0 },
+								// 		show: { opacity: 1 },
+								// 	}}
+								// >
 									<PromptItemWithInteraction
 										key={prompt.promptId}
 										personaType={prompt.personaType}
@@ -91,11 +91,11 @@ const PromptList: FC = () => {
 										onClick={() => router.push(`/prompt/${prompt.promptId}`)}
 										interaction={mapOfPromptInteraction?.get(prompt.promptId)}
 									/>
-								</motion.div>
+								// </motion.div>
 							);
 						})}
 					</div>
-				</motion.div>
+				// </motion.div>
 			)}
 		</>
 	);

@@ -37,7 +37,7 @@ const MyCreatedPromptList = () => {
 
 	const handlePromptItemClick = (id: number, show: boolean) => {
 		if (show) {
-			router.push(`/mypage/created-prompt/${id}`);
+			router.push(`/prompt/${id}`);
 		} else {
 			handlePromptShowToggle(id, show);
 		}

@@ -27,6 +27,7 @@ export interface CreatedPrompt {
 	updateDateTime: string;
 	userEmail: string;
 	viewCount: number;
+	userNickname: string;
 }
 
 export interface Parameter {

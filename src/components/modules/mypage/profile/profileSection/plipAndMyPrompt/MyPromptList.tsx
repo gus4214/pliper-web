@@ -38,7 +38,7 @@ const MyPromptList: React.FC<MyPromptListProps> = ({ createdPrompts }) => {
 						</svg>
 					}
 					title={promptClip.title}
-					userEmail={promptClip.userEmail}
+					userNickname={promptClip.userNickname}
 				/>
 			))}
 		</div>

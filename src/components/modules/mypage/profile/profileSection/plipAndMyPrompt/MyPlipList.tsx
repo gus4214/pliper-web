@@ -32,7 +32,7 @@ const MyPlipList: React.FC<MyPlipListProps> = ({ promptClips }) => {
 						</svg>
 					}
 					title={promptClip.title}
-					userEmail={promptClip.userEmail}
+					userNickname={promptClip.userNickname}
 				/>
 			))}
 		</div>

@@ -46,7 +46,14 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			onConfirm: async () => {
 				try {
 					const result = await registerPromptApi({ ...data, template, parameters });
-					router.push(`/prompt/${result.promptId}`);
+					if (data.show) {
+						router.push(`/prompt/${result.promptId}`);
+					} else {
+						router.push(`/mypage/created-prompt`);
+					}
+					localStorage.removeItem('temporaryPromptTemplate');
+					setTemplate('');
+					setParameters([]);
 					close();
 				} catch (error) {
 					console.error('Error in RegisterPromptApi:', error);
@@ -62,7 +69,13 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			onConfirm: async () => {
 				try {
 					const result = await updateMyPromptApi({ ...data, template, parameters }, promptId!);
-					router.push(`/prompt/${result.promptId}`);
+					if (data.show) {
+						router.push(`/prompt/${result.promptId}`);
+					} else {
+						router.push(`/mypage/created-prompt`);
+					}
+					setTemplate('');
+					setParameters([]);
 					close();
 				} catch (error) {
 					console.error('Error in updateMyPromptApi:', error);
@@ -87,18 +100,17 @@ const usePromptRegisterForm = (data?: Prompt) => {
 	useEffect(() => {
 		// 페이지가 로딩되면 임시 저장된 데이터를 불러옵니다.
 		const temporaryDataString = localStorage.getItem('temporaryPromptTemplate');
+		if (data) {
+			setTemplate(data.template);
+			setParameters(data.parameters);
+			return;
+		}
 
 		if (temporaryDataString) {
 			const temporaryData = JSON.parse(temporaryDataString);
 			formHandler.reset(temporaryData.formValues);
 			setTemplate(temporaryData.template);
 			setParameters(temporaryData.parameters);
-			return;
-		}
-
-		if (data) {
-			setTemplate(data.template);
-			setParameters(data.parameters);
 			return;
 		}
 	}, []);
@@ -109,10 +121,13 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			description: '작성하신 내용의 템플릿을 임시저장 합니다.',
 			onConfirm: () => {
 				saveTemporarily();
+				close();
 				router.back();
 			},
 			onCancel: () => {
 				localStorage.removeItem('temporaryPromptTemplate');
+				setTemplate('');
+				setParameters([]);
 				router.back();
 			},
 		});

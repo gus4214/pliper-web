@@ -90,7 +90,6 @@ const queryKeys = {
 };
 
 export const useGetInteractionByPrompts = (input: GetInteractionByPromptsRequest, options?: object) => {
-	console.log(options);
 	return useQuery(queryKeys.getPromptCategory(input), () => getInteractionByPromptsApi(input), {
 		suspense: true,
 		refetchOnReconnect: false,

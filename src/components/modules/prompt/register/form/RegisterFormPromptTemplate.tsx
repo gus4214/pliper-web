@@ -28,7 +28,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 
 			const newParameters = newTitles.map((title) => {
 				// 기존 파라미터 중 일치하는 title을 찾습니다.
-				const existingParam = parameters.find((param) => param.title === title);
+				const existingParam = parameters?.find((param) => param.title === title);
 
 				// 일치하는 title이 있으면 기존 값을 사용하고, 그렇지 않으면 새로운 객체를 생성합니다.
 				return existingParam || { description: '', title, type: '', typeValues: '' };
