@@ -19,7 +19,7 @@ const DailyPromptCategoryChips: React.FC<DailyPromptCategoryChipsProps> = () => 
 
 	return (
 		<div className='gap-2 flex'>
-			{data?.dailyCategories.map((category) => (
+			{data?.dailyCategories?.map((category) => (
 				<SelectChip
 					key={category.dept1.code}
 					label={category.dept1.text}
