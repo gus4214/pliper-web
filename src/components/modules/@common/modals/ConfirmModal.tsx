@@ -1,3 +1,4 @@
+import Loading from '@/src/components/atoms/loading/Loading';
 import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
 import { ConfirmModalAtomProps, ModalConfirmOptions } from '@/src/stores/modal';
 import { closeConfirmModalAtom } from '@/src/stores/modal/actions/confirm';
@@ -45,22 +46,30 @@ const ConfirmModal: React.FC<ConfirmModalAtomProps> = (props) => {
 			onClickBackdrop={onCancel}
 			className='w-[450px] px-12 pt-10 pb-4 bg-white rounded-2xl border border-neutral-200 flex-col justify-center items-center gap-8 flex overflow-hidden'
 		>
-			<div className='w-[289px] h-16 flex-col justify-center items-center gap-4 inline-flex'>
-				{title && <h1 className='text-center text-neutral-800 text-[22px] font-bold'>{title}</h1>}
-				{description && <h2 className='text-center text-neutral-600 text-base font-normal'>{description}</h2>}
-			</div>
-			<div className='flex gap-2'>
-				{!hideCancel && (
-					<Button onClick={handleClose} color='ghost' className='w-[173px] rounded-[99px]'>
-						취소
-					</Button>
-				)}
-				{!hideConfirm && (
-					<Button onClick={() => handleConfirm()} color='neutral' className='w-[173px] rounded-[99px] bg-navy-900'>
-						확인
-					</Button>
-				)}
-			</div>
+			{!modalLoading ? (
+				<>
+					<div className='w-[289px] h-16 flex-col justify-center items-center gap-4 inline-flex'>
+						{title && <h1 className='text-center text-neutral-800 text-[22px] font-bold'>{title}</h1>}
+						{description && <h2 className='text-center text-neutral-600 text-base font-normal'>{description}</h2>}
+					</div>
+					<div className='flex gap-2'>
+						{!hideCancel && (
+							<Button onClick={handleClose} color='ghost' className='w-[173px] rounded-[99px]'>
+								취소
+							</Button>
+						)}
+						{!hideConfirm && (
+							<Button onClick={() => handleConfirm()} color='neutral' className='w-[173px] rounded-[99px] bg-navy-900'>
+								확인
+							</Button>
+						)}
+					</div>
+				</>
+			) : (
+				<div className='mb-6'>
+					<Loading />
+				</div>
+			)}
 		</Modal.Legacy>
 	);
 };

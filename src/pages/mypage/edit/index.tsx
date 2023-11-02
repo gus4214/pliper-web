@@ -1,5 +1,4 @@
 import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageButton';
-import React from 'react';
 
 const MyProfileEditPage = () => {
 	return (
