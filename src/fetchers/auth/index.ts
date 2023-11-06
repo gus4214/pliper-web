@@ -28,6 +28,16 @@ export interface RegisterUserRequest {
 	taste: string[];
 }
 
+export interface UpdateUserProfileResult {
+	nickname: string;
+	notificationCount: number;
+	oauthEmail: string;
+	oauthSub: string;
+	oauthType: string;
+	taste: string;
+	userID: number;
+}
+
 export const googleAuthApi = (callbackUrl: string) => {
 	return callApi<{ callbackUrl: string }, OAuthResult>({
 		api: apis.GOOGLE_AUTH_API,
@@ -54,6 +64,14 @@ export const registerUserApi = (data: RegisterUserRequest, token: string) => {
 		api: apis.REGISTER_API,
 		body: data,
 		token: token,
+	});
+};
+
+export const updateUserProfileApi = (data: RegisterUserRequest) => {
+	return callApi<RegisterUserRequest, UpdateUserProfileResult>({
+		api: apis.UPDATE_PROFILE_API,
+		body: data,
+		token: getCookie(accessTokenKey),
 	});
 };
 
