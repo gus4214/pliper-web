@@ -1,7 +1,7 @@
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import { temporaryTokenKey } from '@/src/configs/auth';
 import { userCategory } from '@/src/configs/signup';
-import {registerUserApi, RegisterUserRequest} from '@/src/fetchers/auth';
+import { registerUserApi, RegisterUserRequest } from '@/src/fetchers/auth';
 import { getCookie, saveAccessToken } from '@/src/utils/cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
@@ -21,8 +21,14 @@ const schema = yup.object().shape({
 
 const SignupForm = () => {
 	const router = useRouter();
-
-	const formHandler = useForm<FormData>({
+	const temporaryToken = getCookie(temporaryTokenKey);
+	const {
+		control,
+		handleSubmit,
+		setValue,
+		watch,
+		formState: { isValid },
+	} = useForm<FormData>({
 		mode: 'onChange',
 		resolver: yupResolver(schema),
 		defaultValues: {
@@ -30,16 +36,8 @@ const SignupForm = () => {
 			nickname: '',
 		},
 	});
-	const {
-		register,
-		control,
-		handleSubmit,
-		setValue,
-		watch,
-		formState: { isValid },
-	} = formHandler;
-
 	const selectedJobs = watch('taste');
+	const buttonActive = isValid && selectedJobs.length >= 1;
 
 	const addOrRemoveJob = (key: string) => {
 		if (selectedJobs?.includes(key)) {
@@ -51,10 +49,6 @@ const SignupForm = () => {
 			setValue('taste', [...selectedJobs!, key]);
 		}
 	};
-
-	const btnActive = isValid;
-
-	const temporaryToken = getCookie(temporaryTokenKey);
 
 	const onSubmit = async (data: RegisterUserRequest) => {
 		const result = await registerUserApi(data, temporaryToken);
@@ -95,7 +89,7 @@ const SignupForm = () => {
 							inputProps={{ placeholder: '최대 8자로 입력해주세요' }}
 							label={'닉네임을 입력해주세요.'}
 						/>
-						<Button fullWidth color='neutral' disabled={!btnActive}>
+						<Button fullWidth color='neutral' disabled={!buttonActive}>
 							플리퍼 시작하기
 						</Button>
 					</div>
