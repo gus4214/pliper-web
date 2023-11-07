@@ -2,10 +2,12 @@ import MyPageUserSummaryLoader from '@/src/components/modules/mypage/MyPageUserS
 import PlipAndMyPrompt from '@/src/components/modules/mypage/profile/profileSection/plipAndMyPrompt/PlipAndMyPrompt';
 import UserInfoHeader from '@/src/components/modules/mypage/profile/profileSection/UserInfoHeader';
 import { useAuthContext } from '@/src/hooks/context';
+import { useRouter } from 'next/router';
 import { Button } from 'react-daisyui';
 
 const ProfileSection = () => {
 	const { user } = useAuthContext();
+	const router = useRouter();
 
 	return (
 		<MyPageUserSummaryLoader>
@@ -15,7 +17,13 @@ const ProfileSection = () => {
 					taste={user?.taste as string}
 					oauthType={user?.oauthType as string}
 					action={
-						<Button variant='outline' className='rounded border border-neutral-200 h-[34px] min-h-[34px]'>
+						<Button
+							variant='outline'
+							className='rounded border border-neutral-200 h-[34px] min-h-[34px]'
+							onClick={() => {
+								router.push('/mypage/edit');
+							}}
+						>
 							<span className='text-center text-black text-sm font-normal'>프로필 관리</span>
 						</Button>
 					}

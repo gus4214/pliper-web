@@ -1,5 +1,14 @@
 import { ApiInfo } from '@/src/fetchers/apis';
 
+export interface IBaasResponse<T> {
+	isError?: boolean;
+	isUnknownError?: boolean;
+	errorId?: string;
+	errorMessage?: string;
+	errorStatus?: number;
+	data?: T;
+}
+
 export interface IPageRequest {
 	limit?: number;
 	page?: number;
