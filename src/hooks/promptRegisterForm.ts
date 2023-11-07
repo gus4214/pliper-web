@@ -1,6 +1,6 @@
 import { updateMyPromptApi } from './../fetchers/prompt/my-prompt';
 import { registerPromptApi } from '@/src/fetchers/prompt';
-import { Prompt } from '@/src/fetchers/prompt/types';
+import {PersonaType, Prompt} from '@/src/fetchers/prompt/types';
 import { useConfirmModal } from '@/src/hooks/modal';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { useAtom } from 'jotai';
@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 
 export interface PromptRegisterFormData {
 	title: string;
-	personaType: string;
+	personaType: PersonaType;
 	category1Text: string;
 	category2Text: string;
 	llmModel: string;
@@ -27,7 +27,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			category2Text: data?.category2Text || '',
 			description: data?.description || '',
 			llmModel: data?.llmModel || '',
-			personaType: data?.personaType || '업무',
+			personaType: data?.personaType || 'JOB',
 			show: data?.show || true,
 			title: data?.title || '',
 		},

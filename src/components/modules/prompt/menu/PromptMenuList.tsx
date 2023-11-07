@@ -16,9 +16,9 @@ const PromptMenuList = () => {
 	const [selectedModel, setSelectedModel] = useAtom(llmModelAtom);
 
 	let currentCategories = [] as Category[];
-	if (personaType === '일상' && data) {
+	if (personaType === 'DAILY' && data) {
 		currentCategories = data.dailyCategories;
-	} else if (personaType === '업무' && data) {
+	} else if (personaType === 'JOB' && data) {
 		currentCategories = data.jobCategories;
 	}
 
@@ -70,23 +70,23 @@ const PromptMenuList = () => {
 				<div className='pl-4 border-l border-neutral-200 flex-col justify-center items-start gap-2 flex'>
 					<Button
 						className={`w-32 h-8 px-4 py-[9px] min-h-8 text-start ${
-							personaType === '일상'
+							personaType === 'DAILY'
 								? 'text-teal-400 font-medium bg-neutral-50'
 								: 'hover:text-teal-400 hover:font-medium hover:bg-neutral-50'
 						}`}
 						color='ghost'
-						onClick={() => setPersonaType('일상')}
+						onClick={() => setPersonaType('DAILY')}
 					>
 						<span className='text-[15px] font-normal w-full'>일상</span>
 					</Button>
 					<Button
 						className={`w-32 h-8 px-4 py-[9px] min-h-8 text-start ${
-							personaType === '업무'
+							personaType === 'JOB'
 								? 'text-teal-400 font-medium bg-neutral-50'
 								: 'hover:text-teal-400 hover:font-medium hover:bg-neutral-50'
 						}`}
 						color='ghost'
-						onClick={() => setPersonaType('업무')}
+						onClick={() => setPersonaType('JOB')}
 					>
 						<span className='text-[15px] font-normal w-full'>업무</span>
 					</Button>

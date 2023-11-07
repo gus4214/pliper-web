@@ -11,11 +11,12 @@ interface PromptCardProps {
 	tag: string;
 	likeCount: string;
 	viewCount: string;
+	onClick?: () => void;
 }
 
-const PromptCard: React.FC<PromptCardProps> = ({ src, user, title, tag, likeCount, viewCount }) => {
+const PromptCard: React.FC<PromptCardProps> = ({ src, user, title, tag, likeCount, viewCount, onClick }) => {
 	return (
-		<Card className='w-[376px] cursor-pointer hover:shadow-lg transition-all duration-300'>
+		<Card className='w-[376px] cursor-pointer hover:shadow-lg transition-all duration-300' >
 			<div className='w-full h-[164px] relative'>
 				<Image src={src} alt='Card Image' fill className='absolute z-0 rounded-lg object-cover' />
 			</div>

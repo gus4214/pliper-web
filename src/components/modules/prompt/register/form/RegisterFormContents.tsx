@@ -7,28 +7,27 @@ import PersonaToggleGroup from '@/src/components/modules/prompt/register/form/Pe
 import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register/form/RegisterFormPromptTemplate';
 import LabelWithFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithFormElement';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
-import { Category, Dept1 } from '@/src/fetchers/prompt/types';
+import { Category, Dept1, PersonaType } from '@/src/fetchers/prompt/types';
 import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Modal, Toggle } from 'react-daisyui';
-import { UseFormReturn } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
+import { Modal, Toggle } from 'react-daisyui';
+import { Controller, UseFormReturn } from 'react-hook-form';
 
 interface RegisterFormContentsProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
 }
 
 const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler }) => {
-	const { data } = useGetPromptCategory();
-
 	const { control, watch, getValues } = formHandler;
 
-	const [selectedPersona, setSelectedPersona] = useState<'일상' | '업무'>('업무');
-	const personaType = watch('personaType');
+	const { data } = useGetPromptCategory();
+	const [selectedPersona, setSelectedPersona] = useState<PersonaType>('JOB');
 
 	// 카테고리 상태 및 로직
 	const [selectedDept1, setSelectedDept1] = useState<string | null>(getValues('category1Text'));
 	const [dept1Categories, setDept1Categories] = useState<Dept1[]>([]);
+
+	const personaType = watch('personaType');
 
 	const dept1ChipOptions = dept1Categories.map((dept1) => ({
 		code: dept1.code,
@@ -38,7 +37,7 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 	const dept2Options = useMemo(() => {
 		if (!selectedDept1 || !personaType) return [];
 
-		const targetCategories = personaType === '업무' ? data?.jobCategories : data?.dailyCategories;
+		const targetCategories = personaType === 'JOB' ? data?.jobCategories : data?.dailyCategories;
 		const selectedCategory = targetCategories?.find((category) => category.dept1.text === selectedDept1);
 		return selectedCategory ? selectedCategory.dept2.map((item) => ({ code: item.code, label: item.text })) : [];
 	}, [selectedDept1, personaType, data]);
@@ -48,9 +47,9 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 			setDept1Categories(categories.map((category) => category.dept1));
 		};
 
-		if (personaType === '일상') {
+		if (personaType === 'DAILY') {
 			updateDept1Categories(data?.dailyCategories || []);
-		} else if (personaType === '업무') {
+		} else if (personaType === 'JOB') {
 			updateDept1Categories(data?.jobCategories || []);
 		}
 	}, [personaType, data]);
@@ -67,7 +66,7 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 
 				{/* // 페르소나 구간 */}
 				<LabelWithFormElement label='페르소나'>
-					<PersonaToggleGroup formHandler={formHandler} onChange={(value) => setSelectedPersona(value as '일상' | '업무')} />
+					<PersonaToggleGroup formHandler={formHandler} onChange={(value) => setSelectedPersona(value as PersonaType)} />
 				</LabelWithFormElement>
 
 				{/* 카테고리 구간 */}

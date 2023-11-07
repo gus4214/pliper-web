@@ -1,8 +1,9 @@
 import PromptCard from '@/src/components/modules/main/card/PromptCard';
-import { useGetCurationMain } from '@/src/fetchers/main';
+import {useGetCurationMain, useGetCurationWeek} from '@/src/fetchers/main';
 import { workCategoryAtom } from '@/src/stores/main';
 import { formatNumber } from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
+import {useRouter} from "next/router";
 
 const samplePropmpt = [
 	{
@@ -62,22 +63,23 @@ const samplePropmpt = [
 ];
 
 const MainWorkPromptList = () => {
+	const router = useRouter();
 	const jobCategory = useAtomValue(workCategoryAtom);
-
-	const { data } = useGetCurationMain({ dailyCategory: null, jobCategory });
+	const { data } = useGetCurationWeek({ persona: 'JOB', category: jobCategory! }, {enable:!!jobCategory});
 
 	return (
 		<div className='w-full gap-x-6 gap-y-10 flex flex-wrap'>
-			{samplePropmpt.map((prompt) => {
+			{data?.prompts?.map((prompt) => {
 				return (
 					<PromptCard
 						key={prompt.promptId}
-						src={prompt.src}
+						src={prompt.imageUrl || '/images/sample/6.gif'}
 						user={prompt.userEmail}
 						title={prompt.title}
 						tag={prompt.personaType}
 						likeCount={formatNumber(prompt.likeCount)}
 						viewCount={formatNumber(prompt.viewCount)}
+						onClick={() => router.push(`/prompt/${prompt.promptId}`)}
 					/>
 				);
 			})}

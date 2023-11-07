@@ -19,8 +19,8 @@ const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ formHandler, on
 			name='personaType'
 			control={control}
 			options={[
-				{ code: '업무', label: '📝 업무' },
-				{ code: '일상', label: '☕️ 일상' },
+				{ code: 'JOB', label: '📝 업무' },
+				{ code: 'DAILY', label: '☕️ 일상' },
 			]}
 			color='secondary'
 			chipClassName='bg-white'
