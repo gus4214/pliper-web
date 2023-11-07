@@ -14,7 +14,7 @@ export interface GetPromptsRequest extends IPageRequest {
 }
 
 export interface GetAiToolsRequest {
-	type: GetAiToolsType;
+	type?: GetAiToolsType;
 }
 
 export interface RegisterPromptRequest {
@@ -111,6 +111,7 @@ export interface Prompt {
 	precisionDown: number;
 	precisionUp: number;
 	promptId: number;
+	imageUrl?: string;
 	show: boolean;
 	template: string;
 	title: string;

@@ -3,7 +3,8 @@ import MainBookMarkCard from '@/src/components/modules/main/card/MainBookMarkCar
 import { formatNumber } from '@/src/utils/utils';
 import React from 'react';
 import { Badge } from 'react-daisyui';
-import { Prompt } from "@/src/fetchers/prompt/types";
+import { Prompt } from '@/src/fetchers/prompt/types';
+import { useRouter } from 'next/router';
 
 const sampleBestClip = [
 	{
@@ -34,16 +35,18 @@ interface MainVisualContainerProps {
 }
 
 const MainVisualContainer: React.FC<MainVisualContainerProps> = ({ bestClip }) => {
+	const router = useRouter();
+
 	return (
 		<MainVisualBox src={'/images/mainVis.png'}>
 			<div className='w-[672px] flex flex-col items-center gap-14 absolute top-[50px]'>
 				<h1 className='text-center text-white text-[32px] font-bold'>가장 많은 북마크로 저장된 프롬프트</h1>
 				<div className='gap-12 flex'>
-					{bestClip.map((v, i) => {
+					{bestClip.slice(0, 4).map((v, i) => {
 						return (
 							<MainBookMarkCard
 								key={v.promptId}
-								src={'/images/work.jpeg'}
+								src={v.imageUrl || '/images/work.jpeg'}
 								title={v.title}
 								user={v.userNickname}
 								badge={
@@ -51,6 +54,7 @@ const MainVisualContainer: React.FC<MainVisualContainerProps> = ({ bestClip }) =
 										<span className='text-white text-lg font-bold leading-[18px]'>{formatNumber(v.viewCount)}</span>
 									</Badge>
 								}
+								onClick={() => router.push(`/prompt/${v.promptId}`)}
 							/>
 						);
 					})}
