@@ -1,6 +1,6 @@
 import MainVisualBox from '@/src/components/atoms/box/main/MainVisualBox';
 import MainBookMarkCard from '@/src/components/modules/main/card/MainBookMarkCard';
-import { formatNumber } from '@/src/utils/utils';
+import {addHttpsPrefix, formatNumber} from '@/src/utils/utils';
 import React from 'react';
 import { Badge } from 'react-daisyui';
 import { Prompt } from '@/src/fetchers/prompt/types';
@@ -46,12 +46,12 @@ const MainVisualContainer: React.FC<MainVisualContainerProps> = ({ bestClip }) =
 						return (
 							<MainBookMarkCard
 								key={v.promptId}
-								src={v.imageUrl || '/images/work.jpeg'}
+								src={addHttpsPrefix(v.imageUrl) || '/images/work.jpeg'}
 								title={v.title}
 								user={v.userNickname}
 								badge={
 									<Badge color='accent' className='w-[60px] h-8 p-2.5 rounded'>
-										<span className='text-white text-lg font-bold leading-[18px]'>{formatNumber(v.viewCount)}</span>
+										<span className='text-white text-lg font-bold leading-[18px]'>{formatNumber(v.clipCount)}</span>
 									</Badge>
 								}
 								onClick={() => router.push(`/prompt/${v.promptId}`)}

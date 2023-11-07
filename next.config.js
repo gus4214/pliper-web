@@ -15,6 +15,14 @@ const nextConfig = withTwin({
 		});
 		return config;
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'static.pliper.kr',
+			},
+		],
+	},
 });
 
 module.exports = nextConfig;

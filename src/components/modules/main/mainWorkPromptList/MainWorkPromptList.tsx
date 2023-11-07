@@ -1,7 +1,7 @@
 import PromptCard from '@/src/components/modules/main/card/PromptCard';
 import {useGetCurationMain, useGetCurationWeek} from '@/src/fetchers/main';
 import { workCategoryAtom } from '@/src/stores/main';
-import { formatNumber } from '@/src/utils/utils';
+import {addHttpsPrefix, formatNumber} from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
 import {useRouter} from "next/router";
 import {promptKoTextOfPersona} from "@/src/configs/prompt";
@@ -74,7 +74,7 @@ const MainWorkPromptList = () => {
 				return (
 					<PromptCard
 						key={prompt.promptId}
-						src={prompt.imageUrl || '/images/sample/6.gif'}
+						src={addHttpsPrefix(prompt.imageUrl) || '/images/sample/6.gif'}
 						user={prompt.userNickname}
 						title={prompt.title}
 						tag={promptKoTextOfPersona[prompt.personaType]}

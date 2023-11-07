@@ -136,3 +136,13 @@ export const urlToFile = async (url: string) => {
 };
 
 export const getFileNameFromUrl = (url: string) => url.split('/').pop();
+
+export const addHttpsPrefix = (url?: string) => {
+	if (!url) {
+		return url
+	}
+	if (!/^https?:\/\//i.test(url)) {
+		url = 'https://' + url;
+	}
+	return url;
+};

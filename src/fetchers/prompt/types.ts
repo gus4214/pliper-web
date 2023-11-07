@@ -106,6 +106,7 @@ export interface Prompt {
 	createDateTime: string;
 	description: string;
 	likeCount: number;
+	clipCount: number;
 	llmModel: string;
 	parameters: Parameter[];
 	percents: number;

@@ -1,7 +1,7 @@
 import DailyPromptCard from '@/src/components/modules/main/card/DailyPromptCard';
 import {useGetCurationMain, useGetCurationWeek} from '@/src/fetchers/main';
 import {dailyCategoryAtom, workCategoryAtom} from '@/src/stores/main';
-import { formatNumber } from '@/src/utils/utils';
+import {addHttpsPrefix, formatNumber} from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
 import {useRouter} from "next/router";
 import {promptKoTextOfPersona} from "@/src/configs/prompt";
@@ -74,7 +74,7 @@ const MainDailyPromptList = () => {
 				return (
 					<DailyPromptCard
 						key={prompt.promptId}
-						src={prompt.imageUrl || '/images/sample/3.jpeg'}
+						src={addHttpsPrefix(prompt.imageUrl) || '/images/sample/3.jpeg'}
 						user={prompt.userNickname}
 						title={prompt.title}
 						tag={promptKoTextOfPersona[prompt.personaType]}
