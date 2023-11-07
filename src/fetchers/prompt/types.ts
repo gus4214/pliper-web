@@ -3,6 +3,8 @@ import { IPageRequest } from '@/src/fetchers/types';
 
 export type GetAiToolsType = 'LLM' | 'IMAGE';
 
+export type PersonaType = 'DAILY' | 'JOB'
+
 export interface GetPromptsRequest extends IPageRequest {
 	category1Texts?: string[];
 	category2Texts?: string[];
@@ -14,7 +16,7 @@ export interface GetPromptsRequest extends IPageRequest {
 }
 
 export interface GetAiToolsRequest {
-	type: GetAiToolsType;
+	type?: GetAiToolsType;
 }
 
 export interface RegisterPromptRequest {
@@ -23,7 +25,7 @@ export interface RegisterPromptRequest {
 	description: string;
 	llmModel: string;
 	parameters?: Parameter[];
-	personaType: string;
+	personaType: PersonaType;
 	show: boolean;
 	template?: string;
 	title: string;
@@ -72,7 +74,7 @@ export interface RegisterPromptResult {
 	llmModel: string;
 	parameters: Parameter[];
 	percents: number;
-	personaType: string;
+	personaType: PersonaType;
 	precisionDown: number;
 	precisionUp: number;
 	promptId: number;
@@ -107,10 +109,11 @@ export interface Prompt {
 	llmModel: string;
 	parameters: Parameter[];
 	percents: number;
-	personaType: string;
+	personaType: PersonaType;
 	precisionDown: number;
 	precisionUp: number;
 	promptId: number;
+	imageUrl?: string;
 	show: boolean;
 	template: string;
 	title: string;

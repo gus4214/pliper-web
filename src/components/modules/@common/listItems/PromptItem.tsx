@@ -1,9 +1,10 @@
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
-import { InteractionByPrompt } from '@/src/fetchers/prompt/types';
+import {InteractionByPrompt, PersonaType} from '@/src/fetchers/prompt/types';
 import React from 'react';
+import {promptKoTextOfPersona} from "@/src/configs/prompt";
 
 export interface PromptItemProps {
-	personaType: string;
+	personaType: PersonaType;
 	category1Text: string;
 	userNickname: string;
 	updateDateTime: string;
@@ -39,7 +40,7 @@ const PromptItem: React.FC<PromptItemProps> = ({
 			onClick={onClick && onClick}
 		>
 			<div className='w-20 py-1.5 bg-white rounded flex-col justify-center items-center gap-2 flex'>
-				<span className='text-center text-neutral-400 text-[13px] font-semibold'>{personaType}</span>
+				<span className='text-center text-neutral-400 text-[13px] font-semibold'>{promptKoTextOfPersona[personaType]}</span>
 				<span className='text-center text-neutral-200 text-[13px] font-normal'>/</span>
 				<span className='text-center text-teal-200 text-[13px] font-semibold'>{category1Text}</span>
 			</div>

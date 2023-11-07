@@ -1,5 +1,6 @@
 import MainAiPlatformList from '@/src/components/modules/main/mainAiPlatform/MainAiPlatformList';
 import { Card } from 'react-daisyui';
+import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
 
 const MainAiPlatformContainer = () => {
 	return (
@@ -9,7 +10,9 @@ const MainAiPlatformContainer = () => {
 					<h1 className='text-black text-[28px] font-bold'>AI 플랫폼</h1>
 					<span className='text-neutral-400 text-sm font-normal'>플랫폼을 통해 AI를 활용 해보는건 어떠세요?</span>
 				</div>
-				<MainAiPlatformList />
+				<AsyncComponentBoundary>
+					<MainAiPlatformList />
+				</AsyncComponentBoundary>
 			</div>
 		</div>
 	);

@@ -2,7 +2,6 @@ import MainWorkPromptBox from '@/src/components/atoms/box/main/MainWorkPromptBox
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
 import MainWorkPromptList from '@/src/components/modules/main/mainWorkPromptList/MainWorkPromptList';
 import WorkPromptCategoryChips from '@/src/components/modules/main/mainWorkPromptList/WorkPromptCategoryChips';
-import { BestClip } from '@/src/fetchers/main';
 
 interface MainWorkPromptContainerProps {}
 

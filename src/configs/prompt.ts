@@ -1,3 +1,5 @@
+import {PersonaType} from "@/src/fetchers/prompt/types";
+
 export type PromptSortType = 'LATEST' | 'ACCURACY' | 'LIKE';
 
 export const promptSortCategory = {
@@ -6,7 +8,7 @@ export const promptSortCategory = {
 	LATEST: '✨ 최신 순',
 };
 
-export const promptLLMCategory = {
-	GPT: 'GPT 3.5',
-	BING: 'BING',
-};
+export const promptKoTextOfPersona: Record<PersonaType, string> = {
+	'JOB': '업무',
+	'DAILY': '일상',
+}

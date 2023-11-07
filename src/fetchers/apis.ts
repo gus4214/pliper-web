@@ -52,6 +52,11 @@ export const apis: { [k: string]: ApiInfo } = {
 		method: 'GET',
 		description: '메인에서 노출 될 큐레이션(키워드, 주간 베스트, 클립 베스트) 요청 API',
 	},
+	GET_CURATION_WEEK: {
+		uri: '/v1/aggregate/week',
+		method: 'GET',
+		description: '페르소나 기반 일주일 동안 인기 있는 프롬프트 Top 10 요청 API',
+	},
 
 	GET_NOTIFICATIONS_API: { uri: '/v1/notification', method: 'GET', description: '알림 내역 요청 API' },
 	GET_NOTIFICATION_COUNT_API: { uri: '/v1/notification-count', method: 'GET', description: '알림 개수 요청 API' },

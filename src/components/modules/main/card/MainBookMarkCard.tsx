@@ -6,12 +6,13 @@ interface MainBookMarkCardProps {
 	title: string;
 	user: string;
 	badge: React.ReactNode;
+	onClick?: () => void;
 }
 
-const MainBookMarkCard: React.FC<MainBookMarkCardProps> = ({ src, title, user, badge }) => {
+const MainBookMarkCard: React.FC<MainBookMarkCardProps> = ({ src, title, user, badge, onClick }) => {
 	return (
 		<div className='flex flex-col justify-center gap-[18px]'>
-			<div className='w-[260px] h-40 relative cursor-pointer'>
+			<div className='w-[260px] h-40 relative cursor-pointer' onClick={onClick}>
 				<Image src={src} alt={title} fill className='rounded-tl-lg rounded-tr-[50px] rounded-bl-lg rounded-br-[50px] object-cover' />
 				<div className='left-0 top-[-16px] absolute'>{badge}</div>
 			</div>

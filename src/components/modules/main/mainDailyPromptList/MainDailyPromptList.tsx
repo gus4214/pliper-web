@@ -1,8 +1,10 @@
 import DailyPromptCard from '@/src/components/modules/main/card/DailyPromptCard';
-import { useGetCurationMain } from '@/src/fetchers/main';
-import { dailyCategoryAtom } from '@/src/stores/main';
+import {useGetCurationMain, useGetCurationWeek} from '@/src/fetchers/main';
+import {dailyCategoryAtom, workCategoryAtom} from '@/src/stores/main';
 import { formatNumber } from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
+import {useRouter} from "next/router";
+import {promptKoTextOfPersona} from "@/src/configs/prompt";
 
 const samplePropmpt = [
 	{
@@ -62,22 +64,23 @@ const samplePropmpt = [
 ];
 
 const MainDailyPromptList = () => {
+	const router = useRouter();
 	const dailyCategory = useAtomValue(dailyCategoryAtom);
-
-	const { data } = useGetCurationMain({ dailyCategory, jobCategory: null });
+	const { data } = useGetCurationWeek({ persona: 'DAILY', category: dailyCategory! }, {enable:!!dailyCategory});
 
 	return (
 		<div className='w-full gap-x-6 gap-y-6 flex flex-wrap'>
-			{samplePropmpt.map((prompt) => {
+			{data?.prompts?.map((prompt) => {
 				return (
 					<DailyPromptCard
 						key={prompt.promptId}
-						src={prompt.src}
-						user={prompt.userEmail}
+						src={prompt.imageUrl || '/images/sample/3.jpeg'}
+						user={prompt.userNickname}
 						title={prompt.title}
-						tag={prompt.personaType}
+						tag={promptKoTextOfPersona[prompt.personaType]}
 						likeCount={formatNumber(prompt.likeCount)}
 						viewCount={formatNumber(prompt.viewCount)}
+						onClick={() => router.push(`/prompt/${prompt.promptId}`)}
 					/>
 				);
 			})}
