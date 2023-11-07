@@ -1,9 +1,11 @@
 import PromptCategoryChip from '@/src/components/atoms/chip/PromptCategoryChip';
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
 import { formatDateToKorean } from '@/src/utils/dateUtils';
+import {PersonaType} from "@/src/fetchers/prompt/types";
+import {promptKoTextOfPersona} from "@/src/configs/prompt";
 
 interface PromptDetailInfoHeaderProps {
-	personaType: string;
+	personaType: PersonaType;
 	category1Text: string;
 	category2Text: string;
 	likeCount?: number;
@@ -42,7 +44,7 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 					<div className='grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex'>
 						<div className='self-stretch justify-between items-center gap-4 inline-flex'>
 							<div className='justify-start items-start gap-2 flex'>
-								<PromptCategoryChip text={personaType} />
+								<PromptCategoryChip text={promptKoTextOfPersona[personaType]} />
 								<PromptCategoryChip text={category1Text} color='light' />
 								<PromptCategoryChip text={category2Text} color='gray' />
 								<PromptCategoryChip text={llmModel} color='gray' />
