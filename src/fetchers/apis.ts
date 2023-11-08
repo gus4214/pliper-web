@@ -17,7 +17,7 @@ export const apis: { [k: string]: ApiInfo } = {
 	NAVER_AUTH_API: { uri: '/v1/auth/naver', method: 'GET', description: 'Oauth2.0 네이버 인증 API' },
 	NAVER_AUTH_CALLBACK_API: { uri: '/v1/auth/naver/callback', method: 'GET', description: 'Oauth2.0 네이버 인증 완료 처리 API' },
 	REGISTER_API: { uri: '/v1/join', method: 'POST', description: '회원가입 요청 API' },
-	UPDATE_PROFILE_API: { uri: '/v1/user/profile', method: 'POST', description: '유저 정보 수정 요청 API' },
+	UPDATE_PROFILE_API: { uri: '/v1/user/profile', method: 'PUT', description: '유저 정보 수정 요청 API' },
 
 	// 유저정보
 	PROFILE_API: { uri: '/v1/user/profile', method: 'GET', description: 'JWT 기반 유저 정보 조회 요청 API' },

@@ -1,4 +1,6 @@
 import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
+import { IResponse } from '@/src/fetchers/types';
+import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
 
@@ -10,12 +12,15 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
+	const [errorMessage, setErrorMessage] = useState('');
+
 	const handleGoogleLogin = async () => {
 		try {
+			// const result = await googleAuthApi('http://localhost:3000/api/auth/google/callback');
 			const result = await googleAuthApi(`${webHost}/api/auth/google/callback`);
 			window.location.href = result.url;
 		} catch (error) {
-			console.error('Error in GoogleAuthApi:', error);
+			console.error('Error in NaverAuthApi:', error);
 		}
 	};
 

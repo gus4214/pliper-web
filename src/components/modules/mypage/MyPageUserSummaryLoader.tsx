@@ -24,13 +24,13 @@ const MyPageUserSummaryLoader: React.FC<MyPageUserSummaryLoaderProps> = ({ child
 		if (myPageUserSummary || isLoading || isEmptyData) return;
 
 		setMyPageUserSummary({
-			clipCount: data!.clipCount,
-			createdPrompts: data!.createdPrompts,
-			createdPromptsCount: data!.createdPromptsCount,
-			likeCount: data!.likeCount,
-			precisionUpCount: data!.precisionUpCount,
-			promptClips: data!.promptClips,
-			userEmail: data!.userEmail,
+			clipCount: data?.clipCount || 0,
+			createdPrompts: data?.createdPrompts || [],
+			createdPromptsCount: data?.createdPromptsCount || 0,
+			likeCount: data?.likeCount || 0,
+			precisionUpCount: data?.precisionUpCount || 0,
+			promptClips: data?.promptClips || [],
+			userEmail: data?.userEmail || '',
 		});
 	}, [myPageUserSummary, isLoading]);
 

@@ -76,6 +76,6 @@ export const callApi = <T, R extends object>(request: IRequest<T, R>, options?: 
 			// result.errorStatus = error.response?.status || 500;
 			// result.isError = true;
 			console.log('====== [WARN] request fail ======', result, error.response?.data);
-			return result;
+			throw error;
 		});
 };

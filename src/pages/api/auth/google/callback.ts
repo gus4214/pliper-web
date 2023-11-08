@@ -4,6 +4,7 @@ import { IResponse } from '@/src/fetchers/types';
 import axios, { AxiosError } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const code = req.query.code;
 
@@ -33,13 +34,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	} catch (error) {
 		const axiosError = error as AxiosError<IResponse<OAuthCallbackResult>>;
-		if (axiosError.response?.data.code === 402) {
-			console.log(axiosError.response.data);
-			res.setHeader('Set-Cookie', `temporaryToken=${axiosError.response.data.message}; Path=/; Max-Age=3600`);
-			res.redirect('/signup');
-		} else {
-			console.error('Error in googleAuthCallback:', error);
-			res.status(500).send('An error occurred during authentication.' + error);
+
+		if (axiosError.response) {
+			switch (axiosError.response.status) {
+				case 401:
+					// res.status(401).json({ error: 'code_already_used_or_expired' });
+					// break;
+					return res.redirect('/login?error=code_already_used_or_expired');
+				case 402:
+					console.log(axiosError.response.data);
+					res.setHeader('Set-Cookie', `temporaryToken=${axiosError.response.data.message}; Path=/; Max-Age=3600`);
+					res.redirect('/signup');
+					break;
+				default:
+				// 다른 HTTP 에러 처리
+			}
 		}
+		console.error('Error in googleAuthCallback:', error);
+		res.status(500).send('An error occurred during authentication.');
 	}
 };

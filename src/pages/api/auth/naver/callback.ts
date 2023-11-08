@@ -4,6 +4,7 @@ import { IResponse } from '@/src/fetchers/types';
 import axios, { AxiosError } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const code = req.query.code;
 
