@@ -21,7 +21,7 @@ const NotificationTabList: FC<NotificationTabListProps> = ({condition, onMore}) 
                 <div className='flex flex-col gap-4 justify-start '>
                     {data?.pages.map((page, index) => (
                         <React.Fragment key={index}>
-                            {!page?.notifications && <NotificationEmptyItem/>}
+                            {(!page?.notifications || page?.notifications.length === 0) && <NotificationEmptyItem/>}
                             {page?.notifications?.map((item, i) => (
                                 <NotificationItem key={i} group={item.group} type={item.type} date={item.notificationDateTime}
                                                   text={item.content}/>
