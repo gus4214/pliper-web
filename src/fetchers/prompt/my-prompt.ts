@@ -1,3 +1,4 @@
+import { IBaasResponse } from '@/src/fetchers/types';
 import {
 	GetInteractionByPromptsRequest,
 	GetInteractionByPromptsResult,
@@ -12,6 +13,8 @@ import { apis } from '@/src/fetchers/apis';
 import { getCookie } from '@/src/utils/cookie';
 import { accessTokenKey } from '@/src/configs/auth';
 import { QueryClient, useInfiniteQuery, useQuery } from 'react-query';
+
+export type GetMyPromptResult = Prompt & IBaasResponse;
 
 export const getInteractionByPromptsApi = (input: GetInteractionByPromptsRequest) => {
 	return callApi<GetInteractionByPromptsRequest, GetInteractionByPromptsResult>({
@@ -73,7 +76,7 @@ export const deleteMyPromptApi = (promptId: number) => {
 // 상세
 
 export const getMyPromptApi = (promptId: string, token?: string) => {
-	return callApi<string, Prompt>({
+	return callApi<string, GetMyPromptResult>({
 		api: apis.GET_MY_PROMPT_DETAIL,
 		slug: { promptId },
 		token: token,

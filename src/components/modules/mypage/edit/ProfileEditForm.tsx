@@ -3,16 +3,20 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import FormInput from '@/src/components/modules/@common/form/FormInput';
-import { Button } from 'react-daisyui';
+import { Button, Input } from 'react-daisyui';
 import { userCategory } from '@/src/configs/signup';
 import { RegisterUserRequest, updateUserProfileApi } from '@/src/fetchers/auth';
 import { useRouter } from 'next/router';
 import { useAuthContext } from '@/src/hooks/context';
-import { useConfirmModal } from '@/src/hooks/modal';
+import { useConfirmModal, useFailModal } from '@/src/hooks/modal';
+import { useSetAtom } from 'jotai';
+import { updateProfileAtom } from '@/src/stores/auth/actions/updateUserProfile';
+import { serverErrorText } from '@/src/utils/lang';
 
 interface FormData {
 	taste: string[];
 	nickname: string;
+	etcTaste?: string;
 }
 
 const schema = yup.object().shape({
@@ -23,7 +27,9 @@ const schema = yup.object().shape({
 const ProfileEditForm = () => {
 	const router = useRouter();
 	const [open, close] = useConfirmModal();
+	const failOpen = useFailModal();
 	const { user } = useAuthContext();
+	const setUserInfo = useSetAtom(updateProfileAtom);
 	const {
 		control,
 		setValue,
@@ -60,6 +66,18 @@ const ProfileEditForm = () => {
 			onConfirm: async ({ loading, clearLoading }) => {
 				loading!();
 				const result = await updateUserProfileApi(data);
+				if (result.isError) {
+					failOpen({
+						title: '정보 수정에 실패했습니다.',
+						description: serverErrorText(result),
+					});
+					clearLoading!();
+					return;
+				}
+				setUserInfo({
+					nickname: result.nickname,
+					taste: result.taste,
+				});
 				close();
 				router.push('/mypage/profile');
 			},
@@ -92,6 +110,7 @@ const ProfileEditForm = () => {
 							</Button>
 						))}
 					</div>
+					{/* {selectedJobs.includes('기타') && <Input placeholder='기타로 체크하실 경우 입력해주세요' />} */}
 				</div>
 				<Button fullWidth color='neutral' disabled={!buttonActive} type='submit'>
 					프로필 수정하기

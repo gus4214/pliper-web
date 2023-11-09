@@ -1,3 +1,4 @@
+import { IBaasResponse } from './../types';
 import { accessTokenKey } from '@/src/configs/auth';
 import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
@@ -5,14 +6,18 @@ import { UserSummary } from '@/src/fetchers/auth/types';
 import { getCookie } from '@/src/utils/cookie';
 import { useQuery } from 'react-query';
 
-export interface OAuthResult {
+export interface OAuthResult extends IBaasResponse {
 	url: string;
 }
 
-export interface OAuthCallbackResult {
+export interface OAuthCallbackResult extends IBaasResponse {
 	expires_in: number;
 	token: string;
 }
+
+export type ProfileResult = LoginUser & IBaasResponse;
+
+export type GetUserSummaryResult = UserSummary & IBaasResponse;
 
 export interface LoginUser {
 	nickname: string;
@@ -28,7 +33,7 @@ export interface RegisterUserRequest {
 	taste: string[];
 }
 
-export interface UpdateUserProfileResult {
+export interface UpdateUserProfileResult extends IBaasResponse {
 	nickname: string;
 	notificationCount: number;
 	oauthEmail: string;
@@ -53,7 +58,7 @@ export const naverAuthApi = (callbackUrl: string) => {
 };
 
 export const profileApi = (token: string) => {
-	return callApi<never, LoginUser>({
+	return callApi<never, ProfileResult>({
 		api: apis.PROFILE_API,
 		token: token,
 	});
@@ -76,7 +81,7 @@ export const updateUserProfileApi = (data: RegisterUserRequest) => {
 };
 
 export const getUserSummaryApi = (token?: string) => {
-	return callApi<never, UserSummary>({
+	return callApi<never, GetUserSummaryResult>({
 		api: apis.GET_USER_SUMMARY,
 		token: token || getCookie(accessTokenKey),
 	});

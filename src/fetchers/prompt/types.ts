@@ -1,9 +1,9 @@
 import { PromptSortType } from '@/src/configs/prompt';
-import { IPageRequest } from '@/src/fetchers/types';
+import { IBaasResponse, IPageRequest } from '@/src/fetchers/types';
 
 export type GetAiToolsType = 'LLM' | 'IMAGE';
 
-export type PersonaType = 'DAILY' | 'JOB'
+export type PersonaType = 'DAILY' | 'JOB';
 
 export interface GetPromptsRequest extends IPageRequest {
 	category1Texts?: string[];
@@ -45,7 +45,7 @@ export interface InteractionByPrompt {
 
 // =======================================
 
-export interface GetPromptsResult {
+export interface GetPromptsResult extends IBaasResponse {
 	first: boolean;
 	last: boolean;
 	limit: number;
@@ -56,16 +56,16 @@ export interface GetPromptsResult {
 	totalRows: number;
 }
 
-export interface GetPromptCategoryResult {
+export interface GetPromptCategoryResult extends IBaasResponse {
 	dailyCategories: Category[];
 	jobCategories: Category[];
 }
 
-export interface GetAiToolsResult {
+export interface GetAiToolsResult extends IBaasResponse {
 	tools: Tool[];
 }
 
-export interface RegisterPromptResult {
+export interface RegisterPromptResult extends IBaasResponse {
 	category1Text: string;
 	category2Text: string;
 	createDateTime: string;
@@ -87,7 +87,7 @@ export interface RegisterPromptResult {
 	viewCount: number;
 }
 
-export interface GetInteractionByPromptsResult {
+export interface GetInteractionByPromptsResult extends IBaasResponse {
 	interactions: InteractionByPrompt[];
 	email: string;
 }

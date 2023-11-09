@@ -14,6 +14,9 @@ import {
 	RegisterPromptRequest,
 	RegisterPromptResult,
 } from '@/src/fetchers/prompt/types';
+import { IBaasResponse } from '@/src/fetchers/types';
+
+export type GetPromptResult = Prompt & IBaasResponse;
 
 export const getPromptsApi = (input: GetPromptsRequest) => {
 	return callApi<GetPromptsRequest, GetPromptsResult>({
@@ -24,7 +27,7 @@ export const getPromptsApi = (input: GetPromptsRequest) => {
 };
 
 export const getPromptApi = (promptId: string, token?: string) => {
-	return callApi<string, Prompt>({
+	return callApi<string, GetPromptResult>({
 		api: apis.GET_PROMPT_DETAIL,
 		slug: { promptId },
 		token: token,

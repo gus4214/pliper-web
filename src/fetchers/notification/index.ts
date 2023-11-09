@@ -3,7 +3,7 @@ import { apis } from '@/src/fetchers/apis';
 import { accessTokenKey } from '@/src/configs/auth';
 import { getCookie } from '@/src/utils/cookie';
 import { useInfiniteQuery, useQuery } from 'react-query';
-import { IPageRequest } from '@/src/fetchers/types';
+import { IBaasResponse, IPageRequest } from '@/src/fetchers/types';
 
 export type NotificationGroup = 'SYSTEM' | 'USER';
 
@@ -13,7 +13,7 @@ export interface GetNotificationsRequest extends IPageRequest {
 	groups?: NotificationGroup | NotificationGroup[];
 }
 
-export interface GetNotificationsResult {
+export interface GetNotificationsResult extends IBaasResponse {
 	notifications: NotificationItem[];
 	totalRows: number;
 	totalPages: number;
@@ -21,7 +21,7 @@ export interface GetNotificationsResult {
 	first: boolean;
 }
 
-export interface GetNotificationCountResult {
+export interface GetNotificationCountResult extends IBaasResponse {
 	total: number;
 }
 
@@ -49,7 +49,6 @@ export const getNotificationCount = () => {
 	});
 };
 
-
 export const useGetNotifications = (input?: GetNotificationsRequest) => {
 	return useQuery(['notification', 'list', input] as const, () => getNotifications(input), {
 		suspense: true,
@@ -67,34 +66,29 @@ export const useGetNotificationCount = () => {
 };
 
 export const useInfiniteGetNotifications = (input?: GetNotificationsRequest) => {
-
 	const notifications = async ({ pageParam = 1 }) => {
 		const data = await getNotifications({ ...input, page: pageParam });
 
 		return {
 			...data,
 			currentPage: pageParam,
-		}
-	}
+		};
+	};
 
-	return useInfiniteQuery(
-		['notification', 'list', input] as const,
-		notifications,
-		{
-			getNextPageParam: (lastPage, pages) => {
-				// lastPage와 pages는 콜백함수에서 리턴한 값을 의미한다!!
-				// lastPage: 직전에 반환된 리턴값, pages: 여태 받아온 전체 페이지
+	return useInfiniteQuery(['notification', 'list', input] as const, notifications, {
+		getNextPageParam: (lastPage, pages) => {
+			// lastPage와 pages는 콜백함수에서 리턴한 값을 의미한다!!
+			// lastPage: 직전에 반환된 리턴값, pages: 여태 받아온 전체 페이지
 
-				if (!lastPage.last) {
-					return lastPage.currentPage + 1;
-				}
+			if (!lastPage.last) {
+				return lastPage.currentPage + 1;
+			}
 
-				// 마지막 페이지면 undefined가 리턴되어서 hasNextPage는 false가 됨!
-				return undefined;
-			},
-			suspense: true,
-			refetchOnReconnect: false,
-			refetchOnWindowFocus: false,
-		}
-	);
+			// 마지막 페이지면 undefined가 리턴되어서 hasNextPage는 false가 됨!
+			return undefined;
+		},
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
 };

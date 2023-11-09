@@ -15,3 +15,19 @@ export const useConfirmModal = (): [(options: ConfirmModalOpenOptions) => void, 
 
 	return [openModal, closeModal];
 };
+
+export const useFailModal = () => {
+	const openModal = useSetAtom(openConfirmModalAtom);
+	const closeModal = useSetAtom(closeConfirmModalAtom);
+	return ({ title, description, onConfirm }: { title: string; description?: string | React.ReactNode; onConfirm?: () => void }) => {
+		openModal({
+			title,
+			description,
+			onConfirm: () => {
+				onConfirm && onConfirm();
+				closeModal();
+			},
+			hideCancel: true,
+		});
+	};
+};

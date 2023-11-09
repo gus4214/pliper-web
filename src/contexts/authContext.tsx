@@ -1,7 +1,7 @@
 import { accessTokenKey } from '@/src/configs/auth';
 import { LoginUser, profileApi } from '@/src/fetchers/auth';
 import { AuthenticationUser, userAtom } from '@/src/stores/auth';
-import { saveUserAtom } from '@/src/stores/auth/login';
+import { saveUserAtom } from '@/src/stores/auth/actions/login';
 import { initializedAtom } from '@/src/stores/initialization';
 import { clearCookie, getCookie } from '@/src/utils/cookie';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';

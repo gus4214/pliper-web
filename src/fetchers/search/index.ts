@@ -1,3 +1,4 @@
+import { IBaasResponse } from '@/src/fetchers/types';
 import { callApi } from '@/src/fetchers';
 import { apis } from '@/src/fetchers/apis';
 import { accessTokenKey } from '@/src/configs/auth';
@@ -15,15 +16,21 @@ export interface GetTopSearchedItem {
 	score: number;
 }
 
+export type GetSearchedByUserResult = GetSearchedByUserItem[] & IBaasResponse;
+
+export type GetTopSearchedResult = GetTopSearchedItem & IBaasResponse;
+
+export type GetDeleteSearchedByUser = never & IBaasResponse;
+
 export const getSearchedByUserApi = () => {
-	return callApi<never, GetSearchedByUserItem[]>({
+	return callApi<never, GetSearchedByUserResult>({
 		api: apis.GET_SEARCHED_BY_USER,
 		token: getCookie(accessTokenKey),
 	});
 };
 
 export const deleteSearchedByUserApi = ({ historyId }: { historyId: number }) => {
-	return callApi<number, never>({
+	return callApi<number, GetDeleteSearchedByUser>({
 		api: apis.DELETE_SEARCHED_BY_USER,
 		slug: { historyId },
 		token: getCookie(accessTokenKey),
@@ -31,14 +38,14 @@ export const deleteSearchedByUserApi = ({ historyId }: { historyId: number }) =>
 };
 
 export const deleteAllSearchedByUserApi = () => {
-	return callApi<never, never>({
+	return callApi<never, GetDeleteSearchedByUser>({
 		api: apis.DELETE_ALL_SEARCHED_BY_USER,
 		token: getCookie(accessTokenKey),
 	});
 };
 
 export const getTopSearchedApi = () => {
-	return callApi<never, GetTopSearchedItem>({
+	return callApi<never, GetTopSearchedResult>({
 		api: apis.GET_TOP_SEARCHED,
 		token: getCookie(accessTokenKey),
 	});
