@@ -1,8 +1,7 @@
 import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
-import { IResponse } from '@/src/fetchers/types';
-import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
+import Link from 'next/link';
 
 const webHost = process.env.NEXT_PUBLIC_WEB;
 
@@ -75,7 +74,19 @@ const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 					</div>
 					<div className='w-[421px]'>
 						<span className='text-neutral-600 text-[13px]'>
-							계속 진행할경우 <strong>개인정보 보호정책</strong> 및 <strong>서비스약관</strong>에 동의한 것으로 간주됩니다.
+							계속 진행할경우{' '}
+							<strong>
+								<Link href={'/policy/542179ad-6c36-4d82-b993-9ddf871d49f9'} rel='noopener noreferrer' target='_blank'>
+									개인정보처리방침
+								</Link>
+							</strong>{' '}
+							및{' '}
+							<strong>
+								<Link href={'/policy/a573ca9d45e4426ebfbb6ef4ef128953'} rel='noopener noreferrer' target='_blank'>
+									이용약관
+								</Link>
+							</strong>
+							에 동의한 것으로 간주됩니다.
 						</span>
 					</div>
 				</div>
