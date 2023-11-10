@@ -1,8 +1,7 @@
-import { useAuthContext } from '@/src/hooks/context';
 import { useLoginModal } from '@/src/hooks/modal';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { Dropdown, Button, Divider, Avatar } from 'react-daisyui';
+import React, { useEffect, useState } from 'react';
+import { Avatar, Button, Divider, Dropdown } from 'react-daisyui';
 
 interface UserDropdownProps {
 	loggedIn?: boolean;

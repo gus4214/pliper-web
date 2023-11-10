@@ -38,9 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		if (axiosError.response) {
 			switch (axiosError.response.status) {
 				case 401:
-					// res.status(401).json({ error: 'code_already_used_or_expired' });
-					// break;
-					return res.redirect('/login?error=code_already_used_or_expired');
+					return res.redirect('/');
 				case 402:
 					console.log(axiosError.response.data);
 					res.setHeader('Set-Cookie', `temporaryToken=${axiosError.response.data.message}; Path=/; Max-Age=3600`);

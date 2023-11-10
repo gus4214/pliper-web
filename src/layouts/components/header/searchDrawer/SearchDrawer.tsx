@@ -14,13 +14,24 @@ interface SearchDrawerProps {
 
 const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 	const { user } = useAuthContext();
-
 	const router = useRouter();
 
 	const handleSearch = () => {
 		router.push('/prompt');
 		onClose && onClose();
 	};
+
+	useEffect(() => {
+		const closeDrawer = () => {
+			onClose && onClose();
+		};
+
+		router.events.on('routeChangeStart', closeDrawer);
+
+		return () => {
+			router.events.off('routeChangeStart', closeDrawer);
+		};
+	}, [onClose, router.events]);
 
 	useEffect(() => {
 		if (isOpen) {
