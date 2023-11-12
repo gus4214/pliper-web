@@ -1,10 +1,20 @@
 import { deleteAllSearchedByUserApi, deleteSearchedByUserApi, useGetSearchedByUser } from '@/src/fetchers/search';
 import RecentlySearchItem from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchItem';
+import { searchInputAtom } from '@/src/stores/searchForm';
+import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/router';
 
 const RecentlySearchList = () => {
 	const { data, refetch } = useGetSearchedByUser();
+	const router = useRouter();
+	const setSearchInputValue = useSetAtom(searchInputAtom);
 
 	const dataArray = data ? Object.values(data) : [];
+
+	const handleClick = async (text: string) => {
+		await setSearchInputValue(text);
+		router.push('/prompt');
+	};
 
 	const handleDelete = async (historyId: number) => {
 		try {
@@ -37,7 +47,13 @@ const RecentlySearchList = () => {
 			</div>
 			<div className='flex-col justify-start items-start gap-3 flex'>
 				{dataArray.map((v) => (
-					<RecentlySearchItem text={v.keyword} key={v.historyId} historyId={v.historyId} onClick={handleDelete} />
+					<RecentlySearchItem
+						text={v.keyword}
+						key={v.historyId}
+						historyId={v.historyId}
+						onDeleteClick={handleDelete}
+						onClick={handleClick}
+					/>
 				))}
 			</div>
 		</>
