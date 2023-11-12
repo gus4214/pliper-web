@@ -1,4 +1,5 @@
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
+import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
 import PromptDetailInfoHeader from '@/src/components/modules/prompt/detail/PromptDetailInfoHeader';
 import PromptTemplateSection from '@/src/components/modules/prompt/detail/PromptTemplateSection';
 import { Prompt } from '@/src/fetchers/prompt/types';
@@ -29,7 +30,8 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 
 	return (
 		<>
-			<div className='w-[1176px] px-6 flex flex-col items-center mx-auto pt-[57px] pb-[104px]'>
+			<div className='w-[1176px] px-6 flex flex-col items-center mx-auto pt-[57px] pb-[104px] relative'>
+				<FloatButtonGroup className='top-[192px] mr-[-634px]' />
 				<PromptDetailInfoHeader
 					personaType={personaType}
 					category1Text={category1Text}

@@ -1,3 +1,4 @@
+import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
 import MainAiPlatformContainer from '@/src/components/modules/main/mainAiPlatform/MainAiPlatformContainer';
 import MainDailyPromptContainer from '@/src/components/modules/main/mainDailyPromptList/MainDailyPromptContainer';
 import MainHotTopicContainer from '@/src/components/modules/main/mainHotTopic/MainHotTopicContainer';
@@ -9,7 +10,8 @@ const MainTemplate = () => {
 	const { data } = useGetCurationMain({ dailyCategory: null, jobCategory: null });
 
 	return (
-		<div className='flex flex-col items-center'>
+		<div className='flex flex-col items-center relative'>
+			<FloatButtonGroup className='top-[353px] mr-[-656px]' />
 			<MainVisualContainer bestClip={data?.bestClip || []} />
 			<MainHotTopicContainer keywords={data?.keywords || []} />
 			<MainWorkPromptContainer />

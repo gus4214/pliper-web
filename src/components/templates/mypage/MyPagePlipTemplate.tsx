@@ -1,12 +1,14 @@
 import ListTitleHeaderBox from '@/src/components/atoms/box/mypage/ListTitleHeaderBox';
 import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageButton';
+import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
 import MyPlipListContainer from '@/src/components/modules/mypage/plip/MyPlipListContainer';
 import PromptMenuListContainer from '@/src/components/modules/prompt/menu/PromptMenuListContainer';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 
 const MyPagePlipTemplate = () => {
 	return (
-		<div className='w-full h-full flex flex-col items-center'>
+		<div className='w-full h-full flex flex-col items-center relative'>
+			<FloatButtonGroup className='top-[186px] mr-[-646px]' />
 			<ListTitleHeaderBox title={'마이 플립'} />
 			<div className='w-[1160px] flex flex-col pt-6 pb-[85px] gap-8'>
 				<GoBackToMyPageButton />
