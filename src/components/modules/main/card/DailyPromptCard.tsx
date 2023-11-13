@@ -16,7 +16,10 @@ interface DailyPromptCardProps {
 
 const DailyPromptCard: React.FC<DailyPromptCardProps> = ({ src, user, title, tag, likeCount, viewCount, onClick }) => {
 	return (
-		<Card className='w-[576px] p-4 flex flex-row items-center cursor-pointer bg-white gap-4 rounded-lg hover:shadow-lg transition-all duration-300' onClick={onClick}>
+		<Card
+			className='w-[576px] max-h-[112px] p-4 flex flex-row items-center cursor-pointer bg-white gap-4 rounded-lg hover:shadow-lg transition-all duration-300'
+			onClick={onClick}
+		>
 			<Avatar shape='circle' size={4 * 20} src={src} />
 			<div className='flex flex-col gap-3 w-full flex-nowrap truncate'>
 				<div className='flex justify-between'>
