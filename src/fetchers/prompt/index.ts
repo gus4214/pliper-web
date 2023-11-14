@@ -97,30 +97,28 @@ export const useGetAiTools = (type: GetAiToolsRequest) => {
 };
 
 export const useInfiniteGetPrompts = (input: GetPromptsRequest) => {
-	return useInfiniteQuery(
-		queryKeys.getPromptList(input),
-		async ({ pageParam = 1 }) => {
-			try {
-				const result = await getPromptsApi({ ...input, page: pageParam });
-				return result;
-			} catch (error) {
-				return undefined;
+	const prompts = async ({ pageParam = 1 }) => {
+		const data = await getPromptsApi({ ...input, page: pageParam });
+
+		return {
+			...data,
+			currentPage: pageParam,
+		};
+	};
+
+	return useInfiniteQuery(queryKeys.getPromptList(input), prompts, {
+		getNextPageParam: (lastPage, allPages) => {
+			// 마지막 페이지가 아닐 경우 다음 페이지 번호를 반환
+			if (lastPage.page !== lastPage.totalPages) {
+				return lastPage.currentPage + 1;
 			}
+			// 마지막 페이지일 경우 undefined 반환
+			return undefined;
 		},
-		{
-			getNextPageParam: (lastPage, allPages) => {
-				// 마지막 페이지가 아닐 경우 다음 페이지 번호를 반환
-				if (!lastPage?.last) {
-					return (lastPage?.page ?? 0) + 1;
-				}
-				// 마지막 페이지일 경우 undefined 반환
-				return undefined;
-			},
-			suspense: true,
-			refetchOnReconnect: false,
-			refetchOnWindowFocus: false,
-		}
-	);
+		suspense: true,
+		refetchOnReconnect: false,
+		refetchOnWindowFocus: false,
+	});
 };
 
 export const prefetchGetPrompt = (client: QueryClient, promptId: string, token?: string | null) => {

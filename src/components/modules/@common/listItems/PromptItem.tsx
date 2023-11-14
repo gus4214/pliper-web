@@ -1,7 +1,7 @@
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
-import {InteractionByPrompt, PersonaType} from '@/src/fetchers/prompt/types';
+import { InteractionByPrompt, PersonaType } from '@/src/fetchers/prompt/types';
 import React from 'react';
-import {promptKoTextOfPersona} from "@/src/configs/prompt";
+import { promptKoTextOfPersona } from '@/src/configs/prompt';
 
 export interface PromptItemProps {
 	personaType: PersonaType;
