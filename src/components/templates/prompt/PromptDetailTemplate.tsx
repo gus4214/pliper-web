@@ -1,3 +1,4 @@
+import Loading from '@/src/components/atoms/loading/Loading';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
 import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
 import PromptDetailInfoHeader from '@/src/components/modules/prompt/detail/PromptDetailInfoHeader';
@@ -47,7 +48,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 					description={description}
 				/>
 				<div className='mt-12' />
-				<AsyncComponentBoundary>
+				<AsyncComponentBoundary pendingFallback={<Loading />}>
 					<PromptTemplateSection parameters={parameters} template={template} promptId={promptId} />
 				</AsyncComponentBoundary>
 			</div>

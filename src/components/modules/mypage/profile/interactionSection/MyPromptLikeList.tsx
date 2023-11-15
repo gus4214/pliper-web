@@ -27,11 +27,12 @@ const MyPromptLikeList = () => {
 		}
 	}, [inView]);
 
+	if (data?.pages[0].totalRows === 0) return <PromptEmptyText />;
+
 	return (
 		<>
 			{data?.pages.map((page, index) => (
 				<React.Fragment key={index}>
-					{!page?.prompts && <PromptEmptyText />}
 					{page?.prompts.map((prompt) => (
 						<PromptItemWithInteraction
 							key={prompt.promptId}

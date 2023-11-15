@@ -1,60 +1,21 @@
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
-import FormToggleChipGroup from '@/src/components/modules/@common/form/FormToggleChipGroup';
 import PreviewPromptModal from '@/src/components/modules/prompt/register/PreviewPromptModal';
 import AiToggleGroup from '@/src/components/modules/prompt/register/form/AiToggleGroup';
-import PersonaToggleGroup from '@/src/components/modules/prompt/register/form/PersonaToggleGroup';
+import PersonaAndCategory from '@/src/components/modules/prompt/register/form/PersonaAndCategory';
 import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register/form/RegisterFormPromptTemplate';
 import LabelWithFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithFormElement';
-import { useGetPromptCategory } from '@/src/fetchers/prompt';
-import { Category, Dept1, PersonaType } from '@/src/fetchers/prompt/types';
 import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
-import React, { useEffect, useMemo, useState } from 'react';
-import { Modal, Toggle } from 'react-daisyui';
+import React from 'react';
+import { Toggle } from 'react-daisyui';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
-interface RegisterFormContentsProps {
+export interface RegisterFormContentsProps {
 	formHandler: UseFormReturn<PromptRegisterFormData>;
 }
 
 const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler }) => {
-	const { control, watch, getValues } = formHandler;
-
-	const { data } = useGetPromptCategory();
-	const [selectedPersona, setSelectedPersona] = useState<PersonaType>('JOB');
-
-	// 카테고리 상태 및 로직
-	const [selectedDept1, setSelectedDept1] = useState<string | null>(getValues('category1Text'));
-	const [dept1Categories, setDept1Categories] = useState<Dept1[]>([]);
-
-	const personaType = watch('personaType');
-
-	const dept1ChipOptions = dept1Categories.map((dept1) => ({
-		code: dept1.code,
-		label: dept1.text,
-	}));
-
-	const dept2Options = useMemo(() => {
-		if (!selectedDept1 || !personaType) return [];
-
-		const targetCategories = personaType === 'JOB' ? data?.jobCategories : data?.dailyCategories;
-		const selectedCategory = targetCategories?.find((category) => category.dept1.text === selectedDept1);
-		return selectedCategory ? selectedCategory.dept2.map((item) => ({ code: item.code, label: item.text })) : [];
-	}, [selectedDept1, personaType, data]);
-
-	useEffect(() => {
-		const updateDept1Categories = (categories: Category[]) => {
-			setDept1Categories(categories.map((category) => category.dept1));
-		};
-
-		if (personaType === 'DAILY') {
-			updateDept1Categories(data?.dailyCategories || []);
-		} else if (personaType === 'JOB') {
-			updateDept1Categories(data?.jobCategories || []);
-		}
-	}, [personaType, data]);
-
-	const { Dialog, handleShow } = Modal.useDialog();
+	const { control } = formHandler;
 
 	return (
 		<div className='w-[1144px] px-6 pt-8 pb-4 bg-neutral-50 rounded-lg flex-col items-center gap-6 flex'>
@@ -64,29 +25,8 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 					<FormInput control={control} name='title' inputProps={{ placeholder: '제목을 25자 이내로 입력하세요' }} />
 				</LabelWithFormElement>
 
-				{/* // 페르소나 구간 */}
-				<LabelWithFormElement label='페르소나'>
-					<PersonaToggleGroup formHandler={formHandler} onChange={(value) => setSelectedPersona(value as PersonaType)} />
-				</LabelWithFormElement>
-
-				{/* 카테고리 구간 */}
-				<LabelWithFormElement label='카테고리' labelPosition='start'>
-					<div className='flex flex-col gap-4 justify-start'>
-						<FormToggleChipGroup
-							name='category1Text'
-							control={control}
-							options={dept1ChipOptions || []}
-							color='secondary'
-							onChange={setSelectedDept1}
-							chipClassName='bg-white'
-						/>
-						{dept2Options.length > 0 && (
-							<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>
-								<FormToggleChipGroup name='category2Text' control={control} options={dept2Options} color='secondary' />
-							</div>
-						)}
-					</div>
-				</LabelWithFormElement>
+				{/*  페르소나, 카테고리 구간 */}
+				<PersonaAndCategory formHandler={formHandler} />
 
 				{/* 사용 AI 구간 */}
 				<LabelWithFormElement label='사용 AI 플랫폼'>

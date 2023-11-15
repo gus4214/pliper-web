@@ -20,11 +20,11 @@ const PromptItemSkeleton = () => {
 const PromptListSkeleton = () => {
 	return (
 		<div className='flex flex-col gap-4'>
-			<div className='w-[944px] h-[129.5px] rounded-2xl border border-neutral-200 flex bg-gray-300 animate-pulse' />
-			<div className='w-[944px] h-[129.5px] rounded-2xl border border-neutral-200 flex bg-gray-300 animate-pulse' />
-			<div className='w-[944px] h-[129.5px] rounded-2xl border border-neutral-200 flex bg-gray-300 animate-pulse' />
-			<div className='w-[944px] h-[129.5px] rounded-2xl border border-neutral-200 flex bg-gray-300 animate-pulse' />
-			<div className='w-[944px] h-[129.5px] rounded-2xl border border-neutral-200 flex bg-gray-300 animate-pulse' />
+			<div className='w-[944px] h-[129.5px] rounded-2xl  flex bg-gray-300 animate-pulse' />
+			<div className='w-[944px] h-[129.5px] rounded-2xl  flex bg-gray-300 animate-pulse' />
+			<div className='w-[944px] h-[129.5px] rounded-2xl  flex bg-gray-300 animate-pulse' />
+			<div className='w-[944px] h-[129.5px] rounded-2xl  flex bg-gray-300 animate-pulse' />
+			<div className='w-[944px] h-[129.5px] rounded-2xl  flex bg-gray-300 animate-pulse' />
 		</div>
 	);
 };

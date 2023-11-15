@@ -13,7 +13,7 @@ const MyPromptReliabilityList = () => {
 	const router = useRouter();
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
-	const promptIds = data?.pages.flatMap((page) => page?.prompts.map((v) => v.promptId) || []);
+	const promptIds = data?.pages.flatMap((page) => page?.prompts?.map((v) => v.promptId) || []);
 	const { getInteractionByPromptId } = usePromptInteractions(promptIds!);
 
 	const { ref, inView } = useInView({
@@ -27,11 +27,12 @@ const MyPromptReliabilityList = () => {
 		}
 	}, [inView]);
 
+	if (data?.pages[0].totalRows === 0) return <PromptEmptyText />;
+
 	return (
 		<>
 			{data?.pages.map((page, index) => (
 				<React.Fragment key={index}>
-					{!page?.prompts && <PromptEmptyText />}
 					{page?.prompts.map((prompt) => (
 						<PromptItemWithInteraction
 							key={prompt.promptId}
