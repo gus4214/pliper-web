@@ -9,7 +9,6 @@ interface MyPageCreatedPromptDetailTemplateProps {
 const MyPageCreatedPromptDetailTemplate: React.FC<MyPageCreatedPromptDetailTemplateProps> = ({ data }) => {
 	return (
 		<div className='pt-8 pb-17 flex flex-col items-center relative'>
-			<FloatButtonGroup className='top-[192px] mr-[-600px]' />
 			<UpdatePromptFormContainer data={data} />
 		</div>
 	);
