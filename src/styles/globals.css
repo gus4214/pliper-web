@@ -9,3 +9,11 @@
 .google-button:hover .google-icon {
     @apply text-white;
 }
+
+.drawer-transition {
+    @apply fixed inset-x-0 top-16 z-30 w-full h-full flex flex-col items-center overflow-y-hidden transition-transform ease-in-out;
+    transform: translateY(-100%);
+}
+.drawer-open {
+    transform: translateY(0);
+}

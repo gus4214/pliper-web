@@ -21,6 +21,14 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 		onClose && onClose();
 	};
 
+	const handleBackgroundClick = () => {
+		onClose && onClose();
+	};
+
+	const handleContentClick = (event: React.MouseEvent) => {
+		event.stopPropagation();
+	};
+
 	useEffect(() => {
 		const closeDrawer = () => {
 			onClose && onClose();
@@ -52,9 +60,10 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 
 	return (
 		<div
-			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden`}
+			onClick={handleBackgroundClick}
+			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden cursor-pointer`}
 		>
-			<div className='w-[750px] flex flex-col mt-10 justify-center'>
+			<div className='w-[750px] flex flex-col mt-10 justify-center cursor-default' onClick={handleContentClick}>
 				<SearchForm onEnter={handleSearch} />
 				<div className='w-[750px] px-4 py-10 flex-col justify-start items-start gap-10 flex'>
 					{user && <RecentlySearchListContainer />}
