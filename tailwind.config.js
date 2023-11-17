@@ -9,6 +9,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				pretendard: ["var(--font-pretendard)"],
+			},
 			colors: {
 				teal: {
 					50: '#D7f3f4',

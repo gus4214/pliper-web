@@ -13,9 +13,7 @@ const ProfileSection = () => {
 		<MyPageUserSummaryLoader>
 			<div className='flex flex-col gap-8'>
 				<UserInfoHeader
-					nickname={user?.nickname as string}
-					taste={user?.taste as string}
-					oauthType={user?.oauthType as string}
+					user={user!}
 					action={
 						<Button
 							variant='outline'

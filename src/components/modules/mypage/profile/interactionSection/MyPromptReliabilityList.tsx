@@ -3,7 +3,7 @@ import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import PromptItemWithInteraction from '@/src/components/modules/@common/listItems/PromptItemWithInteraction';
 import { useInfiniteGetMyPromptsByReliability } from '@/src/fetchers/prompt/my-prompt';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
-import { formatDateToKorean } from '@/src/utils/dateUtils';
+import {formatDateToKorean, timeAgo} from '@/src/utils/dateUtils';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -39,7 +39,7 @@ const MyPromptReliabilityList = () => {
 							personaType={prompt.personaType}
 							category1Text={prompt.category1Text}
 							userNickname={prompt.userNickname}
-							updateDateTime={formatDateToKorean(prompt.updateDateTime)}
+							updateDateTime={timeAgo(prompt.updateDateTime)}
 							title={prompt.title}
 							likeCount={prompt.likeCount}
 							viewCount={prompt.viewCount}

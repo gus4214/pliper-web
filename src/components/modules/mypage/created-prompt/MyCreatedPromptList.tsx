@@ -6,11 +6,11 @@ import { deleteMyPromptApi, updateMyPromptApi, useInfiniteGetMyCreatedPrompts } 
 import { useConfirmModal } from '@/src/hooks/modal';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
 import { searchFilterAtom } from '@/src/stores/searchForm';
-import { formatDateToKorean } from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { timeAgo } from '@/src/utils/dateUtils';
 
 const MyCreatedPromptList = () => {
 	const router = useRouter();
@@ -120,7 +120,7 @@ const MyCreatedPromptList = () => {
 							personaType={prompt.personaType}
 							category1Text={prompt.category1Text}
 							userNickname={prompt.userNickname}
-							updateDateTime={formatDateToKorean(prompt.updateDateTime)}
+							updateDateTime={timeAgo(prompt.updateDateTime)}
 							title={prompt.title}
 							likeCount={prompt.likeCount}
 							viewCount={prompt.viewCount}

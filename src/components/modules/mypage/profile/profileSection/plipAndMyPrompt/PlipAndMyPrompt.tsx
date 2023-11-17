@@ -20,7 +20,7 @@ const PlipAndMyPrompt = () => {
 				onMoreButtonClick={() => router.push('/mypage/plip')}
 			/>
 			<PlipAndMyPromptBox
-				title='생성한 프롬프트'
+				title='내가 만든 프롬프트'
 				count={createdPromptsCount}
 				list={<MyPromptList createdPrompts={createdPrompts} />}
 				onMoreButtonClick={() => router.push('/mypage/created-prompt')}

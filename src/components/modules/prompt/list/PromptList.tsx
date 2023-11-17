@@ -4,7 +4,7 @@ import { useInfiniteGetPrompts } from '@/src/fetchers/prompt';
 import { useAuthContext } from '@/src/hooks/context';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
 import { searchFilterAtom } from '@/src/stores/searchForm';
-import { formatDateToKorean } from '@/src/utils/dateUtils';
+import {formatDateToKorean, timeAgo} from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
@@ -115,7 +115,7 @@ const PromptList: FC = () => {
 								personaType={prompt.personaType}
 								category1Text={prompt.category1Text}
 								userNickname={prompt.userNickname}
-								updateDateTime={formatDateToKorean(prompt.updateDateTime)}
+								updateDateTime={timeAgo(prompt.updateDateTime)}
 								title={prompt.title}
 								likeCount={prompt.likeCount}
 								viewCount={prompt.viewCount}

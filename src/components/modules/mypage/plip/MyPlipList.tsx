@@ -5,11 +5,11 @@ import PromptItemWithInteraction from '@/src/components/modules/@common/listItem
 import { useInfiniteGetMyPromptClips } from '@/src/fetchers/prompt/my-clip';
 import { usePromptInteractions } from '@/src/hooks/promptInteractions';
 import { searchFilterAtom, searchInputAtom } from '@/src/stores/searchForm';
-import { formatDateToKorean } from '@/src/utils/dateUtils';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import {timeAgo} from "@/src/utils/dateUtils";
 
 const MyPlipList = () => {
 	const router = useRouter();
@@ -70,7 +70,7 @@ const MyPlipList = () => {
 							personaType={prompt.personaType}
 							category1Text={prompt.category1Text}
 							userNickname={prompt.userNickname}
-							updateDateTime={formatDateToKorean(prompt.updateDateTime)}
+							updateDateTime={timeAgo(prompt.updateDateTime)}
 							title={prompt.title}
 							likeCount={prompt.likeCount}
 							viewCount={prompt.viewCount}

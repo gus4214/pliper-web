@@ -17,3 +17,6 @@
 .drawer-open {
     transform: translateY(0);
 }
+
+html,button, input, optgroup, select, textarea  {
+}

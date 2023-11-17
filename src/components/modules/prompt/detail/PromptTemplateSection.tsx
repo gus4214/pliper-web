@@ -16,7 +16,7 @@ interface PromptTemplateSectionProps {
 	preview?: boolean;
 }
 
-const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters, template, promptId, preview }) => {
+const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters = [], template, promptId, preview }) => {
 	const [filledTemplate, setFilledTemplate] = useState('');
 	const ref = useRef<HTMLTextAreaElement | null>(null);
 

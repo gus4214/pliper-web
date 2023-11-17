@@ -9,7 +9,7 @@ const MyPageCreatedPromptTemplate = () => {
 	return (
 		<div className='w-full h-full flex flex-col items-center relative'>
 			<FloatButtonGroup className='top-[186px] mr-[-646px]' />
-			<ListTitleHeaderBox title={'생성한 프롬프트'} />
+			<ListTitleHeaderBox title={'내가 만든 프롬프트'} />
 			<div className='w-[1160px] flex flex-col pt-6 pb-[85px] gap-8'>
 				<GoBackToMyPageButton />
 				<div className='flex  w-full gap-10'>

@@ -1,8 +1,8 @@
 import PromptCategoryChip from '@/src/components/atoms/chip/PromptCategoryChip';
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
-import { formatDateToKorean } from '@/src/utils/dateUtils';
-import {PersonaType} from "@/src/fetchers/prompt/types";
-import {promptKoTextOfPersona} from "@/src/configs/prompt";
+import { formatDateToKorean, timeAgo } from '@/src/utils/dateUtils';
+import { PersonaType } from '@/src/fetchers/prompt/types';
+import { promptKoTextOfPersona } from '@/src/configs/prompt';
 
 interface PromptDetailInfoHeaderProps {
 	personaType: PersonaType;
@@ -57,9 +57,7 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 								<div className='justify-start items-center gap-2 flex'>
 									<span className='text-center text-neutral-400 text-[13px] font-normal'>{userNickname}</span>
 									<div className='w-1 h-1 bg-neutral-200 rounded-full' />
-									<span className='text-center text-neutral-400 text-[13px] font-normal'>
-										{formatDateToKorean(updateDateTime!)}
-									</span>
+									<span className='text-center text-neutral-400 text-[13px] font-normal'>{timeAgo(updateDateTime!)}</span>
 								</div>
 							)}
 						</div>

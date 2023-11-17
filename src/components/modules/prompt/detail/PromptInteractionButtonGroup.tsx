@@ -16,6 +16,7 @@ import {getInteractionByPromptsApi} from '@/src/fetchers/prompt/my-prompt';
 import {useAuthContext} from '@/src/hooks/context';
 import {motion} from 'framer-motion';
 import PlipAnimation, {usePlipAnimation} from "@/src/components/modules/prompt/animation/PlipAnimation";
+import {pretendard} from "@/src/styles/font";
 
 
 interface PromptInteractionButtonGroupProps {
@@ -113,7 +114,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
                     </motion.div>
                 </div>
                 <Button color='accent' onClick={onCreateClick} className='min-h-8 h-10'>
-                    <span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
+                    <span className={`text-white text-sm font-medium`}>프롬프트 생성하기</span>
                 </Button>
             </div>
             <PlipAnimation control={control}/>
