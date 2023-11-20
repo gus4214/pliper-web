@@ -27,7 +27,7 @@ export interface RegisterPromptRequest {
 	parameters?: Parameter[];
 	personaType: PersonaType;
 	show: boolean;
-	template?: string;
+	template: string;
 	title: string;
 }
 

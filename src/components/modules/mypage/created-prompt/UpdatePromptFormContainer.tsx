@@ -28,7 +28,7 @@ const UpdatePromptFormContainer: React.FC<UpdatePromptFormContainerProps> = ({ d
 					>
 						<span className='text-neutral-400 text-sm font-medium'>닫기</span>
 					</Button>
-					<Button color='accent' className='rounded' onClick={onUpdateSubmit}>
+					<Button color='accent' className='rounded' onClick={onUpdateSubmit} disabled={!formHandler.formState.isValid}>
 						<span className='text-white text-sm font-medium'>프롬프트 수정하기</span>
 					</Button>
 				</div>

@@ -4,9 +4,12 @@ import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
 import { Parameter, Prompt } from '@/src/fetchers/prompt/types';
 import { stringToArray } from '@/src/utils/conversionUtils';
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
+import { BeakerIcon } from '@heroicons/react/24/outline';
+import { CopyIcon } from '@/src/components/atoms/icons/CopyIcon';
+import { handleCopyClipBoard } from '@/src/utils/utils';
 
 interface PromptTemplateSectionProps {
 	// prompt: Prompt;
@@ -46,7 +49,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 			newTemplate = newTemplate.replace(placeholder, value);
 		});
 
-		setFilledTemplate(newTemplate+""); // 채워진 템플릿을 상태에 업데이트
+		setFilledTemplate(newTemplate + ''); // 채워진 템플릿을 상태에 업데이트
 		ref.current?.focus();
 	};
 
@@ -60,7 +63,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 							let element; // 이 변수에 각 type에 따른 컴포넌트를 저장할 예정입니다.
 
 							switch (parameter.type) {
-								case '텍스트':
+								case 'TEXT':
 									element = (
 										<FormInput
 											name={parameter.title}
@@ -69,7 +72,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 										/>
 									);
 									break;
-								case '선택':
+								case 'SELECT':
 									element = (
 										<Controller
 											name={parameter.title}
@@ -87,7 +90,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 										/>
 									);
 									break;
-								case '중복 선택':
+								case 'MULTI_SELECT':
 									element = (
 										<FormToggleMultiChipGroup
 											name={parameter.title}
@@ -113,15 +116,22 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 						})}
 					</div>
 				</div>
-				<div className='flex flex-col gap-4'>
+				<div className='flex flex-col gap-4 relative'>
 					<h1 className={`pl-2 ${promptTitle} text-sm font-medium`}>프롬프트</h1>
 					<Textarea
 						ref={ref}
+						readOnly
 						value={filledTemplate}
-						className={`${layoutWidth} h-72 border-8 ${promptTextArea}`}
+						rows={filledTemplate ? 5 : 1}
+						className={`${layoutWidth} border-8 ${promptTextArea}`}
 						bordered={false}
 						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
 					/>
+					{filledTemplate && (
+						<div className={`absolute right-[15px] bottom-[15px] cursor-pointer`} onClick={() => handleCopyClipBoard(filledTemplate)}>
+							<CopyIcon />
+						</div>
+					)}
 				</div>
 			</div>
 			{preview ? (

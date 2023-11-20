@@ -1,14 +1,13 @@
 import FormToggleChipCodeGroup from '@/src/components/modules/@common/form/FormToggleChipCodeGroup';
 import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
-import { UseFormReturn } from 'react-hook-form';
+import {Control, UseFormReturn} from 'react-hook-form';
 
 interface PersonaToggleGroupProps {
-	formHandler: UseFormReturn<PromptRegisterFormData>;
+	control: Control<PromptRegisterFormData>;
 	onChange: (value: string) => void;
 }
 
-const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ formHandler, onChange }) => {
-	const { control, setValue } = formHandler;
+const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ control, onChange }) => {
 
 	// useEffect(() => {
 	// 	setValue('personaType', '업무');

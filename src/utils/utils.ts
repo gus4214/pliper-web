@@ -50,6 +50,10 @@ export const createFormData = <T extends object>(datas: T, form?: FormData) => {
 	return form;
 };
 
+export const handleCopyClipBoard = async (text: string) => {
+	await navigator.clipboard.writeText(text);
+};
+
 export const receiveCallback = <T>(callbackTarget: string) => {
 	return new Promise<T>((resolve, reject) => {
 		function receiveMessage(event: any) {

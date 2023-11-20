@@ -47,28 +47,32 @@ const PersonaAndCategory: React.FC<RegisterFormContentsProps> = ({ formHandler }
 	return (
 		<>
 			{/* // 페르소나 구간 */}
-			<LabelWithFormElement label='페르소나'>
-				<PersonaToggleGroup formHandler={formHandler} onChange={(value) => setSelectedPersona(value as PersonaType)} />
+			<LabelWithFormElement label='페르소나' required>
+				<PersonaToggleGroup control={control} onChange={(value) => setSelectedPersona(value as PersonaType)} />
 			</LabelWithFormElement>
 
 			{/* 카테고리 구간 */}
-			<LabelWithFormElement label='카테고리' labelPosition='start'>
-				<div className='flex flex-col gap-4 justify-start'>
-					<FormToggleChipGroup
-						name='category1Text'
-						control={control}
-						options={dept1ChipOptions || []}
-						color='secondary'
-						onChange={setSelectedDept1}
-						chipClassName='bg-white'
-					/>
-					{dept2Options.length > 0 && (
-						<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>
-							<FormToggleChipGroup name='category2Text' control={control} options={dept2Options} color='secondary' />
+			{formHandler.getValues('personaType') && (
+				<LabelWithFormElement label='카테고리' labelPosition='start' required>
+					<div className='flex flex-col gap-4 justify-start'>
+						<div className={'flex'}>
+							<FormToggleChipGroup
+								name='category1Text'
+								control={control}
+								options={dept1ChipOptions || []}
+								color='secondary'
+								onChange={setSelectedDept1}
+								chipClassName='bg-white'
+							/>
 						</div>
-					)}
-				</div>
-			</LabelWithFormElement>
+						{dept2Options.length > 0 && (
+							<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>
+								<FormToggleChipGroup name='category2Text' control={control} options={dept2Options} color='secondary' />
+							</div>
+						)}
+					</div>
+				</LabelWithFormElement>
+			)}
 		</>
 	);
 };

@@ -21,7 +21,7 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 		<div className='w-[1144px] px-6 pt-8 pb-4 bg-neutral-50 rounded-lg flex-col items-center gap-6 flex'>
 			<div className='w-[1096px] rounded-2xl flex-col justify-center items-start gap-5 flex'>
 				{/* 제목 구간 */}
-				<LabelWithFormElement label='제목'>
+				<LabelWithFormElement label='제목' required>
 					<FormInput control={control} name='title' inputProps={{ placeholder: '제목을 25자 이내로 입력하세요' }} />
 				</LabelWithFormElement>
 
@@ -29,21 +29,21 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 				<PersonaAndCategory formHandler={formHandler} />
 
 				{/* 사용 AI 구간 */}
-				<LabelWithFormElement label='사용 AI 플랫폼'>
+				<LabelWithFormElement label='사용 AI 플랫폼' required>
 					<AiToggleGroup formHandler={formHandler} />
 				</LabelWithFormElement>
 
 				{/* 소개 구간 */}
-				<LabelWithFormElement label='소개' labelPosition='start'>
+				<LabelWithFormElement label='소개' labelPosition='start' required>
 					<FormTextarea
 						control={control}
 						name='description'
-						inputProps={{ placeholder: '프롬프트 템플릿에 대한 소개를 해주세요', rows: 5 }}
+						inputProps={{ placeholder: '프롬프트 템플릿에 대한 소개를 해주세요', rows: 3 }}
 					/>
 				</LabelWithFormElement>
 
 				{/* 프롬프트 템플릿 구간  */}
-				<LabelWithFormElement label='프롬프트 템플릿' labelPosition='start'>
+				<LabelWithFormElement label='프롬프트 템플릿' labelPosition='start' required>
 					<RegisterFormPromptTemplate formHandler={formHandler} />
 				</LabelWithFormElement>
 			</div>

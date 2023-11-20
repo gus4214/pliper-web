@@ -31,28 +31,37 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 		<Controller
 			name={name}
 			control={control}
-			render={({ field: { value, onChange: onControllerChange } }) => (
-				<div className={`${className} flex items-center gap-2`}>
-					{options?.map((option) => (
-						<SelectChip
-							key={option.code}
-							label={option.label}
-							color={color}
-							rounded={rounded}
-							selected={value === option.label}
-							onClick={() => {
-								if (value === option.label) {
-									onControllerChange(''); // 이미 선택된 항목을 클릭한 경우 선택을 해제합니다.
-									onChange && onChange('');
-								} else {
-									onControllerChange(option.label); // 그렇지 않으면 현재 클릭한 항목만 선택합니다.
-									onChange && onChange(option.label);
-								}
-							}}
-							className={chipClassName}
-						/>
-					))}
-				</div>
+			render={({ field: { value, onChange: onControllerChange }, fieldState: { error } }) => (
+				<>
+					<div className={`${className} flex items-center gap-2`}>
+						{options?.map((option) => (
+							<SelectChip
+								key={option.code}
+								label={option.label}
+								color={color}
+								rounded={rounded}
+								selected={value === option.label}
+								onClick={() => {
+									if (value === option.label) {
+										onControllerChange(''); // 이미 선택된 항목을 클릭한 경우 선택을 해제합니다.
+										onChange && onChange('');
+									} else {
+										onControllerChange(option.label); // 그렇지 않으면 현재 클릭한 항목만 선택합니다.
+										onChange && onChange(option.label);
+									}
+								}}
+								className={chipClassName}
+							/>
+						))}
+					</div>
+					{error && (
+						<div className={''}>
+							<label className='label'>
+								<span className='label-text-alt text-red-500'>{error.message}</span>
+							</label>
+						</div>
+					)}
+				</>
 			)}
 		/>
 	);

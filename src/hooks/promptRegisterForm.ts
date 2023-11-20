@@ -1,12 +1,15 @@
 import { updateMyPromptApi } from './../fetchers/prompt/my-prompt';
 import { registerPromptApi } from '@/src/fetchers/prompt';
-import {PersonaType, Prompt} from '@/src/fetchers/prompt/types';
+import {Parameter, PersonaType, Prompt} from '@/src/fetchers/prompt/types';
 import { useConfirmModal } from '@/src/hooks/modal';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import * as yup from "yup";
+
 
 export interface PromptRegisterFormData {
 	title: string;
@@ -16,7 +19,19 @@ export interface PromptRegisterFormData {
 	llmModel: string;
 	description: string;
 	show: boolean;
+	template: string;
 }
+
+const schema = yup.object().shape({
+	title: yup.string().required("제목은 필수값입니다").max(100, '100자 이내로 작성해주세요'),
+	personaType: yup.mixed<PersonaType>().oneOf(['DAILY', 'JOB'] as const, "페르소나는 필수값입니다").required(),
+	category1Text: yup.string().required("카테고리는 필수값입니다"),
+	category2Text: yup.string().required("하위 카테고리는 필수값입니다"),
+	llmModel: yup.string().required("AI 모델은 필수값입니다"),
+	description: yup.string().required("소개는 필수값입니다").max(500, '500자 이내로 작성해주세요'),
+	template:yup.string().required("프롬프트 템플릿은 필수값입니다").max(3000, '3,000자 이내로 작성해주세요'),
+	show: yup.boolean().required(),
+});
 
 const usePromptRegisterForm = (data?: Prompt) => {
 	const promptId = data?.promptId;
@@ -30,14 +45,16 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			personaType: data?.personaType || 'JOB',
 			show: data?.show || true,
 			title: data?.title || '',
+			template: data?.template || '',
 		},
+		resolver: yupResolver(schema)
 	});
 	const { handleSubmit, getValues } = formHandler;
 	const router = useRouter();
 	const [open, close] = useConfirmModal();
 
 	const [parameters, setParameters] = useAtom(parametersAtom);
-	const [template, setTemplate] = useAtom(templateValueAtom);
+	//const [template, setTemplate] = useAtom(templateValueAtom);
 
 	const onRegisterSubmit = async (data: PromptRegisterFormData) => {
 		open({
@@ -45,14 +62,14 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			description: '작성하신 내용으로 템플릿이 생성됩니다.',
 			onConfirm: async () => {
 				try {
-					const result = await registerPromptApi({ ...data, template, parameters });
+					const result = await registerPromptApi({ ...data, parameters });
 					if (data.show) {
 						router.push(`/prompt/${result.promptId}`);
 					} else {
 						router.push(`/mypage/created-prompt`);
 					}
 					localStorage.removeItem('temporaryPromptTemplate');
-					setTemplate('');
+					//setTemplate('');
 					setParameters([]);
 					close();
 				} catch (error) {
@@ -68,13 +85,13 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			description: '작성하신 내용으로 템플릿이 수정됩니다.',
 			onConfirm: async () => {
 				try {
-					const result = await updateMyPromptApi({ ...data, template, parameters }, promptId!);
+					const result = await updateMyPromptApi({ ...data, parameters }, promptId!);
 					if (data.show) {
 						router.push(`/prompt/${result.promptId}`);
 					} else {
 						router.push(`/mypage/created-prompt`);
 					}
-					setTemplate('');
+					//setTemplate('');
 					setParameters([]);
 					close();
 				} catch (error) {
@@ -90,7 +107,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 
 		const temporaryData = {
 			formValues,
-			template,
+			//template,
 			parameters,
 		};
 
@@ -101,7 +118,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 		// 페이지가 로딩되면 임시 저장된 데이터를 불러옵니다.
 		const temporaryDataString = localStorage.getItem('temporaryPromptTemplate');
 		if (data) {
-			setTemplate(data.template);
+			//setTemplate(data.template);
 			setParameters(data.parameters);
 			return;
 		}
@@ -109,7 +126,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 		if (temporaryDataString) {
 			const temporaryData = JSON.parse(temporaryDataString);
 			formHandler.reset(temporaryData.formValues);
-			setTemplate(temporaryData.template);
+			//setTemplate(temporaryData.template);
 			setParameters(temporaryData.parameters);
 			return;
 		}
@@ -126,7 +143,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			},
 			onCancel: () => {
 				localStorage.removeItem('temporaryPromptTemplate');
-				setTemplate('');
+				//setTemplate('');
 				setParameters([]);
 				router.back();
 			},
