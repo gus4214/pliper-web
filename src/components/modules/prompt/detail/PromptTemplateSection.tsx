@@ -7,7 +7,6 @@ import { stringToArray } from '@/src/utils/conversionUtils';
 import React, { useRef, useState } from 'react';
 import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
-import { BeakerIcon } from '@heroicons/react/24/outline';
 import { CopyIcon } from '@/src/components/atoms/icons/CopyIcon';
 import { handleCopyClipBoard } from '@/src/utils/utils';
 

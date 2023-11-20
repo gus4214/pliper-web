@@ -1,6 +1,6 @@
 import { updateMyPromptApi } from './../fetchers/prompt/my-prompt';
 import { registerPromptApi } from '@/src/fetchers/prompt';
-import {Parameter, PersonaType, Prompt} from '@/src/fetchers/prompt/types';
+import { Parameter, PersonaType, Prompt } from '@/src/fetchers/prompt/types';
 import { useConfirmModal } from '@/src/hooks/modal';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,8 +8,7 @@ import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from "yup";
-
+import * as yup from 'yup';
 
 export interface PromptRegisterFormData {
 	title: string;
@@ -23,13 +22,16 @@ export interface PromptRegisterFormData {
 }
 
 const schema = yup.object().shape({
-	title: yup.string().required("제목은 필수값입니다").max(100, '100자 이내로 작성해주세요'),
-	personaType: yup.mixed<PersonaType>().oneOf(['DAILY', 'JOB'] as const, "페르소나는 필수값입니다").required(),
-	category1Text: yup.string().required("카테고리는 필수값입니다"),
-	category2Text: yup.string().required("하위 카테고리는 필수값입니다"),
-	llmModel: yup.string().required("AI 모델은 필수값입니다"),
-	description: yup.string().required("소개는 필수값입니다").max(500, '500자 이내로 작성해주세요'),
-	template:yup.string().required("프롬프트 템플릿은 필수값입니다").max(3000, '3,000자 이내로 작성해주세요'),
+	title: yup.string().required('제목은 필수값입니다').max(100, '100자 이내로 작성해주세요'),
+	personaType: yup
+		.mixed<PersonaType>()
+		.oneOf(['DAILY', 'JOB'] as const, '페르소나는 필수값입니다')
+		.required(),
+	category1Text: yup.string().required('카테고리는 필수값입니다'),
+	category2Text: yup.string().required('하위 카테고리는 필수값입니다'),
+	llmModel: yup.string().required('AI 모델은 필수값입니다'),
+	description: yup.string().required('소개는 필수값입니다').max(500, '500자 이내로 작성해주세요'),
+	template: yup.string().required('프롬프트 템플릿은 필수값입니다').max(3000, '3,000자 이내로 작성해주세요'),
 	show: yup.boolean().required(),
 });
 
@@ -47,7 +49,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			title: data?.title || '',
 			template: data?.template || '',
 		},
-		resolver: yupResolver(schema)
+		resolver: yupResolver(schema),
 	});
 	const { handleSubmit, getValues } = formHandler;
 	const router = useRouter();
@@ -121,6 +123,8 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			//setTemplate(data.template);
 			setParameters(data.parameters);
 			return;
+		} else {
+			setParameters([]);
 		}
 
 		if (temporaryDataString) {
