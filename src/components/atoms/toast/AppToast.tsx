@@ -2,15 +2,17 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { FC, useEffect, useState } from 'react';
 import { AppToastProps } from '@/src/stores/toast';
 
-const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 4000 }) => {
-	const [isVisible, setIsVisible] = useState(false);
+const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 4000, onClose }) => {
+
+	const close = () => {
+		onClose && onClose();
+	}
 
 	useEffect(() => {
 		let timer: string | number | NodeJS.Timeout | undefined;
 		if (open) {
-			setIsVisible(true);
 			timer = setTimeout(() => {
-				setIsVisible(false);
+				close();
 			}, delayHideDuration);
 
 		}
@@ -24,7 +26,7 @@ const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 
 
 	return (
 		<AnimatePresence>
-			{isVisible && (
+			{open && (
 				<motion.div
 					className='fixed bottom-5 right-5 z-100'
 					initial='hidden'

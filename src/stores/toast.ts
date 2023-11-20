@@ -6,6 +6,12 @@ export interface AppToastProps {
 	message?: string;
 	icon?: ReactNode;
 	delayHideDuration?: number;
+	onClose?: () => void;
 }
 
-export const appToastAtom = atom<AppToastProps>({ open: false });
+export const initAppToast: AppToastProps = {
+	open: false,
+	onClose: () => {},
+};
+
+export const appToastAtom = atom<AppToastProps>(initAppToast);

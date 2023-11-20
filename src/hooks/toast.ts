@@ -1,4 +1,4 @@
-import { appToastAtom, AppToastProps } from '@/src/stores/toast';
+import {appToastAtom, AppToastProps, initAppToast} from '@/src/stores/toast';
 import { useAtomValue } from 'jotai';
 import { useAtom } from 'jotai/index';
 
@@ -8,9 +8,6 @@ export const useAppToast = () => {
 	return {
 		toast,
 		openToast: (props: AppToastProps) => setToast(props),
+		closeToast: () =>  setToast(initAppToast)
 	};
 };
-
-export const useAppToastGetter = () => {
-    return useAtomValue(appToastAtom);
-}
