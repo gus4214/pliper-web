@@ -22,7 +22,7 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 			<div className='w-[1096px] rounded-2xl flex-col justify-center items-start gap-5 flex'>
 				{/* 제목 구간 */}
 				<LabelWithFormElement label='제목' required>
-					<FormInput control={control} name='title' inputProps={{ placeholder: '제목을 25자 이내로 입력하세요' }} />
+					<FormInput control={control} name='title' inputProps={{ placeholder: '제목을 100자 이내로 입력하세요' }} />
 				</LabelWithFormElement>
 
 				{/*  페르소나, 카테고리 구간 */}
