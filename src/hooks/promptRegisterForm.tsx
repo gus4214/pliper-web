@@ -6,9 +6,11 @@ import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { useAppToast } from '@/src/hooks/toast';
+import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
 
 export interface PromptRegisterFormData {
 	title: string;
@@ -37,6 +39,12 @@ const schema = yup.object().shape({
 
 const usePromptRegisterForm = (data?: Prompt) => {
 	const promptId = data?.promptId;
+
+	const [parameters, setParameters] = useAtom(parametersAtom);
+	const { openToast } = useAppToast();
+
+	const [open, close] = useConfirmModal();
+	const router = useRouter();
 	const formHandler = useForm<PromptRegisterFormData>({
 		mode: 'onChange',
 		defaultValues: {
@@ -52,11 +60,6 @@ const usePromptRegisterForm = (data?: Prompt) => {
 		resolver: yupResolver(schema),
 	});
 	const { handleSubmit, getValues } = formHandler;
-	const router = useRouter();
-	const [open, close] = useConfirmModal();
-
-	const [parameters, setParameters] = useAtom(parametersAtom);
-	//const [template, setTemplate] = useAtom(templateValueAtom);
 
 	const onRegisterSubmit = async (data: PromptRegisterFormData) => {
 		open({
@@ -74,6 +77,11 @@ const usePromptRegisterForm = (data?: Prompt) => {
 					//setTemplate('');
 					setParameters([]);
 					close();
+					openToast({
+						message: '프롬프트 템플릿을 생성했습니다!',
+						open: true,
+						icon: <ToastPlipIcon />,
+					});
 				} catch (error) {
 					console.error('Error in RegisterPromptApi:', error);
 				}
@@ -96,6 +104,11 @@ const usePromptRegisterForm = (data?: Prompt) => {
 					//setTemplate('');
 					setParameters([]);
 					close();
+					openToast({
+						message: '프롬프트 템플릿을 수정했습니다!',
+						open: true,
+						icon: <ToastPlipIcon />,
+					});
 				} catch (error) {
 					console.error('Error in updateMyPromptApi:', error);
 				}

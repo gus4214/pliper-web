@@ -6,19 +6,26 @@ const RegisterFormContainer = () => {
 	const { formHandler, onRegisterSubmit, handleSaveTemporarily } = usePromptRegisterForm();
 
 	return (
-		<RegisterForm
-			formHandler={formHandler}
-			action={
-				<div className='flex justify-center items-center gap-3'>
-					<Button color='ghost' variant='outline' className='bg-white rounded border border-neutral-200' onClick={handleSaveTemporarily}>
-						<span className='text-neutral-400 text-sm font-medium'>닫기</span>
-					</Button>
-					<Button color='accent' className='rounded' onClick={onRegisterSubmit} disabled={!formHandler.formState.isValid} >
-						<span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
-					</Button>
-				</div>
-			}
-		/>
+		<>
+			<RegisterForm
+				formHandler={formHandler}
+				action={
+					<div className='flex justify-center items-center gap-3'>
+						<Button
+							color='ghost'
+							variant='outline'
+							className='bg-white rounded border border-neutral-200'
+							onClick={handleSaveTemporarily}
+						>
+							<span className='text-neutral-400 text-sm font-medium'>닫기</span>
+						</Button>
+						<Button color='accent' className='rounded' onClick={onRegisterSubmit} disabled={!formHandler.formState.isValid}>
+							<span className='text-white text-sm font-medium'>프롬프트 생성하기</span>
+						</Button>
+					</div>
+				}
+			/>
+		</>
 	);
 };
 

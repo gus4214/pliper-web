@@ -6,6 +6,8 @@ import Head from 'next/head';
 import MainLayout from '@/src/layouts/MainLayout';
 import { NextPage } from 'next';
 import { AuthProvider } from '@/src/contexts/authContext';
+import {useAppToastGetter} from "@/src/hooks/toast";
+import AppToast from "@/src/components/atoms/toast/AppToast";
 
 interface MyAppProps extends AppProps {
 	Component: NextPage;
@@ -15,6 +17,7 @@ export default function App(props: MyAppProps) {
 	const { Component, pageProps } = props;
 
 	const getLayout = Component.getLayout ?? ((page) => <MainLayout>{page}</MainLayout>);
+	const toast = useAppToastGetter();
 
 	const [queryClient] = useState(
 		() =>
@@ -37,7 +40,10 @@ export default function App(props: MyAppProps) {
 			</Head>
 			<QueryClientProvider client={queryClient}>
 				<Hydrate state={pageProps.dehydratedState}>
-					<AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+					<AuthProvider>
+						{getLayout(<Component {...pageProps} />)}
+						<AppToast {...toast} />
+					</AuthProvider>
 				</Hydrate>
 			</QueryClientProvider>
 		</>
