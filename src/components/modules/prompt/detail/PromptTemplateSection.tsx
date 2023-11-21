@@ -9,6 +9,8 @@ import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
 import { CopyIcon } from '@/src/components/atoms/icons/CopyIcon';
 import { handleCopyClipBoard } from '@/src/utils/utils';
+import {useAppToast} from "@/src/hooks/toast";
+import ToastPlipIcon from "@/src/components/atoms/icons/ToastPlipIcon";
 
 interface PromptTemplateSectionProps {
 	// prompt: Prompt;
@@ -21,6 +23,7 @@ interface PromptTemplateSectionProps {
 const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters = [], template, promptId, preview }) => {
 	const [filledTemplate, setFilledTemplate] = useState('');
 	const ref = useRef<HTMLTextAreaElement | null>(null);
+	const { openToast } = useAppToast();
 
 	const formHandler = useForm<Record<string, string>>({
 		mode: 'onChange',
@@ -127,7 +130,14 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
 					/>
 					{filledTemplate && (
-						<div className={`absolute right-[15px] bottom-[15px] cursor-pointer`} onClick={() => handleCopyClipBoard(filledTemplate)}>
+						<div className={`absolute right-[15px] bottom-[15px] cursor-pointer`} onClick={() => {
+							handleCopyClipBoard(filledTemplate)
+							openToast({
+								message: '프롬프트가 클립보드에 복사되었습니다.',
+								open: true,
+								icon: <ToastPlipIcon />,
+							});
+						}}>
 							<CopyIcon />
 						</div>
 					)}

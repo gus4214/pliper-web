@@ -21,7 +21,7 @@ interface FormData {
 
 const schema = yup.object().shape({
 	taste: yup.array().required(),
-	nickname: yup.string().required('닉네임 입력은 필수입니다.').max(8, '닉네임이 너무 깁니다.'),
+	nickname: yup.string().required('닉네임 입력은 필수입니다.').max(10, '닉네임이 너무 깁니다.'),
 });
 
 const ProfileEditForm = () => {
@@ -90,7 +90,7 @@ const ProfileEditForm = () => {
 				<FormInput
 					control={control}
 					name='nickname'
-					inputProps={{ placeholder: '최대 8자로 입력해주세요' }}
+					inputProps={{ placeholder: '최대 10자로 입력해주세요' }}
 					label={'닉네임을 입력해주세요.'}
 				/>
 				<div className='flex-col gap-3 flex'>

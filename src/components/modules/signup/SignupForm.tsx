@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import { Button, Card } from 'react-daisyui';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import {useAppToast} from "@/src/hooks/toast";
+import ToastPlipIcon from "@/src/components/atoms/icons/ToastPlipIcon";
 
 interface FormData {
 	taste: string[];
@@ -16,11 +18,12 @@ interface FormData {
 
 const schema = yup.object().shape({
 	taste: yup.array().required(),
-	nickname: yup.string().required('닉네임 입력은 필수입니다.').max(8, '닉네임이 너무 깁니다.'),
+	nickname: yup.string().required('닉네임 입력은 필수입니다.').max(10, '닉네임이 너무 깁니다.'),
 });
 
 const SignupForm = () => {
 	const router = useRouter();
+	const { openToast } = useAppToast();
 	const temporaryToken = getCookie(temporaryTokenKey);
 	const {
 		control,
@@ -54,6 +57,11 @@ const SignupForm = () => {
 		const result = await registerUserApi(data, temporaryToken);
 		if (result.token) {
 			saveAccessToken(result.token, result.expiresIn);
+			openToast({
+				message: '플리퍼 회원가입이 완료되었습니다 🎉',
+				open: true,
+				icon: <ToastPlipIcon />,
+			});
 			await router.replace('/');
 		}
 	};
@@ -86,7 +94,7 @@ const SignupForm = () => {
 						<FormInput
 							control={control}
 							name='nickname'
-							inputProps={{ placeholder: '최대 8자로 입력해주세요' }}
+							inputProps={{ placeholder: '최대 10자로 입력해주세요' }}
 							label={'닉네임을 입력해주세요.'}
 						/>
 						<Button fullWidth color='neutral' disabled={!buttonActive}>
