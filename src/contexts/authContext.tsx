@@ -1,4 +1,4 @@
-import { accessTokenKey } from '@/src/configs/auth';
+import { accessTokenKey, refreshTokenKey } from "@/src/configs/auth";
 import { LoginUser, profileApi } from '@/src/fetchers/auth';
 import { AuthenticationUser, userAtom } from '@/src/stores/auth';
 import { saveUserAtom } from '@/src/stores/auth/actions/login';
@@ -44,6 +44,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 				try {
 					const userProfile = await profileApi(storedAccessToken);
 					console.log(userProfile, '프로파일 확인 완료');
+					if(userProfile.isError) {
+						throw new Error(userProfile.errorMessage)
+					}
 					await saveUser(userProfile);
 				} catch (error) {
 					console.log('Error 유저 프로파일 요청', error);
@@ -58,6 +61,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
 	const logout = () => {
 		clearCookie(accessTokenKey);
+		clearCookie(refreshTokenKey);
 		setUser(undefined);
 		router.replace('/');
 	};

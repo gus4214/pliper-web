@@ -8,7 +8,9 @@ const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 
 		onClose && onClose();
 	}
 
+	console.log(open, "111")
 	useEffect(() => {
+		console.log(open, "??")
 		let timer: string | number | NodeJS.Timeout | undefined;
 		if (open) {
 			timer = setTimeout(() => {

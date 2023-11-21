@@ -9,8 +9,9 @@ import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
 import { CopyIcon } from '@/src/components/atoms/icons/CopyIcon';
 import { handleCopyClipBoard } from '@/src/utils/utils';
-import {useAppToast} from "@/src/hooks/toast";
-import ToastPlipIcon from "@/src/components/atoms/icons/ToastPlipIcon";
+import { useAppToast } from '@/src/hooks/toast';
+import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
+import { motion } from 'framer-motion';
 
 interface PromptTemplateSectionProps {
 	// prompt: Prompt;
@@ -130,15 +131,27 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
 					/>
 					{filledTemplate && (
-						<div className={`absolute right-[15px] bottom-[15px] cursor-pointer`} onClick={() => {
-							handleCopyClipBoard(filledTemplate)
-							openToast({
-								message: '프롬프트가 클립보드에 복사되었습니다.',
-								open: true,
-								icon: <ToastPlipIcon />,
-							});
-						}}>
-							<CopyIcon />
+						<div
+							className={`absolute right-[5px] cursor-pointer`}
+							onClick={() => {
+								openToast({
+									message: '프롬프트가 클립보드에 복사되었습니다.',
+									open: true,
+									icon: <ToastPlipIcon />,
+								});
+								handleCopyClipBoard(filledTemplate);
+							}}
+						>
+							<motion.div
+								whileHover={{ scale: 1.2 }}
+								whileTap={{ scale: 0.9 }}
+								transition={{
+									stiffness: 400,
+									damping: 10,
+								}}
+							>
+								<CopyIcon />
+							</motion.div>
 						</div>
 					)}
 				</div>
