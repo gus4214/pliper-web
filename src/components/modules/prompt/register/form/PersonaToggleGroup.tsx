@@ -1,6 +1,6 @@
 import FormToggleChipCodeGroup from '@/src/components/modules/@common/form/FormToggleChipCodeGroup';
 import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
-import {Control, UseFormReturn} from 'react-hook-form';
+import { Control, UseFormReturn } from 'react-hook-form';
 
 interface PersonaToggleGroupProps {
 	control: Control<PromptRegisterFormData>;
@@ -8,7 +8,6 @@ interface PersonaToggleGroupProps {
 }
 
 const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ control, onChange }) => {
-
 	// useEffect(() => {
 	// 	setValue('personaType', '업무');
 	// }, []);
@@ -22,7 +21,7 @@ const PersonaToggleGroup: React.FC<PersonaToggleGroupProps> = ({ control, onChan
 				{ code: 'DAILY', label: '☕️ 일상' },
 			]}
 			color='secondary'
-			chipClassName='bg-white'
+			chipClassName='bg-white w-[100px] h-[40px]'
 			onChange={onChange}
 		/>
 	);

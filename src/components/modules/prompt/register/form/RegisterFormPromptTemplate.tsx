@@ -18,6 +18,7 @@ const regex = /{{(.*?)}}/g;
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const [templateValue, setTemplateValue] = useAtom(templateValueAtom);
 	const [parameters, setParameters] = useAtom(parametersAtom);
+	console.log('🚀 ~ file: RegisterFormPromptTemplate.tsx:21 ~ parameters:', parameters);
 
 	const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const value = e.target.value;
@@ -66,46 +67,47 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 			<FormTextarea
 				onChange={(e) => handleTextareaChange(e)}
 				inputProps={{
-					placeholder: '템플릿으로 생성할 프롬프트를 입력해주세요 {{제목}}',
+					className: 'w-[720px] min-h-[240px] placeholder:text-neutral-400',
+					placeholder:
+						'프롬프트의 큰 프레임은 미리 작성해주세요.\u000D\u000A사용자에게 입력 받을 부분은 "{{입력값}}" 으로 생성하면 하단에 자동으로 입력값 필드가 생성됩니다.\u000D\u000A\u000D\u000A•입력값 필드는 최대 7개까지 생성 가능합니다.\u000D\u000A•입력값 형태는 텍스트, 선택, 중복선택 형태로 제공하고 있습니다.',
 					rows: 5,
 				}}
 				control={formHandler.control}
 				// value={templateValue}
 				name={'template'}
 			/>
-			<span className='text-neutral-600 text-sm font-normal pt-3'>
-				{`➡️ 템플릿에 입력값으로 넣고 싶을 경우 {{ 파라미터 }} 형태로 넣어주세요`}
-			</span>
-			<div className='flex flex-col gap-2 pt-8'>
-				{/* parameter가 있을 경우에만 LabelWithTemplateFormElement 렌더링 */}
-				{parameters?.map((param, index) => (
-					<LabelWithTemplateFormElement
-						key={index}
-						leftLabel={param.title}
-						leftElement={
-							<Select value={param.type} onChange={(event) => handleSelectChange(index, event.target.value)}>
-								<Select.Option value={'TEXT'}>텍스트</Select.Option>
-								<Select.Option value={'SELECT'}>선택</Select.Option>
-								<Select.Option value={'MULTI_SELECT'}>중복 선택</Select.Option>
-							</Select>
-						}
-						rightElement={
-							param.type === 'TEXT' ? (
-								<Input
-									value={param.description}
-									className='w-full bg-white rounded border border-neutral-200'
-									onChange={(e) => handleTypeValuesChange(index, e.target.value)}
-								/>
-							) : param.type === 'SELECT' || param.type === 'MULTI_SELECT' ? (
-								<OptionInputComponent
-									typeValues={param.typeValues}
-									onValuesChange={(values) => handleOptionValuesChange(index, values)}
-								/>
-							) : null
-						}
-					/>
-				))}
-			</div>
+			{parameters.length >= 1 && (
+				<div className='flex flex-col gap-2 pt-8'>
+					{/* parameter가 있을 경우에만 LabelWithTemplateFormElement 렌더링 */}
+					{parameters?.map((param, index) => (
+						<LabelWithTemplateFormElement
+							key={index}
+							leftLabel={param.title}
+							leftElement={
+								<Select value={param.type} onChange={(event) => handleSelectChange(index, event.target.value)}>
+									<Select.Option value={'TEXT'}>텍스트</Select.Option>
+									<Select.Option value={'SELECT'}>선택</Select.Option>
+									<Select.Option value={'MULTI_SELECT'}>중복 선택</Select.Option>
+								</Select>
+							}
+							rightElement={
+								param.type === 'TEXT' ? (
+									<Input
+										value={param.description}
+										className='w-full bg-white rounded border border-neutral-200'
+										onChange={(e) => handleTypeValuesChange(index, e.target.value)}
+									/>
+								) : param.type === 'SELECT' || param.type === 'MULTI_SELECT' ? (
+									<OptionInputComponent
+										typeValues={param.typeValues}
+										onValuesChange={(values) => handleOptionValuesChange(index, values)}
+									/>
+								) : null
+							}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };

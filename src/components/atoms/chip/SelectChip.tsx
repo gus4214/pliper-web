@@ -5,7 +5,7 @@ interface SelectChipProps {
 	selected?: boolean;
 	onClick?: () => void;
 	rounded?: boolean;
-	color?: 'primary' | 'secondary';
+	color?: 'primary' | 'secondary' | 'info';
 	className?: string;
 }
 
@@ -20,6 +20,9 @@ const SelectChip: React.FC<SelectChipProps> = ({ label, selected, onClick, color
 			case 'secondary':
 				selectedColor = tw`bg-navy-900`;
 				break;
+			case 'info':
+				selectedColor = tw`bg-slate-500`;
+				break;
 			default:
 				selectedColor = tw`bg-neutral-600`;
 		}
@@ -29,14 +32,14 @@ const SelectChip: React.FC<SelectChipProps> = ({ label, selected, onClick, color
 		<>
 			<div
 				onClick={onClick}
+				className={className}
 				css={[
 					tw`px-4 py-[9px] rounded border justify-center items-center flex cursor-pointer`,
 					rounded && tw`rounded-[50px]`,
 					selected ? selectedColor : tw`border-neutral-200`,
 				]}
-				className={className}
 			>
-				<span css={[tw`text-white text-sm font-medium leading-[14px]`, !selected && tw`text-neutral-400 font-normal`]}>{label}</span>
+				<span css={[tw`text-white text-sm font-normal leading-[14px]`, !selected && tw`text-neutral-400 font-normal`]}>{label}</span>
 			</div>
 		</>
 	);

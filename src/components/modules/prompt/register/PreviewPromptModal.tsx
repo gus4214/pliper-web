@@ -28,7 +28,11 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 
 	return (
 		<>
-			<Button className='bg-white' onClick={handleShow} disabled={!isValid}>
+			<Button
+				className='bg-white rounded border border-neutral-200 w-[81px] min-h-[40px] h-[40px] whitespace-nowrap mt-[14px]'
+				onClick={handleShow}
+				disabled={!isValid}
+			>
 				미리보기
 			</Button>
 			<Dialog

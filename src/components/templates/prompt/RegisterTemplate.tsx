@@ -3,7 +3,7 @@ import RegisterFormContainer from '@/src/components/modules/prompt/register/Regi
 
 const RegisterTemplate = () => {
 	return (
-		<div className='pt-8 pb-17 flex flex-col items-center relative'>
+		<div className='pt-[45px] pb-[127px] flex flex-col items-center relative'>
 			<RegisterFormContainer />
 		</div>
 	);

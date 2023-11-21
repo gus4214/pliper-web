@@ -47,14 +47,23 @@ const PersonaAndCategory: React.FC<RegisterFormContentsProps> = ({ formHandler }
 	return (
 		<>
 			{/* // 페르소나 구간 */}
-			<LabelWithFormElement label='페르소나' required>
-				<PersonaToggleGroup control={control} onChange={(value) => setSelectedPersona(value as PersonaType)} />
+			<LabelWithFormElement label='페르소나' subLabel='프롬프트가 사용될 범위를 의미합니다.' required className='gap-5'>
+				<div className='flex flex-col gap-1.5'>
+					<PersonaToggleGroup control={control} onChange={(value) => setSelectedPersona(value as PersonaType)} />
+					<span className='text-neutral-400 text-xs font-normal'>대화나 심리 상담, 가정생활과 같이 일상에서 사용합니다.</span>
+				</div>
 			</LabelWithFormElement>
 
 			{/* 카테고리 구간 */}
 			{formHandler.getValues('personaType') && (
-				<LabelWithFormElement label='카테고리' labelPosition='start' required>
-					<div className='flex flex-col gap-4 justify-start'>
+				<LabelWithFormElement
+					label='카테고리'
+					subLabel='작성하고자 하는 프롬프트의 해당하는 카테고리를 선택해주세요.'
+					labelPosition='start'
+					required
+					className='gap-[14px]'
+				>
+					<div className='flex flex-col gap-1.5 justify-start'>
 						<div className={'flex'}>
 							<FormToggleChipGroup
 								name='category1Text'
@@ -62,12 +71,18 @@ const PersonaAndCategory: React.FC<RegisterFormContentsProps> = ({ formHandler }
 								options={dept1ChipOptions || []}
 								color='secondary'
 								onChange={setSelectedDept1}
-								chipClassName='bg-white'
+								chipClassName='bg-white h-[40px]'
 							/>
 						</div>
 						{dept2Options.length > 0 && (
 							<div className='p-2.5 bg-neutral-100 rounded-lg border border-neutral-200 justify-start items-center flex'>
-								<FormToggleChipGroup name='category2Text' control={control} options={dept2Options} color='secondary' />
+								<FormToggleChipGroup
+									name='category2Text'
+									control={control}
+									options={dept2Options}
+									color='info'
+									chipClassName='h-10 rounded-lg'
+								/>
 							</div>
 						)}
 					</div>

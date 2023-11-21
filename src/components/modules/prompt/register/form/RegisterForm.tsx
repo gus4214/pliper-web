@@ -12,7 +12,7 @@ interface RegisterFormProps {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler, action }) => {
 	return (
-		<div className='w-[1200px] pt-6 pb-[67px] bg-white flex-col justify-start gap-6 flex'>
+		<div className='w-[1200px] bg-white flex flex-col justify-start px-6'>
 			<RegisterHeader />
 			<AsyncComponentBoundary
 				pendingFallback={

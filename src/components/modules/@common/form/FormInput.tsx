@@ -6,11 +6,13 @@ interface FormTextFieldProps<TFieldValues extends FieldValues = FieldValues, TNa
 	extends UseControllerProps<TFieldValues, TName> {
 	inputProps?: InputProps;
 	label?: string;
+	errorClassName?: string;
 }
 
 const FormInput = <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({
 	label,
 	inputProps,
+	errorClassName,
 	...props
 }: FormTextFieldProps<TFieldValues, TName>) => {
 	const {
@@ -19,7 +21,7 @@ const FormInput = <TFieldValues extends FieldValues = FieldValues, TName extends
 	} = useController(props);
 
 	return (
-		<div className='form-control w-full'>
+		<div className='form-control w-full relative'>
 			{label && (
 				<label className='label'>
 					<span className='label-text'>{label}</span>
@@ -27,7 +29,7 @@ const FormInput = <TFieldValues extends FieldValues = FieldValues, TName extends
 			)}
 			<Input value={value} onChange={onChange} onBlur={onBlur} ref={ref} {...inputProps} />
 			{error && (
-				<label className='label'>
+				<label className={`${errorClassName} label`}>
 					<span className='label-text-alt text-red-500'>{error.message}</span>
 				</label>
 			)}

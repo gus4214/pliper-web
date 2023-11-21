@@ -11,7 +11,7 @@ interface FormToggleChipGroupProps<TFieldValues extends FieldValues = FieldValue
 	control: Control<TFieldValues>;
 	options: ChipOption[];
 	rounded?: boolean;
-	color?: 'primary' | 'secondary';
+	color?: 'primary' | 'secondary' | 'info';
 	className?: string;
 	onChange?: (selectedValue: string) => void;
 	chipClassName?: string;

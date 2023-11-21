@@ -7,12 +7,14 @@ interface FormTextFieldProps<TFieldValues extends FieldValues = FieldValues, TNa
 	extends UseControllerProps<TFieldValues, TName> {
 	inputProps?: TextareaProps;
 	label?: string;
+	errorClassName?: string;
 	onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const FormTextarea = <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({
 	label,
 	inputProps,
+	errorClassName,
 	onChange: onInputChange,
 	...props
 }: FormTextFieldProps<TFieldValues, TName>) => {
@@ -22,7 +24,7 @@ const FormTextarea = <TFieldValues extends FieldValues = FieldValues, TName exte
 	} = useController(props);
 
 	return (
-		<div className='form-control w-full'>
+		<div className='form-control w-full relative'>
 			{label && (
 				<label className='label'>
 					<span className='label-text'>{label}</span>
@@ -39,7 +41,7 @@ const FormTextarea = <TFieldValues extends FieldValues = FieldValues, TName exte
 				{...inputProps}
 			/>
 			{error && (
-				<label className='label'>
+				<label className={`${errorClassName} label`}>
 					<span className='label-text-alt text-red-500'>{error.message}</span>
 				</label>
 			)}
