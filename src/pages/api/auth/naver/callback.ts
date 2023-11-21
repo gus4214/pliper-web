@@ -28,8 +28,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 		if (tokenResponse) {
 			const currentTimeInSeconds = Math.floor(Date.now() / 1000);
-			const durationInSeconds = tokenResponse.expires_in - currentTimeInSeconds;
-			res.setHeader('Set-Cookie', `accessToken=${tokenResponse.token}; Path=/; Max-Age=${durationInSeconds}`);
+			const durationInSeconds = tokenResponse.expiresIn - currentTimeInSeconds;
+			const durationRefreshTokenInSeconds = tokenResponse.refreshTokenExpiresIn - currentTimeInSeconds;
+			res.setHeader('Set-Cookie', [
+				`accessToken=${tokenResponse.token}; Path=/; Max-Age=${durationInSeconds}`,
+				`refreshToken=${tokenResponse.refreshToken}; Path=/; Max-Age=${durationRefreshTokenInSeconds}`,
+			]);
 			res.redirect('/');
 		}
 	} catch (error) {

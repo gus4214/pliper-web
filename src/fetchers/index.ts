@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, Method, RawAxiosRequestHeaders } from 'axios';
 import { SERVER_API } from '@/src/fetchers/apis';
 import { IBaasResponse, IRequest, IResponse } from '@/src/fetchers/types';
+import {createAuthInterceptor} from "@/src/fetchers/interceptors";
 
 export const apiClient: AxiosInstance = axios.create({
 	baseURL: `${SERVER_API}`,
@@ -74,3 +75,6 @@ export const callApi = <T, R extends IBaasResponse>(request: IRequest<T, R>, opt
 			return result;
 		});
 };
+
+createAuthInterceptor(apiClient);
+

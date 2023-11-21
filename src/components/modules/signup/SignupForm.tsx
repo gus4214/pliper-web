@@ -53,8 +53,8 @@ const SignupForm = () => {
 	const onSubmit = async (data: RegisterUserRequest) => {
 		const result = await registerUserApi(data, temporaryToken);
 		if (result.token) {
-			saveAccessToken(result.token, result.expires_in);
-			router.replace('/');
+			saveAccessToken(result.token, result.expiresIn);
+			await router.replace('/');
 		}
 	};
 

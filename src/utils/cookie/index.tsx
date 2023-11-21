@@ -1,4 +1,4 @@
-import {accessTokenKey} from '@/src/configs/auth';
+import {accessTokenKey, refreshTokenKey} from '@/src/configs/auth';
 import {Cookies} from 'react-cookie';
 
 export interface SetCookieOptions {
@@ -28,6 +28,17 @@ export const saveAccessToken = (accessToken: string, expiresIn: number) => {
     const expires = new Date();
     expires.setTime(expiresIn);
     setCookie(accessTokenKey, accessToken, {
+        path: '/',
+        secure: true,
+        sameSite: 'none',
+        expires,
+    });
+};
+
+export const saveRefreshToken = (refreshToken: string, expiresIn: number) => {
+    const expires = new Date();
+    expires.setTime(expiresIn);
+    setCookie(refreshTokenKey, refreshToken, {
         path: '/',
         secure: true,
         sameSite: 'none',

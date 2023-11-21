@@ -11,8 +11,10 @@ export interface OAuthResult extends IBaasResponse {
 }
 
 export interface OAuthCallbackResult extends IBaasResponse {
-	expires_in: number;
+	expiresIn: number;
 	token: string;
+	refreshToken: string;
+	refreshTokenExpiresIn: number;
 }
 
 export type ProfileResult = LoginUser & IBaasResponse;
