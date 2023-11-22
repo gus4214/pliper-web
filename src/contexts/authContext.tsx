@@ -7,6 +7,7 @@ import { clearCookie, getCookie } from '@/src/utils/cookie';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import mixpanel from "mixpanel-browser";
 
 export interface AuthProviderType {
 	loading: boolean;
@@ -47,6 +48,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 					if(userProfile.isError) {
 						throw new Error(userProfile.errorMessage)
 					}
+					mixpanel.identify(userProfile.oauthEmail);
 					await saveUser(userProfile);
 				} catch (error) {
 					console.log('Error 유저 프로파일 요청', error);
@@ -59,10 +61,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 		initialized || initAuth();
 	}, [initialized]);
 
+
 	const logout = () => {
 		clearCookie(accessTokenKey);
 		clearCookie(refreshTokenKey);
 		setUser(undefined);
+		mixpanel.reset();
 		router.replace('/');
 	};
 
