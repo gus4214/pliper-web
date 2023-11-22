@@ -25,6 +25,7 @@ const AiToggleGroup: React.FC<AiToggleGroupProps> = ({ formHandler }) => {
 			options={aiPlatformChipOptions || []}
 			color='secondary'
 			chipClassName='bg-white h-[40px]'
+			errorClassName='flex items-center'
 		/>
 	);
 };

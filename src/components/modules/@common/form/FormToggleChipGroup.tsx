@@ -15,6 +15,7 @@ interface FormToggleChipGroupProps<TFieldValues extends FieldValues = FieldValue
 	className?: string;
 	onChange?: (selectedValue: string) => void;
 	chipClassName?: string;
+	errorClassName?: string;
 }
 
 const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
@@ -26,6 +27,7 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 	className,
 	onChange,
 	chipClassName,
+	errorClassName,
 }: FormToggleChipGroupProps<TFieldValues>) => {
 	return (
 		<Controller
@@ -55,7 +57,7 @@ const FormToggleChipGroup = <TFieldValues extends FieldValues = FieldValues>({
 						))}
 					</div>
 					{error && (
-						<div className={''}>
+						<div className={errorClassName}>
 							<label className='label'>
 								<span className='label-text-alt text-red-500'>{error.message}</span>
 							</label>

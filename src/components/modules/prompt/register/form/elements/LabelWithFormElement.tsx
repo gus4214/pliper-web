@@ -22,8 +22,8 @@ const LabelWithFormElement: React.FC<LabelWithFormElementProps> = ({
 }) => {
 	return (
 		<div className={`${className} w-full flex flex-col justify-start items-${labelPosition}`}>
-			<div className='flex flex-col'>
-				<div className='w-[150px] flex gap-4 items-center'>
+			<div className='flex flex-col gap-1'>
+				<div className='w-[150px] flex gap-4 items-center relative'>
 					<span className='text-black text-[15px] font-semibold'>
 						{label} {required && <span className={'text-teal-200'}>*</span>}
 					</span>

@@ -56,7 +56,13 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 					subLabel='프롬프트 템플릿에 대해 소개 내용을 작성합니다.'
 					required
 					className='gap-[14px]'
-					labelRightComponent={<NoticeTooltip />}
+					labelRightComponent={
+						<NoticeTooltip className='w-[209px]'>
+							<span className='text-teal-400 text-xs font-normal'>
+								어떤 용도로 작성 하였는지, 어떤 상황에서 사용하면 좋은지 사용자들이 이해하기 쉽게 작성해주세요 🙂
+							</span>
+						</NoticeTooltip>
+					}
 				>
 					<div className='flex flex-col'>
 						<FormTextarea
