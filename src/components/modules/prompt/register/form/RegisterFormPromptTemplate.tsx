@@ -14,6 +14,7 @@ interface RegisterFormPromptTemplateProps {
 }
 
 const regex = /{{(.*?)}}/g;
+const MAX_PARAMETERS = 7;
 
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const [templateValue, setTemplateValue] = useAtom(templateValueAtom);
@@ -25,8 +26,11 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 		//setTemplateValue(value);
 		const matches = value.match(regex);
 		if (matches) {
-			const newTitles = matches.map((match) => match.replace('{{', '').replace('}}', ''));
-			const newParameters = newTitles.map((title) => {
+			let newTitles = matches.map((match) => match.replace('{{', '').replace('}}', ''));
+			if (newTitles.length > MAX_PARAMETERS) {
+				newTitles = newTitles.slice(0, MAX_PARAMETERS)
+			}
+			const newParameters = newTitles.map((title, i) => {
 				// 기존 파라미터 중 일치하는 title을 찾습니다.
 				const existingParam = parameters?.find((param) => param.title === title);
 				// 일치하는 title이 있으면 기존 값을 사용하고, 그렇지 않으면 새로운 객체를 생성합니다.
