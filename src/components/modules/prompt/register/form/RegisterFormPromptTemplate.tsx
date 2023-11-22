@@ -4,8 +4,8 @@ import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { arrayToString } from '@/src/utils/conversionUtils';
 import { useAtom } from 'jotai';
-import React, { useEffect } from 'react';
-import { Input, Select, Textarea } from 'react-daisyui';
+import React from 'react';
+import { Input, Select } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
 import FormTextarea from '@/src/components/modules/@common/form/FormTextarea';
 
@@ -76,7 +76,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 				// value={templateValue}
 				name={'template'}
 			/>
-			{parameters.length >= 1 && (
+			{parameters && (
 				<div className='flex flex-col gap-2 pt-8'>
 					{/* parameter가 있을 경우에만 LabelWithTemplateFormElement 렌더링 */}
 					{parameters?.map((param, index) => (

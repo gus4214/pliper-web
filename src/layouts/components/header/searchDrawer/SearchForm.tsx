@@ -1,7 +1,7 @@
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { Search } from 'heroicons-react';
 import { useAtom } from 'jotai';
-import React, { ChangeEvent } from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import { Input } from 'react-daisyui';
 import { useController, useForm } from 'react-hook-form';
 
@@ -31,6 +31,12 @@ const SearchForm: React.FC<SearchFormProps> = ({ placeholder = '뭐든 적어주
 		name: 'title',
 		control,
 	});
+
+	useEffect(() => {
+		return () => {
+			setSearchInputValue('');
+		}
+	}, []);
 
 	const onSubmit = async (data: BaseFormFields) => {
 		const { title } = data;

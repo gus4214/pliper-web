@@ -2,7 +2,7 @@ import Loading from '@/src/components/atoms/loading/Loading';
 import PromptItemWithInteraction from '@/src/components/modules/@common/listItems/PromptItemWithInteraction';
 import { useInfiniteGetPrompts } from '@/src/fetchers/prompt';
 import { useAuthContext } from '@/src/hooks/context';
-import { usePromptInteractions } from '@/src/hooks/promptInteractions';
+import { usePromptInteractions } from '@/src/hooks/promptController';
 import { searchFilterAtom } from '@/src/stores/searchForm';
 import {formatDateToKorean, timeAgo} from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';

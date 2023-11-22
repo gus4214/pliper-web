@@ -4,7 +4,7 @@ import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { X } from 'heroicons-react';
 import { useAtomValue } from 'jotai';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Modal } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -22,7 +22,6 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 	} = formHandler;
 
 	const { personaType, category1Text, category2Text, title, llmModel, description } = watch();
-
 	const parameters = useAtomValue(parametersAtom);
 	const template = useAtomValue(templateValueAtom);
 

@@ -57,10 +57,11 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 					<Image src={'/images/logo/pliper.svg'} alt='logo' width={96} height={24} />
 				</Link>
 				<div className='flex-1 ml-[159px] w-[190px]'>
+					<Button color='ghost'>플리퍼란?</Button>
 					<Button color='ghost' onClick={() => router.push('/prompt')}>
 						프롬프트
 					</Button>
-					<Button color='ghost'>메뉴명 2</Button>
+
 				</div>
 				<div className='flex gap-4'>
 					<SearchDropdown onClick={handleSearchClick} />

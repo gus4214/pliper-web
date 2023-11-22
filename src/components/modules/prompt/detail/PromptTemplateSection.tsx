@@ -158,7 +158,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 			</div>
 			{preview ? (
 				<div className='w-[225px] gap-3 flex'>
-					<Button variant='outline'>수정하기</Button>
+					<Button variant='outline'>닫기</Button>
 					<Button
 						variant='outline'
 						color='accent'

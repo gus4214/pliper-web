@@ -5,28 +5,20 @@ import PromptDetailInfoHeader from '@/src/components/modules/prompt/detail/Promp
 import PromptTemplateSection from '@/src/components/modules/prompt/detail/PromptTemplateSection';
 import { Prompt } from '@/src/fetchers/prompt/types';
 import React from 'react';
+import { useAuthContext } from '@/src/hooks/context';
 
 interface PromptDetailTemplateProps {
 	prompt: Prompt;
 }
 
 const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) => {
+	const { user } = useAuthContext();
+
 	const {
 		parameters,
 		template,
 		promptId,
-		personaType,
-		category1Text,
-		category2Text,
-		title,
-		likeCount,
-		viewCount,
-		percents,
-		llmModel,
 		userEmail,
-		userNickname,
-		updateDateTime,
-		description,
 	} = prompt;
 
 	return (
@@ -34,18 +26,8 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 			<div className='w-[1176px] px-6 flex flex-col items-center mx-auto pt-[57px] pb-[104px] relative'>
 				<FloatButtonGroup className='top-[192px] mr-[-634px]' />
 				<PromptDetailInfoHeader
-					personaType={personaType}
-					category1Text={category1Text}
-					category2Text={category2Text}
-					title={title}
-					likeCount={likeCount}
-					viewCount={viewCount}
-					percents={percents}
-					llmModel={llmModel}
-					userEmail={userEmail}
-					userNickname={userNickname}
-					updateDateTime={updateDateTime}
-					description={description}
+					{...prompt}
+					isCreator={user && user.oauthEmail === userEmail}
 				/>
 				<div className='mt-12' />
 				<AsyncComponentBoundary pendingFallback={<Loading />}>

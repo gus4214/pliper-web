@@ -2,7 +2,7 @@ import Loading from '@/src/components/atoms/loading/Loading';
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import PromptItemWithInteraction from '@/src/components/modules/@common/listItems/PromptItemWithInteraction';
 import { useInfiniteGetMyPromptsByView } from '@/src/fetchers/prompt/my-prompt';
-import { usePromptInteractions } from '@/src/hooks/promptInteractions';
+import { usePromptInteractions } from '@/src/hooks/promptController';
 import { timeAgo } from '@/src/utils/dateUtils';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';

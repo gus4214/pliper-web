@@ -3,7 +3,7 @@ import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import SearchTitleEmptyText from '@/src/components/atoms/text/SearchTitleEmptyText';
 import PromptItemWithInteraction from '@/src/components/modules/@common/listItems/PromptItemWithInteraction';
 import { useInfiniteGetMyPromptClips } from '@/src/fetchers/prompt/my-clip';
-import { usePromptInteractions } from '@/src/hooks/promptInteractions';
+import { usePromptInteractions } from '@/src/hooks/promptController';
 import { searchFilterAtom, searchInputAtom } from '@/src/stores/searchForm';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
