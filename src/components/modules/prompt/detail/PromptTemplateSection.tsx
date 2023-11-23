@@ -4,7 +4,7 @@ import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
 import { Parameter, Prompt } from '@/src/fetchers/prompt/types';
 import { stringToArray } from '@/src/utils/conversionUtils';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Select, Textarea } from 'react-daisyui';
 import { Controller, useForm } from 'react-hook-form';
 import { CopyIcon } from '@/src/components/atoms/icons/CopyIcon';
@@ -12,6 +12,9 @@ import { handleCopyClipBoard } from '@/src/utils/utils';
 import { useAppToast } from '@/src/hooks/toast';
 import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
 import { motion } from 'framer-motion';
+import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
+import { DocumentDuplicateIcon as DocumentDuplicateSolidIcon } from '@heroicons/react/24/solid';
+import TextareaAutosize from 'react-textarea-autosize';
 
 interface PromptTemplateSectionProps {
 	// prompt: Prompt;
@@ -23,8 +26,10 @@ interface PromptTemplateSectionProps {
 
 const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters = [], template, promptId, preview }) => {
 	const [filledTemplate, setFilledTemplate] = useState('');
+	console.log('🚀 ~ file: PromptTemplateSection.tsx:28 ~ filledTemplate:', filledTemplate);
 	const ref = useRef<HTMLTextAreaElement | null>(null);
 	const { openToast } = useAppToast();
+	const [isHovering, setIsHovering] = useState(false);
 
 	const formHandler = useForm<Record<string, string>>({
 		mode: 'onChange',
@@ -39,8 +44,10 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 
 	const { control, getValues } = formHandler;
 	const layoutWidth = preview ? 'w-[440px]' : 'w-[556px]';
-	const promptTitle = filledTemplate ? 'text-teal-400' : 'text-neutral-400';
-	const promptTextArea = filledTemplate ? 'border-teal-400' : 'border-neutral-100';
+	const promptTextArea = filledTemplate ? 'bg-white' : 'bg-[#FAFFFF]';
+
+	const handleMouseEnter = () => setIsHovering(true);
+	const handleMouseLeave = () => setIsHovering(false);
 
 	const createPrompt = () => {
 		let newTemplate = template;
@@ -56,12 +63,20 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 		ref.current?.focus();
 	};
 
+	useEffect(() => {
+		if (ref.current) {
+			const lineCount = filledTemplate.split('\n').length;
+			const newRows = Math.max(5, lineCount);
+			ref.current.rows = newRows;
+		}
+	}, [filledTemplate]);
+
 	return (
 		<div className='flex flex-col gap-6 items-center'>
 			<div className='flex gap-4 w-full'>
 				<div className='flex flex-col gap-4'>
-					<h1 className='pl-2 text-neutral-400 text-sm font-medium'>입력값</h1>
-					<div className={`flex flex-col gap-2 ${layoutWidth}`}>
+					<h1 className='pl-2 text-neutral-500 text-[13px] font-semibold'>내용</h1>
+					<div className={`flex flex-col gap-2.5 ${layoutWidth}`}>
 						{parameters?.map((parameter, i) => {
 							let element; // 이 변수에 각 type에 따른 컴포넌트를 저장할 예정입니다.
 
@@ -71,7 +86,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 										<FormInput
 											name={parameter.title}
 											control={control}
-											inputProps={{ placeholder: parameter.description, className: 'w-full' }}
+											inputProps={{ placeholder: parameter.description, className: 'w-full h-10 rounded' }}
 										/>
 									);
 									break;
@@ -81,7 +96,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 											name={parameter.title}
 											control={control}
 											render={({ field }) => (
-												<Select {...field}>
+												<Select {...field} className='w-[240px] min-h-[40px] h-[40px] rounded'>
 													<Select.Option value={'선택하기'}>선택하기</Select.Option>
 													{(stringToArray(parameter.typeValues) as any).map((typeValue: string, i: string) => (
 														<Select.Option key={i} value={typeValue}>
@@ -100,8 +115,8 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 											control={control}
 											options={parameter.typeValues.split(',').map((value) => ({ code: value, label: value }))}
 											color='secondary'
-											className='w-full flex flex-wrap'
-											chipClassName='bg-white whitespace-nowrap'
+											className='w-full flex flex-wrap p-2.5 bg-neutral-100 rounded'
+											chipClassName='bg-white whitespace-nowrap h-8 text-black text-sm font-normal'
 										/>
 									);
 									break;
@@ -120,19 +135,30 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 					</div>
 				</div>
 				<div className='flex flex-col gap-4 relative'>
-					<h1 className={`pl-2 ${promptTitle} text-sm font-medium`}>프롬프트</h1>
+					<h1 className={`pl-2 text-neutral-500 text-[13px] font-semibold`}>프롬프트</h1>
+					{/* <TextareaAutosize
+						// ref={ref}
+						readOnly
+						value={filledTemplate}
+						// rows={5}
+						className={`${layoutWidth} border border-teal-200 rounded-lg ${promptTextArea} focus:outline-none`}
+						// bordered={false}
+						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
+					/> */}
 					<Textarea
 						ref={ref}
 						readOnly
 						value={filledTemplate}
-						rows={filledTemplate ? 5 : 1}
-						className={`${layoutWidth} border-8 ${promptTextArea}`}
+						rows={5}
+						className={`${layoutWidth} border border-teal-200 rounded-lg ${promptTextArea} focus:outline-none`}
 						bordered={false}
 						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
 					/>
 					{filledTemplate && (
 						<div
 							className={`absolute right-[5px] cursor-pointer`}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 							onClick={() => {
 								openToast({
 									message: '프롬프트가 클립보드에 복사되었습니다.',
@@ -150,7 +176,11 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 									damping: 10,
 								}}
 							>
-								<CopyIcon />
+								{isHovering ? (
+									<DocumentDuplicateSolidIcon className='text-teal-200 w-6 h-6' />
+								) : (
+									<DocumentDuplicateIcon className='text-teal-200 w-6 h-6' />
+								)}
 							</motion.div>
 						</div>
 					)}

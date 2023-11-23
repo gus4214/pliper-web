@@ -7,13 +7,9 @@ interface PromptTemplateSectionItemProps {
 
 const PromptTemplateSectionItem: React.FC<PromptTemplateSectionItemProps> = ({ title, element }) => {
 	return (
-		<div className='w-full flex p-4 bg-neutral-100 rounded-lg'>
-			<div className='flex items-center gap-6 w-full'>
-				<div className='w-[80px] flex'>
-					<h1 className='text-black text-sm font-medium whitespace-wrap'>{title}</h1>
-				</div>
-				<div className='w-[420px]'>{element}</div>
-			</div>
+		<div className='w-full flex flex-col p-4 bg-neutral-50 rounded-lg gap-2.5'>
+			<h1 className='text-black text-[13px] font-semibold whitespace-wrap'>{title}</h1>
+			<div className='w-full'>{element}</div>
 		</div>
 	);
 };
