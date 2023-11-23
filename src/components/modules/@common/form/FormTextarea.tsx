@@ -9,12 +9,14 @@ interface FormTextFieldProps<TFieldValues extends FieldValues = FieldValues, TNa
 	label?: string;
 	errorClassName?: string;
 	onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+	ActionComponent?: React.ReactNode;
 }
 
 const FormTextarea = <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({
 	label,
 	inputProps,
 	errorClassName,
+	ActionComponent,
 	onChange: onInputChange,
 	...props
 }: FormTextFieldProps<TFieldValues, TName>) => {
@@ -30,18 +32,21 @@ const FormTextarea = <TFieldValues extends FieldValues = FieldValues, TName exte
 					<span className='label-text'>{label}</span>
 				</label>
 			)}
-			<Textarea
-				value={value}
-				onChange={(e) => {
-					onChange(e);
-					onInputChange && onInputChange(e);
-				}}
-				onBlur={onBlur}
-				ref={ref}
-				{...inputProps}
-			/>
+			<div className={'relative'}>
+				<Textarea
+					value={value}
+					onChange={(e) => {
+						onChange(e);
+						onInputChange && onInputChange(e);
+					}}
+					onBlur={onBlur}
+					ref={ref}
+					{...inputProps}
+				/>
+				{ActionComponent && ActionComponent}
+			</div>
 			{error && (
-				<label className={`${errorClassName} label`}>
+				<label className={`${errorClassName ? errorClassName : ''} label pt-0`}>
 					<span className='label-text-alt text-red-500'>{error.message}</span>
 				</label>
 			)}

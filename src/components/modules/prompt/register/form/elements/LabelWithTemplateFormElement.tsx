@@ -8,7 +8,7 @@ interface LabelWithTemplateFormElementProps {
 
 const LabelWithTemplateFormElement: React.FC<LabelWithTemplateFormElementProps> = ({ leftLabel, leftElement, rightElement }) => {
 	return (
-		<div className='w-[934px] flex py-4 px-6 bg-neutral-100 rounded-2xl gap-6'>
+		<div className='w-full flex py-4 px-6 bg-neutral-100 rounded-2xl gap-6'>
 			<div className='flex items-center gap-6'>
 				<div className='w-[120px] flex py-2'>
 					<h1 className='text-black text-[13px] font-medium whitespace-wrap'>{leftLabel}</h1>

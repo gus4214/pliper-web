@@ -32,12 +32,6 @@ const SearchForm: React.FC<SearchFormProps> = ({ placeholder = '뭐든 적어주
 		control,
 	});
 
-	useEffect(() => {
-		return () => {
-			setSearchInputValue('');
-		}
-	}, []);
-
 	const onSubmit = async (data: BaseFormFields) => {
 		const { title } = data;
 		setSearchInputValue(title);
