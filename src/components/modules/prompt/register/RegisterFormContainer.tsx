@@ -10,7 +10,7 @@ const RegisterFormContainer = () => {
 			<RegisterForm
 				formHandler={formHandler}
 				action={
-					<div className='flex justify-center items-center gap-3'>
+					<div className='flex justify-between items-center gap-3'>
 						<Button
 							color='ghost'
 							variant='outline'

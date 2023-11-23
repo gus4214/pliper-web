@@ -4,8 +4,8 @@ import usePromptRegisterForm from '@/src/hooks/promptRegisterForm';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Button } from 'react-daisyui';
-import ToastPlipIcon from "@/src/components/atoms/icons/ToastPlipIcon";
-import AppToast from "@/src/components/atoms/toast/AppToast";
+import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
+import AppToast from '@/src/components/atoms/toast/AppToast';
 
 interface UpdatePromptFormContainerProps {
 	data: Prompt;
@@ -20,7 +20,7 @@ const UpdatePromptFormContainer: React.FC<UpdatePromptFormContainerProps> = ({ d
 			<RegisterForm
 				formHandler={formHandler}
 				action={
-					<div className='flex justify-center items-center gap-3'>
+					<div className='flex justify-between items-center gap-3'>
 						<Button
 							color='ghost'
 							variant='outline'

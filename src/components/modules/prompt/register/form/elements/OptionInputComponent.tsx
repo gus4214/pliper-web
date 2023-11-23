@@ -43,24 +43,21 @@ const OptionInputComponent: React.FC<OptionInputComponentProps> = ({ onValuesCha
 	};
 
 	return (
-		<div className=' bg-neutral-100 rounded justify-start items-center flex w-full'>
-			<div className='w-full flex gap-2 flex-wrap'>
+		<div className=' bg-neutral-50 rounded justify-start items-center flex w-full'>
+			<div className='w-full flex gap-2 flex-wrap items-center'>
 				{options.map((option, index) => (
-					<div className='relative w-[112px]' key={index}>
+					<div className='relative w-[137px]' key={index}>
 						<Input
-							className='w-[112px] pl-4 pr-8 py-2 bg-white rounded border border-neutral-200 focus:outline-none'
+							className='w-[137px] h-[32px] pl-4 pr-8 py-2 text-sm font-normal bg-white rounded border border-neutral-200 focus:outline-none'
 							placeholder={option}
 							value={values[index] || ''}
 							onChange={(e) => handleInputChange(index, e.target.value)}
 						/>
-						<X
-							className='absolute top-[15px] right-3 w-5 h-5 text-neutral-400 cursor-pointer'
-							onClick={() => handleRemoveOption(index)}
-						/>
+						<X className='absolute top-[6px] right-3 w-5 h-5 text-neutral-400 cursor-pointer' onClick={() => handleRemoveOption(index)} />
 					</div>
 				))}
 				{options.length < 10 && (
-					<Button className='bg-neutral-200' onClick={handleAddOption}>
+					<Button className='bg-neutral-200 rounded min-h-[32px] h-[32px]' onClick={handleAddOption}>
 						추가
 					</Button>
 				)}

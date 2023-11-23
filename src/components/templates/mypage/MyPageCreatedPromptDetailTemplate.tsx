@@ -8,7 +8,7 @@ interface MyPageCreatedPromptDetailTemplateProps {
 
 const MyPageCreatedPromptDetailTemplate: React.FC<MyPageCreatedPromptDetailTemplateProps> = ({ data }) => {
 	return (
-		<div className='pt-8 pb-17 flex flex-col items-center relative'>
+		<div className='pt-[45px] pb-[60px] flex flex-col items-center relative'>
 			<UpdatePromptFormContainer data={data} />
 		</div>
 	);

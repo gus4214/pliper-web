@@ -20,9 +20,7 @@ const MAX_PARAMETERS = 7;
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const [parameters, setParameters] = useAtom(parametersAtom);
 
-	const isFullParameters = parameters.length >= MAX_PARAMETERS;
-
-	console.log(isFullParameters, parameters.length, MAX_PARAMETERS);
+	const isFullParameters = parameters?.length >= MAX_PARAMETERS;
 
 	const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		updateParametersDomByTemplate(e.target.value);
@@ -91,12 +89,14 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 							className: 'w-[720px] h-60 placeholder:text-neutral-400 relative',
 							rows: 5,
 						}}
-						ActionComponent={<PlusCircleIcon
-							className={`w-10 h-14 absolute z-10 right-[6px] bottom-[6px] ${
-								!isFullParameters ? 'text-amber-300 hover:text-amber-400 cursor-pointer' : 'text-neutral-200'
-							}`}
-							onClick={() => handleAddParameterClick()}
-						/>}
+						ActionComponent={
+							<PlusCircleIcon
+								className={`w-10 h-14 absolute z-10 right-[6px] bottom-[6px] ${
+									!isFullParameters ? 'text-amber-300 hover:text-amber-400 cursor-pointer' : 'text-neutral-200'
+								}`}
+								onClick={() => handleAddParameterClick()}
+							/>
+						}
 						control={formHandler.control}
 						name={'template'}
 					/>
@@ -117,14 +117,18 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 				</div>
 			</div>
 			{parameters && (
-				<div className='flex flex-col gap-2 pt-4 w-full'>
+				<div className='flex flex-col gap-5 pt-4 w-full'>
 					{/* parameter가 있을 경우에만 LabelWithTemplateFormElement 렌더링 */}
 					{parameters?.map((param, index) => (
 						<LabelWithTemplateFormElement
 							key={index}
 							leftLabel={param.title}
 							leftElement={
-								<Select value={param.type} onChange={(event) => handleSelectChange(index, event.target.value)}>
+								<Select
+									value={param.type}
+									onChange={(event) => handleSelectChange(index, event.target.value)}
+									className='w-[240px] min-h-[40px] h-[40px] rounded'
+								>
 									<Select.Option value={'TEXT'}>텍스트</Select.Option>
 									<Select.Option value={'SELECT'}>선택</Select.Option>
 									<Select.Option value={'MULTI_SELECT'}>중복 선택</Select.Option>
@@ -134,7 +138,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 								param.type === 'TEXT' ? (
 									<Input
 										value={param.description}
-										className='w-full bg-white rounded border border-neutral-200'
+										className='w-full h-10 bg-white rounded border border-neutral-200 text-[13px] font-normal'
 										onChange={(e) => handleTypeValuesChange(index, e.target.value)}
 									/>
 								) : param.type === 'SELECT' || param.type === 'MULTI_SELECT' ? (
