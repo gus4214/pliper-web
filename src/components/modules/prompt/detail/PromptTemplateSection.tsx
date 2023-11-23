@@ -1,23 +1,21 @@
+import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
 import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail/PromptInteractionButtonGroup';
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
-import { Parameter, Prompt } from '@/src/fetchers/prompt/types';
-import { stringToArray } from '@/src/utils/conversionUtils';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Select, Textarea } from 'react-daisyui';
-import { Controller, useForm } from 'react-hook-form';
-import { CopyIcon } from '@/src/components/atoms/icons/CopyIcon';
-import { handleCopyClipBoard } from '@/src/utils/utils';
+import { Parameter } from '@/src/fetchers/prompt/types';
 import { useAppToast } from '@/src/hooks/toast';
-import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
-import { motion } from 'framer-motion';
+import { stringToArray } from '@/src/utils/conversionUtils';
+import { handleCopyClipBoard } from '@/src/utils/utils';
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import { DocumentDuplicateIcon as DocumentDuplicateSolidIcon } from '@heroicons/react/24/solid';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { Button, Select } from 'react-daisyui';
+import { Controller, useForm } from 'react-hook-form';
 import TextareaAutosize from 'react-textarea-autosize';
 
 interface PromptTemplateSectionProps {
-	// prompt: Prompt;
 	parameters: Parameter[];
 	template: string;
 	promptId?: number;
@@ -26,8 +24,6 @@ interface PromptTemplateSectionProps {
 
 const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters = [], template, promptId, preview }) => {
 	const [filledTemplate, setFilledTemplate] = useState('');
-	console.log('🚀 ~ file: PromptTemplateSection.tsx:28 ~ filledTemplate:', filledTemplate);
-	const ref = useRef<HTMLTextAreaElement | null>(null);
 	const { openToast } = useAppToast();
 	const [isHovering, setIsHovering] = useState(false);
 
@@ -60,16 +56,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 		});
 
 		setFilledTemplate(newTemplate + ''); // 채워진 템플릿을 상태에 업데이트
-		ref.current?.focus();
 	};
-
-	useEffect(() => {
-		if (ref.current) {
-			const lineCount = filledTemplate.split('\n').length;
-			const newRows = Math.max(5, lineCount);
-			ref.current.rows = newRows;
-		}
-	}, [filledTemplate]);
 
 	return (
 		<div className='flex flex-col gap-6 items-center'>
@@ -136,54 +123,45 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 				</div>
 				<div className='flex flex-col gap-4 relative'>
 					<h1 className={`pl-2 text-neutral-500 text-[13px] font-semibold`}>프롬프트</h1>
-					{/* <TextareaAutosize
-						// ref={ref}
-						readOnly
-						value={filledTemplate}
-						// rows={5}
-						className={`${layoutWidth} border border-teal-200 rounded-lg ${promptTextArea} focus:outline-none`}
-						// bordered={false}
-						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
-					/> */}
-					<Textarea
-						ref={ref}
-						readOnly
-						value={filledTemplate}
-						rows={5}
-						className={`${layoutWidth} border border-teal-200 rounded-lg ${promptTextArea} focus:outline-none`}
-						bordered={false}
-						placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
-					/>
-					{filledTemplate && (
-						<div
-							className={`absolute right-[5px] cursor-pointer`}
-							onMouseEnter={handleMouseEnter}
-							onMouseLeave={handleMouseLeave}
-							onClick={() => {
-								openToast({
-									message: '프롬프트가 클립보드에 복사되었습니다.',
-									open: true,
-									icon: <ToastPlipIcon />,
-								});
-								handleCopyClipBoard(filledTemplate);
-							}}
-						>
-							<motion.div
-								whileHover={{ scale: 1.2 }}
-								whileTap={{ scale: 0.9 }}
-								transition={{
-									stiffness: 400,
-									damping: 10,
+					<div className='relative'>
+						<TextareaAutosize
+							readOnly
+							value={filledTemplate}
+							className={`${layoutWidth} p-2.5 border border-teal-200 rounded-lg ${promptTextArea} focus:outline-none`}
+							minRows={5}
+							placeholder='생성 버튼 누를 시 왼쪽 입력값 기반으로 해당 프롬프트가 작성됩니다.'
+						/>
+						{filledTemplate && (
+							<div
+								className={`absolute right-[7px] bottom-4 cursor-pointer`}
+								onMouseEnter={handleMouseEnter}
+								onMouseLeave={handleMouseLeave}
+								onClick={() => {
+									openToast({
+										message: '프롬프트가 클립보드에 복사되었습니다.',
+										open: true,
+										icon: <ToastPlipIcon />,
+									});
+									handleCopyClipBoard(filledTemplate);
 								}}
 							>
-								{isHovering ? (
-									<DocumentDuplicateSolidIcon className='text-teal-200 w-6 h-6' />
-								) : (
-									<DocumentDuplicateIcon className='text-teal-200 w-6 h-6' />
-								)}
-							</motion.div>
-						</div>
-					)}
+								<motion.div
+									whileHover={{ scale: 1.2 }}
+									whileTap={{ scale: 0.9 }}
+									transition={{
+										stiffness: 400,
+										damping: 10,
+									}}
+								>
+									{isHovering ? (
+										<DocumentDuplicateSolidIcon className='text-teal-200 w-6 h-6' />
+									) : (
+										<DocumentDuplicateIcon className='text-teal-200 w-6 h-6' />
+									)}
+								</motion.div>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 			{preview ? (
