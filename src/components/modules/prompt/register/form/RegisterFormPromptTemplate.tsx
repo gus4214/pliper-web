@@ -25,7 +25,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 	console.log(isFullParameters, parameters.length, MAX_PARAMETERS);
 
 	const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		createParameter(e.target.value);
+		updateParametersDomByTemplate(e.target.value);
 	};
 
 	const handleSelectChange = (index: number, type: string) => {
@@ -52,7 +52,17 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 		setParameters(updatedParameters);
 	};
 
-	const createParameter = (template: string) => {
+	const handleAddParameterClick = () => {
+		if (isFullParameters) {
+			return;
+		}
+		let tempContent = formHandler.getValues('template');
+		tempContent = tempContent + `{{입력값${parameters.length + 1}}}\n`;
+		updateParametersDomByTemplate(tempContent);
+		formHandler.setValue('template', tempContent);
+	};
+
+	const updateParametersDomByTemplate = (template: string) => {
 		const matches = template.match(regex);
 		if (matches) {
 			let newTitles = matches.map((match) => match.replace('{{', '').replace('}}', ''));
@@ -71,16 +81,6 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 		}
 	};
 
-	const addParameter = () => {
-		if (isFullParameters) {
-			return;
-		}
-		let tempContent = formHandler.getValues('template');
-		tempContent = tempContent + `{{입력값${parameters.length + 1}}}\n`;
-		createParameter(tempContent);
-		formHandler.setValue('template', tempContent);
-	};
-
 	return (
 		<div className='flex flex-col w-full'>
 			<div className='w-full flex flex-row'>
@@ -95,7 +95,7 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 							className={`w-10 h-14 absolute z-10 right-[6px] bottom-[6px] ${
 								!isFullParameters ? 'text-amber-300 hover:text-amber-400 cursor-pointer' : 'text-neutral-200'
 							}`}
-							onClick={() => addParameter()}
+							onClick={() => handleAddParameterClick()}
 						/>}
 						control={formHandler.control}
 						name={'template'}
