@@ -16,7 +16,6 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 	const { Dialog, handleShow, handleHide } = Modal.useDialog();
 
 	const {
-		getValues,
 		formState: { isValid },
 		watch,
 	} = formHandler;
@@ -36,7 +35,7 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 			</Button>
 			<Dialog
 				backdrop
-				className='max-w-[976px] max-h-[915px] px-4 py-6 bg-white rounded-lg border border-neutral-200 flex-col justify-start items-center gap-4 flex'
+				className='max-w-[976px] p-6 bg-white rounded-lg border border-neutral-200 flex-col justify-start items-center gap-4 flex overflow-y-auto'
 			>
 				<Modal.Header className='flex w-full justify-between mb-0'>
 					<span className='text-black text-lg font-bold'>미리보기</span>
@@ -52,7 +51,6 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 						description={description}
 						preview
 					/>
-					<div className='mt-12' />
 					<PromptTemplateSection parameters={parameters} template={template} preview />
 				</Modal.Body>
 			</Dialog>

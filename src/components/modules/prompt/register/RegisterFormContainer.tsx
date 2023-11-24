@@ -12,15 +12,18 @@ const RegisterFormContainer = () => {
 				action={
 					<div className='flex justify-between items-center gap-3'>
 						<Button
-							color='ghost'
-							variant='outline'
-							className='bg-white rounded border border-neutral-200'
+							className='bg-white rounded border border-neutral-200 text-neutral-400 text-lg font-medium'
 							onClick={handleSaveTemporarily}
 						>
-							<span className='text-neutral-400 text-sm font-medium'>뒤로가기</span>
+							뒤로가기
 						</Button>
-						<Button color='accent' className='rounded' onClick={onRegisterSubmit} disabled={!formHandler.formState.isValid}>
-							<span className='text-white text-sm font-medium'>프롬프트 등록하기</span>
+						<Button
+							color='accent'
+							className='h-12 rounded text-white text-lg font-medium'
+							onClick={onRegisterSubmit}
+							disabled={!formHandler.formState.isValid}
+						>
+							프롬프트 등록하기
 						</Button>
 					</div>
 				}

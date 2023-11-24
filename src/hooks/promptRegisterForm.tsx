@@ -41,6 +41,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 	const promptId = data?.promptId;
 
 	const [parameters, setParameters] = useAtom(parametersAtom);
+	const [template, setTemplate] = useAtom(templateValueAtom);
 	const { openToast } = useAppToast();
 
 	const [open, close] = useConfirmModal();
@@ -74,7 +75,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 						router.push(`/mypage/created-prompt`);
 					}
 					localStorage.removeItem('temporaryPromptTemplate');
-					//setTemplate('');
+					setTemplate('');
 					setParameters([]);
 					close();
 					openToast({
@@ -101,7 +102,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 					} else {
 						router.push(`/mypage/created-prompt`);
 					}
-					//setTemplate('');
+					setTemplate('');
 					setParameters([]);
 					close();
 					openToast({
@@ -122,7 +123,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 
 		const temporaryData = {
 			formValues,
-			//template,
+			template,
 			parameters,
 		};
 
@@ -133,7 +134,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 		// 페이지가 로딩되면 임시 저장된 데이터를 불러옵니다.
 		const temporaryDataString = localStorage.getItem('temporaryPromptTemplate');
 		if (data) {
-			//setTemplate(data.template);
+			setTemplate(data.template);
 			setParameters(data.parameters);
 			return;
 		} else {
@@ -143,7 +144,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 		if (temporaryDataString) {
 			const temporaryData = JSON.parse(temporaryDataString);
 			formHandler.reset(temporaryData.formValues);
-			//setTemplate(temporaryData.template);
+			setTemplate(temporaryData.template);
 			setParameters(temporaryData.parameters);
 			return;
 		}
@@ -160,7 +161,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 			},
 			onCancel: () => {
 				localStorage.removeItem('temporaryPromptTemplate');
-				//setTemplate('');
+				setTemplate('');
 				setParameters([]);
 				router.back();
 			},

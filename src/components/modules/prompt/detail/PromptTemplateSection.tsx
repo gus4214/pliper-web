@@ -4,6 +4,7 @@ import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/Form
 import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail/PromptInteractionButtonGroup';
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
 import { Parameter } from '@/src/fetchers/prompt/types';
+import { usePromptTemplateCreate } from '@/src/hooks/promptDetailTemplate';
 import { useAppToast } from '@/src/hooks/toast';
 import { stringToArray } from '@/src/utils/conversionUtils';
 import { handleCopyClipBoard } from '@/src/utils/utils';
@@ -12,7 +13,7 @@ import { DocumentDuplicateIcon as DocumentDuplicateSolidIcon } from '@heroicons/
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { Button, Select } from 'react-daisyui';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import TextareaAutosize from 'react-textarea-autosize';
 
 interface PromptTemplateSectionProps {
@@ -23,40 +24,20 @@ interface PromptTemplateSectionProps {
 }
 
 const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters = [], template, promptId, preview }) => {
-	const [filledTemplate, setFilledTemplate] = useState('');
 	const { openToast } = useAppToast();
 	const [isHovering, setIsHovering] = useState(false);
 
-	const formHandler = useForm<Record<string, string>>({
-		mode: 'onChange',
-		defaultValues: parameters?.reduce(
-			(acc, parameter) => {
-				acc[parameter.title] = ''; // 각 parameter의 기본값을 빈 문자열로 설정
-				return acc;
-			},
-			{} as Record<string, any>
-		),
-	});
+	const {
+		filledTemplate,
+		createPrompt,
+		formHandler: { control },
+	} = usePromptTemplateCreate({ parameters, template });
 
-	const { control, getValues } = formHandler;
 	const layoutWidth = preview ? 'w-[440px]' : 'w-[556px]';
 	const promptTextArea = filledTemplate ? 'bg-white' : 'bg-[#FAFFFF]';
 
 	const handleMouseEnter = () => setIsHovering(true);
 	const handleMouseLeave = () => setIsHovering(false);
-
-	const createPrompt = () => {
-		let newTemplate = template;
-
-		// parameters에 따라 템플릿을 채워넣는 로직
-		parameters.forEach((parameter) => {
-			const value = getValues()[parameter.title]; // form에서 해당 title의 값을 가져옵니다.
-			const placeholder = `{{${parameter.title}}}`;
-			newTemplate = newTemplate.replace(placeholder, value);
-		});
-
-		setFilledTemplate(newTemplate + ''); // 채워진 템플릿을 상태에 업데이트
-	};
 
 	return (
 		<div className='flex flex-col gap-6 items-center'>
@@ -166,10 +147,12 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 			</div>
 			{preview ? (
 				<div className='w-[225px] gap-3 flex'>
-					<Button variant='outline'>닫기</Button>
+					<Button className='bg-white rounded border border-neutral-200 w-16 h-[48px] whitespace-nowrap text-neutral-400 text-lg font-medium'>
+						닫기
+					</Button>
 					<Button
-						variant='outline'
 						color='accent'
+						className='h-12 rounded text-white text-lg font-medium'
 						onClick={(e) => {
 							e.preventDefault();
 							createPrompt();

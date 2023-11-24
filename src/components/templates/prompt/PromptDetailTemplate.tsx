@@ -4,10 +4,10 @@ import FloatButtonGroup from '@/src/components/modules/@common/floatButton/Float
 import PromptDetailInfoHeader from '@/src/components/modules/prompt/detail/PromptDetailInfoHeader';
 import PromptTemplateSection from '@/src/components/modules/prompt/detail/PromptTemplateSection';
 import { Prompt } from '@/src/fetchers/prompt/types';
-import React from 'react';
 import { useAuthContext } from '@/src/hooks/context';
-import { Button } from 'react-daisyui';
 import { useRouter } from 'next/router';
+import React from 'react';
+import { Button } from 'react-daisyui';
 
 interface PromptDetailTemplateProps {
 	prompt: Prompt;
@@ -28,12 +28,10 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 					<PromptTemplateSection parameters={parameters} template={template} promptId={promptId} />
 				</AsyncComponentBoundary>
 				<Button
-					color='ghost'
-					variant='outline'
-					className='mt-8 w-60 h-12 bg-white rounded-lg border border-gray-200'
+					className='mt-8 w-60 h-12 bg-white rounded-lg border border-gray-200 text-black text-base font-medium'
 					onClick={() => push('/prompt')}
 				>
-					<span className='text-black text-base font-medium'>목록으로</span>
+					목록으로
 				</Button>
 			</div>
 		</>

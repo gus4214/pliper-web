@@ -3,7 +3,7 @@ import OptionInputComponent from '@/src/components/modules/prompt/register/form/
 import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { arrayToString } from '@/src/utils/conversionUtils';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import React from 'react';
 import { Input, Select } from 'react-daisyui';
 import { UseFormReturn } from 'react-hook-form';
@@ -19,11 +19,13 @@ const MAX_PARAMETERS = 7;
 
 const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({ formHandler }) => {
 	const [parameters, setParameters] = useAtom(parametersAtom);
+	const setTemplateValue = useSetAtom(templateValueAtom);
 
 	const isFullParameters = parameters?.length >= MAX_PARAMETERS;
 
 	const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		updateParametersDomByTemplate(e.target.value);
+		setTemplateValue(e.target.value);
 	};
 
 	const handleSelectChange = (index: number, type: string) => {
