@@ -39,6 +39,15 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 	const handleMouseEnter = () => setIsHovering(true);
 	const handleMouseLeave = () => setIsHovering(false);
 
+	const handleCopyIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		openToast({
+			message: '프롬프트가 클립보드에 복사되었습니다.',
+			open: true,
+			icon: <ToastPlipIcon />,
+		});
+		handleCopyClipBoard(filledTemplate);
+	};
+
 	return (
 		<div className='flex flex-col gap-6 items-center'>
 			<div className='flex gap-4 w-full'>
@@ -117,14 +126,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 								className={`absolute right-[7px] bottom-4 cursor-pointer`}
 								onMouseEnter={handleMouseEnter}
 								onMouseLeave={handleMouseLeave}
-								onClick={() => {
-									openToast({
-										message: '프롬프트가 클립보드에 복사되었습니다.',
-										open: true,
-										icon: <ToastPlipIcon />,
-									});
-									handleCopyClipBoard(filledTemplate);
-								}}
+								onClick={(e) => handleCopyIconClick(e)}
 							>
 								<motion.div
 									whileHover={{ scale: 1.2 }}

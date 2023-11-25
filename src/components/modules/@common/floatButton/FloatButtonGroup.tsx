@@ -34,28 +34,32 @@ const FloatButtonGroup: React.FC<FloatButtonGroupProps> = ({ className }) => {
 	return (
 		<div className={`${className} fixed right-[50%] z-10`}>
 			<div className='w-12 h-24 px-2.5 py-4 bg-teal-200 rounded-[99px] flex-col justify-center items-center gap-4 flex'>
-				<motion.div
-					whileHover={{ scale: 1.2 }}
-					whileTap={{ scale: 0.9 }}
-					transition={{
-						type: 'spring',
-						stiffness: 400,
-						damping: 10,
-					}}
-				>
-					<FloatPromptPlusIcon className='cursor-pointer' onClick={handlePlusIconClick} />
-				</motion.div>
-				<motion.div
-					whileHover={{ scale: 1.2 }}
-					whileTap={{ scale: 0.9 }}
-					transition={{
-						type: 'spring',
-						stiffness: 400,
-						damping: 10,
-					}}
-				>
-					<FloatPlipIcon className='cursor-pointer' onClick={handlePlipIconClick} />
-				</motion.div>
+				<div onClick={handlePlusIconClick}>
+					<motion.div
+						whileHover={{ scale: 1.2 }}
+						whileTap={{ scale: 0.9 }}
+						transition={{
+							type: 'spring',
+							stiffness: 400,
+							damping: 10,
+						}}
+					>
+						<FloatPromptPlusIcon className='cursor-pointer' />
+					</motion.div>
+				</div>
+				<div onClick={handlePlipIconClick}>
+					<motion.div
+						whileHover={{ scale: 1.2 }}
+						whileTap={{ scale: 0.9 }}
+						transition={{
+							type: 'spring',
+							stiffness: 400,
+							damping: 10,
+						}}
+					>
+						<FloatPlipIcon className='cursor-pointer' />
+					</motion.div>
+				</div>
 			</div>
 		</div>
 	);
