@@ -6,6 +6,9 @@ const nextConfig = withTwin({
 	reactStrictMode: true,
 	transpilePackages: ['react-daisyui'],
 	output: 'standalone',
+	compiler: {
+		removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
+	},
 	swcMinify: true,
 	webpack(config) {
 		config.module.rules.push({

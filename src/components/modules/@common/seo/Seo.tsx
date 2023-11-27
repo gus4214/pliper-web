@@ -29,6 +29,7 @@ export const Seo: FC<SeoProps> = ({
     return (
         <Head>
             <title>{title ? titleTemplate(title) : defaultSeoProps.title}</title>
+            <link rel='canonical' href={webHost} />
             <meta name="robots" content="index,follow"/>
             <meta name="description" content={description}/>
             <meta name="twitter:card" content="summary_large_image"/>
