@@ -27,6 +27,8 @@ export interface GetNotificationCountResult extends IBaasResponse {
 
 export interface NotificationItem {
 	notificationId: number;
+	promptId?: number;
+	link?: string;
 	group: NotificationGroup;
 	type: NotificationType;
 	userEmail?: string;

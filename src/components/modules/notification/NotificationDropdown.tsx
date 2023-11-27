@@ -1,5 +1,5 @@
 import NotificationIcon from '@/src/components/atoms/icons/NotificationIcon';
-import React, {FC, useState} from 'react';
+import React, { FC, useEffect, useState } from "react";
 import {Button, Dropdown, Tabs} from 'react-daisyui';
 import AsyncComponentBoundary from "@/src/components/atoms/suspense/AsyncComponentBoundary";
 import {useAuthContext} from "@/src/hooks/context";
@@ -7,6 +7,7 @@ import {GetNotificationsRequest, NotificationGroup} from "@/src/fetchers/notific
 import NotificationSkeleton from "@/src/components/modules/notification/NotificationSkeleton";
 import dynamic from "next/dynamic";
 import {useNotification} from "@/src/hooks/notification";
+import { useRouter } from "next/router";
 
 const NotificationTabList = dynamic(() => import( "@/src/components/modules/notification/NotificationTabList"), {
     ssr: false,
@@ -45,13 +46,18 @@ const categoryOfTab: Record<string, NotificationGroup | NotificationGroup[]> = {
 const itemMoreCount = 4
 
 const NotificationDropdown: FC = () => {
-    const [open, setOpen] = useState(false);
+    const router = useRouter();
+    const [open, setOpen] = useState(true);
     const [tabValue, setTabValue] = useState(0);
     const [condition, setCondition] = useState<GetNotificationsRequest>({limit: itemMoreCount, page: 1});
 
     const {active, showNotifications} = useNotification()
     const {user} = useAuthContext();
 
+    useEffect(() => {
+        console.log(router.asPath," 닫자!!", open)
+        setOpen(false)
+    }, [router]);
 
     const handleChangeTab = (tab: number) => {
         setTabValue(tab)
@@ -65,8 +71,8 @@ const NotificationDropdown: FC = () => {
 
 
     return (
-        <Dropdown vertical='bottom' end>
-            <Dropdown.Toggle button={false}>
+        <Dropdown vertical='bottom' end open={open} onClick={() => setOpen(true)} onBlur={() => setOpen(false)}>
+            <Dropdown.Toggle button={false} >
                 <Button size='sm' color='ghost' shape='circle' onClick={() => showNotifications()}>
                     <NotificationIcon active={active}/>
                 </Button>
