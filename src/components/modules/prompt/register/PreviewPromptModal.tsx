@@ -51,7 +51,7 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 						description={description}
 						preview
 					/>
-					<PromptTemplateSection parameters={parameters} template={template} preview />
+					<PromptTemplateSection parameters={parameters} template={template} preview  llm={llmModel} />
 				</Modal.Body>
 			</Dialog>
 		</>
