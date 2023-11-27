@@ -115,11 +115,14 @@ const PromptMenuList = () => {
 								{categoryOpen.includes(category.dept1.text) && ( // 현재 열린 카테고리의 code와 비교합니다.
 									<div className='pl-6 pb-2 flex-col gap-4 flex'>
 										{category.dept2.map((category2, i) => (
-											<div className='items-center gap-2 flex' key={i}>
+											<div
+												className='items-center gap-2 flex cursor-pointer'
+												onClick={() => handleCheckboxChange(category2.text)}
+												key={i}
+											>
 												<Checkbox
 													size='sm'
 													className='w-4 h-4 rounded'
-													onChange={() => handleCheckboxChange(category2.text)}
 													checked={selectedCodes.includes(category2.text)}
 													aria-label={`하위 카테고리 ${category2.text} 선택`}
 												/>
@@ -137,11 +140,10 @@ const PromptMenuList = () => {
 				<h1 className='text-center text-neutral-800 text-xs font-bold'>플랫폼</h1>
 				<div className='pl-4 py-2 flex-col gap-4 flex border-l border-teal-200'>
 					{llmData?.tools.map((tool, i) => (
-						<div key={i} className='items-center gap-2 flex'>
+						<div key={i} className='items-center gap-2 flex cursor-pointer' onClick={() => handleModelCheckboxChange(tool.name)}>
 							<Checkbox
 								size='sm'
 								className='w-4 h-4 rounded'
-								onChange={() => handleModelCheckboxChange(tool.name)}
 								checked={selectedModel.includes(tool.name)}
 								aria-label={`플랫폼 ${tool.name} 선택`}
 							/>
