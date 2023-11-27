@@ -6,10 +6,11 @@ import { useRouter } from 'next/router';
 
 interface NotificationTabListProps {
 	condition?: GetNotificationsRequest;
+	onClick?: () => void;
 	onMore?: () => void;
 }
 
-const NotificationTabList: FC<NotificationTabListProps> = ({ condition, onMore }) => {
+const NotificationTabList: FC<NotificationTabListProps> = ({ condition, onMore, onClick }) => {
 	const { data, fetchNextPage, isFetchingNextPage, refetch, hasNextPage } = useInfiniteGetNotifications(condition);
 	const router = useRouter();
 
@@ -19,6 +20,7 @@ const NotificationTabList: FC<NotificationTabListProps> = ({ condition, onMore }
 		} else if (item.link) {
 			router.push(item.link);
 		}
+		onClick && onClick();
 	};
 
 	if (!data?.pages) {

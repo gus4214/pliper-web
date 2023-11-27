@@ -1,4 +1,4 @@
-import { atom } from 'jotai/index';
+import { atom } from 'jotai';
 import { ReactNode } from 'react';
 
 export interface AppToastProps {
@@ -7,6 +7,12 @@ export interface AppToastProps {
 	icon?: ReactNode;
 	delayHideDuration?: number;
 	onClose?: () => void;
+	action?: Action;
+}
+
+interface Action {
+	message: string;
+	onAction: () => void;
 }
 
 export const initAppToast: AppToastProps = {

@@ -19,6 +19,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 interface PromptTemplateSectionProps {
 	parameters: Parameter[];
 	template: string;
+	llm: string;
 	promptId?: number;
 	preview?: boolean;
 }
@@ -41,7 +42,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 
 	const handleCopyIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		openToast({
-			message: '프롬프트가 클립보드에 복사되었습니다.',
+			message: '프롬프트가 클립보드에 복사되었습니다',
 			open: true,
 			icon: <ToastPlipIcon />,
 		});
@@ -63,7 +64,10 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 										<FormInput
 											name={parameter.title}
 											control={control}
-											inputProps={{ placeholder: parameter.description, className: 'w-full h-10 rounded' }}
+											inputProps={{
+												placeholder: parameter.description,
+												className: 'w-full h-10 rounded',
+											}}
 										/>
 									);
 									break;
@@ -90,7 +94,10 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 										<FormToggleMultiChipGroup
 											name={parameter.title}
 											control={control}
-											options={parameter.typeValues.split(',').map((value) => ({ code: value, label: value }))}
+											options={parameter.typeValues.split(',').map((value) => ({
+												code: value,
+												label: value,
+											}))}
 											color='secondary'
 											className='w-full flex flex-wrap p-2.5 bg-neutral-100 rounded'
 											chipClassName='bg-white whitespace-nowrap h-8 text-black text-sm font-normal'

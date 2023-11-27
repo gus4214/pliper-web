@@ -25,7 +25,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 				<FloatButtonGroup className='top-[192px] mr-[-634px]' />
 				<PromptDetailInfoHeader {...prompt} isCreator={user && user.oauthEmail === userEmail} />
 				<AsyncComponentBoundary pendingFallback={<Loading />}>
-					<PromptTemplateSection parameters={parameters} template={template} promptId={promptId} />
+					<PromptTemplateSection parameters={parameters} template={template} promptId={promptId} llm={prompt.llmModel}  />
 				</AsyncComponentBoundary>
 				<Button
 					className='mt-8 w-60 h-12 bg-white rounded-lg border border-gray-200 text-black text-base font-medium'
