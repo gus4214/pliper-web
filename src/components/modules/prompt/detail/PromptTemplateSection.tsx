@@ -1,10 +1,8 @@
 import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
-import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail/PromptInteractionButtonGroup';
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
 import { Parameter } from '@/src/fetchers/prompt/types';
-import { usePromptTemplateCreate } from '@/src/hooks/promptDetailTemplate';
 import { useAppToast } from '@/src/hooks/toast';
 import { stringToArray } from '@/src/utils/conversionUtils';
 import { handleCopyClipBoard } from '@/src/utils/utils';
@@ -12,27 +10,20 @@ import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import { DocumentDuplicateIcon as DocumentDuplicateSolidIcon } from '@heroicons/react/24/solid';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
-import { Button, Select } from 'react-daisyui';
-import { Controller } from 'react-hook-form';
+import { Select } from 'react-daisyui';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import TextareaAutosize from 'react-textarea-autosize';
 
 interface PromptTemplateSectionProps {
 	parameters: Parameter[];
-	template: string;
-	llm: string;
-	promptId?: number;
+	filledTemplate: string;
+	control?: Control<FieldValues>;
 	preview?: boolean;
 }
 
-const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters = [], template, promptId, preview }) => {
+const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameters = [], filledTemplate, control, preview }) => {
 	const { openToast } = useAppToast();
 	const [isHovering, setIsHovering] = useState(false);
-
-	const {
-		filledTemplate,
-		createPrompt,
-		formHandler: { control },
-	} = usePromptTemplateCreate({ parameters, template });
 
 	const layoutWidth = preview ? 'w-[440px]' : 'w-[556px]';
 	const promptTextArea = filledTemplate ? 'bg-white' : 'bg-[#FAFFFF]';
@@ -75,7 +66,7 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 									element = (
 										<Controller
 											name={parameter.title}
-											control={control}
+											control={control!}
 											render={({ field }) => (
 												<Select {...field} className='w-[240px] min-h-[40px] h-[40px] rounded'>
 													<Select.Option value={'선택하기'}>선택하기</Select.Option>
@@ -93,11 +84,8 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 									element = (
 										<FormToggleMultiChipGroup
 											name={parameter.title}
-											control={control}
-											options={parameter.typeValues.split(',').map((value) => ({
-												code: value,
-												label: value,
-											}))}
+											control={control!}
+											options={parameter.typeValues.split(',').map((value) => ({ code: value, label: value }))}
 											color='secondary'
 											className='w-full flex flex-wrap p-2.5 bg-neutral-100 rounded'
 											chipClassName='bg-white whitespace-nowrap h-8 text-black text-sm font-normal'
@@ -154,25 +142,6 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ parameter
 					</div>
 				</div>
 			</div>
-			{preview ? (
-				<div className='w-[225px] gap-3 flex'>
-					<Button className='bg-white rounded border border-neutral-200 w-16 h-[48px] whitespace-nowrap text-neutral-400 text-lg font-medium'>
-						닫기
-					</Button>
-					<Button
-						color='accent'
-						className='h-12 rounded text-white text-lg font-medium'
-						onClick={(e) => {
-							e.preventDefault();
-							createPrompt();
-						}}
-					>
-						프롬프트 생성하기
-					</Button>
-				</div>
-			) : (
-				<PromptInteractionButtonGroup onCreateClick={createPrompt} promptId={promptId!} />
-			)}
 		</div>
 	);
 };

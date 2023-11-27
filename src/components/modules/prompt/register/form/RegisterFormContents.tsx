@@ -7,8 +7,10 @@ import RegisterFormPromptTemplate from '@/src/components/modules/prompt/register
 import LabelWithFormElement from '@/src/components/modules/prompt/register/form/elements/LabelWithFormElement';
 import NoticeTooltip from '@/src/components/modules/prompt/register/form/elements/NoticeTooltip';
 import { PromptRegisterFormData } from '@/src/hooks/promptRegisterForm';
-import React from 'react';
-import { Toggle } from 'react-daisyui';
+import { openPreviewModalAtom } from '@/src/stores/prompt/previewModal';
+import { useSetAtom } from 'jotai';
+import React, { useState } from 'react';
+import { Button, Toggle } from 'react-daisyui';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
 export interface RegisterFormContentsProps {
@@ -18,8 +20,10 @@ export interface RegisterFormContentsProps {
 const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler }) => {
 	const {
 		control,
-		formState: { errors },
+		formState: { errors, isValid },
 	} = formHandler;
+
+	const handlePreviewModalOpen = useSetAtom(openPreviewModalAtom);
 
 	return (
 		<div className='w-[1144px] pt-8 pb-6 mb-4 rounded-lg flex-col items-center gap-6 flex'>
@@ -91,7 +95,13 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 					<RegisterFormPromptTemplate formHandler={formHandler} />
 				</LabelWithFormElement>
 				<LabelWithFormElement label='프롬프트 미리보기' subLabel='작성한 내용에 대한 화면을 미리 확인해 보세요.'>
-					<PreviewPromptModal formHandler={formHandler} />
+					<Button
+						className='bg-white rounded border border-neutral-200 w-[81px] min-h-[40px] h-[40px] whitespace-nowrap mt-[14px]'
+						onClick={handlePreviewModalOpen}
+						disabled={!isValid}
+					>
+						미리보기
+					</Button>
 				</LabelWithFormElement>
 			</div>
 			<div className='w-full flex items-center justify-end gap-3'>
@@ -104,6 +114,7 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 					)}
 				/>
 			</div>
+			<PreviewPromptModal formHandler={formHandler} />
 		</div>
 	);
 };
