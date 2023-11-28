@@ -27,10 +27,10 @@
 	border: 1.5px solid #39cccc;
 }
 .arrow_box:after, .arrow_box:before {
-	right: 100%;
-	top: 50%;
 	border: solid transparent;
 	content: "";
+	right: 100%;
+	top: 50%;
 	height: 0;
 	width: 0;
 	position: absolute;
@@ -48,6 +48,34 @@
 	border-right-color: #39cccc;
 	border-width: 8.5px;
 	margin-top: -8.5px;
+}
+
+/*  하단 */
+.arrow-bottom:after, .arrow-bottom:before {
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	right: 3%;
+	bottom: 100%;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow-bottom:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #ffffff;
+	border-width: 6px;
+	margin-top: 10px;
+	margin-right: 2px;
+	border-style: solid;
+}
+.arrow-bottom:before {
+	border-color: rgba(57, 204, 204, 0);
+	border-bottom-color:  #39cccc;
+	border-width: 8px;
+	margin-top: 5px;
+	border-style: solid;
 }
 
 html,button, input, optgroup, select, textarea  {
