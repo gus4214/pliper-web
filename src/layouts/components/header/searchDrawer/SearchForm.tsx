@@ -1,7 +1,7 @@
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { Search } from 'heroicons-react';
 import { useAtom } from 'jotai';
-import React, {ChangeEvent, useEffect} from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { Input } from 'react-daisyui';
 import { useController, useForm } from 'react-hook-form';
 
@@ -44,7 +44,9 @@ const SearchForm: React.FC<SearchFormProps> = ({ placeholder = '뭐든 적어주
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<div className={`${twStyle} rounded-[130px] border-none w-[750px] h-[60px] py-2 bg-neutral-50 flex justify-center items-center`}>
+			<div
+				className={`${twStyle} focus-within:border-teal-200 rounded-[130px] border border-transparent w-[750px] h-[60px] py-2 bg-neutral-50 flex justify-center items-center`}
+			>
 				<Search />
 				<Input
 					defaultValue={searchInputValue}
