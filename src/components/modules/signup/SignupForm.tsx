@@ -10,6 +10,8 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import {useAppToast} from "@/src/hooks/toast";
 import ToastPlipIcon from "@/src/components/atoms/icons/ToastPlipIcon";
+import mixpanel from "mixpanel-browser";
+import {JOIN} from "@/src/configs/mixpanel";
 
 interface FormData {
 	taste: string[];
@@ -62,6 +64,7 @@ const SignupForm = () => {
 				open: true,
 				icon: <ToastPlipIcon />,
 			});
+			mixpanel.track(JOIN)
 			await router.replace('/');
 		}
 	};

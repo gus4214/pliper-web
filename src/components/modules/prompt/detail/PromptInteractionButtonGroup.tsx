@@ -17,6 +17,8 @@ import {useAuthContext} from '@/src/hooks/context';
 import {motion} from 'framer-motion';
 import PlipAnimation, {usePlipAnimation} from "@/src/components/modules/prompt/animation/PlipAnimation";
 import {pretendard} from "@/src/styles/font";
+import mixpanel from "mixpanel-browser";
+import {PROMT_ACCURACY, PROMT_LIKE, PROMT_PLIP} from "@/src/configs/mixpanel";
 
 
 interface PromptInteractionButtonGroupProps {
@@ -50,7 +52,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
         if (clip) {
             active()
             clipPromptApi(promptId);
-
+            mixpanel.track(PROMT_PLIP, {promptId, clip});
         } else {
             disable()
             cancelClipPromptApi(promptId);
@@ -61,6 +63,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
     const handleLikePrompt = (like?: boolean) => {
         if (like) {
             likePromptApi(promptId);
+            mixpanel.track(PROMT_LIKE, {promptId, like});
         } else {
             cancelLikePromptApi(promptId);
         }
@@ -72,6 +75,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
         if (reliability) {
             reliabilityPromptApi(promptId, reliability);
             setReliability(reliability);
+            mixpanel.track(PROMT_ACCURACY, {promptId, reliability});
         } else {
             cancelReliabilityPromptApi(promptId);
             setReliability(undefined);

@@ -10,6 +10,7 @@ import { useAppToast } from '@/src/hooks/toast';
 import AppToast from '@/src/components/atoms/toast/AppToast';
 import mixpanel from 'mixpanel-browser';
 import { useRouter } from 'next/router';
+import {PAGE_VIEW} from "@/src/configs/mixpanel";
 
 interface MyAppProps extends AppProps {
 	Component: NextPage;
@@ -36,7 +37,7 @@ export default function App(props: MyAppProps) {
 
 	useEffect(() => {
 		const handleRouteChange = (url: string) => {
-			mixpanel.track('Page Viewed', { page: url });
+			mixpanel.track(PAGE_VIEW, { page: url });
 		};
 
 		router.events.on('routeChangeComplete', handleRouteChange);

@@ -11,6 +11,8 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useAppToast } from '@/src/hooks/toast';
 import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
+import mixpanel from "mixpanel-browser";
+import {PROMT_REGISTER} from "@/src/configs/mixpanel";
 
 export interface PromptRegisterFormData {
 	title: string;
@@ -83,6 +85,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 						open: true,
 						icon: <ToastPlipIcon />,
 					});
+					mixpanel.track(PROMT_REGISTER, { promptId: result.promptId });
 				} catch (error) {
 					console.error('Error in RegisterPromptApi:', error);
 				}
