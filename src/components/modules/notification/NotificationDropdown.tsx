@@ -47,7 +47,7 @@ const itemMoreCount = 4
 
 const NotificationDropdown: FC = () => {
     const router = useRouter();
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [tabValue, setTabValue] = useState(0);
     const [condition, setCondition] = useState<GetNotificationsRequest>({limit: itemMoreCount, page: 1});
 
@@ -55,9 +55,8 @@ const NotificationDropdown: FC = () => {
     const {user} = useAuthContext();
 
     useEffect(() => {
-        console.log(router.asPath," 닫자!!", open)
         setOpen(false)
-    }, [router]);
+    }, [router.asPath]);
 
     const handleChangeTab = (tab: number) => {
         setTabValue(tab)
