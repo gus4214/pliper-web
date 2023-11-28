@@ -153,9 +153,7 @@ const PromptMenuList = () => {
 				</div>
 			</div>
 			<Button
-				color='ghost'
-				variant='outline'
-				className='py-2 min-h-8 h-8 rounded border border-neutral-400'
+				className='w-36 min-h-8 h-8 rounded bg-white border border-neutral-200 text-black text-xs font-normal'
 				aria-label='모든 선택 해제'
 				onClick={handleReset}
 				disabled={!isAnythingSelected()}

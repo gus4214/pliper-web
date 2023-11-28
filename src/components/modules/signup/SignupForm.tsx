@@ -8,10 +8,10 @@ import { useRouter } from 'next/router';
 import { Button, Card } from 'react-daisyui';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import {useAppToast} from "@/src/hooks/toast";
-import ToastPlipIcon from "@/src/components/atoms/icons/ToastPlipIcon";
-import mixpanel from "mixpanel-browser";
-import {JOIN} from "@/src/configs/mixpanel";
+import { useAppToast } from '@/src/hooks/toast';
+import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
+import mixpanel from 'mixpanel-browser';
+import { JOIN } from '@/src/configs/mixpanel';
 
 interface FormData {
 	taste: string[];
@@ -64,7 +64,7 @@ const SignupForm = () => {
 				open: true,
 				icon: <ToastPlipIcon />,
 			});
-			mixpanel.track(JOIN)
+			mixpanel.track(JOIN);
 			await router.replace('/');
 		}
 	};
@@ -84,9 +84,11 @@ const SignupForm = () => {
 									<Button
 										key={key}
 										size='md'
-										color='neutral'
-										variant={selectedJobs?.includes(value) ? undefined : 'outline'}
-										className='w-[196px]'
+										className={`w-[196px] ${
+											selectedJobs?.includes(value) ? 'bg-neutral-400' : 'bg-white'
+										} rounded border border-neutral-200 ${
+											selectedJobs?.includes(value) ? 'text-white' : 'text-black'
+										} text-[15px] font-normal`}
 										onClick={() => addOrRemoveJob(value)}
 									>
 										{value}
@@ -97,10 +99,15 @@ const SignupForm = () => {
 						<FormInput
 							control={control}
 							name='nickname'
-							inputProps={{ placeholder: '최대 10자로 입력해주세요' }}
+							inputProps={{ placeholder: '최대 10자로 입력해주세요', className: 'rounded border border-neutral-200' }}
 							label={'닉네임을 입력해주세요.'}
 						/>
-						<Button fullWidth color='neutral' disabled={!buttonActive}>
+						<Button
+							fullWidth
+							disabled={!buttonActive}
+							color='accent'
+							className='rounded text-white text-base font-semibold disabled:bg-neutral-100 disabled:text-neutral-400 '
+						>
 							플리퍼 시작하기
 						</Button>
 					</div>
