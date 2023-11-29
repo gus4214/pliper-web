@@ -1,4 +1,3 @@
-import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageButton';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -9,9 +8,11 @@ import { RegisterUserRequest, updateUserProfileApi } from '@/src/fetchers/auth';
 import { useRouter } from 'next/router';
 import { useAuthContext } from '@/src/hooks/context';
 import { useConfirmModal, useFailModal } from '@/src/hooks/modal';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { updateProfileAtom } from '@/src/stores/auth/actions/updateUserProfile';
 import { serverErrorText } from '@/src/utils/lang';
+import { userAtom } from '@/src/stores/auth';
+import { stringToArray } from '@/src/utils/conversionUtils';
 
 interface FormData {
 	taste: string[];
@@ -30,6 +31,7 @@ const ProfileEditForm = () => {
 	const failOpen = useFailModal();
 	const { user } = useAuthContext();
 	const setUserInfo = useSetAtom(updateProfileAtom);
+
 	const {
 		control,
 		setValue,
@@ -40,7 +42,7 @@ const ProfileEditForm = () => {
 		mode: 'onChange',
 		resolver: yupResolver(schema),
 		defaultValues: {
-			taste: [],
+			taste: stringToArray(user?.taste || '') || [],
 			nickname: user?.nickname || '',
 		},
 	});
@@ -112,7 +114,6 @@ const ProfileEditForm = () => {
 							</Button>
 						))}
 					</div>
-					{/* {selectedJobs.includes('기타') && <Input placeholder='기타로 체크하실 경우 입력해주세요' />} */}
 				</div>
 				<Button
 					fullWidth

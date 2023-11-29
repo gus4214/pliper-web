@@ -45,13 +45,13 @@ const SearchForm: React.FC<SearchFormProps> = ({ placeholder = '뭐든 적어주
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div
-				className={`${twStyle} focus-within:border-teal-200 rounded-[130px] border border-transparent w-[750px] h-[60px] py-2 bg-neutral-50 flex justify-center items-center`}
+				className={`${twStyle} focus-within:border-teal-200 focus-within:bg-white rounded-[130px] border border-transparent w-[750px] h-[60px] py-2 bg-neutral-50 flex justify-center items-center`}
 			>
 				<Search />
 				<Input
 					defaultValue={searchInputValue}
 					placeholder={placeholder}
-					className='w-[374px] border-none bg-neutral-50 focus:outline-none'
+					className='w-[374px] border-none bg-neutral-50 focus:outline-none focus:bg-white'
 					onChange={onChange}
 				/>
 			</div>
