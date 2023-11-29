@@ -5,8 +5,12 @@ import EffectIcon from '@/src/components/atoms/icons/about/EffectIcon';
 import Marquee from 'react-fast-marquee';
 import FlowerIcon from '@/src/components/atoms/icons/about/FlowerIcon';
 import ScratchIcon from '@/src/components/atoms/icons/about/ScratchIcon';
+import { ArrowRightCircleIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/router';
 
 const RendingPage: NextPage = () => {
+	const { push } = useRouter();
+
 	return (
 		<>
 			<section className='flex relative w-full min-h-[800px] justify-center items-center bg-black'>
@@ -32,6 +36,7 @@ const RendingPage: NextPage = () => {
 					<Button
 						color='accent'
 						className="w-60 h-14 bg-teal-200 border-none rounded-[99px] text-white text-xl font-semibold font-['Pretendard'] leading-tight"
+						onClick={() => push('/')}
 					>
 						플리퍼 경험 해보기
 					</Button>
@@ -87,6 +92,39 @@ const RendingPage: NextPage = () => {
 					</Marquee>
 				</div>
 			</section>
+			{/* <section className='flex relative w-full min-h-[1634px] justify-center items-center'></section> */}
+			<section className='bg-neutral-50 flex justify-center items-center min-h-[152px]'>
+				<div className='text-center'>
+					<span className="text-black text-xl font-normal font-['Pretendard'] leading-9">
+						다양한 프롬프트를 <span className='font-medium'>무료</span>로 경험해보고, <br />
+						플리퍼가 여러분의 하루에 어떤 변화를 가져다 줄 수 있는지 <span className='font-medium'>직접 확인해보세요!</span>
+					</span>
+				</div>
+			</section>
+			<div
+				className='min-h-[80px] h-[80px] bg-teal-200 flex justify-center items-center sticky bottom-0 z-30 cursor-pointer'
+				onClick={() => push('/')}
+			>
+				<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' fill='none'>
+					<g opacity='0.5'>
+						<path
+							d='M9.82614 5.31646C13.9754 4.77776 18.2059 4.5 22.5006 4.5C26.7948 4.5 31.0249 4.7777 35.1738 5.3163C39.0183 5.81539 41.7567 9.03874 41.9846 12.7699C41.333 12.5523 40.6424 12.4079 39.9201 12.348C37.1429 12.1175 34.3346 12 31.4999 12C28.6653 12 25.857 12.1175 23.08 12.348C18.3634 12.7394 15 16.7293 15 21.2164V29.7874C15 33.1687 16.9094 36.2653 19.8656 37.7557L14.5607 43.0607C14.1317 43.4897 13.4865 43.618 12.926 43.3858C12.3655 43.1536 12 42.6067 12 42V33.9411C11.273 33.8632 10.5483 33.7773 9.82617 33.6836C5.80932 33.1621 3 29.6666 3 25.7253V13.2748C3 9.33344 5.80931 5.83797 9.82614 5.31646Z'
+							fill='white'
+						/>
+						<path
+							d='M31.4999 15C28.7482 15 26.0227 15.114 23.3281 15.3377C20.2495 15.5932 18 18.2056 18 21.2164V29.7874C18 32.8027 20.2559 35.4166 23.3384 35.6683C25.8261 35.8713 28.3401 35.9824 30.8768 35.9981L36.4393 41.5607C36.8683 41.9897 37.5135 42.118 38.074 41.8858C38.6345 41.6536 39 41.1067 39 40.5V35.7202C39.2207 35.7037 39.4412 35.6864 39.6615 35.6684C42.744 35.4169 45 32.803 45 29.7876V21.2164C45 18.2056 42.7505 15.5932 39.6719 15.3377C36.9772 15.114 34.2517 15 31.4999 15Z'
+							fill='white'
+						/>
+					</g>
+				</svg>
+				<div className='text-center ml-2.5 mr-1'>
+					<span className="text-white text-lg font-normal font-['Pretendard'] leading-[18px]">
+						3초 만에 플리퍼 가입하고, 관심사에 맞는{' '}
+					</span>
+					<span className="text-white text-lg font-semibold font-['Pretendard'] leading-[18px]">프롬프트를 경험해보세요</span>
+				</div>
+				<ArrowRightCircleIcon className='w-6 h-6 text-white' />
+			</div>
 		</>
 	);
 };
