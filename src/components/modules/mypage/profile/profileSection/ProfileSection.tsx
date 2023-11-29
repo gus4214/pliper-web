@@ -16,13 +16,12 @@ const ProfileSection = () => {
 					user={user!}
 					action={
 						<Button
-							variant='outline'
-							className='rounded border border-neutral-200 h-[34px] min-h-[34px]'
+							className='rounded bg-white border border-neutral-200 h-[34px] min-h-[34px] text-black text-sm font-normal'
 							onClick={() => {
 								router.push('/mypage/edit');
 							}}
 						>
-							<span className='text-center text-black text-sm font-normal'>프로필 관리</span>
+							프로필 관리
 						</Button>
 					}
 				/>

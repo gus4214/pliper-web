@@ -1,5 +1,6 @@
 import PercentsBar from '@/src/components/atoms/percentsBar/PercentsBar';
 import React from 'react';
+import ArrowToolTip from '@/src/components/atoms/tootip/ArrowToolTip';
 
 interface LikeAndViewLabelProps {
 	likeCount: string;
@@ -10,7 +11,7 @@ interface LikeAndViewLabelProps {
 
 const LikeAndViewLabel: React.FC<LikeAndViewLabelProps> = ({ likeCount, viewCount, percents, isLikeAuthUser }) => {
 	const isPercentsBarShow = percents !== null && percents !== undefined;
-	const color = isLikeAuthUser ? 'fill-teal-200' : 'fill-neutral-400'
+	const color = isLikeAuthUser ? 'fill-teal-200' : 'fill-neutral-400';
 
 	return (
 		<>
@@ -36,7 +37,15 @@ const LikeAndViewLabel: React.FC<LikeAndViewLabelProps> = ({ likeCount, viewCoun
 				{isPercentsBarShow && (
 					<>
 						<div className='w-1 h-1 bg-stone-300 rounded-full' />
-						<PercentsBar percents={percents!} />
+						<div>
+							<ArrowToolTip
+								position={'bottom'}
+								width={190}
+								tooltip={<span className='text-teal-400 text-xs font-normal'>해당 지표는 정확도를 의미해요 <br/>게이지가 높을수록 정확도가 높습니다 👍</span>}
+							>
+								<PercentsBar percents={percents!} />
+							</ArrowToolTip>
+						</div>
 					</>
 				)}
 			</div>

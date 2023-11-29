@@ -90,7 +90,7 @@ const ProfileEditForm = () => {
 				<FormInput
 					control={control}
 					name='nickname'
-					inputProps={{ placeholder: '최대 10자로 입력해주세요' }}
+					inputProps={{ placeholder: '최대 10자로 입력해주세요', className: 'rounded border border-neutral-200' }}
 					label={'닉네임을 입력해주세요.'}
 				/>
 				<div className='flex-col gap-3 flex'>
@@ -101,9 +101,11 @@ const ProfileEditForm = () => {
 								key={key}
 								type='button'
 								size='md'
-								color='neutral'
-								variant={selectedJobs?.includes(value) ? undefined : 'outline'}
-								className='w-[196px]'
+								className={`w-[196px] ${
+									selectedJobs?.includes(value) ? 'bg-neutral-400' : 'bg-white'
+								} rounded border border-neutral-200 ${
+									selectedJobs?.includes(value) ? 'text-white' : 'text-black'
+								} text-[15px] font-normal`}
 								onClick={() => addOrRemoveJob(value)}
 							>
 								{value}
@@ -112,7 +114,13 @@ const ProfileEditForm = () => {
 					</div>
 					{/* {selectedJobs.includes('기타') && <Input placeholder='기타로 체크하실 경우 입력해주세요' />} */}
 				</div>
-				<Button fullWidth color='neutral' disabled={!buttonActive} type='submit'>
+				<Button
+					fullWidth
+					color='accent'
+					disabled={!buttonActive}
+					type='submit'
+					className='rounded text-white text-base font-semibold disabled:bg-neutral-100 disabled:text-neutral-400'
+				>
 					프로필 수정하기
 				</Button>
 			</div>
