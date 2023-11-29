@@ -3,7 +3,7 @@ interface BlankLayoutProps {
 }
 
 const BlankLayout: React.FC<BlankLayoutProps> = ({ children }) => {
-	return <div className='flex flex-col h-screen'>{children}</div>;
+	return <main className='flex flex-col h-screen'>{children}</main>;
 };
 
 export default BlankLayout;

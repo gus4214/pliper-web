@@ -10,13 +10,29 @@ import { useAppToast } from '@/src/hooks/toast';
 import AppToast from '@/src/components/atoms/toast/AppToast';
 import mixpanel from 'mixpanel-browser';
 import { useRouter } from 'next/router';
-import {PAGE_VIEW} from "@/src/configs/mixpanel";
+import { PAGE_VIEW } from '@/src/configs/mixpanel';
+import BlankLayout from '@/src/layouts/BlankLayout';
 
 interface MyAppProps extends AppProps {
 	Component: NextPage;
 }
 
 mixpanel.init('d335406e77e40117220463579c75ee5f', { debug: process.env.NODE_ENV !== 'production', persistence: 'localStorage' });
+
+const ComponentGuard: React.FC<MyAppProps> = ({ Component, pageProps }: MyAppProps) => {
+	if (Component?.layout === 'blank') {
+		return (
+			<BlankLayout>
+				<Component {...pageProps} />
+			</BlankLayout>
+		);
+	}
+	return (
+		<MainLayout>
+			<Component {...pageProps} />
+		</MainLayout>
+	);
+};
 
 export default function App(props: MyAppProps) {
 	const { Component, pageProps } = props;
@@ -59,7 +75,8 @@ export default function App(props: MyAppProps) {
 			<QueryClientProvider client={queryClient}>
 				<Hydrate state={pageProps.dehydratedState}>
 					<AuthProvider>
-						{getLayout(<Component {...pageProps} />)}
+						{/* {getLayout(<Component {...pageProps} />)} */}
+						<ComponentGuard {...props} />
 						<AppToast {...toast} onClose={closeToast} />
 					</AuthProvider>
 				</Hydrate>
