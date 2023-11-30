@@ -14,7 +14,7 @@ const RendingPage: NextPage = () => {
 	return (
 		<>
 			<section className='flex relative w-full min-h-[800px] justify-center items-center bg-black'>
-				<Image src='/images/about/about_bg01.png' alt='Background image' priority fill style={{ objectFit: 'cover' }} />
+				<Image src='/images/about/about_bg01.png' alt='background-image-2' priority fill style={{ objectFit: 'cover' }} />
 				<div className='flex flex-col justify-center items-center gap-10 z-20'>
 					<div className='flex-col justify-center items-center gap-5 flex'>
 						<div className='flex-col justify-center items-center gap-5 flex'>
@@ -92,7 +92,9 @@ const RendingPage: NextPage = () => {
 					</Marquee>
 				</div>
 			</section>
-			{/* <section className='flex relative w-full min-h-[1634px] justify-center items-center'></section> */}
+			<section className='flex relative w-full min-h-[1634px] justify-center items-center'>
+				{/* <Image src='/images/about/about_bg02.png' alt='background-image-2' priority fill style={{ objectFit: 'contain' }} /> */}
+			</section>
 			<section className='bg-neutral-50 flex justify-center items-center min-h-[152px]'>
 				<div className='text-center'>
 					<span className="text-black text-xl font-normal font-['Pretendard'] leading-9">
