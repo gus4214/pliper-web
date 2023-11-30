@@ -4,4 +4,6 @@ const MyProfileEditPage = () => {
 	return <MyPageEditTemplate />;
 };
 
+MyProfileEditPage.grant = 'user';
+
 export default MyProfileEditPage;

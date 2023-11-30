@@ -27,7 +27,7 @@ const MyCreatedPromptList = () => {
 	});
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
-	const promptIds = data?.pages.flatMap((page) => page?.prompts.map((v) => v.promptId) || []);
+	const promptIds = data?.pages.flatMap((page) => page?.prompts?.map((v) => v.promptId) || []);
 	const { getInteractionByPromptId } = usePromptInteractions(promptIds!);
 	const { goPromptDetailPage, deletePrompt, togglePromptShow } = usePromptHandler();
 
@@ -51,7 +51,7 @@ const MyCreatedPromptList = () => {
 		}
 	}, [inView]);
 
-	if (data?.pages[0]?.prompts.length === 0) {
+	if (data?.pages[0]?.prompts?.length === 0) {
 		return renderEmptyState();
 	}
 
@@ -59,7 +59,7 @@ const MyCreatedPromptList = () => {
 		<>
 			{data?.pages.map((page, index) => (
 				<React.Fragment key={index}>
-					{page?.prompts.map((prompt) => (
+					{page?.prompts?.map((prompt) => (
 						<PromptItemWithActions
 							key={prompt.promptId}
 							personaType={prompt.personaType}

@@ -12,6 +12,7 @@ import mixpanel from 'mixpanel-browser';
 import { useRouter } from 'next/router';
 import { PAGE_VIEW } from '@/src/configs/mixpanel';
 import BlankLayout from '@/src/layouts/BlankLayout';
+import { GrantProvider } from '@/src/contexts/grantContext';
 
 interface MyAppProps extends AppProps {
 	Component: NextPage;
@@ -37,7 +38,6 @@ const ComponentGuard: React.FC<MyAppProps> = ({ Component, pageProps }: MyAppPro
 export default function App(props: MyAppProps) {
 	const { Component, pageProps } = props;
 	const router = useRouter();
-	const getLayout = Component.getLayout ?? ((page) => <MainLayout>{page}</MainLayout>);
 	const { toast, closeToast } = useAppToast();
 	const [queryClient] = useState(
 		() =>
@@ -75,8 +75,9 @@ export default function App(props: MyAppProps) {
 			<QueryClientProvider client={queryClient}>
 				<Hydrate state={pageProps.dehydratedState}>
 					<AuthProvider>
-						{/* {getLayout(<Component {...pageProps} />)} */}
-						<ComponentGuard {...props} />
+						<GrantProvider pageGrantType={Component.grant}>
+							<ComponentGuard {...props} />
+						</GrantProvider>
 						<AppToast {...toast} onClose={closeToast} />
 					</AuthProvider>
 				</Hydrate>

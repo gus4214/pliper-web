@@ -4,4 +4,6 @@ const MyCreatedPromptPage = () => {
 	return <MyPageCreatedPromptTemplate />;
 };
 
+MyCreatedPromptPage.grant = 'user';
+
 export default MyCreatedPromptPage;

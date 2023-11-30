@@ -4,4 +4,6 @@ const MyPlipPage = () => {
 	return <MyPagePlipTemplate />;
 };
 
+MyPlipPage.grant = 'user';
+
 export default MyPlipPage;

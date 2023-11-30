@@ -9,7 +9,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import {timeAgo} from "@/src/utils/dateUtils";
+import { timeAgo } from '@/src/utils/dateUtils';
 
 const MyPlipList = () => {
 	const router = useRouter();
@@ -27,7 +27,7 @@ const MyPlipList = () => {
 	});
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
-	const promptIds = data?.pages.flatMap((page) => page?.prompts.map((v) => v.promptId) || []);
+	const promptIds = data?.pages.flatMap((page) => page?.prompts?.map((v) => v.promptId) || []);
 	const { getInteractionByPromptId } = usePromptInteractions(promptIds!);
 
 	const { ref, inView } = useInView({
@@ -56,7 +56,7 @@ const MyPlipList = () => {
 		};
 	}, []);
 
-	if (data?.pages[0]?.prompts.length === 0) {
+	if (data?.pages[0]?.prompts?.length === 0) {
 		return renderEmptyState();
 	}
 
@@ -64,7 +64,7 @@ const MyPlipList = () => {
 		<>
 			{data?.pages.map((page, index) => (
 				<React.Fragment key={index}>
-					{page?.prompts.map((prompt) => (
+					{page?.prompts?.map((prompt) => (
 						<PromptItemWithInteraction
 							key={prompt.promptId}
 							personaType={prompt.personaType}

@@ -5,4 +5,6 @@ const MyPage: NextPage = () => {
 	return <MyPageProfileTemplate />;
 };
 
+MyPage.grant = 'user';
+
 export default MyPage;

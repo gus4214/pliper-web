@@ -6,4 +6,6 @@ const RegisterPage: NextPage = () => {
 	return <RegisterTemplate />;
 };
 
+RegisterPage.grant = 'user';
+
 export default RegisterPage;

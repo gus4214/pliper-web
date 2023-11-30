@@ -27,6 +27,8 @@ const MyCreatedPromptDetailPage: NextPage<MyCreatedPromptDetailPageProps> = ({ t
 	return <MyPageCreatedPromptDetailTemplate data={data!} />;
 };
 
+MyCreatedPromptDetailPage.grant = 'user';
+
 export default MyCreatedPromptDetailPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
