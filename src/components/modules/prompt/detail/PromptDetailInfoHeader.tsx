@@ -99,7 +99,7 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 					</div>
 				</div>
 				<div className='flex flex-col justify-start pt-4 pb-6'>
-					<span className='text-black text-base font-normal whitespace-break-spaces'>{description}</span>
+					<h2 className='text-black text-base font-normal whitespace-break-spaces'>{description}</h2>
 				</div>
 			</div>
 		</div>
