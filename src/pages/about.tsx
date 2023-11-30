@@ -5,11 +5,43 @@ import EffectIcon from '@/src/components/atoms/icons/about/EffectIcon';
 import Marquee from 'react-fast-marquee';
 import FlowerIcon from '@/src/components/atoms/icons/about/FlowerIcon';
 import ScratchIcon from '@/src/components/atoms/icons/about/ScratchIcon';
-import { ArrowRightCircleIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
+import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
+import FadeIn from 'react-fade-in';
+import { useEffect, useRef, useState } from 'react';
 
 const RendingPage: NextPage = () => {
 	const { push } = useRouter();
+	const [isVisibleFirst, setIsVisibleFirst] = useState(false);
+	const [isVisibleSecond, setIsVisibleSecond] = useState(false);
+	const firstSectionRef = useRef(null);
+	const secondSectionRef = useRef(null);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.target === firstSectionRef.current) {
+						setIsVisibleFirst(entry.isIntersecting);
+					} else if (entry.target === secondSectionRef.current) {
+						setIsVisibleSecond(entry.isIntersecting);
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+
+		if (firstSectionRef.current) {
+			observer.observe(firstSectionRef.current);
+		}
+		if (secondSectionRef.current) {
+			observer.observe(secondSectionRef.current);
+		}
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
 
 	return (
 		<>
@@ -58,28 +90,30 @@ const RendingPage: NextPage = () => {
 						<h2 className="text-black text-5xl font-semibold font-['Pretendard'] leading-[67.20px]">현재 잠잠해진 이유는 뭘까요?</h2>
 					</div>
 					<div className='flex flex-col min-w-[1260px] min-h-[510px] pt-[76px] gap-[100px]'>
-						<div className='flex flex-col gap-6'>
-							<div className='relative'>
-								<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">AI 사용이 </span>
-								<span className="text-teal-200 text-[40px] font-bold font-['Pretendard'] leading-10">어려워요</span>
-								<FlowerIcon className='absolute bottom-[-20px] left-[230px]' />
+						<FadeIn visible={isVisibleFirst} delay={200}>
+							<div className='flex flex-col gap-6'>
+								<div className='relative'>
+									<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">AI 사용이 </span>
+									<span className="text-teal-200 text-[40px] font-bold font-['Pretendard'] leading-10">어려워요</span>
+									<FlowerIcon className='absolute bottom-[-20px] left-[230px]' />
+								</div>
+								<span className="text-black text-[22px] font-normal font-['Pretendard'] leading-[37.40px]">
+									도구가 많아지고 있는 만큼 인터페이스 사용이 복잡해짐으로써 <br />
+									많은 사람들은 다양한 개인 업무 활용에 어려움을 겪고 있어요.
+								</span>
 							</div>
-							<span className="text-black text-[22px] font-normal font-['Pretendard'] leading-[37.40px]">
-								도구가 많아지고 있는 만큼 인터페이스 사용이 복잡해짐으로써 <br />
-								많은 사람들은 다양한 개인 업무 활용에 어려움을 겪고 있어요.
-							</span>
-						</div>
-						<div className='flex flex-col gap-6 items-end'>
-							<div className='relative'>
-								<span className="text-amber-400 text-[40px] font-bold font-['Pretendard'] leading-10">할루시네이션</span>
-								<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">이 뭐에요?</span>
-								<ScratchIcon className='absolute bottom-[-12px] left-[-50px]' />
+							<div ref={firstSectionRef} className='flex flex-col gap-6 items-end'>
+								<div className='relative'>
+									<span className="text-amber-400 text-[40px] font-bold font-['Pretendard'] leading-10">할루시네이션</span>
+									<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">이 뭐에요?</span>
+									<ScratchIcon className='absolute bottom-[-12px] left-[-50px]' />
+								</div>
+								<span className="text-right text-black text-[22px] font-normal font-['Pretendard'] leading-[37.40px]">
+									프롬프트에 질문을 올바르게 입력하지 못하면 GPT의 잘못된 정보, <br />
+									할루시네이션이 발생됩니다. 이로 인해 추가적 학습이 필요하며, 피로도가 높아요.
+								</span>
 							</div>
-							<span className="text-right text-black text-[22px] font-normal font-['Pretendard'] leading-[37.40px]">
-								프롬프트에 질문을 올바르게 입력하지 못하면 GPT의 잘못된 정보, <br />
-								할루시네이션이 발생됩니다. 이로 인해 추가적 학습이 필요하며, 피로도가 높아요.
-							</span>
-						</div>
+						</FadeIn>
 					</div>
 				</div>
 				<div className='relative py-[88px]'>
@@ -92,8 +126,47 @@ const RendingPage: NextPage = () => {
 					</Marquee>
 				</div>
 			</section>
-			<section className='flex relative w-full min-h-[1634px] justify-center items-center'>
-				{/* <Image src='/images/about/about_bg02.png' alt='background-image-2' priority fill style={{ objectFit: 'contain' }} /> */}
+			<section className='relative w-full min-h-[1634px] flex justify-center items-center bg-[#223F61]'>
+				<div className='absolute top-0 left-2/1 w-[1920px] h-full'>
+					<Image src='/images/about/about_bg02.png' alt='background-image-2' priority fill style={{ objectFit: 'cover' }} />
+				</div>
+				<div className='w-[1176px] flex flex-col justify-center items-center z-10'>
+					<div className='p-2 bg-white bg-opacity-20 flex justify-center items-center'>
+						<span className="text-white text-[56px] font-semibold font-['Pretendard'] leading-[56px]">
+							AI 전문 프롬프트 <span className='font-bold'>플리퍼</span>
+						</span>
+					</div>
+					<div className="text-center text-white text-[28px] font-medium font-['Pretendard'] leading-[44.80px] pt-8">
+						AI 기술을 전문가처럼 쓸 수 있게 위해 만들었어요!
+						<br />
+						하루를 더욱 생산적으로 만들어주는 AI 파트너, 플리퍼와 함께라면 가능해요.
+					</div>
+					<div className='w-full flex flex-col pt-[100px]'>
+						<FadeIn visible={isVisibleSecond} delay={100}>
+							<div className='flex justify-end'>
+								<Image width={476} height={276} src={'/images/about/pliper_01.svg'} alt='업무의 생산성' />
+							</div>
+							<div className='flex justify-start mt-[-48px]'>
+								<div className='p-10 gap-6 w-[476px] h-[276px] bg-white rounded-2xl shadow flex flex-col items-center'>
+									<img src='/images/about/icon.svg' alt='플리퍼만의 플립 기능' />
+									<div className='flex flex-col items-center gap-4'>
+										<span className="text-black text-2xl font-bold font-['Pretendard'] leading-normal">플리퍼만의 플립 기능</span>
+										<span className="text-center text-neutral-600 text-base font-bold font-['Pretendard'] leading-relaxed">
+											플리퍼는 사용자의 업무 능력 향상을 위해 <br />
+											세컨드 브레인 역할을 수행할 수 있어요.
+										</span>
+									</div>
+								</div>
+							</div>
+							<div ref={secondSectionRef} className='flex justify-end mt-[-48px]'>
+								<Image width={476} height={276} src={'/images/about/pliper_03.svg'} alt='커스텀 템플릿 제공' />
+							</div>
+							<div className='flex justify-start mt-[-48px]'>
+								<Image width={476} height={276} src={'/images/about/pliper_04.svg'} alt='커스텀 템플릿 제공' />
+							</div>
+						</FadeIn>
+					</div>
+				</div>
 			</section>
 			<section className='bg-neutral-50 flex justify-center items-center min-h-[152px]'>
 				<div className='text-center'>
