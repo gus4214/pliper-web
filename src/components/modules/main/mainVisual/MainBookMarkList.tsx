@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Badge } from 'react-daisyui';
 
-const MainBookMarkList: React.FC<MainVisualContainerProps> = ({ bestClip }) => {
+const MainBookMarkList: React.FC<Omit<MainVisualContainerProps, 'mainImage'>> = ({ bestClip }) => {
 	const router = useRouter();
 
 	return (
