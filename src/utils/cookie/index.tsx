@@ -26,7 +26,7 @@ export const clearCookie = (name: string) => {
 };
 export const saveAccessToken = (accessToken: string, expiresIn: number) => {
     const expires = new Date();
-    expires.setTime(expiresIn);
+    expires.setTime(expiresIn * 1000);
     setCookie(accessTokenKey, accessToken, {
         path: '/',
         secure: true,
@@ -37,7 +37,7 @@ export const saveAccessToken = (accessToken: string, expiresIn: number) => {
 
 export const saveRefreshToken = (refreshToken: string, expiresIn: number) => {
     const expires = new Date();
-    expires.setTime(expiresIn);
+    expires.setTime(expiresIn * 1000);
     setCookie(refreshTokenKey, refreshToken, {
         path: '/',
         secure: true,
