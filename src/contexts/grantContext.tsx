@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuthContext } from '@/src/hooks/context';
 import { PageGrantType } from '@/src/types/global';
+import { useLoginModal } from '@/src/hooks/modal';
 
 export interface GrantProviderType {}
 
@@ -17,16 +18,22 @@ type GrantProviderProps = {
 const GrantProvider = ({ children, pageGrantType }: GrantProviderProps) => {
 	const { user } = useAuthContext();
 	const router = useRouter();
+	const [open, close] = useLoginModal();
+
+	const handleReturnToHome = async () => {
+		await router.replace({
+			pathname: '/',
+			query: { returnUrl: router.asPath },
+		});
+		open();
+	};
 
 	useEffect(() => {
 		if (!router.isReady) {
 			return;
 		}
 		if (pageGrantType === 'user' && !user) {
-			router.replace({
-				pathname: '/',
-				query: { returnUrl: router.asPath },
-			});
+			handleReturnToHome();
 		}
 	}, [router.route]);
 
