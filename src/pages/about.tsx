@@ -8,7 +8,27 @@ import ScratchIcon from '@/src/components/atoms/icons/about/ScratchIcon';
 import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
 import FadeIn from 'react-fade-in';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+interface AboutCardProps {
+	src: string;
+	title: string;
+	subTitle: React.ReactNode;
+}
+
+const AboutCard: React.FC<AboutCardProps> = ({ src, title, subTitle }) => {
+	return (
+		<div className='p-10 gap-6 w-[476px] h-[276px] bg-white bg-opacity-20 hover:bg-opacity-100 group rounded-2xl hover:shadow flex flex-col items-center cursor-pointer'>
+			<img src={src} alt={title} />
+			<div className='flex flex-col items-center gap-4'>
+				<span className="group-hover:text-black text-white text-2xl font-bold font-['Pretendard'] leading-normal">{title}</span>
+				<span className="group-hover:text-black text-center text-white text-base font-normal font-['Pretendard'] leading-relaxed">
+					{subTitle}
+				</span>
+			</div>
+		</div>
+	);
+};
 
 const RendingPage: NextPage = () => {
 	const { push } = useRouter();
@@ -44,7 +64,7 @@ const RendingPage: NextPage = () => {
 	}, []);
 
 	return (
-		<>
+		<div className='overflow-x-hidden'>
 			<section className='flex relative w-full min-h-[800px] justify-center items-center bg-black'>
 				<Image src='/images/about/about_bg01.png' alt='background-image-2' priority fill style={{ objectFit: 'cover' }} />
 				<div className='flex flex-col justify-center items-center gap-10 z-20'>
@@ -144,25 +164,53 @@ const RendingPage: NextPage = () => {
 					<div className='w-full flex flex-col pt-[100px]'>
 						<FadeIn visible={isVisibleSecond} delay={100}>
 							<div className='flex justify-end'>
-								<Image width={476} height={276} src={'/images/about/pliper_01.svg'} alt='업무의 생산성' />
+								<AboutCard
+									src='/images/about/icon_01.svg'
+									title='업무의 생산성'
+									subTitle={
+										<>
+											초보자부터 전문가까지, 누구나 쉽게 업무의 효율을
+											<br /> 높일 수 있어 하루를 <span className='font-semibold'>효과적</span>으로 보낼 수 있어요.
+										</>
+									}
+								/>
 							</div>
 							<div className='flex justify-start mt-[-48px]'>
-								<div className='p-10 gap-6 w-[476px] h-[276px] bg-white rounded-2xl shadow flex flex-col items-center'>
-									<img src='/images/about/icon.svg' alt='플리퍼만의 플립 기능' />
-									<div className='flex flex-col items-center gap-4'>
-										<span className="text-black text-2xl font-bold font-['Pretendard'] leading-normal">플리퍼만의 플립 기능</span>
-										<span className="text-center text-neutral-600 text-base font-bold font-['Pretendard'] leading-relaxed">
+								<AboutCard
+									src='/images/about/icon_02.svg'
+									title='플리퍼만의 플립 기능'
+									subTitle={
+										<>
 											플리퍼는 사용자의 업무 능력 향상을 위해 <br />
-											세컨드 브레인 역할을 수행할 수 있어요.
-										</span>
-									</div>
-								</div>
+											<span className='font-semibold'>세컨드 브레인</span> 역할을 수행할 수 있어요.
+										</>
+									}
+								/>
 							</div>
 							<div ref={secondSectionRef} className='flex justify-end mt-[-48px]'>
-								<Image width={476} height={276} src={'/images/about/pliper_03.svg'} alt='커스텀 템플릿 제공' />
+								<AboutCard
+									src={'/images/about/icon_03.svg'}
+									title='커스텀 템플릿 제공'
+									subTitle={
+										<>
+											LLM의 사전 지식 없이도 필요한 프롬프트를
+											<br /> <span className='font-semibold'>손쉽게 사용</span>할 수 있어요.
+										</>
+									}
+								/>
 							</div>
 							<div className='flex justify-start mt-[-48px]'>
-								<Image width={476} height={276} src={'/images/about/pliper_04.svg'} alt='커스텀 템플릿 제공' />
+								<AboutCard
+									src='/images/about/icon_04.svg'
+									title='정확한 프롬프트'
+									subTitle={
+										<>
+											사용자간 피드백을 통해 할루시네이션을 최소화 하며,
+											<br />
+											<span className='font-semibold'>검증된 AI 프롬프트</span>를 선별하는데 도움을 드려요.
+										</>
+									}
+								/>
 							</div>
 						</FadeIn>
 					</div>
@@ -177,7 +225,7 @@ const RendingPage: NextPage = () => {
 				</div>
 			</section>
 			<div
-				className='min-h-[80px] h-[80px] bg-teal-200 flex justify-center items-center sticky bottom-0 z-30 cursor-pointer'
+				className='min-h-[80px] h-[80px] bg-teal-200 hover:bg-teal-300 active:bg-teal-400 flex justify-center items-center sticky bottom-0 z-30 cursor-pointer'
 				onClick={() => push('/')}
 			>
 				<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' fill='none'>
@@ -200,7 +248,7 @@ const RendingPage: NextPage = () => {
 				</div>
 				<ArrowRightCircleIcon className='w-6 h-6 text-white' />
 			</div>
-		</>
+		</div>
 	);
 };
 
