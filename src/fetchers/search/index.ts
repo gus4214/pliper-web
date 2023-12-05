@@ -20,7 +20,7 @@ export type GetSearchedByUserResult = GetSearchedByUserItem[] & IBaasResponse;
 
 export type GetTopSearchedResult = GetTopSearchedItem & IBaasResponse;
 
-export type GetDeleteSearchedByUser = never & IBaasResponse;
+export type GetDeleteSearchedByUser = IBaasResponse;
 
 export const getSearchedByUserApi = () => {
 	return callApi<never, GetSearchedByUserResult>({

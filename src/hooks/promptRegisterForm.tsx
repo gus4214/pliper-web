@@ -1,7 +1,7 @@
 import { updateMyPromptApi } from './../fetchers/prompt/my-prompt';
 import { registerPromptApi } from '@/src/fetchers/prompt';
 import { Parameter, PersonaType, Prompt } from '@/src/fetchers/prompt/types';
-import { useConfirmModal } from '@/src/hooks/modal';
+import { useConfirmModal, useFailModal } from '@/src/hooks/modal';
 import { parametersAtom, templateValueAtom } from '@/src/stores/prompt/register';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAtom } from 'jotai';
@@ -11,8 +11,9 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useAppToast } from '@/src/hooks/toast';
 import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
-import mixpanel from "mixpanel-browser";
-import {PROMT_REGISTER} from "@/src/configs/mixpanel";
+import mixpanel from 'mixpanel-browser';
+import { PROMT_REGISTER } from '@/src/configs/mixpanel';
+import { serverErrorText } from '@/src/utils/lang';
 
 export interface PromptRegisterFormData {
 	title: string;
@@ -47,6 +48,7 @@ const usePromptRegisterForm = (data?: Prompt) => {
 	const { openToast } = useAppToast();
 
 	const [open, close] = useConfirmModal();
+	const failOpen = useFailModal();
 	const router = useRouter();
 	const formHandler = useForm<PromptRegisterFormData>({
 		mode: 'onChange',
@@ -68,27 +70,32 @@ const usePromptRegisterForm = (data?: Prompt) => {
 		open({
 			title: '프롬프트 템플릿 생성하시겠어요?',
 			description: '작성하신 내용으로 템플릿이 생성됩니다.',
-			onConfirm: async () => {
-				try {
-					const result = await registerPromptApi({ ...data, parameters });
-					if (data.show) {
-						router.push(`/prompt/${result.promptId}`);
-					} else {
-						router.push(`/mypage/created-prompt`);
-					}
-					localStorage.removeItem('temporaryPromptTemplate');
-					setTemplate('');
-					setParameters([]);
-					close();
-					openToast({
-						message: '프롬프트 템플릿을 생성했습니다!',
-						open: true,
-						icon: <ToastPlipIcon />,
+			onConfirm: async ({ loading, clearLoading }) => {
+				loading!();
+				const result = await registerPromptApi({ ...data, parameters });
+				if (result.isError) {
+					failOpen({
+						title: '프롬프트 템플릿 생성에 실패했습니다.',
+						description: serverErrorText(result),
 					});
-					mixpanel.track(PROMT_REGISTER, { promptId: result.promptId });
-				} catch (error) {
-					console.error('Error in RegisterPromptApi:', error);
+					clearLoading!();
+					return;
 				}
+				if (data.show) {
+					router.push(`/prompt/${result.promptId}`);
+				} else {
+					router.push(`/mypage/created-prompt`);
+				}
+				localStorage.removeItem('temporaryPromptTemplate');
+				setTemplate('');
+				setParameters([]);
+				close();
+				openToast({
+					message: '프롬프트 템플릿을 생성했습니다!',
+					open: true,
+					icon: <ToastPlipIcon />,
+				});
+				mixpanel.track(PROMT_REGISTER, { promptId: result.promptId });
 			},
 		});
 	};
@@ -97,25 +104,30 @@ const usePromptRegisterForm = (data?: Prompt) => {
 		open({
 			title: '프롬프트 템플릿의 내용을 수정하시겠어요?',
 			description: '작성하신 내용으로 템플릿이 수정됩니다.',
-			onConfirm: async () => {
-				try {
-					const result = await updateMyPromptApi({ ...data, parameters }, promptId!);
-					if (data.show) {
-						router.push(`/prompt/${result.promptId}`);
-					} else {
-						router.push(`/mypage/created-prompt`);
-					}
-					setTemplate('');
-					setParameters([]);
-					close();
-					openToast({
-						message: '프롬프트 템플릿을 수정했습니다!',
-						open: true,
-						icon: <ToastPlipIcon />,
+			onConfirm: async ({ loading, clearLoading }) => {
+				loading!();
+				const result = await updateMyPromptApi({ ...data, parameters }, promptId!);
+				if (result.isError) {
+					failOpen({
+						title: '프롬프트 템플릿 내용 수정에 실패했습니다.',
+						description: serverErrorText(result),
 					});
-				} catch (error) {
-					console.error('Error in updateMyPromptApi:', error);
+					clearLoading!();
+					return;
 				}
+				if (data.show) {
+					router.push(`/prompt/${result.promptId}`);
+				} else {
+					router.push(`/mypage/created-prompt`);
+				}
+				setTemplate('');
+				setParameters([]);
+				close();
+				openToast({
+					message: '프롬프트 템플릿을 수정했습니다!',
+					open: true,
+					icon: <ToastPlipIcon />,
+				});
 			},
 		});
 	};
