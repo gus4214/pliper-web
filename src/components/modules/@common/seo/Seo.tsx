@@ -11,8 +11,8 @@ interface SeoProps {
 }
 
 const defaultSeoProps = {
-    title: "플리퍼 | 하루를 더욱 생산적으로 만들어주는 AI 파트너",
-    description: "플리퍼를 통해 사용자의 업무 능력 향상을 도와주는 세컨드 브레인 역할로 사용해보세요!",
+    title: "플리퍼 | 하루를 더욱 생산적으로 만들어주는 프롬프트(Prompt) 템플릿 플랫폼",
+    description: "내가 원하는 결과를 위한 GPT 프롬프트(Prompt) 여기 다 모았습니다. 플리퍼를 통해 ChatGPT, 뤼튼 사용 시 사용자의 업무 능력 향상을 도와주는 세컨드 브레인 역할로 사용해보세요!",
 } as SeoProps
 
 /**
@@ -30,6 +30,7 @@ export const Seo: FC<SeoProps> = ({
         <Head>
             <title>{title ? titleTemplate(title) : defaultSeoProps.title}</title>
             <link rel='canonical' href={webHost} />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta name="robots" content="index,follow"/>
             <meta name="description" content={description}/>
             <meta name="twitter:card" content="summary_large_image"/>
