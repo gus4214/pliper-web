@@ -9,6 +9,7 @@ import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
 import FadeIn from 'react-fade-in';
 import React, { useEffect, useRef, useState } from 'react';
+import { Seo } from "@/src/components/modules/@common/seo/Seo";
 
 interface AboutCardProps {
 	src: string;
@@ -18,6 +19,8 @@ interface AboutCardProps {
 
 const AboutCard: React.FC<AboutCardProps> = ({ src, title, subTitle }) => {
 	return (
+		<>
+		<Seo title={'서비스 소개'} />
 		<div className='p-10 gap-6 w-[476px] h-[276px] bg-white bg-opacity-20 hover:bg-opacity-100 group rounded-2xl hover:shadow flex flex-col items-center cursor-pointer'>
 			<img src={src} alt={title} />
 			<div className='flex flex-col items-center gap-4'>
@@ -27,6 +30,7 @@ const AboutCard: React.FC<AboutCardProps> = ({ src, title, subTitle }) => {
 				</span>
 			</div>
 		</div>
+		</>
 	);
 };
 
