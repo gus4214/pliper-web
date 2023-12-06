@@ -9,7 +9,7 @@ import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
 import FadeIn from 'react-fade-in';
 import React, { useEffect, useRef, useState } from 'react';
-import { Seo } from "@/src/components/modules/@common/seo/Seo";
+import { Seo } from '@/src/components/modules/@common/seo/Seo';
 
 interface AboutCardProps {
 	src: string;
@@ -20,16 +20,18 @@ interface AboutCardProps {
 const AboutCard: React.FC<AboutCardProps> = ({ src, title, subTitle }) => {
 	return (
 		<>
-		<Seo title={'서비스 소개'} />
-		<div className='p-10 gap-6 w-[476px] h-[276px] bg-white bg-opacity-20 hover:bg-opacity-100 group rounded-2xl hover:shadow flex flex-col items-center cursor-pointer'>
-			<img src={src} alt={title} />
-			<div className='flex flex-col items-center gap-4'>
-				<span className="group-hover:text-black text-white text-2xl font-bold font-['Pretendard'] leading-normal">{title}</span>
-				<span className="group-hover:text-black text-center text-white text-base font-normal font-['Pretendard'] leading-relaxed">
-					{subTitle}
-				</span>
+			<Seo title={'서비스 소개'} />
+			<div className='p-10 gap-6 w-[476px] h-[276px] bg-white bg-opacity-20 hover:shadow-2xl hover:bg-opacity-100 group rounded-2xl flex flex-col items-center cursor-pointer transition duration-300'>
+				<img src={src} alt={title} className='transition duration-300' />
+				<div className='flex flex-col items-center gap-4'>
+					<span className="group-hover:text-black text-white text-2xl font-bold font-['Pretendard'] leading-normal transition duration-300">
+						{title}
+					</span>
+					<span className="group-hover:text-black text-center text-white text-base font-normal font-['Pretendard'] leading-relaxed transition duration-300">
+						{subTitle}
+					</span>
+				</div>
 			</div>
-		</div>
 		</>
 	);
 };
@@ -113,9 +115,9 @@ const RendingPage: NextPage = () => {
 						<h1 className="text-black text-5xl font-normal font-['Pretendard'] leading-[67.20px]">AI 기술 ChatGPT</h1>
 						<h2 className="text-black text-5xl font-semibold font-['Pretendard'] leading-[67.20px]">현재 잠잠해진 이유는 뭘까요?</h2>
 					</div>
-					<div className='flex flex-col min-w-[1260px] min-h-[510px] pt-[76px] gap-[100px]'>
+					<div className='flex flex-col min-w-[1260px] min-h-[510px] pt-[124px] gap-[100px]'>
 						<FadeIn visible={isVisibleFirst} delay={200}>
-							<div className='flex flex-col gap-6'>
+							<div ref={firstSectionRef} className='flex flex-col gap-6'>
 								<div className='relative'>
 									<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">AI 사용이 </span>
 									<span className="text-teal-200 text-[40px] font-bold font-['Pretendard'] leading-10">어려워요</span>
@@ -126,7 +128,7 @@ const RendingPage: NextPage = () => {
 									많은 사람들은 다양한 개인 업무 활용에 어려움을 겪고 있어요.
 								</span>
 							</div>
-							<div ref={firstSectionRef} className='flex flex-col gap-6 items-end'>
+							<div className='flex flex-col gap-6 items-end mt-[180px]'>
 								<div className='relative'>
 									<span className="text-amber-400 text-[40px] font-bold font-['Pretendard'] leading-10">할루시네이션</span>
 									<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">이 뭐에요?</span>
@@ -150,7 +152,7 @@ const RendingPage: NextPage = () => {
 					</Marquee>
 				</div>
 			</section>
-			<section className='relative w-full min-h-[1634px] flex justify-center items-center bg-[#223F61]'>
+			<section className='relative w-full py-[200px] flex justify-center items-center bg-[#223F61]'>
 				<div className='absolute top-0 left-2/1 w-[1920px] h-full'>
 					<Image src='/images/about/about_bg02.png' alt='background-image-2' priority fill style={{ objectFit: 'cover' }} />
 				</div>
@@ -165,7 +167,7 @@ const RendingPage: NextPage = () => {
 						<br />
 						하루를 더욱 생산적으로 만들어주는 AI 파트너, 플리퍼와 함께라면 가능해요.
 					</div>
-					<div className='w-full flex flex-col pt-[100px]'>
+					<div className='w-full flex flex-col pt-[200px]'>
 						<FadeIn visible={isVisibleSecond} delay={100}>
 							<div className='flex justify-end'>
 								<AboutCard
@@ -179,7 +181,7 @@ const RendingPage: NextPage = () => {
 									}
 								/>
 							</div>
-							<div className='flex justify-start mt-[-48px]'>
+							<div ref={secondSectionRef} className='flex justify-start mt-[48px]'>
 								<AboutCard
 									src='/images/about/icon_02.svg'
 									title='플리퍼만의 플립 기능'
@@ -191,7 +193,7 @@ const RendingPage: NextPage = () => {
 									}
 								/>
 							</div>
-							<div ref={secondSectionRef} className='flex justify-end mt-[-48px]'>
+							<div className='flex justify-end mt-[48px]'>
 								<AboutCard
 									src={'/images/about/icon_03.svg'}
 									title='커스텀 템플릿 제공'
@@ -203,7 +205,7 @@ const RendingPage: NextPage = () => {
 									}
 								/>
 							</div>
-							<div className='flex justify-start mt-[-48px]'>
+							<div className='flex justify-start mt-[48px]'>
 								<AboutCard
 									src='/images/about/icon_04.svg'
 									title='정확한 프롬프트'
