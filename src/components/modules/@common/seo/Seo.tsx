@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { FC } from 'react';
 import { useRouter } from "next/router";
+import { addHttpsPrefix } from "@/src/utils/utils";
 
 const webHost = process.env.NEXT_PUBLIC_WEB;
 const titleTemplate = (title: string) => `플리퍼 | ${title}`;
@@ -40,13 +41,13 @@ export const Seo: FC<SeoProps> = ({ title, description = defaultSeoProps.descrip
 			<meta property='og:description' content={description} />
 			<meta property='og:url' content={webHost+ router.asPath} />
 			<meta property='og:site_name' content='플리퍼' />
-			<meta property='og:image' content={imageUrl} />
+			<meta property='og:image' content={addHttpsPrefix(imageUrl)} />
 			<meta property='og:type' content='website' />
 			<meta property='og:locale' content='ko_KR' />
 
 			<meta property='twitter:title' content={title} />
 			<meta property='twitter:description' content={description} />
-			<meta property='twitter:image' content={imageUrl} />
+			<meta property='twitter:image' content={addHttpsPrefix(imageUrl)} />
 		</Head>
 	);
 };
