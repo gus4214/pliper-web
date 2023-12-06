@@ -4,7 +4,8 @@ import { prefetchGetMyPrompt, useGetMyPrompt } from '@/src/fetchers/prompt/my-pr
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from 'react-query';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Seo } from '@/src/components/modules/@common/seo/Seo';
 
 interface MyCreatedPromptDetailPageProps {
 	token?: string;
@@ -24,7 +25,12 @@ const MyCreatedPromptDetailPage: NextPage<MyCreatedPromptDetailPageProps> = ({ t
 		return <></>;
 	}
 
-	return <MyPageCreatedPromptDetailTemplate data={data!} />;
+	return (
+		<>
+			<Seo title={'내가 작성한 프롬프트 - ' + data?.title} description={data?.description} imageUrl={data?.imageUrl} />
+			<MyPageCreatedPromptDetailTemplate data={data!} />
+		</>
+	);
 };
 
 MyCreatedPromptDetailPage.grant = 'user';
