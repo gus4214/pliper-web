@@ -11,7 +11,7 @@ interface MainPageProps {
 export default function Home({ mainImage }: MainPageProps) {
 	return (
 		<>
-			<Seo />
+			<Seo  />
 			<MainTemplate mainImage={mainImage} />
 		</>
 	);

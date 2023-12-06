@@ -16,7 +16,7 @@ const PromptDetailPage: NextPage<PromptDetailPageProps> = ({ token }) => {
 
 	return (
 		<>
-			<Seo title={data?.title} description={data?.description} imageUrl={data?.imageUrl} />
+			<Seo title={data?.title} description={'프롬프트 - ' + data?.description} imageUrl={data?.imageUrl} />
 			<PromptDetailTemplate prompt={data!} />
 		</>
 	);

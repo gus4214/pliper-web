@@ -16,7 +16,7 @@ type GrantProviderProps = {
 };
 
 const GrantProvider = ({ children, pageGrantType }: GrantProviderProps) => {
-	const { user } = useAuthContext();
+	const { user, loading } = useAuthContext();
 	const router = useRouter();
 	const [open, close] = useLoginModal();
 
@@ -29,13 +29,13 @@ const GrantProvider = ({ children, pageGrantType }: GrantProviderProps) => {
 	};
 
 	useEffect(() => {
-		if (!router.isReady) {
+		if (!router.isReady || loading) {
 			return;
 		}
 		if (pageGrantType === 'user' && !user) {
 			handleReturnToHome();
 		}
-	}, [router.route]);
+	}, [router.route, loading]);
 
 	return <GrantContext.Provider value=''>{children}</GrantContext.Provider>;
 };

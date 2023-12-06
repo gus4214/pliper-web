@@ -8,6 +8,7 @@ import { Modal } from 'react-notion-x/build/third-party/modal';
 import Image from 'next/image';
 import { GetStaticProps } from 'next';
 import { ExtendedRecordMap } from 'notion-types';
+import { Seo } from '@/src/components/modules/@common/seo/Seo';
 
 const notion = new NotionAPI();
 
@@ -15,12 +16,20 @@ interface PolicyProps {
 	recordMap: ExtendedRecordMap;
 }
 
+const titleOfNotionPage: { [key: string]: string } = {
+	'542179ad-6c36-4d82-b993-9ddf871d49f9': '개인정보처리방침',
+	'a573ca9d45e4426ebfbb6ef4ef128953': '서비스이용약관',
+	'ec7a3dc929c74fd9a3eaf2f1db37ae02': '사용가이드',
+};
+
 const Policy: FC<PolicyProps> = ({ recordMap }) => {
 	const router = useRouter();
 	const { id } = router.query; // notion 공개용 ID
 
+	console.log(recordMap, '!!!');
 	return (
 		<div>
+			<Seo title={titleOfNotionPage[id as string]} />
 			<NotionRenderer
 				disableHeader // notion 헤더 안보이도록
 				components={{
@@ -47,7 +56,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<PolicyProps> = async (context) => {
 	const pageId = (context.params?.id as string) || 'ec7a3dc929c74fd9a3eaf2f1db37ae02';
 	const recordMap = await notion.getPage(pageId);
-
 	return {
 		props: {
 			recordMap,

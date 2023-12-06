@@ -35,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				`refreshToken=${tokenResponse.refreshToken}; Path=/; Max-Age=${durationRefreshTokenInSeconds}`,
 			]);
 
-			res.redirect('/');
+			res.redirect(req.query.returnUrl ? req.query.returnUrl as string : '/');
 		}
 	} catch (error) {
 		const axiosError = error as AxiosError<IResponse<OAuthCallbackResult>>;

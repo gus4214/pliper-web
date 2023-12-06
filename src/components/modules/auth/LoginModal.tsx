@@ -2,6 +2,7 @@ import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-daisyui';
 import Link from 'next/link';
+import {useRouter} from "next/router";
 
 const webHost = process.env.NEXT_PUBLIC_WEB;
 
@@ -12,10 +13,11 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	const [errorMessage, setErrorMessage] = useState('');
+	const router = useRouter();
 
 	const handleGoogleLogin = async () => {
 		try {
-			const result = await googleAuthApi(`${webHost}/api/auth/google/callback`);
+			const result = await googleAuthApi(`${webHost}/api/auth/google/callback${router.query.returnUrl ? `?returnUrl=${router.query.returnUrl}` : ''}`);
 			window.location.href = result.url;
 		} catch (error) {
 			console.error('Error in NaverAuthApi:', error);
@@ -24,7 +26,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 
 	const handleNaverLogin = async () => {
 		try {
-			const result = await naverAuthApi(`${webHost}/api/auth/naver/callback`);
+			const result = await naverAuthApi(
+				`${webHost}/api/auth/naver/callback${router.query.returnUrl ? `?returnUrl=${router.query.returnUrl}` : ''}`
+			);
 			window.location.href = result.url;
 		} catch (error) {
 			console.error('Error in NaverAuthApi:', error);

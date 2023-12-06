@@ -25,11 +25,11 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) =
 						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/mypage/profile')}>
 							개인 스페이스
 						</Dropdown.Item>
-						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/prompt/register')}>
-							프롬프트 만들기
-						</Dropdown.Item>
 						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/mypage/plip')}>
 							마이 플립
+						</Dropdown.Item>
+						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/prompt/register')}>
+							프롬프트 작성
 						</Dropdown.Item>
 						<Divider className='m-0' />
 						<Dropdown.Item className='p-3 justify-center' onClick={handleLogout}>

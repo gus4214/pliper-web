@@ -8,7 +8,7 @@ const Footer = () => {
 				<div className='flex flex-col gap-4'>
 					<div className='justify-start items-start gap-4 flex'>
 						<span className='text-center text-slate-200 text-[13px] font-normal'>
-							<Link href={'https://pliper.notion.site/PLIPER-AI-ec7a3dc929c74fd9a3eaf2f1db37ae02?pvs=4'} rel="noopener noreferrer" target="_blank">이용가이드</Link>
+							<Link href={'https://pliper.notion.site/PLIPER-AI-ec7a3dc929c74fd9a3eaf2f1db37ae02?pvs=4'} rel="noopener noreferrer" target="_blank">사용가이드</Link>
 						</span>
 						<span className='text-center text-slate-200 text-[13px] font-medium'>
 							<Link href={'/policy/542179ad-6c36-4d82-b993-9ddf871d49f9'} rel="noopener noreferrer" target="_blank">개인정보처리방침</Link>

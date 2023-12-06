@@ -58,7 +58,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 				</Link>
 				<div className='flex-1 ml-[159px] w-[190px]'>
 					<Button color='ghost' onClick={() => router.push('/about')}>
-						플리퍼란?
+						서비스 소개
 					</Button>
 					<Button color='ghost' onClick={() => router.push('/prompt')}>
 						프롬프트

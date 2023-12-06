@@ -1,8 +1,8 @@
 import FormInput from '@/src/components/modules/@common/form/FormInput';
 import { temporaryTokenKey } from '@/src/configs/auth';
 import { userCategory } from '@/src/configs/signup';
-import { registerUserApi, RegisterUserRequest } from '@/src/fetchers/auth';
-import { getCookie, saveAccessToken, saveRefreshToken } from "@/src/utils/cookie";
+import {profileApi, registerUserApi, RegisterUserRequest} from '@/src/fetchers/auth';
+import { getCookie, saveAccessToken, saveRefreshToken } from '@/src/utils/cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'react-daisyui';
@@ -12,6 +12,8 @@ import { useAppToast } from '@/src/hooks/toast';
 import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
 import mixpanel from 'mixpanel-browser';
 import { JOIN } from '@/src/configs/mixpanel';
+import { saveUserAtom } from '@/src/stores/auth/actions/login';
+import { useSetAtom } from 'jotai/index';
 
 interface FormData {
 	taste: string[];
@@ -26,6 +28,7 @@ const schema = yup.object().shape({
 const SignupForm = () => {
 	const router = useRouter();
 	const { openToast } = useAppToast();
+	const saveUser = useSetAtom(saveUserAtom);
 	const temporaryToken = getCookie(temporaryTokenKey);
 	const {
 		control,
@@ -60,11 +63,14 @@ const SignupForm = () => {
 		if (result.token) {
 			saveAccessToken(result.token, result.expiresIn);
 			saveRefreshToken(result.refreshToken, result.refreshTokenExpiresIn);
+			const userProfile = await profileApi(result.token);
+			saveUser(userProfile);
 			openToast({
 				message: '플리퍼 회원가입이 완료되었습니다 🎉',
 				open: true,
 				icon: <ToastPlipIcon />,
 			});
+			mixpanel.identify(userProfile.oauthEmail);
 			mixpanel.track(JOIN);
 			await router.replace('/');
 		}
