@@ -10,7 +10,7 @@ const MainBookMarkList: React.FC<Omit<MainVisualContainerProps, 'mainImage'>> = 
 
 	return (
 		<div className='gap-12 flex'>
-			{bestClip.slice(0, 4).map((v, i) => {
+			{bestClip.slice(0, 3).map((v, i) => {
 				return (
 					<MainBookMarkCard
 						key={v.promptId}
