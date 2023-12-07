@@ -8,13 +8,13 @@ type TitleOfGroup = {
     [key in NotificationGroup]: string;
 };
 
-export const titleOfType: TitleOfType = {
-    NOTIFICATION: "공지",
-    EVENT: "이벤트",
-    CLIP: "프롬프트",
+export const titleOfType: Partial<TitleOfType> = {
+    NOTI_NOTIFICATION: "공지",
+    NOTI_EVENT: "이벤트",
+    NOTI_CLIP: "프롬프트",
 }
 
 export const titleOfGroup: TitleOfGroup = {
-    SYSTEM: "시스템",
+    SYSTEM: "공지&이벤트",
     USER: "프롬프트",
 }

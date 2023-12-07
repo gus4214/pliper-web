@@ -13,18 +13,20 @@ import React, { useState } from 'react';
 import { Select } from 'react-daisyui';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import TextareaAutosize from 'react-textarea-autosize';
-import mixpanel from "mixpanel-browser";
-import {PROMT_COPY} from "@/src/configs/mixpanel";
+import mixpanel from 'mixpanel-browser';
+import { PROMT_COPY } from '@/src/configs/mixpanel';
+import { llms } from "@/src/configs/llm";
 
 interface PromptTemplateSectionProps {
 	promptId?: number;
+	llmModel?: string;
 	parameters: Parameter[];
 	filledTemplate: string;
 	control?: Control<FieldValues>;
 	preview?: boolean;
 }
 
-const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ promptId, parameters = [], filledTemplate, control, preview }) => {
+const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ promptId, parameters = [], filledTemplate, control, preview, llmModel }) => {
 	const { openToast } = useAppToast();
 	const [isHovering, setIsHovering] = useState(false);
 
@@ -38,9 +40,15 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ promptId,
 		openToast({
 			message: '프롬프트가 클립보드에 복사되었습니다',
 			open: true,
+			action: llmModel ? {
+				onAction: () => {
+					window.open(llms[llmModel].url, '_blank')
+				},
+				message: '이동하기',
+			} : undefined,
 			icon: <ToastPlipIcon />,
 		});
-		if(!preview) mixpanel.track(PROMT_COPY, {promptId});
+		if (!preview) mixpanel.track(PROMT_COPY, { promptId });
 		handleCopyClipBoard(filledTemplate);
 	};
 

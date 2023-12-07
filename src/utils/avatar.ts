@@ -100,13 +100,13 @@ const configs: TObject = {
 
 const configsKeys = Object.keys(configs);
 
-export const generateRandomAvatarOptions = (email: string) => {
+export const generateRandomAvatarOptions = (text: string) => {
 	const options: TObject = {};
-	const emailCharCodeSum = Array.from(email).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+	const charCodeSum = Array.from(text).reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
 	Object.keys(configs).forEach((key) => {
 		const configArray = configs[key];
-		const index = emailCharCodeSum % configArray.length;
+		const index = charCodeSum % configArray.length;
 		options[key] = configArray[index];
 	});
 

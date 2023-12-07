@@ -21,7 +21,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 	const { user } = useAuthContext();
 	const { push } = useRouter();
 
-	const { parameters, template, promptId, userEmail } = prompt;
+	const { parameters, template, promptId, userEmail, llmModel } = prompt;
 
 	const {
 		filledTemplate,
@@ -35,7 +35,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 				<FloatButtonGroup className='top-[192px] mr-[-634px]' />
 				<PromptDetailInfoHeader {...prompt} isCreator={user && user.oauthEmail === userEmail} />
 				<AsyncComponentBoundary pendingFallback={<Loading />}>
-					<PromptTemplateSection promptId={promptId} parameters={parameters} filledTemplate={filledTemplate} control={control} />
+					<PromptTemplateSection promptId={promptId} llmModel={llmModel} parameters={parameters} filledTemplate={filledTemplate} control={control} />
 				</AsyncComponentBoundary>
 				<div className='mt-8' />
 				<PromptInteractionButtonGroup onCreateClick={() => {

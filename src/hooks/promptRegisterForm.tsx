@@ -34,7 +34,7 @@ const schema = yup.object().shape({
 		.required(),
 	category1Text: yup.string().required('카테고리는 필수값입니다'),
 	category2Text: yup.string().required('하위 카테고리는 필수값입니다'),
-	llmModel: yup.string().required('AI 모델은 필수값입니다'),
+	llmModel: yup.string().required('LLM 플랫폼은 필수값입니다'),
 	description: yup.string().required('소개는 필수값입니다').max(500, '500자 이내로 작성해주세요'),
 	template: yup.string().required('프롬프트 템플릿은 필수값입니다').max(3000, '3,000자 이내로 작성해주세요'),
 	show: yup.boolean().required(),
