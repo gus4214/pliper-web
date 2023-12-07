@@ -47,10 +47,14 @@ const RendingPage: NextPage = () => {
 		const observer = new IntersectionObserver(
 			(entries, observer) => {
 				entries.forEach((entry) => {
-					if (entry.target === firstSectionRef.current) {
-						setIsVisibleFirst(entry.isIntersecting);
-					} else if (entry.target === secondSectionRef.current) {
-						setIsVisibleSecond(entry.isIntersecting);
+					if (entry.isIntersecting) {
+						if (entry.target === firstSectionRef.current) {
+							setIsVisibleFirst(true);
+							observer.unobserve(firstSectionRef.current);
+						} else if (entry.target === secondSectionRef.current) {
+							setIsVisibleSecond(true);
+							observer.unobserve(secondSectionRef.current);
+						}
 					}
 				});
 			},
@@ -117,7 +121,7 @@ const RendingPage: NextPage = () => {
 					</div>
 					<div className='flex flex-col min-w-[1260px] min-h-[510px] pt-[124px] gap-[100px]'>
 						<FadeIn visible={isVisibleFirst} delay={200}>
-							<div ref={firstSectionRef} className='flex flex-col gap-6'>
+							<div className='flex flex-col gap-6'>
 								<div className='relative'>
 									<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">AI 사용이 </span>
 									<span className="text-teal-200 text-[40px] font-bold font-['Pretendard'] leading-10">어려워요</span>
@@ -128,7 +132,7 @@ const RendingPage: NextPage = () => {
 									많은 사람들은 다양한 개인 업무 활용에 어려움을 겪고 있어요.
 								</span>
 							</div>
-							<div className='flex flex-col gap-6 items-end mt-[180px]'>
+							<div ref={firstSectionRef} className='flex flex-col gap-6 items-end mt-[180px]'>
 								<div className='relative'>
 									<span className="text-amber-400 text-[40px] font-bold font-['Pretendard'] leading-10">할루시네이션</span>
 									<span className="text-black text-[40px] font-bold font-['Pretendard'] leading-10">이 뭐에요?</span>
