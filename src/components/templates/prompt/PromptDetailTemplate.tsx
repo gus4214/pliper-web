@@ -10,8 +10,8 @@ import { usePromptTemplateCreate } from '@/src/hooks/promptDetailTemplate';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Button } from 'react-daisyui';
-import mixpanel from "mixpanel-browser";
-import {PROMT_CREATE} from "@/src/configs/mixpanel";
+import mixpanel from 'mixpanel-browser';
+import { PROMT_CREATE } from '@/src/configs/mixpanel';
 
 interface PromptDetailTemplateProps {
 	prompt: Prompt;
@@ -31,17 +31,26 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 
 	return (
 		<>
-			<div className='w-[1176px] px-6 pt-6 mt-[28px] pb-[61px]  flex flex-col items-center mx-auto relative'>
+			<div className='w-[1176px] px-6 pt-6 mt-[28px] pb-[61px] flex flex-col items-center mx-auto relative'>
 				<FloatButtonGroup className='top-[192px] mr-[-634px]' />
 				<PromptDetailInfoHeader {...prompt} isCreator={user && user.oauthEmail === userEmail} />
 				<AsyncComponentBoundary pendingFallback={<Loading />}>
-					<PromptTemplateSection promptId={promptId} llmModel={llmModel} parameters={parameters} filledTemplate={filledTemplate} control={control} />
+					<PromptTemplateSection
+						promptId={promptId}
+						llmModel={llmModel}
+						parameters={parameters}
+						filledTemplate={filledTemplate}
+						control={control}
+					/>
 				</AsyncComponentBoundary>
 				<div className='mt-8' />
-				<PromptInteractionButtonGroup onCreateClick={() => {
-					createPrompt();
-					mixpanel.track(PROMT_CREATE, {promptId, parameters});
-				}} promptId={promptId!} />
+				<PromptInteractionButtonGroup
+					onCreateClick={() => {
+						createPrompt();
+						mixpanel.track(PROMT_CREATE, { promptId, parameters });
+					}}
+					promptId={promptId!}
+				/>
 				<Button
 					className='mt-8 w-60 h-12 bg-white rounded-lg border border-gray-200 text-black text-base font-medium'
 					onClick={() => push('/prompt')}

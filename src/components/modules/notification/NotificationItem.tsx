@@ -41,9 +41,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ group, type, date, 
 					<div className='text-neutral-400 text-[13px] font-normal leading-[13px]'>{timeAgo(date)}</div>
 				</div>
 				<div className='justify-start items-center gap-2.5 inline-flex '>
-					<div className={`${textColor} text-sm font-normal leading-[18px] whitespace-pre whitespace-pre-wrap`}>
-						{text}
-					</div>
+					<div className={`${textColor} text-sm font-normal leading-[22px] whitespace-pre-wrap`}>{text}</div>
 				</div>
 			</div>
 		</>

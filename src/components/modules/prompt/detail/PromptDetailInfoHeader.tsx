@@ -98,8 +98,8 @@ const PromptDetailInfoHeader: React.FC<PromptDetailInfoHeaderProps> = ({
 						</div>
 					</div>
 				</div>
-				<div className='flex flex-col justify-start pt-4 pb-6'>
-					<h2 className='text-black text-base font-normal whitespace-break-spaces'>{description}</h2>
+				<div className='flex flex-col justify-start pt-4'>
+					<h2 className='text-black leading-[29px] text-base font-normal whitespace-break-spaces'>{description}</h2>
 				</div>
 			</div>
 		</div>

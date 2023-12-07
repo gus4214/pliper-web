@@ -104,10 +104,11 @@ const RegisterFormPromptTemplate: React.FC<RegisterFormPromptTemplateProps> = ({
 					/>
 				</div>
 				<div className='px-4  gap-1.5'>
-					<div className='self-stretch rounded-lg bg-neutral-50 p-[16px] text-black text-xs flex flex-col'>
+					<div className='self-stretch rounded-lg bg-neutral-50 p-[16px] text-black text-xs flex flex-col leading-[18px]'>
 						<span className=''>입력하실 내용의 큰 틀을 미리 작성해주세요.</span>
 						<span className=''>
-							{'입력 받을 부분은 "{{ 입력값 }}" 으로 작성 하시거나 우측 하단 생성 버튼을 누르면 자동으로 입력값 필드가 생성됩니다.'}
+							입력 받을 부분은 <span className='font-medium'>{'{{ 입력값 }}'}</span> 으로 작성 하시거나 우측 하단 생성 버튼을 누르면
+							자동으로 입력값 필드가 생성됩니다.
 						</span>
 						<br />
 						<ul className={'list-disc pl-4'}>

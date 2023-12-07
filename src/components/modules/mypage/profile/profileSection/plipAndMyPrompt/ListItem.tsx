@@ -15,7 +15,7 @@ const ListItem: React.FC<ListItemProps> = ({ icon, title, userNickname, onClick 
 		>
 			{icon}
 			<div className='grow shrink basis-0 truncate'>
-				<span className='text-neutral-700 text-sm font-semibold'>{title}</span>
+				<span className='text-neutral-700 text-sm font-medium'>{title}</span>
 			</div>
 			<span className='text-neutral-400 text-[13px] font-normal'>{userNickname}</span>
 		</div>
