@@ -22,7 +22,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 	const { user } = useAuthContext();
 	const { push } = useRouter();
 
-	const { parameters, template, promptId, userEmail } = prompt;
+	const { parameters, template, promptId, userEmail, llmModel } = prompt;
 
 	const { ref, inView } = useInView({
 		/* Optional options */
@@ -35,17 +35,19 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 		formHandler: { control },
 	} = usePromptTemplateCreate({ parameters, template });
 
-	useEffect(() => {
-		console.log('w', inView);
-	}, [inView]);
-
 	return (
 		<>
 			<div className='w-[1176px] px-6 pt-6 mt-[28px] pb-[61px]  flex flex-col items-center mx-auto relative'>
 				<FloatButtonGroup className='top-[192px] mr-[-634px]' />
 				<PromptDetailInfoHeader {...prompt} isCreator={user && user.oauthEmail === userEmail} />
 				<AsyncComponentBoundary pendingFallback={<Loading />}>
-					<PromptTemplateSection promptId={promptId} parameters={parameters} filledTemplate={filledTemplate} control={control} />
+					<PromptTemplateSection
+						promptId={promptId}
+						llmModel={llmModel}
+						parameters={parameters}
+						filledTemplate={filledTemplate}
+						control={control}
+					/>
 				</AsyncComponentBoundary>
 				<div className='mt-8' />
 				<div className={`w-full flex`} ref={ref} />

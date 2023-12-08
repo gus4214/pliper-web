@@ -44,7 +44,7 @@ const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 
 							<div className='text-white text-sm font-medium leading-none'>{message}</div>
 
 							{action ? (
-								<span className={'ml-3 text-teal-400 text-sm font-medium leading-none cursor-pointer'}
+								<span className={'ml-3 text-teal-200 hover:text-teal-100 text-sm font-medium leading-none cursor-pointer'}
 									onClick={() => {
 										action.onAction();
 										close();

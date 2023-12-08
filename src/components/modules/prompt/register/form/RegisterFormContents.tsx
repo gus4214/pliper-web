@@ -61,8 +61,8 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 					required
 					className='gap-[14px]'
 					labelRightComponent={
-						<NoticeTooltip className='w-[209px]'>
-							<span className='text-teal-400 text-xs font-normal'>
+						<NoticeTooltip className='w-[209px] leading-[19px]'>
+							<span className='text-teal-400 text-[12px] font-normal'>
 								어떤 용도로 작성 하였는지, 어떤 상황에서 사용하면 좋은지 사용자들이 이해하기 쉽게 작성해주세요 🙂
 							</span>
 						</NoticeTooltip>

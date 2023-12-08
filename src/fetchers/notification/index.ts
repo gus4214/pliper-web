@@ -7,7 +7,7 @@ import { IBaasResponse, IPageRequest } from '@/src/fetchers/types';
 
 export type NotificationGroup = 'SYSTEM' | 'USER';
 
-export type NotificationType = 'NOTIFICATION' | 'EVENT' | 'CLIP';
+export type NotificationType = 'NOTI_NOTIFICATION' | 'NOTI_EVENT' | 'NOTI_CLIP' | 'NOTI_LIKE' | 'NOTI_PRECISION_UP';
 
 export interface GetNotificationsRequest extends IPageRequest {
 	groups?: NotificationGroup | NotificationGroup[];
