@@ -8,10 +8,11 @@ import { Prompt } from '@/src/fetchers/prompt/types';
 import { useAuthContext } from '@/src/hooks/context';
 import { usePromptTemplateCreate } from '@/src/hooks/promptDetailTemplate';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-daisyui';
-import mixpanel from "mixpanel-browser";
-import {PROMT_CREATE} from "@/src/configs/mixpanel";
+import mixpanel from 'mixpanel-browser';
+import { PROMT_CREATE } from '@/src/configs/mixpanel';
+import { useInView } from 'react-intersection-observer';
 
 interface PromptDetailTemplateProps {
 	prompt: Prompt;
@@ -23,11 +24,20 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 
 	const { parameters, template, promptId, userEmail } = prompt;
 
+	const { ref, inView } = useInView({
+		/* Optional options */
+		threshold: 0,
+	});
+
 	const {
 		filledTemplate,
 		createPrompt,
 		formHandler: { control },
 	} = usePromptTemplateCreate({ parameters, template });
+
+	useEffect(() => {
+		console.log('w', inView);
+	}, [inView]);
 
 	return (
 		<>
@@ -38,10 +48,17 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 					<PromptTemplateSection promptId={promptId} parameters={parameters} filledTemplate={filledTemplate} control={control} />
 				</AsyncComponentBoundary>
 				<div className='mt-8' />
-				<PromptInteractionButtonGroup onCreateClick={() => {
-					createPrompt();
-					mixpanel.track(PROMT_CREATE, {promptId, parameters});
-				}} promptId={promptId!} />
+				<div className={`w-full flex`} ref={ref} />
+				<div className={`flex px-6  w-[1176px] rounded bottom-6 z-50   ${!inView ? `fixed` : ''}`} >
+					<PromptInteractionButtonGroup
+						className={`${!inView ? `border bg-opacity-80 bg-sky-100` : ''}`}
+						onCreateClick={() => {
+							createPrompt();
+							mixpanel.track(PROMT_CREATE, { promptId, parameters });
+						}}
+						promptId={promptId!}
+					/>
+				</div>
 				<Button
 					className='mt-8 w-60 h-12 bg-white rounded-lg border border-gray-200 text-black text-base font-medium'
 					onClick={() => push('/prompt')}

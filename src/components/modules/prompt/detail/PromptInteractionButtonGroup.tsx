@@ -24,9 +24,11 @@ import {PROMT_ACCURACY, PROMT_LIKE, PROMT_PLIP} from "@/src/configs/mixpanel";
 interface PromptInteractionButtonGroupProps {
     promptId: number;
     onCreateClick: () => void;
+    ref?: any;
+    className?: string;
 }
 
-const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> = ({promptId, onCreateClick}) => {
+const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> = ({promptId, onCreateClick, className, ...props}) => {
     const {user, loading} = useAuthContext();
     const [like, setLike] = useState<boolean>(false);
     const [plip, setPlip] = useState<boolean>(false);
@@ -86,7 +88,7 @@ const PromptInteractionButtonGroup: React.FC<PromptInteractionButtonGroupProps> 
     const isActiveReliabilityDown = reliability === 'DOWN'
 
     return (
-        <div className='w-full h-[72px] p-4 bg-sky-200 bg-opacity-10 rounded-lg justify-between items-center flex'>
+        <div className={`w-full h-[72px] p-4 bg-sky-200 bg-opacity-10 rounded-lg justify-between items-center flex ${className}`} {...props} >
             <div className='justify-end items-center flex'>
                 <Button color='ghost' startIcon={<HeartIcon isLike={like}/>} onClick={() => handleLikePrompt(!like)}>
                     <span className='text-neutral-400 text-sm font-normal whitespace-nowrap'>좋아요</span>
