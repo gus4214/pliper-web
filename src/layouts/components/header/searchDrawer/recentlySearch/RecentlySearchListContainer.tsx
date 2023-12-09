@@ -5,7 +5,7 @@ import RecentlySearchListSkeleton from '@/src/layouts/components/header/searchDr
 
 const RecentlySearchListContainer = () => {
 	return (
-		<div className='w-full flex-col justify-start items-start gap-6 flex'>
+		<div className='w-full max-h-[220px] flex-col justify-start items-start gap-6 flex'>
 			<AsyncComponentBoundary pendingFallback={<RecentlySearchListSkeleton />}>
 				<RecentlySearchList />
 			</AsyncComponentBoundary>

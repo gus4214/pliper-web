@@ -3,6 +3,8 @@ import RecentlySearchItem from '@/src/layouts/components/header/searchDrawer/rec
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 const RecentlySearchList = () => {
 	const { data, refetch } = useGetSearchedByUser();
@@ -45,7 +47,10 @@ const RecentlySearchList = () => {
 					</span>
 				)}
 			</div>
-			<div className='flex-col justify-start items-start gap-3 flex'>
+			<PerfectScrollbar
+				options={{ wheelPropagation: false }}
+				className='w-full max-h-[148px] flex flex-col justify-start items-start gap-3 overflow-y-auto'
+			>
 				{dataArray.map((v) => (
 					<RecentlySearchItem
 						text={v.keyword}
@@ -55,7 +60,7 @@ const RecentlySearchList = () => {
 						onClick={handleClick}
 					/>
 				))}
-			</div>
+			</PerfectScrollbar>
 		</>
 	);
 };

@@ -6,7 +6,7 @@ import React from 'react';
 
 const PopularSearchListContainer = () => {
 	return (
-		<div className='w-[484px] flex-col gap-6 flex'>
+		<div className='w-full flex-col gap-6 flex'>
 			<span className='text-black text-base font-semibold'>🔥인기 검색어</span>
 			<AsyncComponentBoundary pendingFallback={<PopularSearchListSkeleton />}>
 				<PopularSearchList />
