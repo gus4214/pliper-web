@@ -53,7 +53,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 				<div className={`w-full flex`} ref={ref} />
 				<div className={`flex px-6  w-[1176px] rounded bottom-6 z-50   ${!inView ? `fixed` : ''}`} >
 					<PromptInteractionButtonGroup
-						className={`${!inView ? `border bg-opacity-80 bg-sky-100` : ''}`}
+						className={`${!inView ? `border bg-white bg-opacity-100 border-neutral-400` : ''}`}
 						onCreateClick={() => {
 							createPrompt();
 							mixpanel.track(PROMT_CREATE, { promptId, parameters });
