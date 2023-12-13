@@ -19,7 +19,7 @@ const MainBookMarkList: React.FC<Omit<MainVisualContainerProps, 'mainImage'>> = 
 						user={v.userNickname}
 						badge={
 							<Badge color='accent' className='w-[60px] h-8 p-2.5 rounded'>
-								<span className='text-white text-lg font-bold leading-[18px]'>{formatNumber(v.clipCount)}</span>
+								<span className='text-white text-lg font-bold leading-[18px]'>{formatNumber(i+1)}</span>
 							</Badge>
 						}
 						onClick={() => router.push(`/prompt/${v.promptId}`)}

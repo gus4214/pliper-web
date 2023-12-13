@@ -14,8 +14,8 @@ const MainDailyPromptList = () => {
 
 	return (
 		<div className='w-full gap-x-6 gap-y-6 flex flex-wrap min-h-[252px]'>
-			{data!.prompts.length <= 0 && <PromptEmptyText />}
-			{data?.prompts?.map((prompt) => {
+			{!data?.prompts?.length && <PromptEmptyText />}
+			{data?.prompts?.slice(0, 6).map((prompt) => {
 				return (
 					<DailyPromptCard
 						key={prompt.promptId}

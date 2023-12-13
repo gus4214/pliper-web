@@ -14,8 +14,8 @@ const MainWorkPromptList = () => {
 
 	return (
 		<div className='w-full gap-x-6 gap-y-10 flex flex-wrap min-h-[286px]'>
-			{data!.prompts.length <= 0 && <PromptEmptyText />}
-			{data?.prompts?.map((prompt) => {
+			{!data?.prompts?.length && <PromptEmptyText />}
+			{data?.prompts?.slice(0, 4).map((prompt) => {
 				return (
 					<PromptCard
 						key={prompt.promptId}
