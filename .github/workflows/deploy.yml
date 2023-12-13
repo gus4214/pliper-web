@@ -24,7 +24,7 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn build
+        run: next-sitemap && yarn build
 #
 #      - name: Clean Next Dir
 #        uses: appleboy/ssh-action@master
