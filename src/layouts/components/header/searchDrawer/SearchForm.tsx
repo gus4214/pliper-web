@@ -1,9 +1,10 @@
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { Search } from 'heroicons-react';
 import { useAtom } from 'jotai';
-import React, { ChangeEvent, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Input } from 'react-daisyui';
-import { useController, useForm } from 'react-hook-form';
+import { Controller, useController, useForm } from 'react-hook-form';
 
 interface BaseFormFields {
 	title: string;
@@ -22,12 +23,13 @@ const SearchForm: React.FC<SearchFormProps> = ({
 	twStyle,
 	defaultValue,
 }) => {
+	const router = useRouter();
 	const [searchInputValue, setSearchInputValue] = useAtom(searchInputAtom);
 
 	const formHandler = useForm<BaseFormFields>({
 		mode: 'onChange',
 		defaultValues: {
-			title: '',
+			title: searchInputValue,
 		},
 	});
 
@@ -47,6 +49,19 @@ const SearchForm: React.FC<SearchFormProps> = ({
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		inputField.onChange(e.target.value);
 	};
+
+	useEffect(() => {
+		const handleRouteChange = (url: string) => {
+			if (url !== '/prompt') {
+				setSearchInputValue('');
+			}
+		};
+		router.events.on('routeChangeComplete', handleRouteChange);
+
+		return () => {
+			router.events.off('routeChangeComplete', handleRouteChange);
+		};
+	}, [router.events, setSearchInputValue]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>

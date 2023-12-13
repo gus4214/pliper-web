@@ -4,8 +4,17 @@ import FloatButtonGroup from '@/src/components/modules/@common/floatButton/Float
 import MyPlipListContainer from '@/src/components/modules/mypage/plip/MyPlipListContainer';
 import PromptMenuListContainer from '@/src/components/modules/prompt/menu/PromptMenuListContainer';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
+import { searchInputAtom } from '@/src/stores/searchForm';
+import { useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 
 const MyPagePlipTemplate = () => {
+	const setSearchInputValue = useSetAtom(searchInputAtom);
+
+	useEffect(() => {
+		return () => setSearchInputValue('');
+	}, []);
+
 	return (
 		<div className='w-full h-full flex flex-col items-center relative'>
 			<FloatButtonGroup className='top-[186px] mr-[-646px]' />
