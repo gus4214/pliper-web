@@ -17,6 +17,15 @@ jobs:
         with:
           node-version: 18
 
+      - name: Cache Yarn Dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install Yarn
         run: npm install -g yarn # Yarn 설치
 
@@ -24,7 +33,7 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: next-sitemap && yarn build
+        run: yarn build
 #
 #      - name: Clean Next Dir
 #        uses: appleboy/ssh-action@master
