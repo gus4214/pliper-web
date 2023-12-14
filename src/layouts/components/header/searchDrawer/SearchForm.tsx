@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Input } from 'react-daisyui';
-import { Controller, useController, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 interface BaseFormFields {
 	title: string;
@@ -17,14 +17,10 @@ interface SearchFormProps {
 	twStyle?: string;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({
-	placeholder = '뭐든 적어주세요, 원하시는 내용을 보여드릴게요!',
-	onEnter,
-	twStyle,
-	defaultValue,
-}) => {
+const SearchForm: React.FC<SearchFormProps> = ({ placeholder = '뭐든 적어주세요, 원하시는 내용을 보여드릴게요!', onEnter, twStyle }) => {
 	const router = useRouter();
 	const [searchInputValue, setSearchInputValue] = useAtom(searchInputAtom);
+	const [searchText, setSearchText] = useState(searchInputValue);
 
 	const formHandler = useForm<BaseFormFields>({
 		mode: 'onChange',
@@ -35,19 +31,14 @@ const SearchForm: React.FC<SearchFormProps> = ({
 
 	const { control, handleSubmit } = formHandler;
 
-	const { field: inputField } = useController({
-		name: 'title',
-		control,
-	});
-
 	const onSubmit = async (data: BaseFormFields) => {
 		const { title } = data;
-		setSearchInputValue(title);
+		setSearchInputValue(searchText);
 		onEnter && onEnter();
 	};
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-		inputField.onChange(e.target.value);
+		setSearchText(e.target.value);
 	};
 
 	useEffect(() => {
@@ -63,6 +54,10 @@ const SearchForm: React.FC<SearchFormProps> = ({
 		};
 	}, [router.events, setSearchInputValue]);
 
+	useEffect(() => {
+		setSearchText(searchInputValue);
+	}, [searchInputValue]);
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div
@@ -70,7 +65,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
 			>
 				<Search />
 				<Input
-					defaultValue={searchInputValue}
+					value={searchText}
 					placeholder={placeholder}
 					className='w-[374px] border-none bg-neutral-50 focus:outline-none focus:bg-white'
 					onChange={onChange}
