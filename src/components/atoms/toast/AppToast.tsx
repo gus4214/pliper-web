@@ -27,7 +27,7 @@ const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 
 		<AnimatePresence>
 			{open && (
 				<motion.div
-					className='fixed bottom-5 right-5 z-100'
+					className='fixed bottom-5 right-5 z-50'
 					initial='hidden'
 					animate='visible'
 					exit='hidden'
