@@ -51,7 +51,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 				</AsyncComponentBoundary>
 				<div className='mt-8' />
 				<div className={`w-full flex`} ref={ref} />
-				<div className={`flex px-6  w-[1176px] rounded bottom-6 z-40   ${!inView ? `fixed` : ''}`} >
+				<div className={`flex px-6  w-[1176px] rounded bottom-6 z-10   ${!inView ? `fixed` : ''}`} >
 					<PromptInteractionButtonGroup
 						className={`${!inView ? `border bg-white bg-opacity-100 border-neutral-400` : ''}`}
 						onCreateClick={() => {

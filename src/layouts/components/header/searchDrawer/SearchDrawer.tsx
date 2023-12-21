@@ -61,7 +61,7 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 	return (
 		<div
 			onClick={handleBackgroundClick}
-			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden cursor-pointer`}
+			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden cursor-pointer z-50`}
 		>
 			<div className='w-[750px] flex flex-col mt-10 justify-center cursor-default' onClick={handleContentClick}>
 				<SearchForm onEnter={handleSearch} />
