@@ -18,7 +18,7 @@ const PromptCard: React.FC<PromptCardProps> = ({ src, user, title, tag, likeCoun
 	return (
 		<Card className='w-[376px] cursor-pointer hover:shadow-lg transition-all duration-300' onClick={onClick}>
 			<div className='w-full h-[164px] relative'>
-				<Image src={src} alt='Card Image' fill className='absolute z-0 rounded-lg object-cover' sizes=" (min-width: 786px) 30vw"  quality={75} priority={true}  />
+				<Image src={src} alt='Card Image' fill className='absolute z-0 rounded-lg object-cover' sizes=" (min-width: 786px) 30vw"  quality={75}  />
 			</div>
 			<Card.Body className='px-3 py-4 rounded-bl-lg rounded-br-lg flex flex-col gap-4 truncate'>
 				<div className='flex flex-col gap-2'>
