@@ -38,6 +38,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open = false, onClose }) => {
 	return (
 		<>
 			<Modal.Legacy
+				aria-hidden="true"
 				open={open}
 				onClickBackdrop={onClose}
 				className='max-w-screen-sm flex flex-col justify-center items-start rounded-2xl bg-white px-20 gap-8 w-[560px] h-[400px]'

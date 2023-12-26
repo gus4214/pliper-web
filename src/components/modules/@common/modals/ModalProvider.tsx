@@ -12,10 +12,10 @@ const ModalProvider = () => {
 	const close = useSetAtom(closeLoginModalAtom);
 
 	return (
-		<>
+		<div aria-hidden="true">
 			<LoginModal open={open} onClose={close} />
 			<ConfirmModal {...props} />
-		</>
+		</div>
 	);
 };
 

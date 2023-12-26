@@ -70,9 +70,9 @@ const NotificationDropdown: FC = () => {
 
 
     return (
-        <Dropdown vertical='bottom' end open={open} onClick={() => setOpen(true)} onBlur={() => setOpen(false)}>
+        <Dropdown role="option" vertical='bottom' aria-label="gnb" end open={open} onClick={() => setOpen(true)} onBlur={() => setOpen(false)}>
             <Dropdown.Toggle button={false} >
-                <Button size='sm' color='ghost' shape='circle' onClick={() => showNotifications()}>
+                <Button aria-label="notification-btn" size='sm' color='ghost' shape='circle' onClick={() => showNotifications()}>
                     <NotificationIcon active={active}/>
                 </Button>
             </Dropdown.Toggle>

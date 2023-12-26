@@ -9,7 +9,7 @@ interface SearchDropdownProps {
 const SearchDropdown: React.FC<SearchDropdownProps> = ({ onClick }) => {
 	return (
 		<>
-			<Button size='sm' color='ghost' shape='circle' onClick={onClick}>
+			<Button role="option" aria-label="search-dropdown" size='sm' color='ghost' shape='circle' onClick={onClick}>
 				<SearchOutline />
 			</Button>
 		</>

@@ -64,7 +64,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 						프롬프트
 					</Button>
 				</div>
-				<div className='flex gap-4'>
+				<div className='flex gap-4' role="listbox" id="top-dropdown" aria-label="top-dropdown">
 					<SearchDropdown onClick={handleSearchClick} />
 					<NotificationDropdown />
 					<UserDropdown loggedIn={!!user} handleLogout={logout} />

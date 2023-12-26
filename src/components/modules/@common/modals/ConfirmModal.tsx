@@ -42,6 +42,7 @@ const ConfirmModal: React.FC<ConfirmModalAtomProps> = (props) => {
 
 	return (
 		<Modal.Legacy
+			aria-hidden="true"
 			open={open}
 			onClickBackdrop={onCancel}
 			className='w-[450px] px-12 pt-10 pb-4 bg-white rounded-2xl border border-neutral-200 flex-col justify-center items-center gap-8 flex overflow-hidden'

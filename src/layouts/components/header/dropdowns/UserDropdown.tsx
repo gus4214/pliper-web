@@ -15,7 +15,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) =
 	return (
 		<>
 			{loggedIn ? (
-				<Dropdown end>
+				<Dropdown end role="option">
 					<Button tag='label' tabIndex={0} color='ghost' className='avatar' shape='circle' size='sm'>
 						<Avatar shape='circle' size={'md'}>
 							<div className='w-6 h-6 bg-gradient-to-b from-blue-400 to-emerald-200 rounded-full'></div>
@@ -38,7 +38,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) =
 					</Dropdown.Menu>
 				</Dropdown>
 			) : (
-				<Button color='ghost' shape='circle' size='sm' onClick={open}>
+				<Button color='ghost' shape='circle' size='sm' onClick={open} role="option">
 					<Avatar shape='circle' size={'md'}>
 						<div className='w-6 h-6 bg-gradient-to-b from-neutral-400 to-neutral-100 rounded-full'></div>
 					</Avatar>
