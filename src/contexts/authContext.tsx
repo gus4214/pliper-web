@@ -39,9 +39,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	useEffect(() => {
 		const initAuth = async () => {
 			console.log('authContext: 신규 진입');
-			const storedAccessToken = getCookie('accessToken');
+			const storedAccessToken = getCookie(accessTokenKey);
+			const storedRefreshToken = getCookie(refreshTokenKey);
 			console.log(`authContext: Token 확인 - ${storedAccessToken}`);
-			if (storedAccessToken) {
+			if (storedAccessToken || storedRefreshToken) {
 				try {
 					const userProfile = await profileApi(storedAccessToken);
 					console.log(userProfile, '프로파일 확인 완료');
