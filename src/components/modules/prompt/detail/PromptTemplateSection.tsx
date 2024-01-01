@@ -9,13 +9,14 @@ import { handleCopyClipBoard } from '@/src/utils/utils';
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import { DocumentDuplicateIcon as DocumentDuplicateSolidIcon } from '@heroicons/react/24/solid';
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Select } from 'react-daisyui';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import TextareaAutosize from 'react-textarea-autosize';
 import mixpanel from 'mixpanel-browser';
 import { PROMT_COPY } from '@/src/configs/mixpanel';
 import { llms } from '@/src/configs/llm';
+import FormTextareaAutoSize from '@/src/components/modules/@common/form/FormTextareaAutoSize';
 
 interface PromptTemplateSectionProps {
 	promptId?: number;
@@ -66,12 +67,12 @@ const PromptTemplateSection: React.FC<PromptTemplateSectionProps> = ({ promptId,
 							switch (parameter.type) {
 								case 'TEXT':
 									element = (
-										<FormInput
+										<FormTextareaAutoSize
 											name={parameter.title}
 											control={control}
 											inputProps={{
 												placeholder: parameter.description,
-												className: 'w-full h-10 rounded',
+												className: 'w-full rounded px-2.5 py-2 text-[13px] font-normal focus:outline-none',
 											}}
 										/>
 									);
