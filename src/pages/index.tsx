@@ -11,7 +11,7 @@ interface MainPageProps {
 export default function Home({ mainImage }: MainPageProps) {
 	return (
 		<>
-			<Seo  />
+			<Seo />
 			<MainTemplate mainImage={mainImage} />
 		</>
 	);
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<MainPageProps> = async ({ qu
 
 	return {
 		props: {
-			mainImage: `/images/main/mainVis-${number}.webp`,
+			mainImage: `/images/main/mainVis${number}.webp`,
 			dehydratedState: dehydrate(queryClient),
 		},
 	};
