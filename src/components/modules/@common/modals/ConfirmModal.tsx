@@ -42,7 +42,7 @@ const ConfirmModal: React.FC<ConfirmModalAtomProps> = (props) => {
 
 	return (
 		<Modal.Legacy
-			aria-hidden="true"
+			aria-hidden='true'
 			open={open}
 			onClickBackdrop={onCancel}
 			className='w-[450px] px-12 pt-10 pb-4 bg-white rounded-2xl border border-neutral-200 flex-col justify-center items-center gap-8 flex overflow-hidden'
@@ -60,7 +60,7 @@ const ConfirmModal: React.FC<ConfirmModalAtomProps> = (props) => {
 							</Button>
 						)}
 						{!hideConfirm && (
-							<Button onClick={() => handleConfirm()} color='neutral' className='w-[173px] rounded-[99px] bg-navy-900'>
+							<Button onClick={() => handleConfirm()} color='ghost' className='w-[173px] rounded-[99px] text-teal-200'>
 								확인
 							</Button>
 						)}
