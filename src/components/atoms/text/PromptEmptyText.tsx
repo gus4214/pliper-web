@@ -1,5 +1,3 @@
-import React from 'react';
-
 const PromptEmptyText = () => {
 	return (
 		<div className='w-full flex justify-center my-[10px]'>

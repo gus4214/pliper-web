@@ -1,5 +1,4 @@
 import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
-import FormInput from '@/src/components/modules/@common/form/FormInput';
 import FormToggleMultiChipGroup from '@/src/components/modules/@common/form/FormToggleMultiChipGroup';
 import PromptTemplateSectionItem from '@/src/components/modules/prompt/detail/PromptTemplateSectionItem';
 import { Parameter } from '@/src/fetchers/prompt/types';

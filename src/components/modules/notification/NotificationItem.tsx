@@ -1,7 +1,7 @@
 import React from 'react';
 import { NotificationGroup, NotificationType } from '@/src/fetchers/notification';
 import { titleOfGroup, titleOfType } from '@/src/configs/notification';
-import { formatDateToKorean, timeAgo } from '@/src/utils/dateUtils';
+import { timeAgo } from '@/src/utils/dateUtils';
 
 interface NotificationItemProps {
 	group: NotificationGroup;

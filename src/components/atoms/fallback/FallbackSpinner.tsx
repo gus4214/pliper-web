@@ -1,5 +1,3 @@
-import React from 'react';
-
 const FallbackSpinner = () => {
 	return (
 		<div className='h-full flex items-center justify-center flex-col relative'>

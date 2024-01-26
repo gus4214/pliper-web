@@ -1,13 +1,13 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface NoticeTooltipProps {
 	children: ReactNode;
 	tooltip: ReactNode;
-	width: number
+	width: number;
 	position: 'bottom';
 }
 
-const ArrowToolTip: FC<NoticeTooltipProps> = ({  children, tooltip, position, width = 300 }) => {
+const ArrowToolTip: FC<NoticeTooltipProps> = ({ children, tooltip, position, width = 300 }) => {
 	const positionToCss = () => {
 		switch (position) {
 			case 'bottom':
@@ -15,7 +15,7 @@ const ArrowToolTip: FC<NoticeTooltipProps> = ({  children, tooltip, position, wi
 		}
 	};
 
-	const widthCss = `w-[${width}px]`
+	const widthCss = `w-[${width}px]`;
 
 	return (
 		<>

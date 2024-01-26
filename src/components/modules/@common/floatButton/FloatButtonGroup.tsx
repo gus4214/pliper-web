@@ -1,10 +1,10 @@
 import FloatPlipIcon from '@/src/components/atoms/icons/float/FloatPlipIcon';
 import FloatPromptPlusIcon from '@/src/components/atoms/icons/float/FloatPromptPlusIcon';
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 import { useAuthContext } from '@/src/hooks/context';
 import { useLoginModal } from '@/src/hooks/modal';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 interface FloatButtonGroupProps {
 	className?: string;

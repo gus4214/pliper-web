@@ -1,5 +1,5 @@
 import useScrollToTop from '@/src/hooks/scrollToTop';
-import { ArrowUpCircleIcon, ArrowUpIcon } from '@heroicons/react/24/solid';
+import { ArrowUpIcon } from '@heroicons/react/24/solid';
 
 interface ScrollToTopButtonProps {
 	showY: number;

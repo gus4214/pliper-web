@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { FC, useEffect, useState } from 'react';
 import { AppToastProps } from '@/src/stores/toast';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FC, useEffect } from 'react';
 
 const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 4000, onClose, action }) => {
 	const close = () => {
@@ -44,7 +44,8 @@ const AppToast: FC<AppToastProps> = ({ open, message, icon, delayHideDuration = 
 							<div className='text-white text-sm font-medium leading-none'>{message}</div>
 
 							{action ? (
-								<span className={'ml-3 text-teal-200 hover:text-teal-100 text-sm font-medium leading-none cursor-pointer'}
+								<span
+									className={'ml-3 text-teal-200 hover:text-teal-100 text-sm font-medium leading-none cursor-pointer'}
 									onClick={() => {
 										action.onAction();
 										close();

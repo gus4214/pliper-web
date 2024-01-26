@@ -1,5 +1,4 @@
 import React from 'react';
-import tw, { css } from 'twin.macro';
 
 interface PromptCategoryChipProps {
 	text: string;

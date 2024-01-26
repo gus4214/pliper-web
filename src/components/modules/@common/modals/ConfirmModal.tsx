@@ -1,5 +1,4 @@
 import Loading from '@/src/components/atoms/loading/Loading';
-import { googleAuthApi, naverAuthApi } from '@/src/fetchers/auth';
 import { ConfirmModalAtomProps, ModalConfirmOptions } from '@/src/stores/modal';
 import { closeConfirmModalAtom } from '@/src/stores/modal/actions/confirm';
 import { useSetAtom } from 'jotai';

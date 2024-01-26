@@ -1,4 +1,4 @@
-import tw, { css } from 'twin.macro';
+import tw from 'twin.macro';
 
 interface SelectChipProps {
 	label: string;

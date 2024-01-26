@@ -1,4 +1,3 @@
-import { Button } from 'react-daisyui';
 import { AuthenticationUser } from '@/src/stores/auth';
 import Avatar from 'avataaars';
 import { generateRandomAvatarOptions } from '@/src/utils/avatar';

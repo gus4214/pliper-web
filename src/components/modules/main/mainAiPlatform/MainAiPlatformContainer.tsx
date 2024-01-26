@@ -1,6 +1,5 @@
-import MainAiPlatformList from '@/src/components/modules/main/mainAiPlatform/MainAiPlatformList';
-import { Card } from 'react-daisyui';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
+import MainAiPlatformList from '@/src/components/modules/main/mainAiPlatform/MainAiPlatformList';
 
 const MainAiPlatformContainer = () => {
 	return (

@@ -1,6 +1,3 @@
-import React from 'react';
-import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
-
 export const NotificationSkeleton = () => {
 	return (
 		<>

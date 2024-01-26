@@ -1,5 +1,3 @@
-import React from 'react';
-
 const RegisterHeader = () => {
 	return (
 		<div className='flex flex-col gap-4 justify-start pb-6'>

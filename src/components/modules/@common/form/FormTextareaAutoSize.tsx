@@ -1,7 +1,6 @@
 import { UseControllerProps } from '@/src/types/formTypes';
-import { Textarea, TextareaProps } from 'react-daisyui';
-import { FieldPath, FieldValues, useController } from 'react-hook-form';
 import { ChangeEvent } from 'react';
+import { FieldPath, FieldValues, useController } from 'react-hook-form';
 import TextareaAutosize, { TextareaAutosizeProps } from 'react-textarea-autosize';
 
 interface FormTextFieldProps<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>

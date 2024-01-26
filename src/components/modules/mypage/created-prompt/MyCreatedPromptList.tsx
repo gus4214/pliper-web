@@ -2,15 +2,15 @@ import Loading from '@/src/components/atoms/loading/Loading';
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import SearchTitleEmptyText from '@/src/components/atoms/text/SearchTitleEmptyText';
 import PromptItemWithActions from '@/src/components/modules/@common/listItems/PromptItemWithActions';
-import { deleteMyPromptApi, updateMyPromptApi, useInfiniteGetMyCreatedPrompts } from '@/src/fetchers/prompt/my-prompt';
+import { useInfiniteGetMyCreatedPrompts } from '@/src/fetchers/prompt/my-prompt';
 import { useConfirmModal } from '@/src/hooks/modal';
 import { usePromptHandler, usePromptInteractions } from '@/src/hooks/promptController';
 import { searchFilterAtom } from '@/src/stores/searchForm';
+import { timeAgo } from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { timeAgo } from '@/src/utils/dateUtils';
 
 const MyCreatedPromptList = () => {
 	const router = useRouter();

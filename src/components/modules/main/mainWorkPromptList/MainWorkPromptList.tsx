@@ -1,11 +1,11 @@
+import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import PromptCard from '@/src/components/modules/main/card/PromptCard';
-import { useGetCurationMain, useGetCurationWeek } from '@/src/fetchers/main';
+import { promptKoTextOfPersona } from '@/src/configs/prompt';
+import { useGetCurationWeek } from '@/src/fetchers/main';
 import { workCategoryAtom } from '@/src/stores/main';
 import { addHttpsPrefix, formatNumber } from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
-import { promptKoTextOfPersona } from '@/src/configs/prompt';
-import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 
 const MainWorkPromptList = () => {
 	const router = useRouter();

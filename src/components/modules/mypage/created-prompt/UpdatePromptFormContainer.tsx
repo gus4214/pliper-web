@@ -4,8 +4,6 @@ import usePromptRegisterForm from '@/src/hooks/promptRegisterForm';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Button } from 'react-daisyui';
-import ToastPlipIcon from '@/src/components/atoms/icons/ToastPlipIcon';
-import AppToast from '@/src/components/atoms/toast/AppToast';
 
 interface UpdatePromptFormContainerProps {
 	data: Prompt;

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface PercentsBarProps {
 	percents: number;
@@ -29,27 +29,3 @@ const PercentsBar: FC<PercentsBarProps> = ({ percents }) => {
 };
 
 export default PercentsBar;
-
-// const PercentsBar: FC<PercentsBarProps> = ({ percents }) => {
-// 	const colors = ['bg-[#BEEFEF]', 'bg-[#84E4E4]', 'bg-[#58DBDB]', 'bg-[#34D3D3]', 'bg-teal-200'];
-
-// 	const calculateFilledDivs = (percents: number) => {
-// 		return Math.floor(percents / 20);
-// 	};
-
-// 	const filledDivs = calculateFilledDivs(percents);
-
-// 	return (
-// 		<div className='flex gap-0.5'>
-// 			{colors.map((color, index) => {
-// 				if (index < filledDivs) {
-// 					return <div key={index} className={`h-2 w-[3px] ${color} rounded`} />;
-// 				} else {
-// 					return <div key={index} className='h-2 w-[3px] bg-neutral-200 rounded' />;
-// 				}
-// 			})}
-// 		</div>
-// 	);
-// };
-
-// export default PercentsBar;

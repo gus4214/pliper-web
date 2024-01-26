@@ -1,5 +1,4 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
-import React from 'react';
 import { Card } from 'react-daisyui';
 
 const MainWorkPromptListSkeleton = () => {

@@ -1,4 +1,3 @@
-import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
 import UpdatePromptFormContainer from '@/src/components/modules/mypage/created-prompt/UpdatePromptFormContainer';
 import { Prompt } from '@/src/fetchers/prompt/types';
 
