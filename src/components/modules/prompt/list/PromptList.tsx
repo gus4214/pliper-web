@@ -4,7 +4,7 @@ import { useInfiniteGetPrompts } from '@/src/fetchers/prompt';
 import { useAuthContext } from '@/src/hooks/context';
 import { usePromptInteractions } from '@/src/hooks/promptController';
 import { searchFilterAtom } from '@/src/stores/searchForm';
-import {formatDateToKorean, timeAgo} from '@/src/utils/dateUtils';
+import { timeAgo } from '@/src/utils/dateUtils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
@@ -64,48 +64,6 @@ const PromptList: FC = () => {
 
 	return (
 		<>
-			{/* {data!.prompts.length <= 0 ? (
-				renderEmptyState()
-			) : (
-				<motion.div
-					variants={{
-						hidden: { opacity: 0 },
-						show: {
-							opacity: 1,
-						},
-					}}
-					initial='hidden'
-					animate='show'
-				>
-				<div className='flex flex-col gap-4'>
-					{data?.prompts?.map((prompt) => {
-						return (
-							<motion.div
-								key={prompt.promptId}
-								variants={{
-									hidden: { opacity: 0 },
-									show: { opacity: 1 },
-								}}
-							>
-							<PromptItemWithInteraction
-								key={prompt.promptId}
-								personaType={prompt.personaType}
-								category1Text={prompt.category1Text}
-								userNickname={prompt.userNickname}
-								updateDateTime={formatDateToKorean(prompt.updateDateTime)}
-								title={prompt.title}
-								likeCount={prompt.likeCount}
-								viewCount={prompt.viewCount}
-								percents={prompt.percents}
-								onClick={() => router.push(`/prompt/${prompt.promptId}`)}
-								interaction={mapOfPromptInteraction?.get(prompt.promptId)}
-							/>
-							</motion.div>
-						);
-					})}
-				</div>
-			</motion.div>
-			)} */}
 			<div className='flex flex-col gap-4'>
 				{data?.pages.map((page, index) => (
 					<React.Fragment key={index}>
