@@ -1,5 +1,5 @@
-# 팀 소개
-<img width="829" alt="스크린샷 2024-05-08 오전 4 36 06" src="https://github.com/sinbunsetak/pliper-web/assets/98795239/9e615096-409f-4e16-a175-061bce23ed9d">
+# <img alt='로고' src="https://github.com/gus4214/pliper-web/assets/98795239/6c112967-805d-4fca-af55-1c6913ddbbbe" width="30"> 플리퍼 - 프롬프트 템플릿 플랫폼
+<img width="1132" alt="스크린샷 2024-05-14 오후 12 35 23" src="https://github.com/gus4214/pliper-web/assets/98795239/6b633890-0f90-4994-bfa2-29e010c34d6c">
 
 <br>
 
