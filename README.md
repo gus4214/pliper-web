@@ -40,7 +40,7 @@
 - 인프라 : AWS
 - 미들웨어 : Redis(Cache, 검색), Mariadb(서비스 데이터)
 - 백엔드 : Golang, fiber f/w
-- 프론트엔드 : Next.js^13.4.9, TypeScript^5.1.6, TailwindCSS^3.3.3, React-Query^3.39.3, Jotai^2.3.1, 
+- 프론트엔드 : Next.js, TypeScript, TailwindCSS, React-Query, Jotai
 - 배포 : Github CI
 - 디자인 : Figma
 
