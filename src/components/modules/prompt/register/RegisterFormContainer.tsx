@@ -10,16 +10,16 @@ const RegisterFormContainer = () => {
 			<RegisterForm
 				formHandler={formHandler}
 				action={
-					<div className='flex justify-between items-center gap-3'>
+					<div className='flex items-center justify-between gap-3'>
 						<Button
-							className='bg-white rounded border border-neutral-200 text-neutral-400 text-lg font-medium'
+							className='text-lg font-medium bg-white border rounded border-neutral-200 text-neutral-400'
 							onClick={handleSaveTemporarily}
 						>
 							뒤로가기
 						</Button>
 						<Button
 							color='accent'
-							className='h-12 rounded text-white text-lg font-medium'
+							className='h-12 text-lg font-medium text-white rounded'
 							onClick={onRegisterSubmit}
 							disabled={!formHandler.formState.isValid}
 						>

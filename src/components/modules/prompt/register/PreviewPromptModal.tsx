@@ -37,11 +37,11 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 				open={open}
 				className='max-w-[976px] p-6 bg-white rounded-lg border border-neutral-200 flex-col justify-start items-center gap-4 flex overflow-y-auto overflow-x-hidden'
 			>
-				<Modal.Header className='flex w-full justify-between mb-0'>
-					<span className='text-black text-lg font-bold'>미리보기</span>
+				<Modal.Header className='flex justify-between w-full mb-0'>
+					<span className='text-lg font-bold text-black'>미리보기</span>
 					<X className='cursor-pointer' onClick={close} />
 				</Modal.Header>
-				<Modal.Body className='rounded-lg border border-neutral-200 px-4 pb-4'>
+				<Modal.Body className='px-4 pb-4 border rounded-lg border-neutral-200'>
 					<PromptDetailInfoHeader
 						personaType={personaType}
 						category1Text={category1Text}
@@ -62,7 +62,7 @@ const PreviewPromptModal: React.FC<PreviewPromptModalProps> = ({ formHandler }) 
 					</Button>
 					<Button
 						color='accent'
-						className='h-12 rounded text-white text-lg font-medium'
+						className='h-12 text-lg font-medium text-white rounded'
 						onClick={(e) => {
 							e.preventDefault();
 							createPrompt();

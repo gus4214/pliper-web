@@ -6,7 +6,7 @@ const GoBackToMyPageButton = () => {
 
 	return (
 		<div
-			className='group w-[1160px] h-10 px-4 py-2 bg-neutral-50 hover:bg-neutral-100 rounded-lg gap-2 flex items-center cursor-pointer'
+			className='group w-[1160px] h-10 px-4 py-2 bg-neutral-50 hover:bg-neutral-100 rounded-lg gap-2 flex cursor-pointer items-center'
 			onClick={() => router.push('/mypage/profile')}
 		>
 			<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
@@ -18,7 +18,7 @@ const GoBackToMyPageButton = () => {
 					className='group-hover:fill-[#737373] fill-[#A3A3A3]'
 				/>
 			</svg>
-			<span className='text-neutral-400 group-hover:text-neutral-500 text-sm font-medium'>마이페이지로 돌아가기</span>
+			<span className='text-sm font-medium text-neutral-400 group-hover:text-neutral-500'>마이페이지로 돌아가기</span>
 		</div>
 	);
 };
