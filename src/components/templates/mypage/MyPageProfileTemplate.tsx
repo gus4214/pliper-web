@@ -1,7 +1,7 @@
-import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
-import MyPageUserSummaryLoader from '@/src/components/modules/mypage/MyPageUserSummaryLoader';
-import InteractionSection from '@/src/components/modules/mypage/profile/interactionSection/InteractionSection';
-import ProfileSection from '@/src/components/modules/mypage/profile/profileSection/ProfileSection';
+import FloatButtonGroup from '@/src/components/molecules/floatButton/FloatButtonGroup';
+import MyPageUserSummaryLoader from '@/src/components/organisms/mypage/MyPageUserSummaryLoader';
+import InteractionSection from '@/src/components/organisms/mypage/profile/interactionSection/InteractionSection';
+import ProfileSection from '@/src/components/organisms/mypage/profile/profileSection/ProfileSection';
 
 const MyPageProfileTemplate = () => {
 	return (

@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from 'react-query';
 import React, { useEffect } from 'react';
-import { Seo } from '@/src/components/modules/@common/seo/Seo';
+import { Seo } from '@/src/components/molecules/seo/Seo';
 
 interface MyCreatedPromptDetailPageProps {
 	token?: string;

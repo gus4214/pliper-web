@@ -3,7 +3,7 @@ import { accessTokenKey } from '@/src/configs/auth';
 import { prefetchGetPrompt, useGetPrompt } from '@/src/fetchers/prompt';
 import { GetServerSideProps, NextPage } from 'next';
 import { QueryClient, dehydrate } from 'react-query';
-import { Seo } from '@/src/components/modules/@common/seo/Seo';
+import { Seo } from '@/src/components/molecules/seo/Seo';
 import { useRouter } from 'next/router';
 
 interface PromptDetailPageProps {

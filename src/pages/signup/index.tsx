@@ -2,7 +2,7 @@ import SignupTemplate from '@/src/components/templates/SignupTemplate';
 import BlankLayout from '@/src/layouts/BlankLayout';
 import { NextPage } from 'next';
 import React, { ReactNode } from 'react';
-import {Seo} from "@/src/components/modules/@common/seo/Seo";
+import { Seo } from '@/src/components/molecules/seo/Seo';
 
 const SignupPage: NextPage = () => {
 	return (

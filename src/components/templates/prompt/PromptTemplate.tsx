@@ -1,9 +1,9 @@
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
-import PromptListContainer from '@/src/components/modules/prompt/list/PromptListContainer';
-import PromptSelectChips from '@/src/components/modules/prompt/list/PromptSelectChips';
-import PromptMenuList from '@/src/components/modules/prompt/menu/PromptMenuList';
-import PromptMenuListContainer from '@/src/components/modules/prompt/menu/PromptMenuListContainer';
+import FloatButtonGroup from '@/src/components/molecules/floatButton/FloatButtonGroup';
+import PromptListContainer from '@/src/components/organisms/prompt/list/PromptListContainer';
+import PromptSelectChips from '@/src/components/organisms/prompt/list/PromptSelectChips';
+import PromptMenuList from '@/src/components/organisms/prompt/menu/PromptMenuList';
+import PromptMenuListContainer from '@/src/components/organisms/prompt/menu/PromptMenuListContainer';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 
 const PromptTemplate = () => {

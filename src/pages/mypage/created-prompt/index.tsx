@@ -1,6 +1,6 @@
 import MyPageCreatedPromptTemplate from '@/src/components/templates/mypage/MyPageCreatedPromptTemplate';
-import {Seo} from "@/src/components/modules/@common/seo/Seo";
-import React from "react";
+import { Seo } from '@/src/components/molecules/seo/Seo';
+import React from 'react';
 
 const MyCreatedPromptPage = () => {
 	return (

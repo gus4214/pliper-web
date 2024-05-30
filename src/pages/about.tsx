@@ -9,7 +9,7 @@ import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
 import FadeIn from 'react-fade-in';
 import React, { useEffect, useRef, useState } from 'react';
-import { Seo } from '@/src/components/modules/@common/seo/Seo';
+import { Seo } from '@/src/components/molecules/seo/Seo';
 
 interface AboutCardProps {
 	src: string;

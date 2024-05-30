@@ -1,9 +1,9 @@
 import Loading from '@/src/components/atoms/loading/Loading';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
-import PromptDetailInfoHeader from '@/src/components/modules/prompt/detail/PromptDetailInfoHeader';
-import PromptInteractionButtonGroup from '@/src/components/modules/prompt/detail/PromptInteractionButtonGroup';
-import PromptTemplateSection from '@/src/components/modules/prompt/detail/PromptTemplateSection';
+import FloatButtonGroup from '@/src/components/molecules/floatButton/FloatButtonGroup';
+import PromptDetailInfoHeader from '@/src/components/organisms/prompt/detail/PromptDetailInfoHeader';
+import PromptInteractionButtonGroup from '@/src/components/organisms/prompt/detail/PromptInteractionButtonGroup';
+import PromptTemplateSection from '@/src/components/organisms/prompt/detail/PromptTemplateSection';
 import { Prompt } from '@/src/fetchers/prompt/types';
 import { useAuthContext } from '@/src/hooks/context';
 import { usePromptTemplateCreate } from '@/src/hooks/promptDetailTemplate';
@@ -51,7 +51,7 @@ const PromptDetailTemplate: React.FC<PromptDetailTemplateProps> = ({ prompt }) =
 				</AsyncComponentBoundary>
 				<div className='mt-8' />
 				<div className={`w-full flex`} ref={ref} />
-				<div className={`flex px-6  w-[1176px] rounded bottom-6 z-10   ${!inView ? `fixed` : ''}`} >
+				<div className={`flex px-6  w-[1176px] rounded bottom-6 z-10   ${!inView ? `fixed` : ''}`}>
 					<PromptInteractionButtonGroup
 						className={`${!inView ? `border bg-white bg-opacity-100 border-neutral-400` : ''}`}
 						onCreateClick={() => {

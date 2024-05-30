@@ -1,8 +1,8 @@
 import ListTitleHeaderBox from '@/src/components/atoms/box/mypage/ListTitleHeaderBox';
 import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageButton';
-import FloatButtonGroup from '@/src/components/modules/@common/floatButton/FloatButtonGroup';
-import MyPlipListContainer from '@/src/components/modules/mypage/plip/MyPlipListContainer';
-import PromptMenuListContainer from '@/src/components/modules/prompt/menu/PromptMenuListContainer';
+import FloatButtonGroup from '@/src/components/molecules/floatButton/FloatButtonGroup';
+import MyPlipListContainer from '@/src/components/organisms/mypage/plip/MyPlipListContainer';
+import PromptMenuListContainer from '@/src/components/organisms/prompt/menu/PromptMenuListContainer';
 import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { useSetAtom } from 'jotai';

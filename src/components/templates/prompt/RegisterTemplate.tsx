@@ -1,4 +1,4 @@
-import RegisterFormContainer from '@/src/components/modules/prompt/register/RegisterFormContainer';
+import RegisterFormContainer from '@/src/components/organisms/prompt/register/RegisterFormContainer';
 
 const RegisterTemplate = () => {
 	return (

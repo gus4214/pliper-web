@@ -1,4 +1,4 @@
-import UpdatePromptFormContainer from '@/src/components/modules/mypage/created-prompt/UpdatePromptFormContainer';
+import UpdatePromptFormContainer from '@/src/components/organisms/mypage/created-prompt/UpdatePromptFormContainer';
 import { Prompt } from '@/src/fetchers/prompt/types';
 
 interface MyPageCreatedPromptDetailTemplateProps {

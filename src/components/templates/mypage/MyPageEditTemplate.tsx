@@ -1,5 +1,5 @@
 import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageButton';
-import ProfileEditForm from '@/src/components/modules/mypage/edit/ProfileEditForm';
+import ProfileEditForm from '@/src/components/organisms/mypage/edit/ProfileEditForm';
 
 const MyPageEditTemplate = () => {
 	return (

@@ -1,7 +1,7 @@
 import RegisterTemplate from '@/src/components/templates/prompt/RegisterTemplate';
 import { NextPage } from 'next';
 import React from 'react';
-import {Seo} from "@/src/components/modules/@common/seo/Seo";
+import { Seo } from '@/src/components/molecules/seo/Seo';
 
 const RegisterPage: NextPage = () => {
 	return (

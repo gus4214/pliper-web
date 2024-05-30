@@ -1,5 +1,5 @@
 import ScrollToTopButton from '@/src/components/atoms/buttons/ScrollToTopButton';
-import ModalProvider from '@/src/components/modules/@common/modals/ModalProvider';
+import ModalProvider from '@/src/components/molecules/modals/ModalProvider';
 import Footer from '@/src/layouts/components/footer/Footer';
 import MainHeader from '@/src/layouts/components/header/MainHeader';
 import { pretendard } from '@/src/styles/font';

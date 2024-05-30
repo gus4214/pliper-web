@@ -1,4 +1,4 @@
-import SignupForm from '@/src/components/modules/signup/SignupForm';
+import SignupForm from '@/src/components/organisms/signup/SignupForm';
 
 const SignupTemplate = () => {
 	return (

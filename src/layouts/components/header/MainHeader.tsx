@@ -1,4 +1,4 @@
-import NotificationDropdown from '@/src/components/modules/notification/NotificationDropdown';
+import NotificationDropdown from '@/src/components/organisms/notification/NotificationDropdown';
 import SearchDropdown from '@/src/layouts/components/header/dropdowns/SearchDropdown';
 import UserDropdown from '@/src/layouts/components/header/dropdowns/UserDropdown';
 import { Button, Navbar } from 'react-daisyui';
@@ -64,7 +64,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ position }) => {
 						프롬프트
 					</Button>
 				</div>
-				<div className='flex gap-4' role="listbox" id="top-dropdown" aria-label="top-dropdown">
+				<div className='flex gap-4' role='listbox' id='top-dropdown' aria-label='top-dropdown'>
 					<SearchDropdown onClick={handleSearchClick} />
 					<NotificationDropdown />
 					<UserDropdown loggedIn={!!user} handleLogout={logout} />

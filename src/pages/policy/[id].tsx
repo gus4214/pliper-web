@@ -8,7 +8,7 @@ import { Modal } from 'react-notion-x/build/third-party/modal';
 import Image from 'next/image';
 import { GetStaticProps } from 'next';
 import { ExtendedRecordMap } from 'notion-types';
-import { Seo } from '@/src/components/modules/@common/seo/Seo';
+import { Seo } from '@/src/components/molecules/seo/Seo';
 
 const notion = new NotionAPI();
 
@@ -18,8 +18,8 @@ interface PolicyProps {
 
 const titleOfNotionPage: { [key: string]: string } = {
 	'542179ad-6c36-4d82-b993-9ddf871d49f9': '개인정보처리방침',
-	'a573ca9d45e4426ebfbb6ef4ef128953': '서비스이용약관',
-	'ec7a3dc929c74fd9a3eaf2f1db37ae02': '사용가이드',
+	a573ca9d45e4426ebfbb6ef4ef128953: '서비스이용약관',
+	ec7a3dc929c74fd9a3eaf2f1db37ae02: '사용가이드',
 };
 
 const Policy: FC<PolicyProps> = ({ recordMap }) => {
