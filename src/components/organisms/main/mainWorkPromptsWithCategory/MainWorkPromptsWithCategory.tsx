@@ -1,21 +1,19 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import MainWorkPromptList from '@/src/components/organisms/main/mainWorkPromptList/MainWorkPromptList';
-import MainWorkPromptListSkeleton from '@/src/components/organisms/main/mainWorkPromptList/MainWorkPromptListSkeleton';
-import WorkPromptCategoryChips from '@/src/components/organisms/main/mainWorkPromptList/WorkPromptCategoryChips';
+import MainWorkPromptList from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPrompts';
+import MainWorkPromptsSkeleton from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPromptsSkeleton';
+import WorkPromptCategoryChips from '@/src/components/organisms/main/mainWorkPromptsWithCategory/WorkPromptCategoryChips';
 
-interface MainWorkPromptContainerProps {}
-
-const MainWorkPromptContainer: React.FC<MainWorkPromptContainerProps> = () => {
+const MainWorkPromptsWithCategory = () => {
 	return (
 		<section className='w-full bg-neutral-50 flex flex-col py-[45px] items-center justify-center relative'>
 			<h1 className='text-center text-[28px] font-bold text-black'>업무에서 활용 가능한 프롬프트 엄선작</h1>
 			<div className='w-[1176px] mt-8'>
-				<div className='w-full flex flex-col items-center gap-8'>
+				<div className='flex flex-col items-center w-full gap-8'>
 					<AsyncComponentBoundary pendingFallback={<Skeleton height='h-8' />}>
 						<WorkPromptCategoryChips />
 					</AsyncComponentBoundary>
-					<AsyncComponentBoundary pendingFallback={<MainWorkPromptListSkeleton />}>
+					<AsyncComponentBoundary pendingFallback={<MainWorkPromptsSkeleton />}>
 						<MainWorkPromptList />
 					</AsyncComponentBoundary>
 				</div>
@@ -24,4 +22,4 @@ const MainWorkPromptContainer: React.FC<MainWorkPromptContainerProps> = () => {
 	);
 };
 
-export default MainWorkPromptContainer;
+export default MainWorkPromptsWithCategory;

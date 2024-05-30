@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface MainBookMarkCardProps {
+interface MainBookMarkItemProps {
 	src: string;
 	title: string;
 	user: string;
@@ -9,19 +9,27 @@ interface MainBookMarkCardProps {
 	onClick?: () => void;
 }
 
-const MainBookMarkCard: React.FC<MainBookMarkCardProps> = ({ src, title, user, badge, onClick }) => {
+const MainBookMarkItem: React.FC<MainBookMarkItemProps> = ({ src, title, user, badge, onClick }) => {
 	return (
 		<div className='flex flex-col justify-center gap-[18px]'>
 			<div className='w-[260px] h-40 relative cursor-pointer' onClick={onClick}>
-				<Image  src={src} alt={title} fill className='rounded-tl-lg rounded-tr-[50px] rounded-bl-lg rounded-br-[50px] object-cover' sizes=" (min-width: 786px) 30vw"  quality={75} priority={true}  />
+				<Image
+					src={src}
+					alt={title}
+					fill
+					className='rounded-tl-lg rounded-tr-[50px] rounded-bl-lg rounded-br-[50px] object-cover'
+					sizes=' (min-width: 786px) 30vw'
+					quality={75}
+					priority={true}
+				/>
 				<div className='left-0 top-[-16px] absolute'>{badge}</div>
 			</div>
 			<div className='w-[260px] flex flex-col gap-3'>
-				<span className='text-black text-lg font-semibold truncate'>{title}</span>
+				<span className='text-lg font-semibold text-black truncate'>{title}</span>
 				<span className='opacity-70 text-neutral-400 text-[13px] font-medium truncate'>{user}</span>
 			</div>
 		</div>
 	);
 };
 
-export default MainBookMarkCard;
+export default MainBookMarkItem;

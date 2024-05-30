@@ -1,5 +1,5 @@
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
-import PromptCard from '@/src/components/organisms/main/card/PromptCard';
+import BasicPromptCard from '@/src/components/molecules/cards/basicPromptCard';
 import { promptKoTextOfPersona } from '@/src/configs/prompt';
 import { useGetCurationWeek } from '@/src/fetchers/main';
 import { workCategoryAtom } from '@/src/stores/main';
@@ -7,7 +7,7 @@ import { addHttpsPrefix, formatNumber } from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 
-const MainWorkPromptList = () => {
+const MainWorkPrompts = () => {
 	const router = useRouter();
 	const jobCategory = useAtomValue(workCategoryAtom);
 	const { data } = useGetCurationWeek({ persona: 'JOB', category: jobCategory! }, { enable: !!jobCategory });
@@ -17,7 +17,7 @@ const MainWorkPromptList = () => {
 			{!data?.prompts?.length && <PromptEmptyText />}
 			{data?.prompts?.slice(0, 6).map((prompt) => {
 				return (
-					<PromptCard
+					<BasicPromptCard
 						key={prompt.promptId}
 						src={addHttpsPrefix(prompt.imageUrl) || '/images/sample/6.gif'}
 						user={prompt.userNickname}
@@ -33,4 +33,4 @@ const MainWorkPromptList = () => {
 	);
 };
 
-export default MainWorkPromptList;
+export default MainWorkPrompts;

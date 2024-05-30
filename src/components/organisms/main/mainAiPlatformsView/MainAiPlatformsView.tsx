@@ -1,7 +1,7 @@
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import MainAiPlatformList from '@/src/components/organisms/main/mainAiPlatform/MainAiPlatformList';
+import MainAiPlatforms from '@/src/components/organisms/main/mainAiPlatformsView/MainAiPlatforms';
 
-const MainAiPlatformContainer = () => {
+const MainAiPlatformsView = () => {
 	return (
 		<div className='w-full bg-slate-200 bg-opacity-50 flex justify-center items-center py-[50px]'>
 			<div className='w-[1200px] px-4 rounded-2xl flex-col justify-start items-start gap-10 flex'>
@@ -10,11 +10,11 @@ const MainAiPlatformContainer = () => {
 					<span className='text-sm font-normal text-neutral-400'>플랫폼을 통해 AI를 활용 해보는건 어떠세요?</span>
 				</div>
 				<AsyncComponentBoundary>
-					<MainAiPlatformList />
+					<MainAiPlatforms />
 				</AsyncComponentBoundary>
 			</div>
 		</div>
 	);
 };
 
-export default MainAiPlatformContainer;
+export default MainAiPlatformsView;

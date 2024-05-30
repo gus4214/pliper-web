@@ -1,18 +1,22 @@
-import MainBookMarkCard from '@/src/components/organisms/main/card/MainBookMarkCard';
-import { MainVisualContainerProps } from '@/src/components/organisms/main/mainVisual/MainVisualContainer';
+import MainBookMarkItem from '@/src/components/organisms/main/mainBookMarksAndHotTopics/mainBookMarks/MainBookMarkItem';
+import { Prompt } from '@/src/fetchers/prompt/types';
 import { addHttpsPrefix, formatNumber } from '@/src/utils/utils';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { FC } from 'react';
 import { Badge } from 'react-daisyui';
 
-const MainBookMarkList: React.FC<Omit<MainVisualContainerProps, 'mainImage'>> = ({ bestClip }) => {
+interface MainBookMarksProps {
+	bestClip: Prompt[];
+}
+
+const MainBookMarks: FC<MainBookMarksProps> = ({ bestClip }) => {
 	const router = useRouter();
 
 	return (
-		<div className='gap-12 flex'>
+		<div className='flex gap-12'>
 			{bestClip.slice(0, 3).map((v, i) => {
 				return (
-					<MainBookMarkCard
+					<MainBookMarkItem
 						key={v.promptId}
 						src={addHttpsPrefix(v.imageUrl) || '/images/work.jpeg'}
 						title={v.title}
@@ -30,4 +34,4 @@ const MainBookMarkList: React.FC<Omit<MainVisualContainerProps, 'mainImage'>> = 
 	);
 };
 
-export default MainBookMarkList;
+export default MainBookMarks;

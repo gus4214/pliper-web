@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 
-interface MainBookMarkListSkeletonProps {
+interface MainBookMarksSkeletonProps {
 	count: number;
 }
 
-const MainBookMarkListSkeleton: FC<MainBookMarkListSkeletonProps> = ({ count }) => {
+const MainBookMarksSkeleton: FC<MainBookMarksSkeletonProps> = ({ count }) => {
 	return (
-		<div className='gap-12 flex'>
-			{new Array(count).fill(0).map((_,i) => (
+		<div className='flex gap-12'>
+			{new Array(count).fill(0).map((_, i) => (
 				<div key={i} className='flex flex-col justify-center gap-[18px]'>
 					<div className='w-[260px] h-40 relative rounded-tl-lg rounded-tr-[50px] rounded-bl-lg rounded-br-[50px] bg-gray-300 animate-pulse' />
 				</div>
@@ -16,4 +16,4 @@ const MainBookMarkListSkeleton: FC<MainBookMarkListSkeletonProps> = ({ count }) 
 	);
 };
 
-export default MainBookMarkListSkeleton;
+export default MainBookMarksSkeleton;

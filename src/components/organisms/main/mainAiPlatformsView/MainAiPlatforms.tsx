@@ -1,7 +1,7 @@
 import { useGetAiTools } from '@/src/fetchers/prompt';
 import { Card } from 'react-daisyui';
 
-const MainAiPlatformList = () => {
+const MainAiPlatforms = () => {
 	const { data } = useGetAiTools({ type: 'LLM' });
 	return (
 		<div className='flex justify-start gap-6 relative max-w-[1200px]'>
@@ -9,8 +9,8 @@ const MainAiPlatformList = () => {
 				return (
 					<Card key={i} imageFull className='w-[376px] h-20 relative flex cursor-pointer' onClick={() => window.open(tool.url, '_blank')}>
 						<Card.Image src={`/images/ai/ai${(i % 3) + 1}.jpeg`} alt='ai-web' className='w-full' />
-						<div className='flex gap-3 items-center z-10 justify-center'>
-							<span className='text-white text-lg font-medium'>{tool.name}</span>
+						<div className='z-10 flex items-center justify-center gap-3'>
+							<span className='text-lg font-medium text-white'>{tool.name}</span>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								fill='none'
@@ -29,4 +29,4 @@ const MainAiPlatformList = () => {
 	);
 };
 
-export default MainAiPlatformList;
+export default MainAiPlatforms;

@@ -4,7 +4,7 @@ import { Card, Badge } from 'react-daisyui';
 import CategoryChip from '@/src/components/atoms/chip/CategoryChip';
 import LikeAndViewLabel from '@/src/components/atoms/label/LikeAndViewLabel';
 
-interface PromptCardProps {
+interface BasicPromptCardProps {
 	src: string;
 	user: string;
 	title: string;
@@ -14,18 +14,25 @@ interface PromptCardProps {
 	onClick?: () => void;
 }
 
-const PromptCard: React.FC<PromptCardProps> = ({ src, user, title, tag, likeCount, viewCount, onClick }) => {
+const BasicPromptCard: React.FC<BasicPromptCardProps> = ({ src, user, title, tag, likeCount, viewCount, onClick }) => {
 	return (
 		<Card className='w-[376px] cursor-pointer hover:shadow-lg transition-all duration-300' onClick={onClick}>
 			<div className='w-full h-[164px] relative'>
-				<Image src={src} alt='Card Image' fill className='absolute z-0 rounded-lg object-cover' sizes=" (min-width: 786px) 30vw"  quality={75}  />
+				<Image
+					src={src}
+					alt='Card Image'
+					fill
+					className='absolute z-0 object-cover rounded-lg'
+					sizes=' (min-width: 786px) 30vw'
+					quality={75}
+				/>
 			</div>
-			<Card.Body className='px-3 py-4 rounded-bl-lg rounded-br-lg flex flex-col gap-4 truncate'>
+			<Card.Body className='flex flex-col gap-4 px-3 py-4 truncate rounded-bl-lg rounded-br-lg'>
 				<div className='flex flex-col gap-2'>
-					<p className='text-neutral-400 text-xs'>{user}</p>
-					<span className='text-black text-base font-medium truncate'>{title}</span>
+					<p className='text-xs text-neutral-400'>{user}</p>
+					<span className='text-base font-medium text-black truncate'>{title}</span>
 				</div>
-				<div className='w-full flex justify-between'>
+				<div className='flex justify-between w-full'>
 					<CategoryChip text={tag} />
 					<LikeAndViewLabel likeCount={likeCount} viewCount={viewCount} />
 				</div>
@@ -34,4 +41,4 @@ const PromptCard: React.FC<PromptCardProps> = ({ src, user, title, tag, likeCoun
 	);
 };
 
-export default PromptCard;
+export default BasicPromptCard;

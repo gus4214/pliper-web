@@ -1,8 +1,8 @@
 import SelectChip from '@/src/components/atoms/chip/SelectChip';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
-import {dailyCategoryAtom, workCategoryAtom} from '@/src/stores/main';
+import { dailyCategoryAtom } from '@/src/stores/main';
 import { useAtom } from 'jotai';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 interface DailyPromptCategoryChipsProps {
 	className?: string;
@@ -13,15 +13,15 @@ const DailyPromptCategoryChips: React.FC<DailyPromptCategoryChipsProps> = () => 
 	const [selectedCategory, setSelectedCategory] = useAtom(dailyCategoryAtom);
 
 	useEffect(() => {
-		setSelectedCategory(data?.dailyCategories?.[0].dept1?.text)
-	}, [isLoading])
+		setSelectedCategory(data?.dailyCategories?.[0].dept1?.text);
+	}, [isLoading]);
 
 	const handleChipClick = (code: string) => {
 		setSelectedCategory(code);
 	};
 
 	return (
-		<div className='gap-2 flex'>
+		<div className='flex gap-2'>
 			{data?.dailyCategories?.map((category) => (
 				<SelectChip
 					key={category.dept1.code}

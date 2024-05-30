@@ -1,5 +1,5 @@
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
-import DailyPromptCard from '@/src/components/organisms/main/card/DailyPromptCard';
+import VerticalPromptCard from '@/src/components/molecules/cards/verticalPromptCard';
 import { promptKoTextOfPersona } from '@/src/configs/prompt';
 import { useGetCurationWeek } from '@/src/fetchers/main';
 import { dailyCategoryAtom } from '@/src/stores/main';
@@ -7,7 +7,7 @@ import { addHttpsPrefix, formatNumber } from '@/src/utils/utils';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 
-const MainDailyPromptList = () => {
+const MainDailyPrompts = () => {
 	const router = useRouter();
 	const dailyCategory = useAtomValue(dailyCategoryAtom);
 	const { data } = useGetCurationWeek({ persona: 'DAILY', category: dailyCategory! }, { enable: !!dailyCategory });
@@ -17,7 +17,7 @@ const MainDailyPromptList = () => {
 			{!data?.prompts?.length && <PromptEmptyText />}
 			{data?.prompts?.slice(0, 4).map((prompt) => {
 				return (
-					<DailyPromptCard
+					<VerticalPromptCard
 						key={prompt.promptId}
 						src={addHttpsPrefix(prompt.imageUrl) || '/images/sample/3.jpeg'}
 						user={prompt.userNickname}
@@ -33,4 +33,4 @@ const MainDailyPromptList = () => {
 	);
 };
 
-export default MainDailyPromptList;
+export default MainDailyPrompts;
