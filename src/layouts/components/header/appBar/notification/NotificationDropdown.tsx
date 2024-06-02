@@ -4,12 +4,12 @@ import { Button, Dropdown, Tabs } from 'react-daisyui';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
 import { useAuthContext } from '@/src/hooks/context';
 import { GetNotificationsRequest, NotificationGroup } from '@/src/fetchers/notification';
-import NotificationSkeleton from '@/src/components/organisms/notification/NotificationSkeleton';
+import NotificationSkeleton from '@/src/layouts/components/header/appBar/notification/NotificationSkeleton';
 import dynamic from 'next/dynamic';
 import { useNotification } from '@/src/hooks/notification';
 import { useRouter } from 'next/router';
 
-const NotificationTabList = dynamic(() => import('@/src/components/organisms/notification/NotificationTabList'), {
+const NotificationTabList = dynamic(() => import('@/src/layouts/components/header/appBar/notification/NotificationTabList'), {
 	ssr: false,
 });
 

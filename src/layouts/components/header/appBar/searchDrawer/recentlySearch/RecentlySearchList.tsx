@@ -1,5 +1,5 @@
 import { deleteAllSearchedByUserApi, deleteSearchedByUserApi, useGetSearchedByUser } from '@/src/fetchers/search';
-import RecentlySearchItem from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchItem';
+import RecentlySearchItem from '@/src/layouts/components/header/appBar/searchDrawer/recentlySearch/RecentlySearchItem';
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';

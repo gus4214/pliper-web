@@ -4,7 +4,7 @@ import PromptListContainer from '@/src/components/organisms/prompt/list/PromptLi
 import PromptSelectChips from '@/src/components/organisms/prompt/list/PromptSelectChips';
 import PromptMenuList from '@/src/components/organisms/prompt/menu/PromptMenuList';
 import PromptMenuListContainer from '@/src/components/organisms/prompt/menu/PromptMenuListContainer';
-import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
+import SearchForm from '@/src/layouts/components/header/appBar/searchDrawer/SearchForm';
 
 const PromptTemplate = () => {
 	return (

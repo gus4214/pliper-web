@@ -1,4 +1,4 @@
-import NotificationItem, { NotificationEmptyItem } from '@/src/components/organisms/notification/NotificationItem';
+import NotificationItem, { NotificationEmptyItem } from '@/src/layouts/components/header/appBar/notification/NotificationItem';
 import React, { FC } from 'react';
 import { GetNotificationsRequest, useInfiniteGetNotifications, NotificationItem as INotificationItem } from '@/src/fetchers/notification';
 import { ChevronRight } from 'heroicons-react';

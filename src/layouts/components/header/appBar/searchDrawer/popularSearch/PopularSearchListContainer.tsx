@@ -1,7 +1,7 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import PopularSearchList from '@/src/layouts/components/header/searchDrawer/popularSearch/PopularSearchList';
-import PopularSearchListSkeleton from '@/src/layouts/components/header/searchDrawer/popularSearch/PopularSearchListSkeleton';
+import PopularSearchList from '@/src/layouts/components/header/appBar/searchDrawer/popularSearch/PopularSearchList';
+import PopularSearchListSkeleton from '@/src/layouts/components/header/appBar/searchDrawer/popularSearch/PopularSearchListSkeleton';
 import React from 'react';
 
 const PopularSearchListContainer = () => {

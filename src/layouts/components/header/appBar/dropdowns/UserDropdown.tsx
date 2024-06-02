@@ -1,3 +1,4 @@
+import { useAuthContext } from '@/src/hooks/context';
 import { useLoginModal } from '@/src/hooks/modal';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -5,17 +6,17 @@ import { Avatar, Button, Divider, Dropdown } from 'react-daisyui';
 
 interface UserDropdownProps {
 	loggedIn?: boolean;
-	handleLogout?: () => void;
+	onLogout?: () => void;
 }
 
-const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) => {
+const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, onLogout }) => {
 	const [open, close] = useLoginModal();
 	const router = useRouter();
 
 	return (
 		<>
 			{loggedIn ? (
-				<Dropdown end role="option">
+				<Dropdown end role='option'>
 					<Button tag='label' tabIndex={0} color='ghost' className='avatar' shape='circle' size='sm'>
 						<Avatar shape='circle' size={'md'}>
 							<div className='w-6 h-6 bg-gradient-to-b from-blue-400 to-emerald-200 rounded-full'></div>
@@ -32,13 +33,13 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, handleLogout }) =
 							프롬프트 작성
 						</Dropdown.Item>
 						<Divider className='m-0' />
-						<Dropdown.Item className='p-3 justify-center' onClick={handleLogout}>
+						<Dropdown.Item className='p-3 justify-center' onClick={onLogout}>
 							로그아웃
 						</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
 			) : (
-				<Button tag='label' color='ghost' shape='circle' size='sm' onClick={open} role="option">
+				<Button tag='label' color='ghost' shape='circle' size='sm' onClick={open} role='option'>
 					<Avatar shape='circle' size={'md'}>
 						<div className='w-6 h-6 bg-gradient-to-b from-neutral-400 to-neutral-100 rounded-full'></div>
 					</Avatar>

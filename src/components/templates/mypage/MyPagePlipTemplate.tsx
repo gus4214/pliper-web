@@ -3,7 +3,7 @@ import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageB
 import FloatButtonGroup from '@/src/components/molecules/floatButton/FloatButtonGroup';
 import MyPlipListContainer from '@/src/components/organisms/mypage/plip/MyPlipListContainer';
 import PromptMenuListContainer from '@/src/components/organisms/prompt/menu/PromptMenuListContainer';
-import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
+import SearchForm from '@/src/layouts/components/header/appBar/searchDrawer/SearchForm';
 import { searchInputAtom } from '@/src/stores/searchForm';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';

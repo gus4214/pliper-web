@@ -3,7 +3,7 @@ import GoBackToMyPageButton from '@/src/components/atoms/buttons/GoBackToMyPageB
 import FloatButtonGroup from '@/src/components/molecules/floatButton/FloatButtonGroup';
 import MyCreatedPromptListContainer from '@/src/components/organisms/mypage/created-prompt/MyCreatedPromptListContainer';
 import PromptMenuListContainer from '@/src/components/organisms/prompt/menu/PromptMenuListContainer';
-import SearchForm from '@/src/layouts/components/header/searchDrawer/SearchForm';
+import SearchForm from '@/src/layouts/components/header/appBar/searchDrawer/SearchForm';
 
 const MyPageCreatedPromptTemplate = () => {
 	return (

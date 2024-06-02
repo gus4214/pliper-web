@@ -1,7 +1,7 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import RecentlySearchList from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchList';
-import RecentlySearchListSkeleton from '@/src/layouts/components/header/searchDrawer/recentlySearch/RecentlySearchListSkeleton';
+import RecentlySearchList from '@/src/layouts/components/header/appBar/searchDrawer/recentlySearch/RecentlySearchList';
+import RecentlySearchListSkeleton from '@/src/layouts/components/header/appBar/searchDrawer/recentlySearch/RecentlySearchListSkeleton';
 
 const RecentlySearchListContainer = () => {
 	return (
