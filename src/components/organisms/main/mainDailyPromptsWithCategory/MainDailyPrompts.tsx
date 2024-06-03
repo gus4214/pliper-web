@@ -8,8 +8,9 @@ import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 
 const MainDailyPrompts = () => {
-	const router = useRouter();
 	const dailyCategory = useAtomValue(dailyCategoryAtom);
+
+	const router = useRouter();
 	const { data } = useGetCurationWeek({ persona: 'DAILY', category: dailyCategory! }, { enable: !!dailyCategory });
 
 	return (

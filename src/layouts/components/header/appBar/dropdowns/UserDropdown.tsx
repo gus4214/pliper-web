@@ -1,7 +1,7 @@
-import { useAuthContext } from '@/src/hooks/context';
 import { useLoginModal } from '@/src/hooks/modal';
+import { appUserNavigation } from '@/src/navigation';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Avatar, Button, Divider, Dropdown } from 'react-daisyui';
 
 interface UserDropdownProps {
@@ -10,8 +10,14 @@ interface UserDropdownProps {
 }
 
 const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, onLogout }) => {
-	const [open, close] = useLoginModal();
+	const [open] = useLoginModal();
 	const router = useRouter();
+
+	const navigationItems = appUserNavigation();
+
+	const handleRoute = (path: string) => {
+		router.push(path);
+	};
 
 	return (
 		<>
@@ -19,21 +25,17 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, onLogout }) => {
 				<Dropdown end role='option'>
 					<Button tag='label' tabIndex={0} color='ghost' className='avatar' shape='circle' size='sm'>
 						<Avatar shape='circle' size={'md'}>
-							<div className='w-6 h-6 bg-gradient-to-b from-blue-400 to-emerald-200 rounded-full'></div>
+							<div className='w-6 h-6 rounded-full bg-gradient-to-b from-blue-400 to-emerald-200'></div>
 						</Avatar>
 					</Button>
 					<Dropdown.Menu className='w-[130px] rounded-lg z-10'>
-						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/mypage/profile')}>
-							개인 스페이스
-						</Dropdown.Item>
-						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/mypage/plip')}>
-							마이 플립
-						</Dropdown.Item>
-						<Dropdown.Item className='p-3 justify-center' onClick={() => router.push('/prompt/register')}>
-							프롬프트 작성
-						</Dropdown.Item>
+						{navigationItems.map((v, i) => (
+							<Dropdown.Item key={i} className='justify-center p-3' onClick={() => handleRoute(v.path)}>
+								{v.title}
+							</Dropdown.Item>
+						))}
 						<Divider className='m-0' />
-						<Dropdown.Item className='p-3 justify-center' onClick={onLogout}>
+						<Dropdown.Item className='justify-center p-3' onClick={onLogout}>
 							로그아웃
 						</Dropdown.Item>
 					</Dropdown.Menu>
@@ -41,7 +43,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, onLogout }) => {
 			) : (
 				<Button tag='label' color='ghost' shape='circle' size='sm' onClick={open} role='option'>
 					<Avatar shape='circle' size={'md'}>
-						<div className='w-6 h-6 bg-gradient-to-b from-neutral-400 to-neutral-100 rounded-full'></div>
+						<div className='w-6 h-6 rounded-full bg-gradient-to-b from-neutral-400 to-neutral-100'></div>
 					</Avatar>
 				</Button>
 			)}

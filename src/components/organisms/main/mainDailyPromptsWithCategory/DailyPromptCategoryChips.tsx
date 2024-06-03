@@ -9,8 +9,9 @@ interface DailyPromptCategoryChipsProps {
 }
 
 const DailyPromptCategoryChips: React.FC<DailyPromptCategoryChipsProps> = () => {
-	const { data, isLoading } = useGetPromptCategory();
 	const [selectedCategory, setSelectedCategory] = useAtom(dailyCategoryAtom);
+
+	const { data, isLoading } = useGetPromptCategory();
 
 	useEffect(() => {
 		setSelectedCategory(data?.dailyCategories?.[0].dept1?.text);

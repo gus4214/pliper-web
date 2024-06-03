@@ -1,6 +1,6 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import MainWorkPromptList from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPrompts';
+import MainWorkPrompts from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPrompts';
 import MainWorkPromptsSkeleton from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPromptsSkeleton';
 import WorkPromptCategoryChips from '@/src/components/organisms/main/mainWorkPromptsWithCategory/WorkPromptCategoryChips';
 
@@ -14,7 +14,7 @@ const MainWorkPromptsWithCategory = () => {
 						<WorkPromptCategoryChips />
 					</AsyncComponentBoundary>
 					<AsyncComponentBoundary pendingFallback={<MainWorkPromptsSkeleton />}>
-						<MainWorkPromptList />
+						<MainWorkPrompts />
 					</AsyncComponentBoundary>
 				</div>
 			</div>

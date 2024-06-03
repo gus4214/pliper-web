@@ -8,8 +8,9 @@ import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 
 const MainWorkPrompts = () => {
-	const router = useRouter();
 	const jobCategory = useAtomValue(workCategoryAtom);
+
+	const router = useRouter();
 	const { data } = useGetCurationWeek({ persona: 'JOB', category: jobCategory! }, { enable: !!jobCategory });
 
 	return (

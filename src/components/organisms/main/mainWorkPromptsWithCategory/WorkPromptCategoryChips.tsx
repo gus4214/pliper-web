@@ -2,26 +2,27 @@ import SelectChip from '@/src/components/atoms/chip/SelectChip';
 import { useGetPromptCategory } from '@/src/fetchers/prompt';
 import { workCategoryAtom } from '@/src/stores/main';
 import { useAtom } from 'jotai';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 interface WorkPromptCategoryChipsProps {
 	className?: string;
 }
 
 const WorkPromptCategoryChips: React.FC<WorkPromptCategoryChipsProps> = () => {
-	const { data, isLoading } = useGetPromptCategory();
 	const [selectedCategory, setSelectedCategory] = useAtom(workCategoryAtom);
 
+	const { data, isLoading } = useGetPromptCategory();
+
 	useEffect(() => {
-		setSelectedCategory(data?.jobCategories?.[0].dept1?.text)
-	}, [isLoading])
+		setSelectedCategory(data?.jobCategories?.[0].dept1?.text);
+	}, [isLoading]);
 
 	const handleChipClick = (code: string) => {
 		setSelectedCategory(code);
 	};
 
 	return (
-		<div className='gap-2 flex'>
+		<div className='flex gap-2'>
 			{data?.jobCategories?.map((category) => (
 				<SelectChip
 					key={category.dept1.code}
