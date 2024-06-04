@@ -1,22 +1,22 @@
 import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import BasicPromptCard from '@/src/components/molecules/cards/basicPromptCard';
 import { promptKoTextOfPersona } from '@/src/configs/prompt';
-import { useGetCurationWeek } from '@/src/fetchers/main';
-import { workCategoryAtom } from '@/src/stores/main';
+import { Prompt } from '@/src/fetchers/prompt/types';
 import { addHttpsPrefix, formatNumber } from '@/src/utils/utils';
-import { useAtomValue } from 'jotai';
-import { useRouter } from 'next/router';
+import { FC } from 'react';
 
-const MainWorkPrompts = () => {
-	const jobCategory = useAtomValue(workCategoryAtom);
+export type MainWorkPrompt = Pick<Prompt, 'promptId' | 'imageUrl' | 'userNickname' | 'title' | 'personaType' | 'likeCount' | 'viewCount'>;
 
-	const router = useRouter();
-	const { data } = useGetCurationWeek({ persona: 'JOB', category: jobCategory! }, { enable: !!jobCategory });
+interface MainWorkPromptsProps {
+	prompts: MainWorkPrompt[];
+	onClick: (promptId: number) => void;
+}
 
+const MainWorkPrompts: FC<MainWorkPromptsProps> = ({ prompts, onClick }) => {
 	return (
 		<div className='w-full gap-x-6 gap-y-10 flex flex-wrap min-h-[286px]'>
-			{!data?.prompts?.length && <PromptEmptyText />}
-			{data?.prompts?.slice(0, 6).map((prompt) => {
+			{prompts.length === 0 && <PromptEmptyText />}
+			{prompts?.slice(0, 6).map((prompt) => {
 				return (
 					<BasicPromptCard
 						key={prompt.promptId}
@@ -26,7 +26,7 @@ const MainWorkPrompts = () => {
 						tag={promptKoTextOfPersona[prompt.personaType]}
 						likeCount={formatNumber(prompt.likeCount)}
 						viewCount={formatNumber(prompt.viewCount)}
-						onClick={() => router.push(`/prompt/${prompt.promptId}`)}
+						onClick={() => onClick(prompt.promptId)}
 					/>
 				);
 			})}

@@ -1,8 +1,8 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
 import AsyncComponentBoundary from '@/src/components/atoms/suspense/AsyncComponentBoundary';
-import MainWorkPrompts from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPrompts';
+import MainWorkPromptsContainer from '@/src/components/organisms/main/containers/MainWorkPromptsContainer';
+import WorkPromptCategoryChipsContainer from '@/src/components/organisms/main/containers/WorkPromptCategoryChipsContainer';
 import MainWorkPromptsSkeleton from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPromptsSkeleton';
-import WorkPromptCategoryChips from '@/src/components/organisms/main/mainWorkPromptsWithCategory/WorkPromptCategoryChips';
 
 const MainWorkPromptsWithCategory = () => {
 	return (
@@ -11,10 +11,10 @@ const MainWorkPromptsWithCategory = () => {
 			<div className='w-[1176px] mt-8'>
 				<div className='flex flex-col items-center w-full gap-8'>
 					<AsyncComponentBoundary pendingFallback={<Skeleton height='h-8' />}>
-						<WorkPromptCategoryChips />
+						<WorkPromptCategoryChipsContainer />
 					</AsyncComponentBoundary>
 					<AsyncComponentBoundary pendingFallback={<MainWorkPromptsSkeleton />}>
-						<MainWorkPrompts />
+						<MainWorkPromptsContainer />
 					</AsyncComponentBoundary>
 				</div>
 			</div>
