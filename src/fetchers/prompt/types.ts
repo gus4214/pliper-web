@@ -124,6 +124,9 @@ export interface Prompt {
 	viewCount: number;
 }
 
+// Prompt Type for CurationPromptList
+export type PartialPrompt = Pick<Prompt, 'promptId' | 'imageUrl' | 'userNickname' | 'title' | 'personaType' | 'likeCount' | 'viewCount'>;
+
 export interface Parameter {
 	description: string;
 	title: string;

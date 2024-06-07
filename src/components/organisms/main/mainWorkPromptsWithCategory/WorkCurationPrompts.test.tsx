@@ -1,4 +1,5 @@
-import MainWorkPrompts, { MainWorkPrompt } from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPrompts';
+import WorkCurationPrompts from '@/src/components/organisms/main/mainWorkPromptsWithCategory/WorkCurationPrompts';
+import { PartialPrompt } from '@/src/fetchers/prompt/types';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 // with prompts
@@ -13,12 +14,12 @@ const context = describe;
 describe('MainWorkPrompts', () => {
 	const handleClick = jest.fn();
 
-	const renderMainWorkPrompts = (prompts: MainWorkPrompt[]) => {
-		return render(<MainWorkPrompts prompts={prompts} onClick={handleClick} />);
+	const renderMainWorkPrompts = (prompts: PartialPrompt[]) => {
+		return render(<WorkCurationPrompts prompts={prompts} onClick={handleClick} />);
 	};
 
 	context('with prompts', () => {
-		const prompts: MainWorkPrompt[] = [
+		const prompts: PartialPrompt[] = [
 			{
 				promptId: 1,
 				imageUrl: '/images/sample/6.gif',
@@ -57,7 +58,7 @@ describe('MainWorkPrompts', () => {
 
 	context('without prompts', () => {
 		it('renders no prompts message', () => {
-			const prompts: MainWorkPrompt[] = [];
+			const prompts: PartialPrompt[] = [];
 
 			renderMainWorkPrompts(prompts);
 

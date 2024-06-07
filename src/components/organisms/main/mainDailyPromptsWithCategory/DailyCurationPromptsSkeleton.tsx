@@ -1,7 +1,7 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
 import { Avatar, Card } from 'react-daisyui';
 
-const MainDailyPromptsSkeleton = () => {
+const DailyCurationPromptsSkeleton = () => {
 	return (
 		<div className='flex flex-wrap w-full gap-x-6 gap-y-6'>
 			<Card className='w-[576px] p-4 flex flex-row items-center selection:bg-white gap-4 rounded-lg'>
@@ -48,4 +48,4 @@ const MainDailyPromptsSkeleton = () => {
 	);
 };
 
-export default MainDailyPromptsSkeleton;
+export default DailyCurationPromptsSkeleton;

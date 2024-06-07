@@ -4,7 +4,7 @@ import { workCategoryAtom } from '@/src/stores/main';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-const WorkPromptCategoryChipsContainer = () => {
+const WorkPromptCategoriesContainer = () => {
 	const [selectedCategory, setSelectedCategory] = useAtom(workCategoryAtom);
 
 	const { data, isLoading } = useGetPromptCategory();
@@ -20,4 +20,4 @@ const WorkPromptCategoryChipsContainer = () => {
 	return <CategoryDept1Chips categories={data?.jobCategories || []} selectedCategory={selectedCategory} onClick={handleChipClick} />;
 };
 
-export default WorkPromptCategoryChipsContainer;
+export default WorkPromptCategoriesContainer;

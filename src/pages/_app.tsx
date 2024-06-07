@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { PAGE_VIEW } from '@/src/configs/mixpanel';
 import BlankLayout from '@/src/layouts/BlankLayout';
 import { GrantProvider } from '@/src/contexts/grantContext';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 interface MyAppProps extends AppProps {
 	Component: NextPage;
@@ -78,6 +79,7 @@ export default function App(props: MyAppProps) {
 						<GrantProvider pageGrantType={Component.grant}>
 							<ComponentGuard {...props} />
 						</GrantProvider>
+						<ReactQueryDevtools initialIsOpen />
 						<AppToast {...toast} onClose={closeToast} />
 					</AuthProvider>
 				</Hydrate>

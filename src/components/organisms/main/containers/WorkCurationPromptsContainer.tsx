@@ -1,10 +1,10 @@
-import MainWorkPrompts from '@/src/components/organisms/main/mainWorkPromptsWithCategory/MainWorkPrompts';
+import WorkCurationPrompts from '@/src/components/organisms/main/mainWorkPromptsWithCategory/WorkCurationPrompts';
 import { useGetCurationWeek } from '@/src/fetchers/main';
 import { workCategoryAtom } from '@/src/stores/main';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 
-const MainWorkPromptsContainer = () => {
+const WorkCurationPromptsContainer = () => {
 	const jobCategory = useAtomValue(workCategoryAtom);
 
 	const router = useRouter();
@@ -14,7 +14,7 @@ const MainWorkPromptsContainer = () => {
 		router.push(`/prompt/${promptId}`);
 	};
 
-	return <MainWorkPrompts prompts={data?.prompts || []} onClick={handleClick} />;
+	return <WorkCurationPrompts prompts={data?.prompts || []} onClick={handleClick} />;
 };
 
-export default MainWorkPromptsContainer;
+export default WorkCurationPromptsContainer;

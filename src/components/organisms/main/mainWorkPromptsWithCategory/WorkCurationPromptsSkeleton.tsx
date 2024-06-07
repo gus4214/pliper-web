@@ -1,7 +1,7 @@
 import Skeleton from '@/src/components/atoms/skeleton/Skeleton';
 import { Card } from 'react-daisyui';
 
-const MainWorkPromptsSkeleton = () => {
+const WorkCurationPromptsSkeleton = () => {
 	return (
 		<div className='flex flex-wrap w-full gap-x-6 gap-y-10'>
 			<Card className='w-[376px]'>
@@ -86,4 +86,4 @@ const MainWorkPromptsSkeleton = () => {
 	);
 };
 
-export default MainWorkPromptsSkeleton;
+export default WorkCurationPromptsSkeleton;
