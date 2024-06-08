@@ -56,10 +56,7 @@ export interface GetPromptsResult extends IBaasResponse {
 	totalRows: number;
 }
 
-export interface GetPromptCategoryResult extends IBaasResponse {
-	dailyCategories: Category[];
-	jobCategories: Category[];
-}
+export interface GetPromptCategoryResult extends IBaasResponse, PromptCategories {}
 
 export interface GetAiToolsResult extends IBaasResponse {
 	tools: Tool[];
@@ -126,6 +123,11 @@ export interface Prompt {
 
 // Prompt Type for CurationPromptList
 export type PartialPrompt = Pick<Prompt, 'promptId' | 'imageUrl' | 'userNickname' | 'title' | 'personaType' | 'likeCount' | 'viewCount'>;
+
+export interface PromptCategories {
+	dailyCategories: Category[];
+	jobCategories: Category[];
+}
 
 export interface Parameter {
 	description: string;

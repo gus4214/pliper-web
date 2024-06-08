@@ -11,7 +11,7 @@ interface CurationPromptCardsProps {
 
 const CurationPromptCards: FC<CurationPromptCardsProps> = ({ prompts, renderCards, className }) => {
 	return (
-		<div className={twMerge(`flex flex-wrap ${className}`)}>
+		<div className={twMerge(`flex flex-wrap justify-center ${className}`)}>
 			{prompts.length === 0 && <PromptEmptyText />}
 			{prompts?.slice(0, 6).map(renderCards)}
 		</div>

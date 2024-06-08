@@ -5,7 +5,7 @@ import { FC } from 'react';
 interface CategoryDept1ChipsProps {
 	categories: Category[];
 	selectedCategory?: string;
-	onClick: (code: string) => void;
+	onClick: (text: string) => void;
 }
 
 const CategoryDept1Chips: FC<CategoryDept1ChipsProps> = ({ categories, selectedCategory, onClick }) => {
