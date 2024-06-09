@@ -1,4 +1,4 @@
-import WorkCurationPrompts from '@/src/components/organisms/main/curation/work/WorkCurationPrompts';
+import WorkCurationPrompts from '@/src/components/organisms/main/curations/work/WorkCurationPrompts';
 import { PartialPrompt } from '@/src/fetchers/prompt/types';
 import { fireEvent, render, screen } from '@testing-library/react';
 

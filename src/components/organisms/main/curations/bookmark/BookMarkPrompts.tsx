@@ -1,22 +1,20 @@
-import MainBookMarkItem from '@/src/components/organisms/main/mainBookMarksAndHotTopics/mainBookMarks/MainBookMarkItem';
+import BookMarkPromptItem from '@/src/components/organisms/main/curations/bookmark/BookMarkPromptItem';
 import { Prompt } from '@/src/fetchers/prompt/types';
 import { addHttpsPrefix, formatNumber } from '@/src/utils/utils';
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { Badge } from 'react-daisyui';
 
-interface MainBookMarksProps {
-	bestClip: Prompt[];
+interface BookMarkPromptsProps {
+	prompts: Prompt[];
+	onPromptClick: (promptId: number) => void;
 }
 
-const MainBookMarks: FC<MainBookMarksProps> = ({ bestClip }) => {
-	const router = useRouter();
-
+const BookMarkPrompts: FC<BookMarkPromptsProps> = ({ prompts, onPromptClick }) => {
 	return (
-		<div className='flex gap-12'>
-			{bestClip.slice(0, 3).map((v, i) => {
+		<div className='flex flex-wrap justify-center gap-12'>
+			{prompts.slice(0, 3).map((v, i) => {
 				return (
-					<MainBookMarkItem
+					<BookMarkPromptItem
 						key={v.promptId}
 						src={addHttpsPrefix(v.imageUrl) || '/images/work.jpeg'}
 						title={v.title}
@@ -26,7 +24,7 @@ const MainBookMarks: FC<MainBookMarksProps> = ({ bestClip }) => {
 								<span className='text-white text-lg font-bold leading-[18px]'>{formatNumber(i + 1)}</span>
 							</Badge>
 						}
-						onClick={() => router.push(`/prompt/${v.promptId}`)}
+						onClick={() => onPromptClick(v.promptId)}
 					/>
 				);
 			})}
@@ -34,4 +32,4 @@ const MainBookMarks: FC<MainBookMarksProps> = ({ bestClip }) => {
 	);
 };
 
-export default MainBookMarks;
+export default BookMarkPrompts;

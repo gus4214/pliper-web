@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
-interface MainBookMarksSkeletonProps {
+interface BookMarkPromptsSkeletonProps {
 	count: number;
 }
 
-const MainBookMarksSkeleton: FC<MainBookMarksSkeletonProps> = ({ count }) => {
+const BookMarkPromptsSkeleton: FC<BookMarkPromptsSkeletonProps> = ({ count }) => {
 	return (
 		<div className='flex gap-12'>
 			{new Array(count).fill(0).map((_, i) => (
@@ -16,4 +16,4 @@ const MainBookMarksSkeleton: FC<MainBookMarksSkeletonProps> = ({ count }) => {
 	);
 };
 
-export default MainBookMarksSkeleton;
+export default BookMarkPromptsSkeleton;

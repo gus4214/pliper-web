@@ -1,12 +1,12 @@
 import VerticalPromptCard from '@/src/components/molecules/card/VerticalPromptCard';
-import CurationCategoriesContainer from '@/src/components/organisms/main/containers/CurationCategoriesContainer';
-import CurationPromptsContainer from '@/src/components/organisms/main/containers/CurationPromptsContainer';
-import CurationPromptsWithCategory from '@/src/components/organisms/main/curation/CurationPromptsWithCategory';
-import DailyCurationPromptsSkeleton from '@/src/components/organisms/main/curation/daily/DailyCurationPromptsSkeleton';
+import CurationCategoriesContainer from '@/src/containers/main/CurationCategoriesContainer';
+import CurationPromptsContainer from '@/src/containers/main/CurationPromptsContainer';
+import CurationPromptsWithCategory from '@/src/components/organisms/main/curations/CurationPromptsWithCategory';
+import DailyCurationPromptsSkeleton from '@/src/components/organisms/main/curations/daily/DailyCurationPromptsSkeleton';
 import { PartialPrompt } from '@/src/fetchers/prompt/types';
 import { useCurationPromptsWithCategory } from '@/src/hooks/useCurationPromptsWithCategory';
 
-const DailyCurationPromptsWithCategoryContainer = () => {
+const DailyPromptsWithCategoryContainer = () => {
 	const { selectedCategory, onSetSelectedCategory, onPromptClick } = useCurationPromptsWithCategory();
 
 	return (
@@ -33,4 +33,4 @@ const DailyCurationPromptsWithCategoryContainer = () => {
 	);
 };
 
-export default DailyCurationPromptsWithCategoryContainer;
+export default DailyPromptsWithCategoryContainer;

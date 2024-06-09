@@ -1,13 +1,18 @@
-import { useGetAiTools } from '@/src/fetchers/prompt';
+import { Tool } from '@/src/fetchers/prompt/types';
+import { FC } from 'react';
 import { Card } from 'react-daisyui';
 
-const MainAiPlatforms = () => {
-	const { data } = useGetAiTools({ type: 'LLM' });
+interface AiToolsProps {
+	aiTools: Tool[];
+	onToolClick: (url: string) => void;
+}
+
+const AiTools: FC<AiToolsProps> = ({ aiTools, onToolClick }) => {
 	return (
-		<div className='flex justify-start gap-6 relative max-w-[1200px]'>
-			{data?.tools.map((tool, i) => {
+		<div className='flex gap-6 relative'>
+			{aiTools.map((tool, i) => {
 				return (
-					<Card key={i} imageFull className='w-[376px] h-20 relative flex cursor-pointer' onClick={() => window.open(tool.url, '_blank')}>
+					<Card key={i} imageFull className='w-[376px] h-20 relative flex cursor-pointer' onClick={() => onToolClick(tool.url)}>
 						<Card.Image src={`/images/ai/ai${(i % 3) + 1}.jpeg`} alt='ai-web' className='w-full' />
 						<div className='z-10 flex items-center justify-center gap-3'>
 							<span className='text-lg font-medium text-white'>{tool.name}</span>
@@ -29,4 +34,4 @@ const MainAiPlatforms = () => {
 	);
 };
 
-export default MainAiPlatforms;
+export default AiTools;

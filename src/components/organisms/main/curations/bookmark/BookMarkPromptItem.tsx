@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface MainBookMarkItemProps {
+interface BookMarkPromptItemProps {
 	src: string;
 	title: string;
 	user: string;
@@ -9,10 +9,10 @@ interface MainBookMarkItemProps {
 	onClick?: () => void;
 }
 
-const MainBookMarkItem: React.FC<MainBookMarkItemProps> = ({ src, title, user, badge, onClick }) => {
+const BookMarkPromptItem: React.FC<BookMarkPromptItemProps> = ({ src, title, user, badge, onClick }) => {
 	return (
-		<div className='flex flex-col justify-center gap-[18px]'>
-			<div className='w-[260px] h-40 relative cursor-pointer' onClick={onClick}>
+		<div className='flex flex-col gap-[18px] max-w-[260px] relative'>
+			<div className='w-full h-40 relative cursor-pointer' onClick={onClick}>
 				<Image
 					src={src}
 					alt={title}
@@ -24,7 +24,7 @@ const MainBookMarkItem: React.FC<MainBookMarkItemProps> = ({ src, title, user, b
 				/>
 				<div className='left-0 top-[-16px] absolute'>{badge}</div>
 			</div>
-			<div className='w-[260px] flex flex-col gap-3'>
+			<div className='w-full flex flex-col gap-3'>
 				<span className='text-lg font-semibold text-black truncate'>{title}</span>
 				<span className='opacity-70 text-neutral-400 text-[13px] font-medium truncate'>{user}</span>
 			</div>
@@ -32,4 +32,4 @@ const MainBookMarkItem: React.FC<MainBookMarkItemProps> = ({ src, title, user, b
 	);
 };
 
-export default MainBookMarkItem;
+export default BookMarkPromptItem;
