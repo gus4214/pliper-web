@@ -12,7 +12,7 @@ const NavBar = () => {
 	};
 
 	return (
-		<div className='flex-1 ml-[159px] w-[190px]'>
+		<div className='flex flex-nowrap flex-1 md:ml-[159px]'>
 			{navigationItems.map((v, i) => (
 				<Button key={i} color='ghost' onClick={() => handleRoute(v.path)}>
 					{v.title}
