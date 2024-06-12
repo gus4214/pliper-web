@@ -75,9 +75,9 @@ const NotificationDropdown: FC = () => {
 					<NotificationIcon active={active} />
 				</Button>
 			</Dropdown.Toggle>
-			<Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg z-10 block'>
+			<Dropdown.Menu className='w-[400px] p-0 pt-6 bg-white rounded-lg z-40 block'>
 				<div className='w-[380px] h-9 px-6 py-2 justify-start items-center flex'>
-					<span className='text-black text-xl font-bold leading-tight'>알림 내역</span>
+					<span className='text-xl font-bold leading-tight text-black'>알림 내역</span>
 				</div>
 				{user ? <AuthTabs {...{ tabValue, handleChangeTab }} /> : <NoAuthTabs {...{ tabValue, handleChangeTab }} />}
 				<AsyncComponentBoundary pendingFallback={<NotificationSkeleton />}>

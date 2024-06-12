@@ -61,7 +61,7 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 	return (
 		<div
 			onClick={handleBackgroundClick}
-			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden cursor-pointer z-50`}
+			className={`${drawerStyles} fixed inset-x-0 top-16 z-3 w-full h-full bg-gradient-to-b from-sky-100 to-white flex flex-col items-center overflow-y-hidden cursor-pointer z-30`}
 		>
 			<div className='w-[750px] flex flex-col mt-10 justify-center cursor-default' onClick={handleContentClick}>
 				<SearchForm onEnter={handleSearch} />
@@ -70,7 +70,7 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 					<PopularSearchListContainer />
 				</div>
 				<div onClick={onClose} className='w-full h-[60px] px-4 py-2 border-t border-neutral-200 justify-end items-center flex cursor-pointer'>
-					<span className='text-neutral-400 text-base font-medium'>닫기</span>
+					<span className='text-base font-medium text-neutral-400'>닫기</span>
 				</div>
 			</div>
 		</div>

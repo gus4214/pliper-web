@@ -28,7 +28,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ loggedIn, onLogout }) => {
 							<div className='w-6 h-6 rounded-full bg-gradient-to-b from-blue-400 to-emerald-200'></div>
 						</Avatar>
 					</Button>
-					<Dropdown.Menu className='w-[130px] rounded-lg z-10'>
+					<Dropdown.Menu className='w-[130px] rounded-lg z-40'>
 						{navigationItems.map((v, i) => (
 							<Dropdown.Item key={i} className='justify-center p-3' onClick={() => handleRoute(v.path)}>
 								{v.title}

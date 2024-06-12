@@ -15,6 +15,7 @@ const ComponentSuspense: React.FC<ComponentSuspenseProps> = ({ children, fallbac
 	}
 
 	return <>{fallback}</>;
+	// return <Suspense fallback={fallback ? fallback : <Skeleton />}>{children}</Suspense>;
 };
 
 export default ComponentSuspense;

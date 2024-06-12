@@ -64,10 +64,10 @@ const PromptMenuList = () => {
 	}, []);
 
 	return (
-		<div className='w-44 px-4 flex-col gap-8 flex'>
-			<div className='flex-col justify-center items-start gap-6 flex'>
-				<h1 className='text-center text-neutral-800 text-xs font-bold'>페르소나</h1>
-				<div className='pl-4 border-l border-neutral-200 flex-col justify-center items-start gap-2 flex'>
+		<div className='flex flex-col gap-8 px-4 w-44'>
+			<div className='flex flex-col items-start justify-center gap-6'>
+				<span className='text-xs font-bold text-center text-neutral-800'>페르소나</span>
+				<div className='flex flex-col items-start justify-center gap-2 pl-4 border-l border-neutral-200'>
 					<Button
 						className={`w-32 h-8 px-4 py-[9px] min-h-8 text-start ${
 							personaType === 'DAILY'
@@ -94,12 +94,12 @@ const PromptMenuList = () => {
 			</div>
 			{personaType !== '' && (
 				<div className='w-[140px] flex-col justify-start items-start gap-6 flex'>
-					<h1 className='text-center text-neutral-800 text-xs font-bold'>카테고리</h1>
+					<h1 className='text-xs font-bold text-center text-neutral-800'>카테고리</h1>
 					<div className='border-l border-neutral-200 flex-col gap-2.5 flex'>
 						{currentCategories.map((category, i) => (
 							<div
 								css={[
-									tw`flex flex-col border-l gap-3`,
+									tw`flex flex-col gap-3 border-l`,
 									categoryOpen.includes(category.dept1.code) ? tw`border-teal-200` : tw`border-neutral-300`,
 								]}
 								key={i}
@@ -113,10 +113,10 @@ const PromptMenuList = () => {
 									<span className='text-[15px] font-medium w-full'>{category.dept1.text}</span>
 								</Button>
 								{categoryOpen.includes(category.dept1.text) && ( // 현재 열린 카테고리의 code와 비교합니다.
-									<div className='pl-6 pb-2 flex-col gap-4 flex'>
+									<div className='flex flex-col gap-4 pb-2 pl-6'>
 										{category.dept2.map((category2, i) => (
 											<div
-												className='items-center gap-2 flex cursor-pointer'
+												className='flex items-center gap-2 cursor-pointer'
 												onClick={() => handleCheckboxChange(category2.text)}
 												key={i}
 											>
@@ -126,7 +126,7 @@ const PromptMenuList = () => {
 													checked={selectedCodes.includes(category2.text)}
 													aria-label={`하위 카테고리 ${category2.text} 선택`}
 												/>
-												<span className='text-center text-neutral-700 text-sm font-normal'>{category2.text}</span>
+												<span className='text-sm font-normal text-center text-neutral-700'>{category2.text}</span>
 											</div>
 										))}
 									</div>
@@ -137,23 +137,23 @@ const PromptMenuList = () => {
 				</div>
 			)}
 			<div className='w-[140px] flex flex-col justify-start items-start gap-6'>
-				<h1 className='text-center text-neutral-800 text-xs font-bold'>플랫폼</h1>
-				<div className='pl-4 py-2 flex-col gap-4 flex border-l border-teal-200'>
+				<span className='text-xs font-bold text-center text-neutral-800'>플랫폼</span>
+				<div className='flex flex-col gap-4 py-2 pl-4 border-l border-teal-200'>
 					{llmData?.tools.map((tool, i) => (
-						<div key={i} className='items-center gap-2 flex cursor-pointer' onClick={() => handleModelCheckboxChange(tool.name)}>
+						<div key={i} className='flex items-center gap-2 cursor-pointer' onClick={() => handleModelCheckboxChange(tool.name)}>
 							<Checkbox
 								size='sm'
 								className='w-4 h-4 rounded'
 								checked={selectedModel.includes(tool.name)}
 								aria-label={`플랫폼 ${tool.name} 선택`}
 							/>
-							<span className='text-center text-neutral-700 text-sm font-normal'>{tool.name}</span>
+							<span className='text-sm font-normal text-center text-neutral-700'>{tool.name}</span>
 						</div>
 					))}
 				</div>
 			</div>
 			<Button
-				className='w-36 min-h-8 h-8 rounded bg-white border border-neutral-200 text-black text-xs font-normal'
+				className='h-8 text-xs font-normal text-black bg-white border rounded w-36 min-h-8 border-neutral-200'
 				aria-label='모든 선택 해제'
 				onClick={handleReset}
 				disabled={!isAnythingSelected()}
