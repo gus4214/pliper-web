@@ -4,6 +4,7 @@ import PromptListContainer from '@/src/components/organisms/prompt/list/PromptLi
 import PromptSelectChips from '@/src/components/organisms/prompt/list/PromptSelectChips';
 import PromptMenuList from '@/src/components/organisms/prompt/menu/PromptMenuList';
 import PromptMenuListContainer from '@/src/components/organisms/prompt/menu/PromptMenuListContainer';
+import PromptMenuListSkeleton from '@/src/components/organisms/prompt/menu/PromptMenuListSkeleton';
 import SearchForm from '@/src/layouts/components/header/appBar/searchDrawer/SearchForm';
 
 const PromptTemplate = () => {
@@ -14,7 +15,9 @@ const PromptTemplate = () => {
 			<PromptSelectChips className='mt-6' />
 			<div className='mb-8' />
 			<div className='flex gap-10 justify-center'>
-				<PromptMenuListContainer />
+				<AsyncComponentBoundary pendingFallback={<PromptMenuListSkeleton />}>
+					<PromptMenuListContainer />
+				</AsyncComponentBoundary>
 				<PromptListContainer />
 			</div>
 		</div>

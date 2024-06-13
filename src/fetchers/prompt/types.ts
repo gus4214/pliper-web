@@ -4,7 +4,6 @@ import { IBaasResponse, IPageRequest } from '@/src/fetchers/types';
 export type GetAiToolsType = 'LLM' | 'IMAGE';
 
 export type PersonaType = 'DAILY' | 'JOB';
-
 export interface GetPromptsRequest extends IPageRequest {
 	category1Texts?: string[];
 	category2Texts?: string[];
@@ -144,4 +143,5 @@ export interface Category {
 export interface Dept1 {
 	code: string;
 	text: string;
+	persona: PersonaType;
 }
