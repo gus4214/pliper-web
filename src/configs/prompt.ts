@@ -15,11 +15,6 @@ export const promptKoTextOfPersona: Record<PersonaType, string> = {
 	DAILY: '일상',
 };
 
-export const promptKoTextKeyOfPersona: Record<KeyofPromptPersona, string> = {
-	jobCategories: '업무',
-	dailyCategories: '일상',
-};
-
 export const keyOfPersonaCategory: Record<PersonaType, KeyofPromptPersona> = {
 	JOB: 'jobCategories',
 	DAILY: 'dailyCategories',

@@ -82,7 +82,7 @@ describe('MenuList', () => {
 		getByRole('checkbox', { name: 'ChatGPT' });
 		getByRole('checkbox', { name: 'Bard' });
 		getByRole('checkbox', { name: '뤼튼' });
-		getByRole('button', { name: '전체 해제' });
+		expect(getByRole('button', { name: '전체 해제' })).toBeDisabled();
 	});
 
 	context('when PersonaButton is clicked', () => {
@@ -182,9 +182,12 @@ describe('MenuList', () => {
 	});
 
 	context('when ResetButton is clicked', () => {
-		it('ResetButton is disabled if MenuItems are not clicked', () => {
-			const { getByRole } = setup();
-			expect(getByRole('button', { name: '전체 해제' })).toBeDisabled();
+		it('ResetButton is not disabled if MenuItems are clicked', () => {
+			const { getByRole, getByText } = setup();
+			handleClick(getByRole('button', { name: '일상' }));
+			handleClick(getByRole('button', { name: '연애' }));
+			handleClick(getByText('썸'));
+			expect(getByRole('button', { name: '전체 해제' })).not.toBeDisabled();
 		});
 
 		it('resets all MenuList if ResetButton is clicked', () => {
