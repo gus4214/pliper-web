@@ -3,6 +3,7 @@ import { Category, PersonaType, PromptCategories, Tool } from '@/src/fetchers/pr
 import { usePromptMenu } from '@/src/hooks-jotai/usePromptMenu.jotai';
 import { FC } from 'react';
 import { Button, Checkbox } from 'react-daisyui';
+import { twJoin, twMerge } from 'tailwind-merge';
 
 interface MenuListProps {
 	categories: PromptCategories;
@@ -29,7 +30,16 @@ const MenuList: FC<MenuListProps> = ({ categories, aiTools }) => {
 				<ul className='flex flex-col items-start justify-center gap-2 pl-4 border-l border-neutral-200'>
 					{personas.map((persona) => (
 						<li key={persona}>
-							<Button onClick={() => handlePersona(persona)}>{promptKoTextOfPersona[persona]}</Button>
+							<Button
+								className={twJoin(
+									`w-32 h-8 px-4 py-[9px] min-h-8 text-start hover:text-teal-400 hover:font-medium hover:bg-neutral-50`,
+									personaTypes?.includes(persona) && 'text-teal-400 font-medium bg-neutral-50'
+								)}
+								color='ghost'
+								onClick={() => handlePersona(persona)}
+							>
+								<span className='text-[15px] font-normal w-full'>{promptKoTextOfPersona[persona]}</span>
+							</Button>
 						</li>
 					))}
 				</ul>
@@ -37,10 +47,22 @@ const MenuList: FC<MenuListProps> = ({ categories, aiTools }) => {
 			{personaTypes && (
 				<div className='w-[140px] flex-col justify-start items-start gap-6 flex'>
 					<span className='text-xs font-bold text-center text-neutral-800'>카테고리</span>
-					<ul className='border-l border-neutral-200 flex-col gap-2.5 flex'>
+					<ul className='border-l border-neutral-200 flex flex-col gap-2.5'>
 						{currentCategories?.map((category) => (
-							<li key={category.dept1.code} className='flex flex-col'>
-								<Button onClick={() => handleCategoryDept1(category.dept1.text)}>{`${category.dept1.text}`}</Button>
+							<li
+								key={category.dept1.code}
+								className={twMerge(
+									`flex flex-col gap-3`,
+									category1Texts.includes(category.dept1.text) && `border-l border-teal-200 ml-[-1px]`
+								)}
+							>
+								<Button
+									className='w-32 h-8 px-4 py-[9px] min-h-8 text-start hover:text-teal-400 hover:font-medium hover:bg-neutral-50'
+									color='ghost'
+									onClick={() => handleCategoryDept1(category.dept1.text)}
+								>
+									<span className='text-[15px] font-medium w-full'>{`${category.dept1.text}`}</span>
+								</Button>
 								{category1Texts.includes(category.dept1.text) && (
 									<ul className='flex flex-col gap-4 pb-2 pl-6'>
 										{category.dept2.map((categoryDept2) => (
@@ -54,7 +76,7 @@ const MenuList: FC<MenuListProps> = ({ categories, aiTools }) => {
 													checked={category2Texts.includes(categoryDept2.text)}
 													size='sm'
 													className='w-4 h-4 rounded'
-													aria-label={categoryDept2.text}
+													aria-label={`하위 카테고리 ${categoryDept2.text} 선택`}
 												/>
 												<span className='text-sm font-normal text-center text-neutral-700'>{categoryDept2.text}</span>
 											</li>
@@ -71,13 +93,20 @@ const MenuList: FC<MenuListProps> = ({ categories, aiTools }) => {
 				<ul className='flex flex-col gap-4 py-2 pl-4 border-l border-teal-200'>
 					{aiTools.map((tool, i) => (
 						<li key={tool.name} className='flex items-center gap-2 cursor-pointer' onClick={() => handleAiTools(tool.name)}>
-							<Checkbox readOnly checked={llmModel.includes(tool.name)} size='sm' className='w-4 h-4 rounded' aria-label={tool.name} />
+							<Checkbox
+								readOnly
+								checked={llmModel.includes(tool.name)}
+								size='sm'
+								className='w-4 h-4 rounded'
+								aria-label={`플랫폼 ${tool.name} 선택`}
+							/>
 							<span className='text-sm font-normal text-center text-neutral-700'>{tool.name}</span>
 						</li>
 					))}
 				</ul>
 			</div>
 			<Button
+				aria-label='모든 선택 해제'
 				className='h-8 text-xs font-normal text-black bg-white border rounded w-36 min-h-8 border-neutral-200'
 				onClick={resetMenu}
 				disabled={!isMenuSelected}
