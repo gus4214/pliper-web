@@ -1,7 +1,7 @@
 import { PersonaType } from '@/src/fetchers/prompt/types';
 import { PrimitiveAtom, WritableAtom, atom } from 'jotai';
 
-export const personaTypesAtom = atom<PersonaType | undefined>(undefined);
+export const personaTypesAtom = atom<PersonaType | string>('');
 export const category1TextsAtom = atom<string[]>([]);
 export const category2TextsAtom = atom<string[]>([]);
 export const llmModelsAtom = atom<string[]>([]);
@@ -31,7 +31,7 @@ const createCategoryAtomHandler = (categoryAtom: PrimitiveAtom<string[]>): Writa
 
 export const handlePersonaTypesAtom = atom(
 	(get) => get(personaTypesAtom),
-	(get, set, persona?: PersonaType) => {
+	(get, set, persona: PersonaType | string) => {
 		set(personaTypesAtom, persona);
 		set(category1TextsAtom, []);
 		set(category2TextsAtom, []);
@@ -42,7 +42,7 @@ export const handleCategoryDept2Atom = createCategoryAtomHandler(category2TextsA
 export const handleLlmModelAtom = createCategoryAtomHandler(llmModelsAtom);
 
 export const resetCategoryAtom = atom(null, (get, set) => {
-	set(personaTypesAtom, undefined);
+	set(personaTypesAtom, '');
 	set(category1TextsAtom, []);
 	set(category2TextsAtom, []);
 	set(llmModelsAtom, []);

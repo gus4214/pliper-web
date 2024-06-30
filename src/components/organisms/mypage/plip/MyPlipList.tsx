@@ -10,20 +10,25 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { timeAgo } from '@/src/utils/dateUtils';
+import { usePromptMenu } from '@/src/hooks-jotai/usePromptMenu.jotai';
 
 const MyPlipList = () => {
 	const router = useRouter();
 
-	const { title, category2Texts, llmModel, personaTypes } = useAtomValue(searchFilterAtom);
+	const { title } = useAtomValue(searchFilterAtom);
 	const setSearchInput = useSetAtom(searchInputAtom);
+
+	const {
+		selectedMenus: { personaTypes, category2Texts, llmModel },
+	} = usePromptMenu();
 
 	const { data, fetchNextPage, isFetchingNextPage } = useInfiniteGetMyPromptClips({
 		page: 1,
 		limit: 10,
 		title,
+		personaTypes,
 		category2Texts,
 		llmModel,
-		personaTypes,
 	});
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
@@ -82,7 +87,7 @@ const MyPlipList = () => {
 				</React.Fragment>
 			))}
 			{isFetchingNextPage ? (
-				<div className='flex w-full justify-center'>
+				<div className='flex justify-center w-full'>
 					<Loading />
 				</div>
 			) : (

@@ -5,12 +5,12 @@ import { FC } from 'react';
 import { Button, Checkbox } from 'react-daisyui';
 import { twJoin, twMerge } from 'tailwind-merge';
 
-interface MenuListProps {
+interface PromptMenuProps {
 	categories: PromptCategories;
 	aiTools: Tool[];
 }
 
-const MenuList: FC<MenuListProps> = ({ categories, aiTools }) => {
+const PromptMenu: FC<PromptMenuProps> = ({ categories, aiTools }) => {
 	const {
 		selectedMenus: { personaTypes, category1Texts, category2Texts, llmModel },
 		setSelectedMenu: { handlePersona, handleCategoryDept1, handleCategoryDept2, handleAiTools },
@@ -117,4 +117,4 @@ const MenuList: FC<MenuListProps> = ({ categories, aiTools }) => {
 	);
 };
 
-export default MenuList;
+export default PromptMenu;

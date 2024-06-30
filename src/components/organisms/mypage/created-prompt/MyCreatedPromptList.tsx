@@ -3,6 +3,7 @@ import PromptEmptyText from '@/src/components/atoms/text/PromptEmptyText';
 import SearchTitleEmptyText from '@/src/components/atoms/text/SearchTitleEmptyText';
 import PromptItemWithActions from '@/src/components/molecules/listItems/PromptItemWithActions';
 import { useInfiniteGetMyCreatedPrompts } from '@/src/fetchers/prompt/my-prompt';
+import { usePromptMenu } from '@/src/hooks-jotai/usePromptMenu.jotai';
 import { useConfirmModal } from '@/src/hooks/modal';
 import { usePromptHandler, usePromptInteractions } from '@/src/hooks/promptController';
 import { searchFilterAtom } from '@/src/stores/searchForm';
@@ -16,14 +17,19 @@ const MyCreatedPromptList = () => {
 	const router = useRouter();
 	const [open, close] = useConfirmModal();
 
-	const { title, category2Texts, llmModel, personaTypes } = useAtomValue(searchFilterAtom);
+	const { title } = useAtomValue(searchFilterAtom);
+
+	const {
+		selectedMenus: { personaTypes, category2Texts, llmModel },
+	} = usePromptMenu();
+
 	const { data, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteGetMyCreatedPrompts({
 		page: 1,
 		limit: 10,
 		title,
+		personaTypes,
 		category2Texts,
 		llmModel,
-		personaTypes,
 	});
 
 	// pages 배열 내의 모든 prompts의 id를 하나의 배열로 합칩니다.
@@ -81,7 +87,7 @@ const MyCreatedPromptList = () => {
 				</React.Fragment>
 			))}
 			{isFetchingNextPage ? (
-				<div className='flex w-full justify-center'>
+				<div className='flex justify-center w-full'>
 					<Loading />
 				</div>
 			) : (

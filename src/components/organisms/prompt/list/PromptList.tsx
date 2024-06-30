@@ -1,7 +1,7 @@
 import Loading from '@/src/components/atoms/loading/Loading';
 import PromptItemWithInteraction from '@/src/components/molecules/listItems/PromptItemWithInteraction';
 import { useInfiniteGetPrompts } from '@/src/fetchers/prompt';
-import { useAuthContext } from '@/src/hooks/context';
+import { usePromptMenu } from '@/src/hooks-jotai/usePromptMenu.jotai';
 import { usePromptInteractions } from '@/src/hooks/promptController';
 import { searchFilterAtom } from '@/src/stores/searchForm';
 import { timeAgo } from '@/src/utils/dateUtils';
@@ -11,12 +11,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const PromptList: FC = () => {
-	const { user, loading } = useAuthContext();
 	const router = useRouter();
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(10);
 
-	const { title, category2Texts, promptSort, llmModel, personaTypes } = useAtomValue(searchFilterAtom);
+	const { title, promptSort } = useAtomValue(searchFilterAtom);
+
+	const {
+		selectedMenus: { personaTypes, category2Texts, llmModel },
+	} = usePromptMenu();
 
 	const { data, fetchNextPage, isFetchingNextPage } = useInfiniteGetPrompts({
 		page,
@@ -41,13 +44,13 @@ const PromptList: FC = () => {
 		if (title) {
 			return (
 				<div className='w-[744px] flex justify-center my-[10px]'>
-					<span className='text-neutral-400 text-lg font-normal'>{`"${title}" 에 대한 검색결과가 없습니다.`}</span>
+					<span className='text-lg font-normal text-neutral-400'>{`"${title}" 에 대한 검색결과가 없습니다.`}</span>
 				</div>
 			);
 		}
 		return (
 			<div className='w-[744px] flex justify-center my-[10px]'>
-				<span className='text-neutral-400 text-lg font-normal'>프롬프트가 존재하지 않습니다.</span>
+				<span className='text-lg font-normal text-neutral-400'>프롬프트가 존재하지 않습니다.</span>
 			</div>
 		);
 	};
@@ -86,7 +89,7 @@ const PromptList: FC = () => {
 				))}
 			</div>
 			{isFetchingNextPage ? (
-				<div className='flex w-full justify-center my-10'>
+				<div className='flex justify-center w-full my-10'>
 					<Loading />
 				</div>
 			) : (

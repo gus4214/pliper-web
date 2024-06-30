@@ -1,4 +1,4 @@
-import MenuList from '@/src/components/organisms/prompt/menu/MenuList';
+import PromptMenu from '@/src/containers/@common/promptMenu/PromptMenu';
 import { PromptCategories } from '@/src/fetchers/prompt/types';
 import { fireEvent, render, screen } from '@testing-library/react';
 
@@ -63,7 +63,7 @@ const setup = () => {
 		},
 	];
 
-	const utils = render(<MenuList categories={sampleCategories} aiTools={sampleAiTools} />);
+	const utils = render(<PromptMenu categories={sampleCategories} aiTools={sampleAiTools} />);
 
 	return {
 		...utils,
