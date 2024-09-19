@@ -14,7 +14,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler, action }) => {
 	return (
 		<div className='w-[1200px] bg-white flex flex-col justify-start px-6'>
 			<RegisterHeader />
-			<AsyncComponentBoundary
+			{/* <AsyncComponentBoundary
 				pendingFallback={
 					<div className='w-[1144px] h-[754.5px]  bg-neutral-50 rounded-lg flex justify-center items-center'>
 						<Loading />
@@ -22,7 +22,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ formHandler, action }) => {
 				}
 			>
 				<RegisterFormContents formHandler={formHandler} />
-			</AsyncComponentBoundary>
+			</AsyncComponentBoundary> */}
+			<RegisterFormContents formHandler={formHandler} />
 			{action}
 		</div>
 	);

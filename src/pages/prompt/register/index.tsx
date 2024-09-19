@@ -12,6 +12,6 @@ const RegisterPage: NextPage = () => {
 	);
 };
 
-RegisterPage.grant = 'user';
+// RegisterPage.grant = 'user';
 
 export default RegisterPage;

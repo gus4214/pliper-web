@@ -27,7 +27,7 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 
 	return (
 		<div className='w-[1144px] pt-8 pb-6 mb-4 rounded-lg flex-col items-center gap-6 flex'>
-			<div className='w-full rounded-2xl flex-col justify-center items-start gap-10 flex'>
+			<div className='flex flex-col items-start justify-center w-full gap-10 rounded-2xl'>
 				{/* 제목 구간 */}
 				<LabelWithFormElement label='제목' required className='gap-3'>
 					<div className='flex flex-col'>
@@ -41,17 +41,17 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 				</LabelWithFormElement>
 
 				{/*  페르소나, 카테고리 구간 */}
-				<PersonaAndCategory formHandler={formHandler} />
+				{/* <PersonaAndCategory formHandler={formHandler} /> */}
 
 				{/* 사용 AI 구간 */}
-				<LabelWithFormElement
+				{/* <LabelWithFormElement
 					label='플랫폼 선택'
 					subLabel='해당 프롬프트가 어떤 모델에 가장 적합한지 한개의 플랫폼을 선택해주세요.'
 					required
 					className='gap-[14px]'
 				>
 					<AiToggleGroup formHandler={formHandler} />
-				</LabelWithFormElement>
+				</LabelWithFormElement> */}
 
 				{/* 소개 구간 */}
 				<LabelWithFormElement
@@ -98,13 +98,13 @@ const RegisterFormContents: React.FC<RegisterFormContentsProps> = ({ formHandler
 					<Button
 						className='bg-white rounded border border-neutral-200 w-[81px] min-h-[40px] h-[40px] whitespace-nowrap mt-[14px]'
 						onClick={handlePreviewModalOpen}
-						disabled={!isValid}
+						// disabled={!isValid}
 					>
 						미리보기
 					</Button>
 				</LabelWithFormElement>
 			</div>
-			<div className='w-full flex items-center justify-end gap-3'>
+			<div className='flex items-center justify-end w-full gap-3'>
 				<span className='text-neutral-600 text-[13px] font-medium'>해당 프롬프트를 게시 하시겠습니까?</span>
 				<Controller
 					name='show'
