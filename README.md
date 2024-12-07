@@ -4,7 +4,7 @@
 <br>
 
 # 서비스
-- 프롬프트 플랫폼 : [~pliper.kr~](https://www.pliper.kr) (현재 비활성화)
+- 프롬프트 플랫폼 : [pliper.kr](https://www.pliper.kr)
 - 안내 가이드 : [노션 페이지](https://www.notion.so/pliper/PLIPER-AI-ec7a3dc929c74fd9a3eaf2f1db37ae02?pvs=4)
 - 크롬 도구 : [chrome 웹 스토어 - Pliper](https://chromewebstore.google.com/detail/pliper-%EB%8B%B9%EC%8B%A0%EC%9D%98-ai-%ED%8C%8C%ED%8A%B8%EB%84%88/gbcbnablkikcookebdbadkgiblcakeff?hl=ko&utm_source=ext_sidebar)
 
